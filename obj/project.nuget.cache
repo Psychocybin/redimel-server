@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "jsKN7N4g5rHyizBy/pd9YLH1h02TDIic6SJeSFhAsJ73moWa4Xh9vAXoWlrn/mQdjwnb+AOaknCqS47c1O2spQ==",
+  "success": true,
+  "projectFilePath": "C:\\Disk D\\VS projects\\redimel-server\\redimel\\redimel-server\\redimel-server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Go6ob\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
+    "C:\\Users\\Go6ob\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Go6ob\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\Go6ob\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\Go6ob\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\Go6ob\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\Go6ob\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
