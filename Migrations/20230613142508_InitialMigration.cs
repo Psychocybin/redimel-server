@@ -65,7 +65,7 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArmorsAndShields",
+                name: "Armors",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -75,7 +75,7 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArmorsAndShields", x => x.Id);
+                    table.PrimaryKey("PK_Armors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +98,7 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Shield",
+                name: "Shields",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -108,11 +108,11 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shield", x => x.Id);
+                    table.PrimaryKey("PK_Shields", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SpecialAbilityPoints",
+                name: "SpecialCombatSkills",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -122,7 +122,7 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SpecialAbilityPoints", x => x.Id);
+                    table.PrimaryKey("PK_SpecialCombatSkills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -143,7 +143,7 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ultimate",
+                name: "Ultimates",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -153,7 +153,7 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ultimate", x => x.Id);
+                    table.PrimaryKey("PK_Ultimates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,7 +173,7 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BattleGroup",
+                name: "BattleGroups",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -182,16 +182,16 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BattleGroup", x => x.Id);
+                    table.PrimaryKey("PK_BattleGroups", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BattleGroup_AditionalPoints_AditionalPointsId",
+                        name: "FK_BattleGroups_AditionalPoints_AditionalPointsId",
                         column: x => x.AditionalPointsId,
                         principalTable: "AditionalPoints",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroupWest",
+                name: "GroupWests",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -202,9 +202,9 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupWest", x => x.Id);
+                    table.PrimaryKey("PK_GroupWests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GroupWest_AditionalPoints_AditionalPointsId",
+                        name: "FK_GroupWests_AditionalPoints_AditionalPointsId",
                         column: x => x.AditionalPointsId,
                         principalTable: "AditionalPoints",
                         principalColumn: "Id",
@@ -212,7 +212,7 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Negotiation",
+                name: "Negotiations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -221,9 +221,9 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Negotiation", x => x.Id);
+                    table.PrimaryKey("PK_Negotiations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Negotiation_AditionalPoints_AditionalPointsId",
+                        name: "FK_Negotiations_AditionalPoints_AditionalPointsId",
                         column: x => x.AditionalPointsId,
                         principalTable: "AditionalPoints",
                         principalColumn: "Id");
@@ -244,15 +244,15 @@ namespace redimel_server.Migrations
                 {
                     table.PrimaryKey("PK_SpecialAbilities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SpecialAbilities_SpecialAbilityPoints_SpecialCombatSkillId",
+                        name: "FK_SpecialAbilities_SpecialCombatSkills_SpecialCombatSkillId",
                         column: x => x.SpecialCombatSkillId,
-                        principalTable: "SpecialAbilityPoints",
+                        principalTable: "SpecialCombatSkills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SpecialAbilities_Ultimate_UltimateId",
+                        name: "FK_SpecialAbilities_Ultimates_UltimateId",
                         column: x => x.UltimateId,
-                        principalTable: "Ultimate",
+                        principalTable: "Ultimates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -277,15 +277,15 @@ namespace redimel_server.Migrations
                 {
                     table.PrimaryKey("PK_Equipments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Equipments_ArmorsAndShields_ArmorId",
+                        name: "FK_Equipments_Armors_ArmorId",
                         column: x => x.ArmorId,
-                        principalTable: "ArmorsAndShields",
+                        principalTable: "Armors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Equipments_Shield_ShieldId",
+                        name: "FK_Equipments_Shields_ShieldId",
                         column: x => x.ShieldId,
-                        principalTable: "Shield",
+                        principalTable: "Shields",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -303,7 +303,7 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Mission",
+                name: "Missions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -313,16 +313,16 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mission", x => x.Id);
+                    table.PrimaryKey("PK_Missions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Mission_GroupWest_GroupWestId",
+                        name: "FK_Missions_GroupWests_GroupWestId",
                         column: x => x.GroupWestId,
-                        principalTable: "GroupWest",
+                        principalTable: "GroupWests",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "NatureSkill",
+                name: "NatureSkills",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -333,16 +333,16 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NatureSkill", x => x.Id);
+                    table.PrimaryKey("PK_NatureSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NatureSkill_SpecialAbilities_SpecialAbilitiesId",
+                        name: "FK_NatureSkills_SpecialAbilities_SpecialAbilitiesId",
                         column: x => x.SpecialAbilitiesId,
                         principalTable: "SpecialAbilities",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ritual",
+                name: "Rituals",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -353,16 +353,16 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ritual", x => x.Id);
+                    table.PrimaryKey("PK_Rituals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ritual_SpecialAbilities_SpecialAbilitiesId",
+                        name: "FK_Rituals_SpecialAbilities_SpecialAbilitiesId",
                         column: x => x.SpecialAbilitiesId,
                         principalTable: "SpecialAbilities",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Spell",
+                name: "Spells",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -373,9 +373,9 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Spell", x => x.Id);
+                    table.PrimaryKey("PK_Spells", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Spell_SpecialAbilities_SpecialAbilitiesId",
+                        name: "FK_Spells_SpecialAbilities_SpecialAbilitiesId",
                         column: x => x.SpecialAbilitiesId,
                         principalTable: "SpecialAbilities",
                         principalColumn: "Id");
@@ -413,9 +413,9 @@ namespace redimel_server.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Heroes_GroupWest_GroupWestId",
+                        name: "FK_Heroes_GroupWests_GroupWestId",
                         column: x => x.GroupWestId,
-                        principalTable: "GroupWest",
+                        principalTable: "GroupWests",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Heroes_Indicators_IndicatorsId",
@@ -453,7 +453,7 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Baggage",
+                name: "Baggages",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -463,9 +463,9 @@ namespace redimel_server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Baggage", x => x.Id);
+                    table.PrimaryKey("PK_Baggages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Baggage_Heroes_HeroId",
+                        name: "FK_Baggages_Heroes_HeroId",
                         column: x => x.HeroId,
                         principalTable: "Heroes",
                         principalColumn: "Id");
@@ -491,13 +491,13 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Baggage_HeroId",
-                table: "Baggage",
+                name: "IX_Baggages_HeroId",
+                table: "Baggages",
                 column: "HeroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BattleGroup_AditionalPointsId",
-                table: "BattleGroup",
+                name: "IX_BattleGroups_AditionalPointsId",
+                table: "BattleGroups",
                 column: "AditionalPointsId");
 
             migrationBuilder.CreateIndex(
@@ -521,8 +521,8 @@ namespace redimel_server.Migrations
                 column: "WeaponId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupWest_AditionalPointsId",
-                table: "GroupWest",
+                name: "IX_GroupWests_AditionalPointsId",
+                table: "GroupWests",
                 column: "AditionalPointsId");
 
             migrationBuilder.CreateIndex(
@@ -551,18 +551,18 @@ namespace redimel_server.Migrations
                 column: "SpecialAbilitiesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mission_GroupWestId",
-                table: "Mission",
+                name: "IX_Missions_GroupWestId",
+                table: "Missions",
                 column: "GroupWestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NatureSkill_SpecialAbilitiesId",
-                table: "NatureSkill",
+                name: "IX_NatureSkills_SpecialAbilitiesId",
+                table: "NatureSkills",
                 column: "SpecialAbilitiesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Negotiation_AditionalPointsId",
-                table: "Negotiation",
+                name: "IX_Negotiations_AditionalPointsId",
+                table: "Negotiations",
                 column: "AditionalPointsId");
 
             migrationBuilder.CreateIndex(
@@ -571,8 +571,8 @@ namespace redimel_server.Migrations
                 column: "HeroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ritual_SpecialAbilitiesId",
-                table: "Ritual",
+                name: "IX_Rituals_SpecialAbilitiesId",
+                table: "Rituals",
                 column: "SpecialAbilitiesId");
 
             migrationBuilder.CreateIndex(
@@ -586,8 +586,8 @@ namespace redimel_server.Migrations
                 column: "UltimateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Spell_SpecialAbilitiesId",
-                table: "Spell",
+                name: "IX_Spells_SpecialAbilitiesId",
+                table: "Spells",
                 column: "SpecialAbilitiesId");
 
             migrationBuilder.CreateIndex(
@@ -600,28 +600,28 @@ namespace redimel_server.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Baggage");
+                name: "Baggages");
 
             migrationBuilder.DropTable(
-                name: "BattleGroup");
+                name: "BattleGroups");
 
             migrationBuilder.DropTable(
-                name: "Mission");
+                name: "Missions");
 
             migrationBuilder.DropTable(
-                name: "NatureSkill");
+                name: "NatureSkills");
 
             migrationBuilder.DropTable(
-                name: "Negotiation");
+                name: "Negotiations");
 
             migrationBuilder.DropTable(
                 name: "Promises");
 
             migrationBuilder.DropTable(
-                name: "Ritual");
+                name: "Rituals");
 
             migrationBuilder.DropTable(
-                name: "Spell");
+                name: "Spells");
 
             migrationBuilder.DropTable(
                 name: "Talismans");
@@ -636,7 +636,7 @@ namespace redimel_server.Migrations
                 name: "Equipments");
 
             migrationBuilder.DropTable(
-                name: "GroupWest");
+                name: "GroupWests");
 
             migrationBuilder.DropTable(
                 name: "Indicators");
@@ -645,10 +645,10 @@ namespace redimel_server.Migrations
                 name: "SpecialAbilities");
 
             migrationBuilder.DropTable(
-                name: "ArmorsAndShields");
+                name: "Armors");
 
             migrationBuilder.DropTable(
-                name: "Shield");
+                name: "Shields");
 
             migrationBuilder.DropTable(
                 name: "ThrowingWeapons");
@@ -660,10 +660,10 @@ namespace redimel_server.Migrations
                 name: "AditionalPoints");
 
             migrationBuilder.DropTable(
-                name: "SpecialAbilityPoints");
+                name: "SpecialCombatSkills");
 
             migrationBuilder.DropTable(
-                name: "Ultimate");
+                name: "Ultimates");
         }
     }
 }

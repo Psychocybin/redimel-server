@@ -12,15 +12,25 @@ namespace redimel_server.Data
 
         public DbSet<Abilities> Abilities { get; set; }
         public DbSet<AditionalPoints> AditionalPoints { get; set; }
-        public DbSet<Armor> ArmorsAndShields { get; set; }
+        public DbSet<Armor> Armors { get; set; }
+        public DbSet<Baggage> Baggages { get; set; }
+        public DbSet<BattleGroup> BattleGroups { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
-        public DbSet<GroupWest> GroupWest { get; set; }
+        public DbSet<GroupWest> GroupWests { get; set; }
         public DbSet<Hero> Heroes { get; set; }
         public DbSet<Indicators> Indicators { get; set; }
+        public DbSet<Mission> Missions { get; set; }
+        public DbSet<NatureSkill> NatureSkills { get; set; }
+        public DbSet<Negotiation> Negotiations { get; set; }
+        public DbSet<Promises> Promises { get; set; }
+        public DbSet<Ritual> Rituals { get; set; }
+        public DbSet<Shield> Shields { get; set; }
         public DbSet<SpecialAbilities> SpecialAbilities { get; set; }
-        public DbSet<SpecialCombatSkill> SpecialAbilityPoints { get; set; }
+        public DbSet<SpecialCombatSkill> SpecialCombatSkills { get; set; }
+        public DbSet<Spell> Spells { get; set; }
         public DbSet<Talisman> Talismans { get; set; }
         public DbSet<ThrowingWeapon> ThrowingWeapons { get; set; }
+        public DbSet<Ultimate> Ultimates { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
     }
 }
