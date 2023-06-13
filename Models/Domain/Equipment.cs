@@ -13,8 +13,8 @@
         public Guid WeaponId { get; set; }
         public Guid ThrowingWeaponId { get; set; }
         public Guid TalismansId { get; set; }
-        public ArmorAndShield Armor { get; set; }
-        public ArmorAndShield Shield { get; set; }
+        public Armor Armor { get; set; }
+        public Shield Shield { get; set; }
         public Weapon Weapon { get; set; }
         public ThrowingWeapon ThrowingWeapon { get; set; }
         public ICollection<Talisman> Talismans { get; set; }

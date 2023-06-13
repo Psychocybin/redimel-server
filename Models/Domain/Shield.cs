@@ -1,6 +1,6 @@
 ﻿namespace redimel_server.Models.Domain
 {
-    public class ArmorAndShield
+    public class Shield
     {
         public Guid Id { get; set; }
         public string Type { get; set; }

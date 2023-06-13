@@ -8,10 +8,10 @@
         public Guid SpellsId { get; set; }
         public Guid RitualsId { get; set; }
         public Guid NatureSkillsId { get; set; }
-        public SpecialAbilityPoints SpecialCombatSkill { get; set; }
-        public SpecialAbilityPoints Ultimate { get; set; }
-        public ICollection<SpecialAbilityPoints> Spells { get; set; }
-        public ICollection<SpecialAbilityPoints> Rituals { get; set; }
-        public ICollection<SpecialAbilityPoints> NatureSkills { get; set; }
+        public SpecialCombatSkill SpecialCombatSkill { get; set; }
+        public Ultimate Ultimate { get; set; }
+        public ICollection<Spell> Spells { get; set; }
+        public ICollection<Ritual> Rituals { get; set; }
+        public ICollection<NatureSkill> NatureSkills { get; set; }
     }
 }
