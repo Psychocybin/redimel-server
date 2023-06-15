@@ -21,9 +21,9 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var indicatorsDomain = dbContext.Indicators;
+            var indicatorsDomain = await dbContext.Indicators.ToListAsync();
 
             var indicatorsDto = new List<IndicatorsDto>();
             foreach (var indicator in indicatorsDomain)
@@ -47,11 +47,11 @@ namespace redimel_server.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
-        public IActionResult GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var indicatorsDomain = dbContext.Indicators.Find(id);
+            var indicatorsDomain = await dbContext.Indicators.FindAsync(id);
 
-            //var indicators = dbContext.Indicators.FirstOrDefault(x => x.Id == id);
+            //var indicators = dbContext.Indicators.FirstOrDefaultAsync(x => x.Id == id);
 
             if (indicatorsDomain == null)
             {
@@ -75,7 +75,7 @@ namespace redimel_server.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] AddIndicatorsRequestDto addIndicatorsRequestDto)
+        public async Task<IActionResult> Create([FromBody] AddIndicatorsRequestDto addIndicatorsRequestDto)
         {
             var indicatorsDomainModel = new Indicators
             {
@@ -89,8 +89,8 @@ namespace redimel_server.Controllers
                 Endurance = addIndicatorsRequestDto.Endurance
             };
 
-            dbContext.Indicators.Add(indicatorsDomainModel);
-            dbContext.SaveChanges();
+            await dbContext.Indicators.AddAsync(indicatorsDomainModel);
+            await dbContext.SaveChangesAsync();
 
             var indicatorsDto = new IndicatorsDto
             {
@@ -110,9 +110,9 @@ namespace redimel_server.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
-        public IActionResult Update([FromRoute] Guid id, [FromBody] UpdateIndicatorsRequestDto updateIndicatorsRequestDto)
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIndicatorsRequestDto updateIndicatorsRequestDto)
         {
-            var indicatorDomainModel = dbContext.Indicators.FirstOrDefault(i => i.Id == id);
+            var indicatorDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(i => i.Id == id);
 
             if (indicatorDomainModel == null)
             {
@@ -129,7 +129,7 @@ namespace redimel_server.Controllers
             indicatorDomainModel.Evasion = updateIndicatorsRequestDto.Evasion;
             indicatorDomainModel.Endurance = updateIndicatorsRequestDto.Endurance;
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             //Convert Domain Model to DTO
             var indicatorsDto = new IndicatorsDto
@@ -147,5 +147,23 @@ namespace redimel_server.Controllers
 
             return Ok(indicatorsDto);
     }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var indicatorsDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(x =>  x.Id == id);
+
+            if (indicatorsDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Indicators.Remove(indicatorsDomainModel);
+            await dbContext.SaveChangesAsync();
+
+            //return deleted Indicators back - optional
+            return Ok();
+        }
 }
 }
