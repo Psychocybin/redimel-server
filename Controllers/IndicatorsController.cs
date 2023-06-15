@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
+using System;
 
 namespace redimel_server.Controllers
 {
@@ -103,7 +105,47 @@ namespace redimel_server.Controllers
                 Endurance = indicatorsDomainModel.Endurance
             };
 
-            return CreatedAtAction(nameof(GetById), new { id = indicatorsDto.Id}, indicatorsDto);
+            return CreatedAtAction(nameof(GetById), new { id = indicatorsDto.Id }, indicatorsDto);
         }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public IActionResult Update([FromRoute] Guid id, [FromBody] UpdateIndicatorsRequestDto updateIndicatorsRequestDto)
+        {
+            var indicatorDomainModel = dbContext.Indicators.FirstOrDefault(i => i.Id == id);
+
+            if (indicatorDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            //Map DTO to Domain Model
+            indicatorDomainModel.Health = updateIndicatorsRequestDto.Health;
+            indicatorDomainModel.MentalEnergy = updateIndicatorsRequestDto.MentalEnergy;
+            indicatorDomainModel.MentalStrength = updateIndicatorsRequestDto.MentalStrength;
+            indicatorDomainModel.Strength = updateIndicatorsRequestDto.Strength;
+            indicatorDomainModel.Dexterity = updateIndicatorsRequestDto.Dexterity;
+            indicatorDomainModel.Agility = updateIndicatorsRequestDto.Agility;
+            indicatorDomainModel.Evasion = updateIndicatorsRequestDto.Evasion;
+            indicatorDomainModel.Endurance = updateIndicatorsRequestDto.Endurance;
+
+            dbContext.SaveChanges();
+
+            //Convert Domain Model to DTO
+            var indicatorsDto = new IndicatorsDto
+            {
+                Id = indicatorDomainModel.Id,
+                Health = indicatorDomainModel.Health,
+                MentalEnergy = indicatorDomainModel.MentalEnergy,
+                MentalStrength = indicatorDomainModel.MentalStrength,
+                Strength = indicatorDomainModel.Strength,
+                Dexterity = indicatorDomainModel.Dexterity,
+                Agility = indicatorDomainModel.Agility,
+                Evasion = indicatorDomainModel.Evasion,
+                Endurance = indicatorDomainModel.Endurance
+            };
+
+            return Ok(indicatorsDto);
     }
+}
 }
