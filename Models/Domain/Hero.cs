@@ -11,14 +11,14 @@ namespace redimel_server.Models.Domain
         public Guid PromisesId { get; set; }
         public Guid BaggagesId { get; set; }
         public Guid IndicatorsId { get; set; }
-        public Guid EquipmentId { get; set; }
+        public Guid EquipmentsId { get; set; }
         public Guid AbilitiesId { get; set; }
         public Guid SpecialAbilitiesId { get; set; }
         public ICollection<Baggage> Baggages { get; set; }
-        public ICollection<Promises> Promises { get; set; }
-        public Indicators Indicators { get; set; }
-        public Equipment Equipment { get; set; }
-        public Abilities Abilities { get; set; }
-        public SpecialAbilities SpecialAbilities { get; set; }
+        public ICollection<Promise> Promises { get; set; }
+        public Indicator Indicators { get; set; }
+        public Equipment Equipments { get; set; }
+        public Ability Abilities { get; set; }
+        public SpecialAbility SpecialAbilities { get; set; }
     }
 }

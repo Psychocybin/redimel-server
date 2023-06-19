@@ -1,7 +1,8 @@
-﻿namespace redimel_server.Models.DTO
+﻿namespace redimel_server.Models.Domain
 {
-    public class AddIndicatorsRequestDto
+    public class Indicator
     {
+        public Guid Id { get; set; }
         public int Health { get; set; }
         public int MentalEnergy { get; set; }
         public int MentalStrength { get; set; }

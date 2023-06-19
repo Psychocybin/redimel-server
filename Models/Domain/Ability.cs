@@ -2,7 +2,7 @@
 
 namespace redimel_server.Models.Domain
 {
-    public class Abilities
+    public class Ability
     {
         public Guid Id { get; set; }
         public Boolean Survival { get; set; }

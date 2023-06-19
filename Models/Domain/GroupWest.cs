@@ -9,6 +9,6 @@
         public Guid MissionsId { get; set; }
         public ICollection<Mission> Missions { get; set; }
         public ICollection<Hero> Heroes { get; set; }
-        public AditionalPoints AditionalPoints { get; set; }
+        public AditionalPoint AditionalPoints { get; set; }
     }
 }

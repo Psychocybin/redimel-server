@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
+using redimel_server.Repositories;
 using System;
 
 namespace redimel_server.Controllers
@@ -14,21 +15,23 @@ namespace redimel_server.Controllers
     public class IndicatorsController : ControllerBase
     {
         private readonly RedimelServerDbContext dbContext;
+        private readonly IIndicatorRepository indicatorRepository;
 
-        public IndicatorsController(RedimelServerDbContext dbContext)
+        public IndicatorsController(RedimelServerDbContext dbContext, IIndicatorRepository indicatorRepository)
         {
             this.dbContext = dbContext;
+            this.indicatorRepository = indicatorRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var indicatorsDomain = await dbContext.Indicators.ToListAsync();
+            var indicatorDomain = await indicatorRepository.GetAllAsync();
 
-            var indicatorsDto = new List<IndicatorsDto>();
-            foreach (var indicator in indicatorsDomain)
+            var indicatorDto = new List<IndicatorDto>();
+            foreach (var indicator in indicatorDomain)
             {
-                indicatorsDto.Add(new IndicatorsDto()
+                indicatorDto.Add(new IndicatorDto()
                 {
                     Id = indicator.Id,
                     Health = indicator.Health,
@@ -42,97 +45,57 @@ namespace redimel_server.Controllers
                 });
             }
 
-            return Ok(indicatorsDto);
+            return Ok(indicatorDto);
         }
 
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var indicatorsDomain = await dbContext.Indicators.FindAsync(id);
+            var indicatorDomain = await dbContext.Indicators.FindAsync(id);
 
-            //var indicators = dbContext.Indicators.FirstOrDefaultAsync(x => x.Id == id);
+            //var indicator = dbContext.Indicators.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (indicatorsDomain == null)
+            if (indicatorDomain == null)
             {
                 return NotFound();
             }
 
-            var indicatorsDto = new IndicatorsDto
+            var indicatorDto = new IndicatorDto
             {
-                Id = indicatorsDomain.Id,
-                Health = indicatorsDomain.Health,
-                MentalEnergy = indicatorsDomain.MentalEnergy,
-                MentalStrength = indicatorsDomain.MentalStrength,
-                Strength = indicatorsDomain.Strength,
-                Dexterity = indicatorsDomain.Dexterity,
-                Agility = indicatorsDomain.Agility,
-                Evasion = indicatorsDomain.Evasion,
-                Endurance = indicatorsDomain.Endurance
+                Id = indicatorDomain.Id,
+                Health = indicatorDomain.Health,
+                MentalEnergy = indicatorDomain.MentalEnergy,
+                MentalStrength = indicatorDomain.MentalStrength,
+                Strength = indicatorDomain.Strength,
+                Dexterity = indicatorDomain.Dexterity,
+                Agility = indicatorDomain.Agility,
+                Evasion = indicatorDomain.Evasion,
+                Endurance = indicatorDomain.Endurance
             };
 
-            return Ok(indicatorsDto);
+            return Ok(indicatorDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AddIndicatorsRequestDto addIndicatorsRequestDto)
+        public async Task<IActionResult> Create([FromBody] AddIndicatorRequestDto addIndicatorRequestDto)
         {
-            var indicatorsDomainModel = new Indicators
+            var indicatorDomainModel = new Indicator
             {
-                Health = addIndicatorsRequestDto.Health,
-                MentalEnergy = addIndicatorsRequestDto.MentalEnergy,
-                MentalStrength = addIndicatorsRequestDto.MentalStrength,
-                Strength = addIndicatorsRequestDto.Strength,
-                Dexterity = addIndicatorsRequestDto.Dexterity,
-                Agility = addIndicatorsRequestDto.Agility,
-                Evasion = addIndicatorsRequestDto.Evasion,
-                Endurance = addIndicatorsRequestDto.Endurance
+                Health = addIndicatorRequestDto.Health,
+                MentalEnergy = addIndicatorRequestDto.MentalEnergy,
+                MentalStrength = addIndicatorRequestDto.MentalStrength,
+                Strength = addIndicatorRequestDto.Strength,
+                Dexterity = addIndicatorRequestDto.Dexterity,
+                Agility = addIndicatorRequestDto.Agility,
+                Evasion = addIndicatorRequestDto.Evasion,
+                Endurance = addIndicatorRequestDto.Endurance
             };
 
-            await dbContext.Indicators.AddAsync(indicatorsDomainModel);
+            await dbContext.Indicators.AddAsync(indicatorDomainModel);
             await dbContext.SaveChangesAsync();
 
-            var indicatorsDto = new IndicatorsDto
-            {
-                Id = indicatorsDomainModel.Id,
-                Health = indicatorsDomainModel.Health,
-                MentalEnergy = indicatorsDomainModel.MentalEnergy,
-                MentalStrength = indicatorsDomainModel.MentalStrength,
-                Strength = indicatorsDomainModel.Strength,
-                Dexterity = indicatorsDomainModel.Dexterity,
-                Agility = indicatorsDomainModel.Agility,
-                Evasion = indicatorsDomainModel.Evasion,
-                Endurance = indicatorsDomainModel.Endurance
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = indicatorsDto.Id }, indicatorsDto);
-        }
-
-        [HttpPut]
-        [Route("{id:Guid}")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIndicatorsRequestDto updateIndicatorsRequestDto)
-        {
-            var indicatorDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(i => i.Id == id);
-
-            if (indicatorDomainModel == null)
-            {
-                return NotFound();
-            }
-
-            //Map DTO to Domain Model
-            indicatorDomainModel.Health = updateIndicatorsRequestDto.Health;
-            indicatorDomainModel.MentalEnergy = updateIndicatorsRequestDto.MentalEnergy;
-            indicatorDomainModel.MentalStrength = updateIndicatorsRequestDto.MentalStrength;
-            indicatorDomainModel.Strength = updateIndicatorsRequestDto.Strength;
-            indicatorDomainModel.Dexterity = updateIndicatorsRequestDto.Dexterity;
-            indicatorDomainModel.Agility = updateIndicatorsRequestDto.Agility;
-            indicatorDomainModel.Evasion = updateIndicatorsRequestDto.Evasion;
-            indicatorDomainModel.Endurance = updateIndicatorsRequestDto.Endurance;
-
-            await dbContext.SaveChangesAsync();
-
-            //Convert Domain Model to DTO
-            var indicatorsDto = new IndicatorsDto
+            var indicatorDto = new IndicatorDto
             {
                 Id = indicatorDomainModel.Id,
                 Health = indicatorDomainModel.Health,
@@ -145,24 +108,64 @@ namespace redimel_server.Controllers
                 Endurance = indicatorDomainModel.Endurance
             };
 
-            return Ok(indicatorsDto);
+            return CreatedAtAction(nameof(GetById), new { id = indicatorDto.Id }, indicatorDto);
+        }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIndicatorRequestDto updateIndicatorRequestDto)
+        {
+            var indicatorDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(i => i.Id == id);
+
+            if (indicatorDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            //Map DTO to Domain Model
+            indicatorDomainModel.Health = updateIndicatorRequestDto.Health;
+            indicatorDomainModel.MentalEnergy = updateIndicatorRequestDto.MentalEnergy;
+            indicatorDomainModel.MentalStrength = updateIndicatorRequestDto.MentalStrength;
+            indicatorDomainModel.Strength = updateIndicatorRequestDto.Strength;
+            indicatorDomainModel.Dexterity = updateIndicatorRequestDto.Dexterity;
+            indicatorDomainModel.Agility = updateIndicatorRequestDto.Agility;
+            indicatorDomainModel.Evasion = updateIndicatorRequestDto.Evasion;
+            indicatorDomainModel.Endurance = updateIndicatorRequestDto.Endurance;
+
+            await dbContext.SaveChangesAsync();
+
+            //Convert Domain Model to DTO
+            var indicatorDto = new IndicatorDto
+            {
+                Id = indicatorDomainModel.Id,
+                Health = indicatorDomainModel.Health,
+                MentalEnergy = indicatorDomainModel.MentalEnergy,
+                MentalStrength = indicatorDomainModel.MentalStrength,
+                Strength = indicatorDomainModel.Strength,
+                Dexterity = indicatorDomainModel.Dexterity,
+                Agility = indicatorDomainModel.Agility,
+                Evasion = indicatorDomainModel.Evasion,
+                Endurance = indicatorDomainModel.Endurance
+            };
+
+            return Ok(indicatorDto);
     }
 
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var indicatorsDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(x =>  x.Id == id);
+            var indicatorDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(x =>  x.Id == id);
 
-            if (indicatorsDomainModel == null)
+            if (indicatorDomainModel == null)
             {
                 return NotFound();
             }
 
-            dbContext.Indicators.Remove(indicatorsDomainModel);
+            dbContext.Indicators.Remove(indicatorDomainModel);
             await dbContext.SaveChangesAsync();
 
-            //return deleted Indicators back - optional
+            //return deleted Indicator back - optional
             return Ok();
         }
 }

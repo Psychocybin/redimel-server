@@ -1,6 +1,6 @@
 ﻿namespace redimel_server.Models.Domain
 {
-    public class AditionalPoints
+    public class AditionalPoint
     {
         public Guid Id { get; set; }
         public int TeamGame { get; set; }

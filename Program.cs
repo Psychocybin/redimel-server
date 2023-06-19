@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
+using redimel_server.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<RedimelServerDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("RedimelServerConnectionString")));
+
+builder.Services.AddScoped<IIndicatorRepository, SQLIndicatorRepository>();
 
 var app = builder.Build();
 

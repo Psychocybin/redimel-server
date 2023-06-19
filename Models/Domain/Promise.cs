@@ -1,6 +1,6 @@
 ﻿namespace redimel_server.Models.Domain
 {
-    public class Promises
+    public class Promise
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
