@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -15,10 +16,12 @@ namespace redimel_server.Controllers
     public class IndicatorsController : ControllerBase
     {
         private readonly IIndicatorRepository indicatorRepository;
+        private readonly IMapper mapper;
 
-        public IndicatorsController(IIndicatorRepository indicatorRepository)
+        public IndicatorsController(IIndicatorRepository indicatorRepository, IMapper mapper)
         {
             this.indicatorRepository = indicatorRepository;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -26,22 +29,25 @@ namespace redimel_server.Controllers
         {
             var indicatorDomain = await indicatorRepository.GetAllAsync();
 
-            var indicatorDto = new List<IndicatorDto>();
-            foreach (var indicator in indicatorDomain)
-            {
-                indicatorDto.Add(new IndicatorDto()
-                {
-                    Id = indicator.Id,
-                    Health = indicator.Health,
-                    MentalEnergy = indicator.MentalEnergy,
-                    MentalStrength = indicator.MentalStrength,
-                    Strength = indicator.Strength,
-                    Dexterity = indicator.Dexterity,
-                    Agility = indicator.Agility,
-                    Evasion = indicator.Evasion,
-                    Endurance = indicator.Endurance
-                });
-            }
+            //var indicatorDto = new List<IndicatorDto>();
+            //foreach (var indicator in indicatorDomain)
+            //{
+            //    indicatorDto.Add(new IndicatorDto()
+            //    {
+            //        Id = indicator.Id,
+            //        Health = indicator.Health,
+            //        MentalEnergy = indicator.MentalEnergy,
+            //        MentalStrength = indicator.MentalStrength,
+            //        Strength = indicator.Strength,
+            //        Dexterity = indicator.Dexterity,
+            //        Agility = indicator.Agility,
+            //        Evasion = indicator.Evasion,
+            //        Endurance = indicator.Endurance
+            //    });
+            //}
+
+            //Map Domain Models to DTOs
+            var indicatorDto = mapper.Map<List<IndicatorDto>>(indicatorDomain);
 
             //return DTO
             return Ok(indicatorDto);
@@ -61,18 +67,20 @@ namespace redimel_server.Controllers
                 return NotFound();
             }
 
-            var indicatorDto = new IndicatorDto
-            {
-                Id = indicatorDomain.Id,
-                Health = indicatorDomain.Health,
-                MentalEnergy = indicatorDomain.MentalEnergy,
-                MentalStrength = indicatorDomain.MentalStrength,
-                Strength = indicatorDomain.Strength,
-                Dexterity = indicatorDomain.Dexterity,
-                Agility = indicatorDomain.Agility,
-                Evasion = indicatorDomain.Evasion,
-                Endurance = indicatorDomain.Endurance
-            };
+            //var indicatorDto = new IndicatorDto
+            //{
+            //    Id = indicatorDomain.Id,
+            //    Health = indicatorDomain.Health,
+            //    MentalEnergy = indicatorDomain.MentalEnergy,
+            //    MentalStrength = indicatorDomain.MentalStrength,
+            //    Strength = indicatorDomain.Strength,
+            //    Dexterity = indicatorDomain.Dexterity,
+            //    Agility = indicatorDomain.Agility,
+            //    Evasion = indicatorDomain.Evasion,
+            //    Endurance = indicatorDomain.Endurance
+            //};
+
+            var indicatorDto = mapper.Map<IndicatorDto>(indicatorDomain);
 
             return Ok(indicatorDto);
         }
@@ -80,32 +88,11 @@ namespace redimel_server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddIndicatorRequestDto addIndicatorRequestDto)
         {
-            var indicatorDomainModel = new Indicator
-            {
-                Health = addIndicatorRequestDto.Health,
-                MentalEnergy = addIndicatorRequestDto.MentalEnergy,
-                MentalStrength = addIndicatorRequestDto.MentalStrength,
-                Strength = addIndicatorRequestDto.Strength,
-                Dexterity = addIndicatorRequestDto.Dexterity,
-                Agility = addIndicatorRequestDto.Agility,
-                Evasion = addIndicatorRequestDto.Evasion,
-                Endurance = addIndicatorRequestDto.Endurance
-            };
+            var indicatorDomainModel = mapper.Map<Indicator>(addIndicatorRequestDto);
 
             indicatorDomainModel = await indicatorRepository.CreateAsync(indicatorDomainModel);
 
-            var indicatorDto = new IndicatorDto
-            {
-                Id = indicatorDomainModel.Id,
-                Health = indicatorDomainModel.Health,
-                MentalEnergy = indicatorDomainModel.MentalEnergy,
-                MentalStrength = indicatorDomainModel.MentalStrength,
-                Strength = indicatorDomainModel.Strength,
-                Dexterity = indicatorDomainModel.Dexterity,
-                Agility = indicatorDomainModel.Agility,
-                Evasion = indicatorDomainModel.Evasion,
-                Endurance = indicatorDomainModel.Endurance
-            };
+            var indicatorDto = mapper.Map<IndicatorDto>(indicatorDomainModel);
 
             return CreatedAtAction(nameof(GetById), new { id = indicatorDto.Id }, indicatorDto);
         }
@@ -114,17 +101,7 @@ namespace redimel_server.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIndicatorRequestDto updateIndicatorRequestDto)
         {
-            var indicatorDomainModel = new Indicator
-            {
-                Health = updateIndicatorRequestDto.Health,
-                MentalEnergy = updateIndicatorRequestDto.MentalEnergy,
-                MentalStrength = updateIndicatorRequestDto.MentalStrength,
-                Strength = updateIndicatorRequestDto.Strength,
-                Dexterity = updateIndicatorRequestDto.Dexterity,
-                Agility = updateIndicatorRequestDto.Agility,
-                Evasion = updateIndicatorRequestDto.Evasion,
-                Endurance = updateIndicatorRequestDto.Endurance
-            };
+            var indicatorDomainModel = mapper.Map<Indicator>(updateIndicatorRequestDto);
 
             indicatorDomainModel = await indicatorRepository.UpdateAsync(id, indicatorDomainModel);
 
@@ -133,22 +110,8 @@ namespace redimel_server.Controllers
                 return NotFound();
             }
 
-            //Convert Domain Model to DTO
-            var indicatorDto = new IndicatorDto
-            {
-                Id = indicatorDomainModel.Id,
-                Health = indicatorDomainModel.Health,
-                MentalEnergy = indicatorDomainModel.MentalEnergy,
-                MentalStrength = indicatorDomainModel.MentalStrength,
-                Strength = indicatorDomainModel.Strength,
-                Dexterity = indicatorDomainModel.Dexterity,
-                Agility = indicatorDomainModel.Agility,
-                Evasion = indicatorDomainModel.Evasion,
-                Endurance = indicatorDomainModel.Endurance
-            };
-
-            return Ok(indicatorDto);
-    }
+            return Ok(mapper.Map<IndicatorDto>(indicatorDomainModel));
+        }
 
         [HttpDelete]
         [Route("{id:Guid}")]

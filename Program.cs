@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
+using redimel_server.Mappings;
 using redimel_server.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<RedimelServerDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("RedimelServerConnectionString")));
 
 builder.Services.AddScoped<IIndicatorRepository, SQLIndicatorRepository>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 var app = builder.Build();
 
