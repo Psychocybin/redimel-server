@@ -14,12 +14,10 @@ namespace redimel_server.Controllers
     [ApiController]
     public class IndicatorsController : ControllerBase
     {
-        private readonly RedimelServerDbContext dbContext;
         private readonly IIndicatorRepository indicatorRepository;
 
-        public IndicatorsController(RedimelServerDbContext dbContext, IIndicatorRepository indicatorRepository)
+        public IndicatorsController(IIndicatorRepository indicatorRepository)
         {
-            this.dbContext = dbContext;
             this.indicatorRepository = indicatorRepository;
         }
 
@@ -45,6 +43,7 @@ namespace redimel_server.Controllers
                 });
             }
 
+            //return DTO
             return Ok(indicatorDto);
         }
 
@@ -52,8 +51,9 @@ namespace redimel_server.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var indicatorDomain = await dbContext.Indicators.FindAsync(id);
-
+            var indicatorDomain = await indicatorRepository.GetByIdAsync(id);
+            
+            //var indicatorDomain = await dbContext.Indicators.FindAsync(id);
             //var indicator = dbContext.Indicators.FirstOrDefaultAsync(x => x.Id == id);
 
             if (indicatorDomain == null)
@@ -92,8 +92,7 @@ namespace redimel_server.Controllers
                 Endurance = addIndicatorRequestDto.Endurance
             };
 
-            await dbContext.Indicators.AddAsync(indicatorDomainModel);
-            await dbContext.SaveChangesAsync();
+            indicatorDomainModel = await indicatorRepository.CreateAsync(indicatorDomainModel);
 
             var indicatorDto = new IndicatorDto
             {
@@ -115,24 +114,24 @@ namespace redimel_server.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIndicatorRequestDto updateIndicatorRequestDto)
         {
-            var indicatorDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(i => i.Id == id);
+            var indicatorDomainModel = new Indicator
+            {
+                Health = updateIndicatorRequestDto.Health,
+                MentalEnergy = updateIndicatorRequestDto.MentalEnergy,
+                MentalStrength = updateIndicatorRequestDto.MentalStrength,
+                Strength = updateIndicatorRequestDto.Strength,
+                Dexterity = updateIndicatorRequestDto.Dexterity,
+                Agility = updateIndicatorRequestDto.Agility,
+                Evasion = updateIndicatorRequestDto.Evasion,
+                Endurance = updateIndicatorRequestDto.Endurance
+            };
+
+            indicatorDomainModel = await indicatorRepository.UpdateAsync(id, indicatorDomainModel);
 
             if (indicatorDomainModel == null)
             {
                 return NotFound();
             }
-
-            //Map DTO to Domain Model
-            indicatorDomainModel.Health = updateIndicatorRequestDto.Health;
-            indicatorDomainModel.MentalEnergy = updateIndicatorRequestDto.MentalEnergy;
-            indicatorDomainModel.MentalStrength = updateIndicatorRequestDto.MentalStrength;
-            indicatorDomainModel.Strength = updateIndicatorRequestDto.Strength;
-            indicatorDomainModel.Dexterity = updateIndicatorRequestDto.Dexterity;
-            indicatorDomainModel.Agility = updateIndicatorRequestDto.Agility;
-            indicatorDomainModel.Evasion = updateIndicatorRequestDto.Evasion;
-            indicatorDomainModel.Endurance = updateIndicatorRequestDto.Endurance;
-
-            await dbContext.SaveChangesAsync();
 
             //Convert Domain Model to DTO
             var indicatorDto = new IndicatorDto
@@ -155,15 +154,12 @@ namespace redimel_server.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var indicatorDomainModel = await dbContext.Indicators.FirstOrDefaultAsync(x =>  x.Id == id);
+            var indicatorDomainModel = await indicatorRepository.DeleteAsync(id);
 
             if (indicatorDomainModel == null)
             {
                 return NotFound();
             }
-
-            dbContext.Indicators.Remove(indicatorDomainModel);
-            await dbContext.SaveChangesAsync();
 
             //return deleted Indicator back - optional
             return Ok();
