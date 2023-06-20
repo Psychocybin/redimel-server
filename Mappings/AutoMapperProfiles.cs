@@ -11,6 +11,8 @@ namespace redimel_server.Mappings
             CreateMap<Indicator, IndicatorDto>().ReverseMap();
             CreateMap<AddIndicatorRequestDto, Indicator>().ReverseMap();
             CreateMap<UpdateIndicatorRequestDto, Indicator>().ReverseMap();
+            CreateMap<AddBaggageRequestDto, Baggage>().ReverseMap();
+            CreateMap<Baggage, BaggageDto>().ReverseMap();
         }
     }
 }

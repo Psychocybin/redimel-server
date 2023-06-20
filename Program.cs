@@ -16,6 +16,7 @@ builder.Services.AddDbContext<RedimelServerDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("RedimelServerConnectionString")));
 
 builder.Services.AddScoped<IIndicatorRepository, SQLIndicatorRepository>();
+builder.Services.AddScoped<IBaggageRepository, SQLBaggageRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
