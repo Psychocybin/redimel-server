@@ -32,5 +32,42 @@ namespace redimel_server.Data
         public DbSet<ThrowingWeapon> ThrowingWeapons { get; set; }
         public DbSet<Ultimate> Ultimates { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //seed data
+            var ability = new Ability()
+            {
+                Id = Guid.Parse("cd5a3e48-5eb4-49fa-a24d-3c3e861f22b3"),
+                Survival = false,
+                Diplomacy = false,
+                Climbing = false,
+                Acrobatics = false,
+                Skill = false,
+                Guile = false,
+                SecretKnowledge = false,
+                Sneak = false,
+                Elusion = false,
+                WaterCycle = false,
+                Melee = false,
+                NatureSkills = false,
+                BreakingLocks = false,
+                Transformation = false,
+                Spells = false,
+                Rituals = false,
+                Traps = false,
+                Archery = false,
+                ThrowingKnives = false,
+                PoisonousNeedles = false,
+                Stimulants = false,
+                Wrestling = true,
+                Observation = false,
+                ShieldBearer = false
+            };
+
+            modelBuilder.Entity<Ability>().HasData(ability);
+        }
     }
 }
