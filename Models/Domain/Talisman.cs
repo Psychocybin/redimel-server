@@ -8,6 +8,6 @@
         public string BonusIndicator { get; set; }
         public int BonusPoints { get; set; }
         public Guid EquipmentId { get; set; }
-        public Equipment Equipment { get; set; }
+        public virtual Equipment Equipment { get; set; }
     }
 }

@@ -19,12 +19,12 @@ namespace redimel_server.Models.Domain
         public Guid AbilityId { get; set; }
         [ForeignKey("SpecialAbility")]
         public Guid SpecialAbilityId { get; set; }
-        public GroupWest GroupWest { get; set; }
-        public Indicator Indicators { get; set; }
-        public Equipment Equipments { get; set; }
-        public Ability Ability { get; set; }
-        public SpecialAbility SpecialAbility { get; set; }
-        public ICollection<Baggage> Baggages { get; set; }
-        public ICollection<Promise> Promises { get; set; }
+        public virtual GroupWest GroupWest { get; set; }
+        public virtual Indicator Indicators { get; set; }
+        public virtual Equipment Equipments { get; set; }
+        public virtual Ability Ability { get; set; }
+        public virtual SpecialAbility SpecialAbility { get; set; }
+        public virtual ICollection<Baggage> Baggages { get; set; }
+        public virtual ICollection<Promise> Promises { get; set; }
     }
 }

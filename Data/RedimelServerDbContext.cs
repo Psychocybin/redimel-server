@@ -38,6 +38,11 @@ namespace redimel_server.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            //modelBuilder.Entity<Indicator>()
+            //    .HasOne(x => x.Hero)
+            //    .WithOne(x => x.Indicators)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
             //seed data for Soldier Hero
 
             modelBuilder.Entity<Indicator>().HasData(new Indicator

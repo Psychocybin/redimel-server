@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public Boolean IsItDone { get; set; }
         public Guid GroupWestId { get; set; }
-        public GroupWest GroupWest { get; set; }
+        public virtual GroupWest GroupWest { get; set; }
     }
 }

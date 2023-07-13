@@ -21,10 +21,10 @@ namespace redimel_server.Models.Domain
         [ForeignKey("ThrowingWeapon")]
         public Guid ThrowingWeaponId { get; set; }
         //public Hero Hero { get; set; }
-        public Armor Armor { get; set; }
-        public Shield Shield { get; set; }
-        public Weapon Weapon { get; set; }
-        public ThrowingWeapon ThrowingWeapon { get; set; }
-        public ICollection<Talisman> Talismans { get; set; }
+        public virtual Armor Armor { get; set; }
+        public virtual Shield Shield { get; set; }
+        public virtual Weapon Weapon { get; set; }
+        public virtual ThrowingWeapon ThrowingWeapon { get; set; }
+        public virtual ICollection<Talisman> Talismans { get; set; }
     }
 }

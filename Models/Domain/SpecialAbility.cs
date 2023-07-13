@@ -12,10 +12,10 @@ namespace redimel_server.Models.Domain
         [ForeignKey("Ultimate")]
         public Guid UltimateId { get; set; }
         //public Hero Hero { get; set; }
-        public SpecialCombatSkill SpecialCombatSkill { get; set; }
-        public Ultimate Ultimate { get; set; }
-        public ICollection<Spell> Spells { get; set; }
-        public ICollection<Ritual> Rituals { get; set; }
-        public ICollection<NatureSkill> NatureSkills { get; set; }
+        public virtual SpecialCombatSkill SpecialCombatSkill { get; set; }
+        public virtual Ultimate Ultimate { get; set; }
+        public virtual ICollection<Spell> Spells { get; set; }
+        public virtual ICollection<Ritual> Rituals { get; set; }
+        public virtual ICollection<NatureSkill> NatureSkills { get; set; }
     }
 }

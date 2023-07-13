@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public Boolean IsItDone { get; set; }
         public Guid HeroId { get; set; }
-        public Hero Hero { get; set; }
+        public virtual Hero Hero { get; set; }
     }
 }

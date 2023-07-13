@@ -444,7 +444,8 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("GroupWestId");
 
-                    b.HasIndex("IndicatorsId");
+                    b.HasIndex("IndicatorsId")
+                        .IsUnique();
 
                     b.HasIndex("SpecialAbilityId");
 
@@ -1097,9 +1098,9 @@ namespace redimel_server.Migrations
                         .IsRequired();
 
                     b.HasOne("redimel_server.Models.Domain.Indicator", "Indicators")
-                        .WithMany()
-                        .HasForeignKey("IndicatorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Hero")
+                        .HasForeignKey("redimel_server.Models.Domain.Hero", "IndicatorsId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("redimel_server.Models.Domain.SpecialAbility", "SpecialAbility")
@@ -1239,6 +1240,12 @@ namespace redimel_server.Migrations
                     b.Navigation("Baggages");
 
                     b.Navigation("Promises");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.Indicator", b =>
+                {
+                    b.Navigation("Hero")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>

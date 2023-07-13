@@ -13,7 +13,7 @@ namespace redimel_server.Models.Domain
         //[ForeignKey("GroupWest")]
         public Guid GroupWestId { get; set; }
         //public GroupWest GroupWest { get; set; }
-        public ICollection<BattleGroup> BattleGroups { get; set; }
-        public ICollection<Negotiation> Negotiations { get; set; }
+        public virtual ICollection<BattleGroup> BattleGroups { get; set; }
+        public virtual ICollection<Negotiation> Negotiations { get; set; }
     }
 }

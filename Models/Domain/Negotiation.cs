@@ -5,6 +5,6 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
         public Guid AditionalPointsId { get; set; }
-        public AditionalPoint AditionalPoints { get; set; }
+        public virtual AditionalPoint AditionalPoints { get; set; }
     }
 }
