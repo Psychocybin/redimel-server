@@ -12,8 +12,8 @@ using redimel_server.Data;
 namespace redimel_server.Migrations
 {
     [DbContext(typeof(RedimelServerDbContext))]
-    [Migration("20230615203835_RenameClasses")]
-    partial class RenameClasses
+    [Migration("20230713085146_SeedDataForHunterHero")]
+    partial class SeedDataForHunterHero
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace redimel_server.Migrations
 
                     b.Property<bool>("Guile")
                         .HasColumnType("bit");
+
+                    b.Property<Guid>("HeroId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Melee")
                         .HasColumnType("bit");
@@ -106,6 +109,66 @@ namespace redimel_server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Abilities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("cd5a3e48-5eb4-49fa-a24d-3c3e861f22b3"),
+                            Acrobatics = false,
+                            Archery = false,
+                            BreakingLocks = false,
+                            Climbing = false,
+                            Diplomacy = false,
+                            Elusion = false,
+                            Guile = false,
+                            HeroId = new Guid("a9542e10-30a3-45a8-b2ea-cacef3df468a"),
+                            Melee = false,
+                            NatureSkills = false,
+                            Observation = false,
+                            PoisonousNeedles = false,
+                            Rituals = false,
+                            SecretKnowledge = false,
+                            ShieldBearer = false,
+                            Skill = false,
+                            Sneak = false,
+                            Spells = false,
+                            Stimulants = false,
+                            Survival = false,
+                            ThrowingKnives = false,
+                            Transformation = false,
+                            Traps = false,
+                            WaterCycle = false,
+                            Wrestling = true
+                        },
+                        new
+                        {
+                            Id = new Guid("0bd3e733-dcf3-40a3-8f90-e965a72687fd"),
+                            Acrobatics = false,
+                            Archery = true,
+                            BreakingLocks = false,
+                            Climbing = false,
+                            Diplomacy = false,
+                            Elusion = false,
+                            Guile = false,
+                            HeroId = new Guid("e1f39f3c-0fb5-40d4-84d1-b6a46c5c0568"),
+                            Melee = false,
+                            NatureSkills = false,
+                            Observation = false,
+                            PoisonousNeedles = false,
+                            Rituals = false,
+                            SecretKnowledge = false,
+                            ShieldBearer = false,
+                            Skill = false,
+                            Sneak = false,
+                            Spells = false,
+                            Stimulants = false,
+                            Survival = true,
+                            ThrowingKnives = false,
+                            Transformation = false,
+                            Traps = false,
+                            WaterCycle = false,
+                            Wrestling = false
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.AditionalPoint", b =>
@@ -114,20 +177,17 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BattleGroupsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Cover")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("GroupWestId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ImportantInformation")
                         .HasColumnType("int");
 
                     b.Property<int>("Morals")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("NegotiationsId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SlainMonsters")
                         .HasColumnType("int");
@@ -138,6 +198,18 @@ namespace redimel_server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AditionalPoints");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8db8e341-9d6e-42e8-8504-45b5f56eac5f"),
+                            Cover = 2,
+                            GroupWestId = new Guid("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
+                            ImportantInformation = 0,
+                            Morals = 2,
+                            SlainMonsters = 0,
+                            TeamGame = 0
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Armor", b =>
@@ -146,19 +218,40 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ArmorType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Defence")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Armors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("05bee6ad-3556-4d28-b537-ab3fed69ea26"),
+                            ArmorType = "FullPlate",
+                            Defence = 11,
+                            EquipmentId = new Guid("6f58f2e9-7788-43f8-abe1-06a6d96a537b"),
+                            IsExist = true
+                        },
+                        new
+                        {
+                            Id = new Guid("9eb3e847-03e3-428d-9f05-976e64465cb8"),
+                            ArmorType = "WoodArmor",
+                            Defence = 5,
+                            EquipmentId = new Guid("6d6e49e8-84b4-4a11-b8f8-c1613e97479a"),
+                            IsExist = true
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Baggage", b =>
@@ -167,7 +260,7 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("HeroId")
+                    b.Property<Guid>("HeroId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -190,8 +283,11 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AditionalPointId")
+                    b.Property<Guid>("AditionalPointsId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CountPeople")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -199,7 +295,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AditionalPointId");
+                    b.HasIndex("AditionalPointsId");
 
                     b.ToTable("BattleGroups");
                 });
@@ -210,7 +306,10 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ArmorsId")
+                    b.Property<Guid>("ArmorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("HeroId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Knife")
@@ -225,32 +324,59 @@ namespace redimel_server.Migrations
                     b.Property<bool>("Poison")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ShieldsId")
+                    b.Property<Guid>("ShieldId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("SmokeBall")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("TalismansId")
+                    b.Property<Guid>("ThrowingWeaponId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ThrowingWeaponsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("WeaponsId")
+                    b.Property<Guid>("WeaponId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArmorsId");
+                    b.HasIndex("ArmorId");
 
-                    b.HasIndex("ShieldsId");
+                    b.HasIndex("ShieldId");
 
-                    b.HasIndex("ThrowingWeaponsId");
+                    b.HasIndex("ThrowingWeaponId");
 
-                    b.HasIndex("WeaponsId");
+                    b.HasIndex("WeaponId");
 
                     b.ToTable("Equipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6f58f2e9-7788-43f8-abe1-06a6d96a537b"),
+                            ArmorId = new Guid("05bee6ad-3556-4d28-b537-ab3fed69ea26"),
+                            HeroId = new Guid("a9542e10-30a3-45a8-b2ea-cacef3df468a"),
+                            Knife = true,
+                            MedicPack = true,
+                            MoneyBag = 100,
+                            Poison = false,
+                            ShieldId = new Guid("e87042bf-50c0-4b73-adc5-1da34dfdcd5f"),
+                            SmokeBall = true,
+                            ThrowingWeaponId = new Guid("bcb17f68-b01e-484f-b757-7962129f95f6"),
+                            WeaponId = new Guid("57006109-51e5-43e3-a8e0-8f3ece262649")
+                        },
+                        new
+                        {
+                            Id = new Guid("6d6e49e8-84b4-4a11-b8f8-c1613e97479a"),
+                            ArmorId = new Guid("9eb3e847-03e3-428d-9f05-976e64465cb8"),
+                            HeroId = new Guid("e1f39f3c-0fb5-40d4-84d1-b6a46c5c0568"),
+                            Knife = true,
+                            MedicPack = true,
+                            MoneyBag = 100,
+                            Poison = false,
+                            ShieldId = new Guid("c5b0bd9c-7840-41b4-bb71-44ab2b883c7d"),
+                            SmokeBall = false,
+                            ThrowingWeaponId = new Guid("666c294d-c0d1-49d1-89a0-88abb3cf05fe"),
+                            WeaponId = new Guid("b29503f6-4955-4512-a0d9-619f16127a80")
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.GroupWest", b =>
@@ -266,17 +392,19 @@ namespace redimel_server.Migrations
                     b.Property<Guid>("AditionalPointsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("HeroesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MissionsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AditionalPointsId");
 
                     b.ToTable("GroupWests");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
+                            ActualMission = "",
+                            AditionalPointsId = new Guid("8db8e341-9d6e-42e8-8504-45b5f56eac5f")
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Hero", b =>
@@ -285,19 +413,16 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AbilitiesId")
+                    b.Property<Guid>("AbilityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("BaggageCapacity")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("BaggagesId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("EquipmentsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GroupWestId")
+                    b.Property<Guid>("GroupWestId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("HeroClass")
@@ -311,15 +436,12 @@ namespace redimel_server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PromisesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SpecialAbilitiesId")
+                    b.Property<Guid>("SpecialAbilityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AbilitiesId");
+                    b.HasIndex("AbilityId");
 
                     b.HasIndex("EquipmentsId");
 
@@ -327,9 +449,35 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("IndicatorsId");
 
-                    b.HasIndex("SpecialAbilitiesId");
+                    b.HasIndex("SpecialAbilityId");
 
                     b.ToTable("Heroes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a9542e10-30a3-45a8-b2ea-cacef3df468a"),
+                            AbilityId = new Guid("cd5a3e48-5eb4-49fa-a24d-3c3e861f22b3"),
+                            BaggageCapacity = 60.0,
+                            EquipmentsId = new Guid("6f58f2e9-7788-43f8-abe1-06a6d96a537b"),
+                            GroupWestId = new Guid("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
+                            HeroClass = "Barbarian",
+                            IndicatorsId = new Guid("1aa43831-d5b0-4299-9585-a98c527ef9f8"),
+                            Name = "Vranko",
+                            SpecialAbilityId = new Guid("bf99b385-56ee-49f9-b7fe-36cc88f829d0")
+                        },
+                        new
+                        {
+                            Id = new Guid("e1f39f3c-0fb5-40d4-84d1-b6a46c5c0568"),
+                            AbilityId = new Guid("0bd3e733-dcf3-40a3-8f90-e965a72687fd"),
+                            BaggageCapacity = 50.0,
+                            EquipmentsId = new Guid("6d6e49e8-84b4-4a11-b8f8-c1613e97479a"),
+                            GroupWestId = new Guid("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
+                            HeroClass = "Hunter",
+                            IndicatorsId = new Guid("697d4622-b4d9-4b71-85e8-a81bbcd7c0a4"),
+                            Name = "TheLittleBear",
+                            SpecialAbilityId = new Guid("eb521bf8-1f0e-43da-bfaf-82750308b629")
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Indicator", b =>
@@ -353,6 +501,9 @@ namespace redimel_server.Migrations
                     b.Property<int>("Health")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("HeroId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("MentalEnergy")
                         .HasColumnType("int");
 
@@ -365,6 +516,34 @@ namespace redimel_server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Indicators");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1aa43831-d5b0-4299-9585-a98c527ef9f8"),
+                            Agility = 3,
+                            Dexterity = 8,
+                            Endurance = 6,
+                            Evasion = 5,
+                            Health = 70,
+                            HeroId = new Guid("a9542e10-30a3-45a8-b2ea-cacef3df468a"),
+                            MentalEnergy = 20,
+                            MentalStrength = 6,
+                            Strength = 12
+                        },
+                        new
+                        {
+                            Id = new Guid("697d4622-b4d9-4b71-85e8-a81bbcd7c0a4"),
+                            Agility = 3,
+                            Dexterity = 7,
+                            Endurance = 12,
+                            Evasion = 3,
+                            Health = 60,
+                            HeroId = new Guid("e1f39f3c-0fb5-40d4-84d1-b6a46c5c0568"),
+                            MentalEnergy = 24,
+                            MentalStrength = 8,
+                            Strength = 7
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Mission", b =>
@@ -373,7 +552,7 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GroupWestId")
+                    b.Property<Guid>("GroupWestId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsItDone")
@@ -406,7 +585,7 @@ namespace redimel_server.Migrations
                     b.Property<int>("SkillLevel")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("SpecialAbilityId")
+                    b.Property<Guid>("SpecialAbilityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -422,7 +601,7 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AditionalPointId")
+                    b.Property<Guid>("AditionalPointsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -431,7 +610,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AditionalPointId");
+                    b.HasIndex("AditionalPointsId");
 
                     b.ToTable("Negotiations");
                 });
@@ -442,7 +621,7 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("HeroId")
+                    b.Property<Guid>("HeroId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsItDone")
@@ -475,7 +654,7 @@ namespace redimel_server.Migrations
                     b.Property<int>("SkillLevel")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("SpecialAbilityId")
+                    b.Property<Guid>("SpecialAbilityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -494,16 +673,37 @@ namespace redimel_server.Migrations
                     b.Property<int>("Defence")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("ShieldType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Shields");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e87042bf-50c0-4b73-adc5-1da34dfdcd5f"),
+                            Defence = 0,
+                            EquipmentId = new Guid("6f58f2e9-7788-43f8-abe1-06a6d96a537b"),
+                            IsExist = false,
+                            ShieldType = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("c5b0bd9c-7840-41b4-bb71-44ab2b883c7d"),
+                            Defence = 0,
+                            EquipmentId = new Guid("6d6e49e8-84b4-4a11-b8f8-c1613e97479a"),
+                            IsExist = false,
+                            ShieldType = ""
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>
@@ -512,28 +712,38 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("NatureSkillsId")
+                    b.Property<Guid>("HeroId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RitualsId")
+                    b.Property<Guid>("SpecialCombatSkillId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SpecialCombatSkillsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SpellsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UltimatesId")
+                    b.Property<Guid>("UltimateId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpecialCombatSkillsId");
+                    b.HasIndex("SpecialCombatSkillId");
 
-                    b.HasIndex("UltimatesId");
+                    b.HasIndex("UltimateId");
 
                     b.ToTable("SpecialAbilities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("bf99b385-56ee-49f9-b7fe-36cc88f829d0"),
+                            HeroId = new Guid("a9542e10-30a3-45a8-b2ea-cacef3df468a"),
+                            SpecialCombatSkillId = new Guid("d1d752d4-216b-4e3e-b663-6e2f5e849477"),
+                            UltimateId = new Guid("0d71b738-b538-4e19-aebe-05806ab7d2fd")
+                        },
+                        new
+                        {
+                            Id = new Guid("eb521bf8-1f0e-43da-bfaf-82750308b629"),
+                            HeroId = new Guid("e1f39f3c-0fb5-40d4-84d1-b6a46c5c0568"),
+                            SpecialCombatSkillId = new Guid("fdd5bf1d-32c6-460d-b518-570e866f2e7a"),
+                            UltimateId = new Guid("6d16ec7d-7e95-4c76-a146-7532c2c1f39e")
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialCombatSkill", b =>
@@ -552,9 +762,30 @@ namespace redimel_server.Migrations
                     b.Property<int>("SkillLevel")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("SpecialAbilitiesId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("SpecialCombatSkills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d1d752d4-216b-4e3e-b663-6e2f5e849477"),
+                            Name = "SoldierSCS",
+                            RequiredMentalEnergy = 4,
+                            SkillLevel = 1,
+                            SpecialAbilitiesId = new Guid("bf99b385-56ee-49f9-b7fe-36cc88f829d0")
+                        },
+                        new
+                        {
+                            Id = new Guid("fdd5bf1d-32c6-460d-b518-570e866f2e7a"),
+                            Name = "HunterSCS",
+                            RequiredMentalEnergy = 0,
+                            SkillLevel = 1,
+                            SpecialAbilitiesId = new Guid("eb521bf8-1f0e-43da-bfaf-82750308b629")
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Spell", b =>
@@ -573,7 +804,7 @@ namespace redimel_server.Migrations
                     b.Property<int>("SkillLevel")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("SpecialAbilityId")
+                    b.Property<Guid>("SpecialAbilityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -596,14 +827,14 @@ namespace redimel_server.Migrations
                     b.Property<int>("BonusPoints")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("EquipmentId")
+                    b.Property<Guid>("EquipmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("TalismanType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -629,19 +860,51 @@ namespace redimel_server.Migrations
                     b.Property<int>("Defence")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.Property<int>("ThrowingWeaponRange")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ThrowingWeaponType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ThrowingWeapons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("bcb17f68-b01e-484f-b757-7962129f95f6"),
+                            Attack = 0,
+                            Damage = 0,
+                            Defence = 0,
+                            EquipmentId = new Guid("6f58f2e9-7788-43f8-abe1-06a6d96a537b"),
+                            IsExist = false,
+                            Quantity = 0,
+                            ThrowingWeaponRange = 0,
+                            ThrowingWeaponType = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("666c294d-c0d1-49d1-89a0-88abb3cf05fe"),
+                            Attack = 9,
+                            Damage = 10,
+                            Defence = 1,
+                            EquipmentId = new Guid("6d6e49e8-84b4-4a11-b8f8-c1613e97479a"),
+                            IsExist = true,
+                            Quantity = 20,
+                            ThrowingWeaponRange = 4,
+                            ThrowingWeaponType = "ShortBow"
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ultimate", b =>
@@ -660,9 +923,30 @@ namespace redimel_server.Migrations
                     b.Property<int>("SkillLevel")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("SpecialAbilitiesId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Ultimates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0d71b738-b538-4e19-aebe-05806ab7d2fd"),
+                            Name = "SoldierUltimate",
+                            RequiredMentalEnergy = 5,
+                            SkillLevel = 1,
+                            SpecialAbilitiesId = new Guid("bf99b385-56ee-49f9-b7fe-36cc88f829d0")
+                        },
+                        new
+                        {
+                            Id = new Guid("6d16ec7d-7e95-4c76-a146-7532c2c1f39e"),
+                            Name = "HunterUltimate",
+                            RequiredMentalEnergy = 8,
+                            SkillLevel = 1,
+                            SpecialAbilitiesId = new Guid("eb521bf8-1f0e-43da-bfaf-82750308b629")
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Weapon", b =>
@@ -680,65 +964,108 @@ namespace redimel_server.Migrations
                     b.Property<int>("Defence")
                         .HasColumnType("int");
 
-                    b.Property<int>("Range")
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsExist")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsItTwoHandWeapon")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("WeaponRange")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("WeaponType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Weapons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("57006109-51e5-43e3-a8e0-8f3ece262649"),
+                            Attack = 12,
+                            Damage = 15,
+                            Defence = 3,
+                            EquipmentId = new Guid("6f58f2e9-7788-43f8-abe1-06a6d96a537b"),
+                            IsExist = true,
+                            IsItTwoHandWeapon = true,
+                            WeaponRange = 3,
+                            WeaponType = "TwoHand"
+                        },
+                        new
+                        {
+                            Id = new Guid("b29503f6-4955-4512-a0d9-619f16127a80"),
+                            Attack = 11,
+                            Damage = 10,
+                            Defence = 2,
+                            EquipmentId = new Guid("6d6e49e8-84b4-4a11-b8f8-c1613e97479a"),
+                            IsExist = true,
+                            IsItTwoHandWeapon = false,
+                            WeaponRange = 2,
+                            WeaponType = "OneHand"
+                        });
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Baggage", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.Hero", null)
+                    b.HasOne("redimel_server.Models.Domain.Hero", "Hero")
                         .WithMany("Baggages")
-                        .HasForeignKey("HeroId");
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hero");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.BattleGroup", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.AditionalPoint", null)
+                    b.HasOne("redimel_server.Models.Domain.AditionalPoint", "AditionalPoints")
                         .WithMany("BattleGroups")
-                        .HasForeignKey("AditionalPointId");
+                        .HasForeignKey("AditionalPointsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AditionalPoints");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Equipment", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.Armor", "Armors")
+                    b.HasOne("redimel_server.Models.Domain.Armor", "Armor")
                         .WithMany()
-                        .HasForeignKey("ArmorsId")
+                        .HasForeignKey("ArmorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.Shield", "Shields")
+                    b.HasOne("redimel_server.Models.Domain.Shield", "Shield")
                         .WithMany()
-                        .HasForeignKey("ShieldsId")
+                        .HasForeignKey("ShieldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.ThrowingWeapon", "ThrowingWeapons")
+                    b.HasOne("redimel_server.Models.Domain.ThrowingWeapon", "ThrowingWeapon")
                         .WithMany()
-                        .HasForeignKey("ThrowingWeaponsId")
+                        .HasForeignKey("ThrowingWeaponId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.Weapon", "Weapons")
+                    b.HasOne("redimel_server.Models.Domain.Weapon", "Weapon")
                         .WithMany()
-                        .HasForeignKey("WeaponsId")
+                        .HasForeignKey("WeaponId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Armors");
+                    b.Navigation("Armor");
 
-                    b.Navigation("Shields");
+                    b.Navigation("Shield");
 
-                    b.Navigation("ThrowingWeapons");
+                    b.Navigation("ThrowingWeapon");
 
-                    b.Navigation("Weapons");
+                    b.Navigation("Weapon");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.GroupWest", b =>
@@ -754,9 +1081,9 @@ namespace redimel_server.Migrations
 
             modelBuilder.Entity("redimel_server.Models.Domain.Hero", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.Ability", "Abilities")
+                    b.HasOne("redimel_server.Models.Domain.Ability", "Ability")
                         .WithMany()
-                        .HasForeignKey("AbilitiesId")
+                        .HasForeignKey("AbilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -766,9 +1093,11 @@ namespace redimel_server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.GroupWest", null)
+                    b.HasOne("redimel_server.Models.Domain.GroupWest", "GroupWest")
                         .WithMany("Heroes")
-                        .HasForeignKey("GroupWestId");
+                        .HasForeignKey("GroupWestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("redimel_server.Models.Domain.Indicator", "Indicators")
                         .WithMany()
@@ -776,87 +1105,117 @@ namespace redimel_server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", "SpecialAbilities")
+                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", "SpecialAbility")
                         .WithMany()
-                        .HasForeignKey("SpecialAbilitiesId")
+                        .HasForeignKey("SpecialAbilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Abilities");
+                    b.Navigation("Ability");
 
                     b.Navigation("Equipments");
 
+                    b.Navigation("GroupWest");
+
                     b.Navigation("Indicators");
 
-                    b.Navigation("SpecialAbilities");
+                    b.Navigation("SpecialAbility");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Mission", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.GroupWest", null)
+                    b.HasOne("redimel_server.Models.Domain.GroupWest", "GroupWest")
                         .WithMany("Missions")
-                        .HasForeignKey("GroupWestId");
+                        .HasForeignKey("GroupWestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GroupWest");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.NatureSkill", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", null)
+                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", "SpecialAbility")
                         .WithMany("NatureSkills")
-                        .HasForeignKey("SpecialAbilityId");
+                        .HasForeignKey("SpecialAbilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SpecialAbility");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Negotiation", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.AditionalPoint", null)
+                    b.HasOne("redimel_server.Models.Domain.AditionalPoint", "AditionalPoints")
                         .WithMany("Negotiations")
-                        .HasForeignKey("AditionalPointId");
+                        .HasForeignKey("AditionalPointsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AditionalPoints");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Promise", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.Hero", null)
+                    b.HasOne("redimel_server.Models.Domain.Hero", "Hero")
                         .WithMany("Promises")
-                        .HasForeignKey("HeroId");
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hero");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ritual", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", null)
+                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", "SpecialAbility")
                         .WithMany("Rituals")
-                        .HasForeignKey("SpecialAbilityId");
+                        .HasForeignKey("SpecialAbilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SpecialAbility");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.SpecialCombatSkill", "SpecialCombatSkills")
+                    b.HasOne("redimel_server.Models.Domain.SpecialCombatSkill", "SpecialCombatSkill")
                         .WithMany()
-                        .HasForeignKey("SpecialCombatSkillsId")
+                        .HasForeignKey("SpecialCombatSkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.Ultimate", "Ultimates")
+                    b.HasOne("redimel_server.Models.Domain.Ultimate", "Ultimate")
                         .WithMany()
-                        .HasForeignKey("UltimatesId")
+                        .HasForeignKey("UltimateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SpecialCombatSkills");
+                    b.Navigation("SpecialCombatSkill");
 
-                    b.Navigation("Ultimates");
+                    b.Navigation("Ultimate");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Spell", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", null)
+                    b.HasOne("redimel_server.Models.Domain.SpecialAbility", "SpecialAbility")
                         .WithMany("Spells")
-                        .HasForeignKey("SpecialAbilityId");
+                        .HasForeignKey("SpecialAbilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SpecialAbility");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Talisman", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.Equipment", null)
+                    b.HasOne("redimel_server.Models.Domain.Equipment", "Equipment")
                         .WithMany("Talismans")
-                        .HasForeignKey("EquipmentId");
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Equipment");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.AditionalPoint", b =>

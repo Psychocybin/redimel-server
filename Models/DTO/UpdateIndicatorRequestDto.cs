@@ -10,5 +10,6 @@
         public int Agility { get; set; }
         public int Evasion { get; set; }
         public int Endurance { get; set; }
+        public Guid HeroId { get; set; }
     }
 }

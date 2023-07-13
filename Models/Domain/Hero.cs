@@ -1,4 +1,5 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace redimel_server.Models.Domain
 {
@@ -8,17 +9,22 @@ namespace redimel_server.Models.Domain
         public string Name { get; set; }
         public string HeroClass { get; set; }
         public double BaggageCapacity { get; set; }
-        public Guid PromisesId { get; set; }
-        public Guid BaggagesId { get; set; }
+        [ForeignKey("GroupWest")]
+        public Guid GroupWestId { get; set; }
+        [ForeignKey("Indicators")]
         public Guid IndicatorsId { get; set; }
+        [ForeignKey("Equipments")]
         public Guid EquipmentsId { get; set; }
-        public Guid AbilitiesId { get; set; }
-        public Guid SpecialAbilitiesId { get; set; }
-        public ICollection<Baggage> Baggages { get; set; }
-        public ICollection<Promise> Promises { get; set; }
+        [ForeignKey("Ability")]
+        public Guid AbilityId { get; set; }
+        [ForeignKey("SpecialAbility")]
+        public Guid SpecialAbilityId { get; set; }
+        public GroupWest GroupWest { get; set; }
         public Indicator Indicators { get; set; }
         public Equipment Equipments { get; set; }
-        public Ability Abilities { get; set; }
-        public SpecialAbility SpecialAbilities { get; set; }
+        public Ability Ability { get; set; }
+        public SpecialAbility SpecialAbility { get; set; }
+        public ICollection<Baggage> Baggages { get; set; }
+        public ICollection<Promise> Promises { get; set; }
     }
 }
