@@ -13,6 +13,7 @@ namespace redimel_server.Mappings
             CreateMap<UpdateIndicatorRequestDto, Indicator>().ReverseMap();
             CreateMap<AddBaggageRequestDto, Baggage>().ReverseMap();
             CreateMap<Baggage, BaggageDto>().ReverseMap();
+            CreateMap<NatureSkill, NatureSkillDto>().ReverseMap();
         }
     }
 }
