@@ -18,6 +18,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("RedimelServerCon
 builder.Services.AddScoped<IIndicatorRepository, SQLIndicatorRepository>();
 builder.Services.AddScoped<IBaggageRepository, SQLBaggageRepository>();
 builder.Services.AddScoped<INatureSkillRepository, SQLNatureSkillRepository>();
+builder.Services.AddScoped<IAbilityRepository, SQLAbilityRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

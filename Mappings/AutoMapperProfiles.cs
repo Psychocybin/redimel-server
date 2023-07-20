@@ -14,6 +14,7 @@ namespace redimel_server.Mappings
             CreateMap<AddBaggageRequestDto, Baggage>().ReverseMap();
             CreateMap<Baggage, BaggageDto>().ReverseMap();
             CreateMap<NatureSkill, NatureSkillDto>().ReverseMap();
+            CreateMap<Ability, AbilityDto>().ReverseMap();
         }
     }
 }
