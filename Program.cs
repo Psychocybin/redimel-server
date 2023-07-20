@@ -20,6 +20,7 @@ builder.Services.AddScoped<IBaggageRepository, SQLBaggageRepository>();
 builder.Services.AddScoped<INatureSkillRepository, SQLNatureSkillRepository>();
 builder.Services.AddScoped<IAbilityRepository, SQLAbilityRepository>();
 builder.Services.AddScoped<IAditionalPointRepository, SQLAditionalPointRepository>();
+builder.Services.AddScoped<IArmorRepository, SQLArmorRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

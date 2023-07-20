@@ -16,6 +16,7 @@ namespace redimel_server.Mappings
             CreateMap<NatureSkill, NatureSkillDto>().ReverseMap();
             CreateMap<Ability, AbilityDto>().ReverseMap();
             CreateMap<AditionalPoint, AditionalPointDto>().ReverseMap();
+            CreateMap<Armor, ArmorDto>().ReverseMap();
         }
     }
 }
