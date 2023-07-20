@@ -21,6 +21,7 @@ builder.Services.AddScoped<INatureSkillRepository, SQLNatureSkillRepository>();
 builder.Services.AddScoped<IAbilityRepository, SQLAbilityRepository>();
 builder.Services.AddScoped<IAditionalPointRepository, SQLAditionalPointRepository>();
 builder.Services.AddScoped<IArmorRepository, SQLArmorRepository>();
+builder.Services.AddScoped<IEquipmentRepository, SQLEquipmentRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
