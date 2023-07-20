@@ -6,7 +6,7 @@ namespace redimel_server.Repositories
 {
     public class SQLBaggageRepository : IBaggageRepository
     {
-        private readonly DbContext dbContext;
+        private readonly RedimelServerDbContext dbContext;
 
         public SQLBaggageRepository(RedimelServerDbContext dbContext)
         {
@@ -19,6 +19,31 @@ namespace redimel_server.Repositories
             await dbContext.SaveChangesAsync();
             
             return baggage;
+        }
+
+        public async Task<Baggage?> DeleteAsync(Guid id)
+        {
+            var existingBaggage = await dbContext.Baggages.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingBaggage == null)
+            {
+                return null;
+            }
+
+            dbContext.Baggages.Remove(existingBaggage);
+            await dbContext.SaveChangesAsync();
+
+            return existingBaggage;
+        }
+
+        public async Task<List<Baggage>> GetAllAsync()
+        {
+            return await dbContext.Baggages.ToListAsync();
+        }
+
+        public async Task<Baggage?> GetByIdAsync(Guid id)
+        {
+            return await dbContext.Baggages.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

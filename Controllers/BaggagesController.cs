@@ -30,5 +30,41 @@ namespace redimel_server.Controllers
 
             return Ok(baggageDto);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var baggageDomain = await baggageRepository.GetAllAsync();
+
+            return Ok(mapper.Map<List<BaggageDto>>(baggageDomain));
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var baggageDomain = await baggageRepository.GetByIdAsync(id);
+
+            if (baggageDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<BaggageDto>(baggageDomain));
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var baggageDomain = await baggageRepository.DeleteAsync(id);
+
+            if (baggageDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<BaggageDto>(baggageDomain));
+        }
     }
 }
