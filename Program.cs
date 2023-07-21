@@ -32,6 +32,7 @@ builder.Services.AddScoped<ISpecialCombatSkillRepository, SQLSpecialCombatSkillR
 builder.Services.AddScoped<ISpellRepository, SQLSpellRepository>();
 builder.Services.AddScoped<ITalismanRepository, SQLTalismanRepository>();
 builder.Services.AddScoped<IThrowingWeaponRepository, SQLThrowingWeaponRepository>();
+builder.Services.AddScoped<IUltimateRepository, SQLUltimateRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
