@@ -25,6 +25,7 @@ namespace redimel_server.Mappings
             CreateMap<Ritual, RitualDto>().ReverseMap();
             CreateMap<Shield, ShieldDto>().ReverseMap();
             CreateMap<SpecialCombatSkill, SpecialCombatSkillDto>().ReverseMap();
+            CreateMap<Spell, SpellDto>().ReverseMap();
         }
     }
 }
