@@ -25,6 +25,7 @@ builder.Services.AddScoped<IEquipmentRepository, SQLEquipmentRepository>();
 builder.Services.AddScoped<IHeroRepository, SQLHeroRepository>();
 builder.Services.AddScoped<IMissionRepository, SQLMissionRepository>();
 builder.Services.AddScoped<INegotiationRepository, SQLNegotiationRepository>();
+builder.Services.AddScoped<IPromiseRepository, SQLPromiseRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
