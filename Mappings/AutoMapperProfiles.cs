@@ -23,6 +23,7 @@ namespace redimel_server.Mappings
             CreateMap<Negotiation, NegotiationDto>().ReverseMap();
             CreateMap<Promise, PromiseDto>().ReverseMap();
             CreateMap<Ritual, RitualDto>().ReverseMap();
+            CreateMap<Shield, ShieldDto>().ReverseMap();
         }
     }
 }
