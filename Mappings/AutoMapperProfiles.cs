@@ -18,6 +18,7 @@ namespace redimel_server.Mappings
             CreateMap<AditionalPoint, AditionalPointDto>().ReverseMap();
             CreateMap<Armor, ArmorDto>().ReverseMap();
             CreateMap<Equipment, EquipmentDto>().ReverseMap();
+            CreateMap<Hero, HeroDto>().ReverseMap();
         }
     }
 }
