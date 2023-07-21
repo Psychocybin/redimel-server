@@ -30,6 +30,7 @@ builder.Services.AddScoped<IRitualRepository, SQLRitualRepository>();
 builder.Services.AddScoped<IShieldRepository, SQLShieldRepository>();
 builder.Services.AddScoped<ISpecialCombatSkillRepository, SQLSpecialCombatSkillRepository>();
 builder.Services.AddScoped<ISpellRepository, SQLSpellRepository>();
+builder.Services.AddScoped<ITalismanRepository, SQLTalismanRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
