@@ -23,6 +23,7 @@ builder.Services.AddScoped<IAditionalPointRepository, SQLAditionalPointRepositor
 builder.Services.AddScoped<IArmorRepository, SQLArmorRepository>();
 builder.Services.AddScoped<IEquipmentRepository, SQLEquipmentRepository>();
 builder.Services.AddScoped<IHeroRepository, SQLHeroRepository>();
+builder.Services.AddScoped<IMissionRepository, SQLMissionRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
