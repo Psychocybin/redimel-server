@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using redimel_server.CustomActionFilters;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
 using redimel_server.Repositories;
@@ -20,6 +21,7 @@ namespace redimel_server.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> Create([FromBody] AddBaggageRequestDto addBaggageRequestDto)
         {
             var baggageDomainModel = mapper.Map<Baggage>(addBaggageRequestDto);

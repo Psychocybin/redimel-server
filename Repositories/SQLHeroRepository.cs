@@ -13,9 +13,14 @@ namespace redimel_server.Repositories
             this.dbContext = dbContext;
         }
 
+        public async Task<List<Hero>> GetAllAsync()
+        {
+            return await dbContext.Heroes.Include(x => x.Indicators).ToListAsync();
+        }
+
         public async Task<Hero?> GetByIdAsync(Guid id)
         {
-            return await dbContext.Heroes.FirstOrDefaultAsync(x => x.Id == id);
+            return await dbContext.Heroes.Include(x => x.Indicators).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

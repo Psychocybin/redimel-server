@@ -20,6 +20,14 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var heroDomain = await heroRepository.GetAllAsync();
+
+            return Ok(mapper.Map<List<HeroDto>>(heroDomain));
+        }
+
+        [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {

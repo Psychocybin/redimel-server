@@ -9,9 +9,9 @@ namespace redimel_server.Models.DTO
         public string HeroClass { get; set; }
         public double BaggageCapacity { get; set; }
         public Guid GroupWestId { get; set; }
-        public Guid IndicatorsId { get; set; }
         public Guid EquipmentsId { get; set; }
         public Guid AbilityId { get; set; }
         public Guid SpecialAbilityId { get; set; }
+        public IndicatorDto Indicators { get; set; }
     }
 }
