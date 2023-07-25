@@ -6,7 +6,7 @@ namespace redimel_server.Data
 {
     public class RedimelServerDbContext: DbContext
     {
-        public RedimelServerDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
+        public RedimelServerDbContext(DbContextOptions<RedimelServerDbContext> dbContextOptions): base(dbContextOptions)
         {
             
         }

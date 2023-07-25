@@ -18,6 +18,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<RedimelServerDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("RedimelServerConnectionString")));
 
+builder.Services.AddDbContext<RedimelServerAuthDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("RedimelServerAuthConnectionString")));
+
 builder.Services.AddScoped<IIndicatorRepository, SQLIndicatorRepository>();
 builder.Services.AddScoped<IBaggageRepository, SQLBaggageRepository>();
 builder.Services.AddScoped<INatureSkillRepository, SQLNatureSkillRepository>();
