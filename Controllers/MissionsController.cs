@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using redimel_server.Models.DTO;
 using redimel_server.Repositories;
@@ -7,6 +8,7 @@ namespace redimel_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MissionsController : ControllerBase
     {
         private readonly IMapper mapper;

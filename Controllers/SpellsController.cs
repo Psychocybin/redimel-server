@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using redimel_server.Models.Domain;
@@ -9,6 +10,7 @@ namespace redimel_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SpellsController : ControllerBase
     {
         private readonly IMapper mapper;
