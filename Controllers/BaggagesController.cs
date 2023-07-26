@@ -5,6 +5,7 @@ using redimel_server.CustomActionFilters;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
 using redimel_server.Repositories;
+using System.Security.Claims;
 
 namespace redimel_server.Controllers
 {
@@ -39,6 +40,8 @@ namespace redimel_server.Controllers
         [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetAll()
         {
+            //var user = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var baggageDomain = await baggageRepository.GetAllAsync();
 
             return Ok(mapper.Map<List<BaggageDto>>(baggageDomain));

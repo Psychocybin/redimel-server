@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
 
@@ -12,6 +13,9 @@ namespace redimel_server.Repositories
         {
             this.dbContext = dbContext;
         }
+
+        //return await dbContext.Baggages.Where(x => x.HeroId.ToString() == user).ToListAsync();
+
 
         public async Task<Baggage> CreateAsync(Baggage baggage)
         {
