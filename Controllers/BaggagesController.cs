@@ -10,7 +10,6 @@ namespace redimel_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class BaggagesController : ControllerBase
     {
         private readonly IMapper mapper;
@@ -24,6 +23,7 @@ namespace redimel_server.Controllers
 
         [HttpPost]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create([FromBody] AddBaggageRequestDto addBaggageRequestDto)
         {
             var baggageDomainModel = mapper.Map<Baggage>(addBaggageRequestDto);
@@ -36,6 +36,7 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetAll()
         {
             var baggageDomain = await baggageRepository.GetAllAsync();
@@ -45,6 +46,7 @@ namespace redimel_server.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var baggageDomain = await baggageRepository.GetByIdAsync(id);
@@ -59,6 +61,7 @@ namespace redimel_server.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var baggageDomain = await baggageRepository.DeleteAsync(id);

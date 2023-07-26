@@ -10,7 +10,6 @@ namespace redimel_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class SpellsController : ControllerBase
     {
         private readonly IMapper mapper;
@@ -23,6 +22,7 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetAll()
         {
             var spellDomain = await spellRepository.GetAllAsync();
@@ -32,6 +32,7 @@ namespace redimel_server.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var spellDomain = await spellRepository.GetByIdAsync(id);

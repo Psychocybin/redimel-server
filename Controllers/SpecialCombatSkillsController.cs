@@ -8,7 +8,6 @@ namespace redimel_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class SpecialCombatSkillsController : ControllerBase
     {
         private readonly IMapper mapper;
@@ -22,6 +21,7 @@ namespace redimel_server.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var scsDomain = await specialCombatSkillRepository.GetByIdAsync(id);
