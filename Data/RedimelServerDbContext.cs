@@ -33,6 +33,7 @@ namespace redimel_server.Data
         public DbSet<ThrowingWeapon> ThrowingWeapons { get; set; }
         public DbSet<Ultimate> Ultimates { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
