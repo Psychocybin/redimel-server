@@ -5,6 +5,7 @@ using redimel_server.CustomActionFilters;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
 using redimel_server.Repositories;
+using System.Text.Json;
 
 namespace redimel_server.Controllers
 {
@@ -14,18 +15,24 @@ namespace redimel_server.Controllers
     {
         private readonly IIndicatorRepository indicatorRepository;
         private readonly IMapper mapper;
+        private readonly ILogger<IndicatorsController> logger;
 
-        public IndicatorsController(IIndicatorRepository indicatorRepository, IMapper mapper)
+        public IndicatorsController(IIndicatorRepository indicatorRepository, 
+            IMapper mapper, ILogger<IndicatorsController> logger)
         {
             this.indicatorRepository = indicatorRepository;
             this.mapper = mapper;
+            this.logger = logger;
         }
 
         [HttpGet]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetAll()
         {
-            var indicatorDomain = await indicatorRepository.GetAllAsync();
+            //logger.LogInformation("GetAll method was invoked!");
+
+            //logger.LogWarning("This is a warning log!");
+            //logger.LogError("This is a error log!");
 
             //var indicatorDto = new List<IndicatorDto>();
             //foreach (var indicator in indicatorDomain)
@@ -44,11 +51,24 @@ namespace redimel_server.Controllers
             //    });
             //}
 
-            //Map Domain Models to DTOs
-            var indicatorDto = mapper.Map<List<IndicatorDto>>(indicatorDomain);
+            try
+            {
+                //throw new Exception("this is a random exception!!!");
+                var indicatorDomain = await indicatorRepository.GetAllAsync();
 
-            //return DTO
-            return Ok(indicatorDto);
+                //logger.LogInformation($"Finished GetAllIndicators request with data {JsonSerializer.Serialize(indicatorDomain)}");
+
+                //Map Domain Models to DTOs
+                var indicatorDto = mapper.Map<List<IndicatorDto>>(indicatorDomain);
+
+                //return DTO
+                return Ok(indicatorDto);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+                throw;
+            }
         }
 
         [HttpGet]
