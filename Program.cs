@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using redimel_server.Data;
 using redimel_server.Mappings;
+using redimel_server.Middlewares;
 using redimel_server.Repositories;
 using Serilog;
 using System.Text;
@@ -125,6 +126,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

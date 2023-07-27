@@ -51,24 +51,18 @@ namespace redimel_server.Controllers
             //    });
             //}
 
-            try
-            {
-                //throw new Exception("this is a random exception!!!");
-                var indicatorDomain = await indicatorRepository.GetAllAsync();
+            var indicatorDomain = await indicatorRepository.GetAllAsync();
 
-                //logger.LogInformation($"Finished GetAllIndicators request with data {JsonSerializer.Serialize(indicatorDomain)}");
+            //logger.LogInformation($"Finished GetAllIndicators request with data {JsonSerializer.Serialize(indicatorDomain)}");
 
-                //Map Domain Models to DTOs
-                var indicatorDto = mapper.Map<List<IndicatorDto>>(indicatorDomain);
+            //Map Domain Models to DTOs
+            var indicatorDto = mapper.Map<List<IndicatorDto>>(indicatorDomain);
 
-                //return DTO
-                return Ok(indicatorDto);
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, ex.Message);
-                throw;
-            }
+            throw new Exception("this is a random exception!!!");
+
+            //return DTO
+            return Ok(indicatorDto);
+
         }
 
         [HttpGet]
