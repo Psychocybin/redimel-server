@@ -5,7 +5,6 @@ using redimel_server.CustomActionFilters;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
 using redimel_server.Repositories;
-using System.Text.Json;
 
 namespace redimel_server.Controllers
 {
@@ -15,18 +14,15 @@ namespace redimel_server.Controllers
     {
         private readonly IIndicatorRepository indicatorRepository;
         private readonly IMapper mapper;
-        private readonly ILogger<IndicatorsController> logger;
 
-        public IndicatorsController(IIndicatorRepository indicatorRepository, 
-            IMapper mapper, ILogger<IndicatorsController> logger)
+        public IndicatorsController(IIndicatorRepository indicatorRepository, IMapper mapper)
         {
             this.indicatorRepository = indicatorRepository;
             this.mapper = mapper;
-            this.logger = logger;
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Writer")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetAll()
         {
             //logger.LogInformation("GetAll method was invoked!");
@@ -50,19 +46,20 @@ namespace redimel_server.Controllers
             //        Endurance = indicator.Endurance
             //    });
             //}
+            
+            //string userName = Request.HttpContext.User.Identity.Name;
 
             var indicatorDomain = await indicatorRepository.GetAllAsync();
-
+            
             //logger.LogInformation($"Finished GetAllIndicators request with data {JsonSerializer.Serialize(indicatorDomain)}");
 
             //Map Domain Models to DTOs
             var indicatorDto = mapper.Map<List<IndicatorDto>>(indicatorDomain);
-
-            throw new Exception("this is a random exception!!!");
+            
+            //throw new Exception("this is a random exception!!!");
 
             //return DTO
             return Ok(indicatorDto);
-
         }
 
         [HttpGet]
@@ -145,5 +142,5 @@ namespace redimel_server.Controllers
             //return deleted Indicator back - optional
             return Ok();
         }
-}
+    }
 }

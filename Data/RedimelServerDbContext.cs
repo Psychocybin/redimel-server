@@ -34,6 +34,8 @@ namespace redimel_server.Data
         public DbSet<Ultimate> Ultimates { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<Choice> Choices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

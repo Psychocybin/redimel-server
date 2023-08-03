@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using redimel_server.Data;
 
@@ -11,9 +12,11 @@ using redimel_server.Data;
 namespace redimel_server.Migrations
 {
     [DbContext(typeof(RedimelServerDbContext))]
-    partial class RedimelServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230803120940_AddPageAndChoiceTable")]
+    partial class AddPageAndChoiceTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -295,31 +298,6 @@ namespace redimel_server.Migrations
                     b.HasIndex("AditionalPointsId");
 
                     b.ToTable("BattleGroups");
-                });
-
-            modelBuilder.Entity("redimel_server.Models.Domain.Choice", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NextPage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PageId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageId");
-
-                    b.ToTable("Choices");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Equipment", b =>
@@ -665,20 +643,6 @@ namespace redimel_server.Migrations
                     b.HasIndex("AditionalPointsId");
 
                     b.ToTable("Negotiations");
-                });
-
-            modelBuilder.Entity("redimel_server.Models.Domain.Page", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pages");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Promise", b =>
@@ -1099,17 +1063,6 @@ namespace redimel_server.Migrations
                     b.Navigation("AditionalPoints");
                 });
 
-            modelBuilder.Entity("redimel_server.Models.Domain.Choice", b =>
-                {
-                    b.HasOne("redimel_server.Models.Domain.Page", "Page")
-                        .WithMany("Choices")
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Page");
-                });
-
             modelBuilder.Entity("redimel_server.Models.Domain.Equipment", b =>
                 {
                     b.HasOne("redimel_server.Models.Domain.Armor", "Armor")
@@ -1325,11 +1278,6 @@ namespace redimel_server.Migrations
                 {
                     b.Navigation("Hero")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("redimel_server.Models.Domain.Page", b =>
-                {
-                    b.Navigation("Choices");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>
