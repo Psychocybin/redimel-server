@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using redimel_server.Models.Domain;
+using redimel_server.Models.Domain.RedimelDomain;
+using redimel_server.Models.Domain.RedimelDomain.MagelandDomain;
 
 namespace redimel_server.Data
 {
@@ -36,6 +38,37 @@ namespace redimel_server.Data
         public DbSet<Image> Images { get; set; }
         public DbSet<Page> Pages { get; set; }
         public DbSet<Choice> Choices { get; set; }
+        public DbSet<Redimel> Redimels { get; set; }
+        public DbSet<Dikani> Dikanis { get; set; }
+        public DbSet<Faegra> Faegras { get; set; }
+        public DbSet<NorthernNomads> NorthernNomads { get; set; }
+        public DbSet<OutlawTerritory> OutlawTerritories { get; set; }
+        public DbSet<SouthernNomads> SouthernNomads { get; set; }
+        public DbSet<Stincum> Stincums { get; set; }
+        public DbSet<TheBigCity> TheBigCities { get; set; }
+        public DbSet<TheEmpire> TheEmpires { get; set; }
+        public DbSet<TheForestTribes> TheForestTribes { get; set; }
+        public DbSet<TheHigherOnes> TheHigherOnes { get; set; }
+        public DbSet<TheHorsePeople> TheHorsePeoples { get; set; }
+        public DbSet<TheHunters> TheHunters { get; set; }
+        public DbSet<TheIslanders> TheIslanders { get; set; }
+        public DbSet<TheOldKingdom> TheOldKingdoms { get; set; }
+        public DbSet<ThePirateDomains> ThePirateDomains { get; set; }
+        public DbSet<TheShadowWorld> TheShadowWorlds { get; set; }
+        public DbSet<TheTradeLeague> TheTradeLeagues { get; set; }
+        public DbSet<TheWasteland> TheWastelands { get; set; }
+        public DbSet<Tumpridadam> Tumpridadams { get; set; }
+        public DbSet<Mageland> Magelands { get; set; }
+        public DbSet<MageTown> MageTowns { get; set; }
+        public DbSet<MageFields> MageFields { get; set; }
+        public DbSet<MageForest> MageForests { get; set; }
+        public DbSet<MageSea> MageSeas { get; set; }
+        public DbSet<MageHarbor> MageHarbors { get; set; }
+        public DbSet<MageTradeRoad> MageTradeRoads { get; set; }
+        public DbSet<MageTownTheLibrary> MageTownTheLibraries { get; set; }
+        public DbSet<MageTownTheCentralSquare> MageTownTheCentralSquares { get; set; }
+        public DbSet<MageTownInnTheOldMagician> MageTownInnTheOldMagicians { get; set; }
+        public DbSet<MageTownGuardHill> MageTownGuardHills { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

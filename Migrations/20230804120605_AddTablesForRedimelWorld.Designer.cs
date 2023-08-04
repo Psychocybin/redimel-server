@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using redimel_server.Data;
 
@@ -11,9 +12,11 @@ using redimel_server.Data;
 namespace redimel_server.Migrations
 {
     [DbContext(typeof(RedimelServerDbContext))]
-    partial class RedimelServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230804120605_AddTablesForRedimelWorld")]
+    partial class AddTablesForRedimelWorld
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -710,10 +713,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("Dikanis");
                 });
@@ -724,10 +729,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("Faegras");
                 });
@@ -738,10 +745,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MagelandId")
+                    b.Property<Guid?>("MagelandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MagelandId");
 
                     b.ToTable("MageFields");
                 });
@@ -752,10 +761,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MagelandId")
+                    b.Property<Guid?>("MagelandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MagelandId");
 
                     b.ToTable("MageForests");
                 });
@@ -766,10 +777,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MagelandId")
+                    b.Property<Guid?>("MagelandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MagelandId");
 
                     b.ToTable("MageHarbors");
                 });
@@ -780,10 +793,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MagelandId")
+                    b.Property<Guid?>("MagelandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MagelandId");
 
                     b.ToTable("MageSeas");
                 });
@@ -797,18 +812,6 @@ namespace redimel_server.Migrations
                     b.Property<bool>("IsPeopleHate")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MageTownGuardHillId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageTownInnTheOldMagicianId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageTownTheCentralSquareId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageTownTheLibraryId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("MagelandId")
                         .HasColumnType("uniqueidentifier");
 
@@ -820,13 +823,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MageTownGuardHillId");
-
-                    b.HasIndex("MageTownInnTheOldMagicianId");
-
-                    b.HasIndex("MageTownTheCentralSquareId");
-
-                    b.HasIndex("MageTownTheLibraryId");
+                    b.HasIndex("MagelandId");
 
                     b.ToTable("MageTowns");
                 });
@@ -837,10 +834,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MageTownId")
+                    b.Property<Guid?>("MageTownId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MageTownId");
 
                     b.ToTable("MageTownGuardHills");
                 });
@@ -851,10 +850,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MageTownId")
+                    b.Property<Guid?>("MageTownId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MageTownId");
 
                     b.ToTable("MageTownInnTheOldMagicians");
                 });
@@ -865,10 +866,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MageTownId")
+                    b.Property<Guid?>("MageTownId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MageTownId");
 
                     b.ToTable("MageTownTheCentralSquares");
                 });
@@ -885,9 +888,6 @@ namespace redimel_server.Migrations
                     b.Property<int>("BooksRead")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsTheGuardAlive")
-                        .HasColumnType("bit");
-
                     b.Property<Guid>("MageTownId")
                         .HasColumnType("uniqueidentifier");
 
@@ -899,6 +899,8 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MageTownId");
+
                     b.ToTable("MageTownTheLibraries");
                 });
 
@@ -908,10 +910,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MagelandId")
+                    b.Property<Guid?>("MagelandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MagelandId");
 
                     b.ToTable("MageTradeRoads");
                 });
@@ -920,24 +924,6 @@ namespace redimel_server.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageFieldsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageForestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageHarborId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageSeaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageTownId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MageTradeRoadId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumberOfDoubters")
@@ -951,17 +937,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MageFieldsId");
-
-                    b.HasIndex("MageForestId");
-
-                    b.HasIndex("MageHarborId");
-
-                    b.HasIndex("MageSeaId");
-
-                    b.HasIndex("MageTownId");
-
-                    b.HasIndex("MageTradeRoadId");
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("Magelands");
                 });
@@ -972,10 +948,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("NorthernNomads");
                 });
@@ -986,10 +964,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("OutlawTerritories");
                 });
@@ -1000,116 +980,13 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DikaniId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("Earthquake")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("FaegraId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsTheWarStarting")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MagelandId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MagelandsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("NorthernNomadsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OutlawTerritoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SouthernNomadsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("StincumId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheBigCityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheEmpireId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheForestTribesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheHigherOnesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheHorsePeopleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheHuntersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheIslandersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheOldKingdomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ThePirateDomainsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheShadowWorldId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheTradeLeagueId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TheWastelandId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TumpridadamId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DikaniId");
-
-                    b.HasIndex("FaegraId");
-
-                    b.HasIndex("MagelandsId");
-
-                    b.HasIndex("NorthernNomadsId");
-
-                    b.HasIndex("OutlawTerritoryId");
-
-                    b.HasIndex("SouthernNomadsId");
-
-                    b.HasIndex("StincumId");
-
-                    b.HasIndex("TheBigCityId");
-
-                    b.HasIndex("TheEmpireId");
-
-                    b.HasIndex("TheForestTribesId");
-
-                    b.HasIndex("TheHigherOnesId");
-
-                    b.HasIndex("TheHorsePeopleId");
-
-                    b.HasIndex("TheHuntersId");
-
-                    b.HasIndex("TheIslandersId");
-
-                    b.HasIndex("TheOldKingdomId");
-
-                    b.HasIndex("ThePirateDomainsId");
-
-                    b.HasIndex("TheShadowWorldId");
-
-                    b.HasIndex("TheTradeLeagueId");
-
-                    b.HasIndex("TheWastelandId");
-
-                    b.HasIndex("TumpridadamId");
 
                     b.ToTable("Redimels");
                 });
@@ -1120,10 +997,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("SouthernNomads");
                 });
@@ -1134,10 +1013,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("Stincums");
                 });
@@ -1148,10 +1029,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheBigCities");
                 });
@@ -1162,10 +1045,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheEmpires");
                 });
@@ -1176,10 +1061,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheForestTribes");
                 });
@@ -1190,10 +1077,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheHigherOnes");
                 });
@@ -1204,13 +1093,15 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Suspects")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheHorsePeoples");
                 });
@@ -1221,10 +1112,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheHunters");
                 });
@@ -1235,10 +1128,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheIslanders");
                 });
@@ -1249,10 +1144,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheOldKingdoms");
                 });
@@ -1263,10 +1160,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("ThePirateDomains");
                 });
@@ -1277,10 +1176,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheShadowWorlds");
                 });
@@ -1291,10 +1192,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheTradeLeagues");
                 });
@@ -1305,10 +1208,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("TheWastelands");
                 });
@@ -1319,10 +1224,12 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RedimelId")
+                    b.Property<Guid?>("RedimelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RedimelId");
 
                     b.ToTable("Tumpridadams");
                 });
@@ -1866,253 +1773,226 @@ namespace redimel_server.Migrations
                     b.Navigation("Hero");
                 });
 
-            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTown", b =>
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.Dikani", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownGuardHill", "MageTownGuardHill")
-                        .WithMany()
-                        .HasForeignKey("MageTownGuardHillId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownInnTheOldMagician", "MageTownInnTheOldMagician")
-                        .WithMany()
-                        .HasForeignKey("MageTownInnTheOldMagicianId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownTheCentralSquare", "MageTownTheCentralSquare")
-                        .WithMany()
-                        .HasForeignKey("MageTownTheCentralSquareId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownTheLibrary", "MageTownTheLibrary")
-                        .WithMany()
-                        .HasForeignKey("MageTownTheLibraryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MageTownGuardHill");
-
-                    b.Navigation("MageTownInnTheOldMagician");
-
-                    b.Navigation("MageTownTheCentralSquare");
-
-                    b.Navigation("MageTownTheLibrary");
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("Dikani")
+                        .HasForeignKey("RedimelId");
                 });
 
-            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", b =>
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.Faegra", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageFields", "MageFields")
-                        .WithMany()
-                        .HasForeignKey("MageFieldsId")
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("Faegra")
+                        .HasForeignKey("RedimelId");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageFields", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", null)
+                        .WithMany("MageFields")
+                        .HasForeignKey("MagelandId");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageForest", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", null)
+                        .WithMany("MageForest")
+                        .HasForeignKey("MagelandId");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageHarbor", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", null)
+                        .WithMany("MageHarbor")
+                        .HasForeignKey("MagelandId");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageSea", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", null)
+                        .WithMany("MageSea")
+                        .HasForeignKey("MagelandId");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTown", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", "Mageland")
+                        .WithMany("MageTown")
+                        .HasForeignKey("MagelandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageForest", "MageForest")
-                        .WithMany()
-                        .HasForeignKey("MageForestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Mageland");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageHarbor", "MageHarbor")
-                        .WithMany()
-                        .HasForeignKey("MageHarborId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownGuardHill", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTown", null)
+                        .WithMany("MageTownGuardHill")
+                        .HasForeignKey("MageTownId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageSea", "MageSea")
-                        .WithMany()
-                        .HasForeignKey("MageSeaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownInnTheOldMagician", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTown", null)
+                        .WithMany("MageTownInnTheOldMagician")
+                        .HasForeignKey("MageTownId");
+                });
 
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownTheCentralSquare", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTown", null)
+                        .WithMany("MageTownTheCentralSquare")
+                        .HasForeignKey("MageTownId");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTownTheLibrary", b =>
+                {
                     b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTown", "MageTown")
-                        .WithMany()
+                        .WithMany("MageTownTheLibrary")
                         .HasForeignKey("MageTownId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTradeRoad", "MageTradeRoad")
-                        .WithMany()
-                        .HasForeignKey("MageTradeRoadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MageFields");
-
-                    b.Navigation("MageForest");
-
-                    b.Navigation("MageHarbor");
-
-                    b.Navigation("MageSea");
-
                     b.Navigation("MageTown");
-
-                    b.Navigation("MageTradeRoad");
                 });
 
-            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.Redimel", b =>
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTradeRoad", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Dikani", "Dikani")
-                        .WithMany()
-                        .HasForeignKey("DikaniId")
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", null)
+                        .WithMany("MageTradeRoad")
+                        .HasForeignKey("MagelandId");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", "Redimel")
+                        .WithMany("Magelands")
+                        .HasForeignKey("RedimelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Faegra", "Faegra")
-                        .WithMany()
-                        .HasForeignKey("FaegraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Redimel");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", "Magelands")
-                        .WithMany()
-                        .HasForeignKey("MagelandsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.NorthernNomads", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("NorthernNomads")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.NorthernNomads", "NorthernNomads")
-                        .WithMany()
-                        .HasForeignKey("NorthernNomadsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.OutlawTerritory", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("OutlawTerritory")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.OutlawTerritory", "OutlawTerritory")
-                        .WithMany()
-                        .HasForeignKey("OutlawTerritoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.SouthernNomads", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("SouthernNomads")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.SouthernNomads", "SouthernNomads")
-                        .WithMany()
-                        .HasForeignKey("SouthernNomadsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.Stincum", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("Stincum")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Stincum", "Stincum")
-                        .WithMany()
-                        .HasForeignKey("StincumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheBigCity", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheBigCity")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheBigCity", "TheBigCity")
-                        .WithMany()
-                        .HasForeignKey("TheBigCityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheEmpire", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheEmpire")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheEmpire", "TheEmpire")
-                        .WithMany()
-                        .HasForeignKey("TheEmpireId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheForestTribes", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheForestTribes")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheForestTribes", "TheForestTribes")
-                        .WithMany()
-                        .HasForeignKey("TheForestTribesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheHigherOnes", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheHigherOnes")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheHigherOnes", "TheHigherOnes")
-                        .WithMany()
-                        .HasForeignKey("TheHigherOnesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheHorsePeople", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheHorsePeople")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheHorsePeople", "TheHorsePeople")
-                        .WithMany()
-                        .HasForeignKey("TheHorsePeopleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheHunters", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheHunters")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheHunters", "TheHunters")
-                        .WithMany()
-                        .HasForeignKey("TheHuntersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheIslanders", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheIslanders")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheIslanders", "TheIslanders")
-                        .WithMany()
-                        .HasForeignKey("TheIslandersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheOldKingdom", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheOldKingdom")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheOldKingdom", "TheOldKingdom")
-                        .WithMany()
-                        .HasForeignKey("TheOldKingdomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.ThePirateDomains", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("ThePirateDomains")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.ThePirateDomains", "ThePirateDomains")
-                        .WithMany()
-                        .HasForeignKey("ThePirateDomainsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheShadowWorld", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheShadowWorld")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheShadowWorld", "TheShadowWorld")
-                        .WithMany()
-                        .HasForeignKey("TheShadowWorldId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheTradeLeague", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheTradeLeague")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheTradeLeague", "TheTradeLeague")
-                        .WithMany()
-                        .HasForeignKey("TheTradeLeagueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.TheWasteland", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("TheWasteland")
+                        .HasForeignKey("RedimelId");
+                });
 
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.TheWasteland", "TheWasteland")
-                        .WithMany()
-                        .HasForeignKey("TheWastelandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Tumpridadam", "Tumpridadam")
-                        .WithMany()
-                        .HasForeignKey("TumpridadamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dikani");
-
-                    b.Navigation("Faegra");
-
-                    b.Navigation("Magelands");
-
-                    b.Navigation("NorthernNomads");
-
-                    b.Navigation("OutlawTerritory");
-
-                    b.Navigation("SouthernNomads");
-
-                    b.Navigation("Stincum");
-
-                    b.Navigation("TheBigCity");
-
-                    b.Navigation("TheEmpire");
-
-                    b.Navigation("TheForestTribes");
-
-                    b.Navigation("TheHigherOnes");
-
-                    b.Navigation("TheHorsePeople");
-
-                    b.Navigation("TheHunters");
-
-                    b.Navigation("TheIslanders");
-
-                    b.Navigation("TheOldKingdom");
-
-                    b.Navigation("ThePirateDomains");
-
-                    b.Navigation("TheShadowWorld");
-
-                    b.Navigation("TheTradeLeague");
-
-                    b.Navigation("TheWasteland");
-
-                    b.Navigation("Tumpridadam");
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.Tumpridadam", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.RedimelDomain.Redimel", null)
+                        .WithMany("Tumpridadam")
+                        .HasForeignKey("RedimelId");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ritual", b =>
@@ -2202,6 +2082,75 @@ namespace redimel_server.Migrations
             modelBuilder.Entity("redimel_server.Models.Domain.Page", b =>
                 {
                     b.Navigation("Choices");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.MageTown", b =>
+                {
+                    b.Navigation("MageTownGuardHill");
+
+                    b.Navigation("MageTownInnTheOldMagician");
+
+                    b.Navigation("MageTownTheCentralSquare");
+
+                    b.Navigation("MageTownTheLibrary");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.MagelandDomain.Mageland", b =>
+                {
+                    b.Navigation("MageFields");
+
+                    b.Navigation("MageForest");
+
+                    b.Navigation("MageHarbor");
+
+                    b.Navigation("MageSea");
+
+                    b.Navigation("MageTown");
+
+                    b.Navigation("MageTradeRoad");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.RedimelDomain.Redimel", b =>
+                {
+                    b.Navigation("Dikani");
+
+                    b.Navigation("Faegra");
+
+                    b.Navigation("Magelands");
+
+                    b.Navigation("NorthernNomads");
+
+                    b.Navigation("OutlawTerritory");
+
+                    b.Navigation("SouthernNomads");
+
+                    b.Navigation("Stincum");
+
+                    b.Navigation("TheBigCity");
+
+                    b.Navigation("TheEmpire");
+
+                    b.Navigation("TheForestTribes");
+
+                    b.Navigation("TheHigherOnes");
+
+                    b.Navigation("TheHorsePeople");
+
+                    b.Navigation("TheHunters");
+
+                    b.Navigation("TheIslanders");
+
+                    b.Navigation("TheOldKingdom");
+
+                    b.Navigation("ThePirateDomains");
+
+                    b.Navigation("TheShadowWorld");
+
+                    b.Navigation("TheTradeLeague");
+
+                    b.Navigation("TheWasteland");
+
+                    b.Navigation("Tumpridadam");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>
