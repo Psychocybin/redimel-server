@@ -6,6 +6,7 @@ namespace redimel_server.Models.Domain
     {
         public Guid Id { get; set; }
         public string ActualMission { get; set; }
+        public Guid UserId { get; set; }
         [ForeignKey("AditionalPoints")]
         public Guid AditionalPointsId { get; set; }
         public virtual AditionalPoint AditionalPoints { get; set; }

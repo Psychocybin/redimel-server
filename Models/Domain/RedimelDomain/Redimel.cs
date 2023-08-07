@@ -6,8 +6,7 @@ namespace redimel_server.Models.Domain.RedimelDomain
     public class Redimel
     {
         public Guid Id { get; set; }
-        public Boolean IsTheWarStarting { get; set; }
-        public Boolean Earthquake { get; set; }
+        public Guid UserId { get; set; }
         [ForeignKey("Mageland")]
         public Guid MagelandId { get; set; }
         [ForeignKey("TheHorsePeople")]
@@ -68,5 +67,6 @@ namespace redimel_server.Models.Domain.RedimelDomain
         public virtual OutlawTerritory OutlawTerritory { get; set; }
         public virtual TheWasteland TheWasteland { get; set; }
         public virtual TheShadowWorld TheShadowWorld { get; set; }
+        public virtual ICollection<WorldInfoVariable> RedimelVariables { get; set; }
     }
 }

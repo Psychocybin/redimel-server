@@ -69,6 +69,8 @@ namespace redimel_server.Data
         public DbSet<MageTownTheCentralSquare> MageTownTheCentralSquares { get; set; }
         public DbSet<MageTownInnTheOldMagician> MageTownInnTheOldMagicians { get; set; }
         public DbSet<MageTownGuardHill> MageTownGuardHills { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<WorldInfoVariable> WorldInfoVariables { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

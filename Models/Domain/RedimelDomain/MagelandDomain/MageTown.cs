@@ -5,9 +5,6 @@ namespace redimel_server.Models.Domain.RedimelDomain.MagelandDomain
     public class MageTown
     {
         public Guid Id { get; set; }
-        public int ShadowCounter { get; set; }
-        public string? SecretKey { get; set; }
-        public Boolean IsPeopleHate { get; set; }
         public Guid MagelandId { get; set; }
         [ForeignKey("MageTownTheCentralSquare")]
         public Guid MageTownTheCentralSquareId { get; set; }
@@ -21,5 +18,6 @@ namespace redimel_server.Models.Domain.RedimelDomain.MagelandDomain
         public virtual MageTownInnTheOldMagician MageTownInnTheOldMagician { get; set; }
         public virtual MageTownTheLibrary MageTownTheLibrary { get; set; }
         public virtual MageTownGuardHill MageTownGuardHill { get; set; }
+        public virtual ICollection<WorldInfoVariable> MageTownVariables { get; set; }
     }
 }

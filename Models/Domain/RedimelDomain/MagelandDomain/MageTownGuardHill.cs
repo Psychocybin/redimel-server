@@ -4,5 +4,6 @@
     {
         public Guid Id { get; set; }
         public Guid MageTownId { get; set; }
+        public virtual ICollection<WorldInfoVariable> MageTownGuardHillVariables { get; set; }
     }
 }

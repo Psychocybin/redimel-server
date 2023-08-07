@@ -8,6 +8,7 @@ namespace redimel_server.Models.Domain
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string HeroClass { get; set; }
+        public int OrderOfBattle { get; set; }
         public double BaggageCapacity { get; set; }
         [ForeignKey("GroupWest")]
         public Guid GroupWestId { get; set; }

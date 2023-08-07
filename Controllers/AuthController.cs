@@ -51,7 +51,7 @@ namespace redimel_server.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
             var user = await userManager.FindByEmailAsync(loginRequestDto.Username);
-
+            
             if (user != null)
             {
                 var checkPasswordResult = await userManager.CheckPasswordAsync(user, loginRequestDto.Password);
@@ -73,7 +73,7 @@ namespace redimel_server.Controllers
                     }
                 }
             }
-
+            
             return BadRequest("Username or password incorrect!");
         }
     }

@@ -3,7 +3,7 @@
     public class TheHorsePeople
     {
         public Guid Id { get; set; }
-        public Boolean Suspects { get; set; }
         public Guid RedimelId { get; set; }
+        public virtual ICollection<WorldInfoVariable> TheHorsePeopleVariables { get; set; }
     }
 }

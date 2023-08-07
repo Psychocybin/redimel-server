@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using redimel_server.Data;
 
@@ -11,9 +12,11 @@ using redimel_server.Data;
 namespace redimel_server.Migrations
 {
     [DbContext(typeof(RedimelServerDbContext))]
-    partial class RedimelServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230807114142_AddUserTableAndUserRepository")]
+    partial class AddUserTableAndUserRepository
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -462,9 +465,6 @@ namespace redimel_server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderOfBattle")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("SpecialAbilityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -494,7 +494,6 @@ namespace redimel_server.Migrations
                             HeroClass = "Barbarian",
                             IndicatorsId = new Guid("1aa43831-d5b0-4299-9585-a98c527ef9f8"),
                             Name = "Vranko",
-                            OrderOfBattle = 0,
                             SpecialAbilityId = new Guid("bf99b385-56ee-49f9-b7fe-36cc88f829d0")
                         },
                         new
@@ -507,7 +506,6 @@ namespace redimel_server.Migrations
                             HeroClass = "Hunter",
                             IndicatorsId = new Guid("697d4622-b4d9-4b71-85e8-a81bbcd7c0a4"),
                             Name = "TheLittleBear",
-                            OrderOfBattle = 0,
                             SpecialAbilityId = new Guid("eb521bf8-1f0e-43da-bfaf-82750308b629")
                         });
                 });
@@ -1476,7 +1474,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("TumpridadamId");
 
-                    b.ToTable("WorldInfoVariables");
+                    b.ToTable("WorldInfoVariable");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ritual", b =>

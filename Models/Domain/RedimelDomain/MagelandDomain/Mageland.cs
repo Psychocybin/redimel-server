@@ -5,8 +5,6 @@ namespace redimel_server.Models.Domain.RedimelDomain.MagelandDomain
     public class Mageland
     {
         public Guid Id { get; set; }
-        public int NumberOfRobberGangs { get; set; }
-        public int NumberOfDoubters { get; set; }
         public Guid RedimelId { get; set; }
         [ForeignKey("MageTown")]
         public Guid MageTownId { get; set; }
@@ -26,5 +24,6 @@ namespace redimel_server.Models.Domain.RedimelDomain.MagelandDomain
         public virtual MageHarbor MageHarbor { get; set; }
         public virtual MageForest MageForest { get; set; }
         public virtual MageFields MageFields { get; set; }
+        public virtual ICollection<WorldInfoVariable> MagelandVariables { get; set; }
     }
 }
