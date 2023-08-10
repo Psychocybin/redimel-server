@@ -88,6 +88,7 @@ builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IStartGameRepository, SQLStartGameRepository>();
+builder.Services.AddScoped<IPageRepository, SQLPageRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
