@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace redimel_server.Models.DTO
+﻿namespace redimel_server.Models.DTO
 {
-    public class HeroDto
+    public class AddHeroDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -3,14 +3,18 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using redimel_server.Models.Domain;
 using redimel_server.Models.Domain.RedimelDomain;
 using redimel_server.Models.Domain.RedimelDomain.MagelandDomain;
+using redimel_server.Repositories;
 
 namespace redimel_server.Data
 {
     public class RedimelServerDbContext: DbContext
     {
-        public RedimelServerDbContext(DbContextOptions<RedimelServerDbContext> dbContextOptions): base(dbContextOptions)
+        private readonly IUserRepository userRepository;
+
+        public RedimelServerDbContext(DbContextOptions<RedimelServerDbContext> dbContextOptions,
+            IUserRepository userRepository): base(dbContextOptions)
         {
-            
+            this.userRepository = userRepository;
         }
 
         public DbSet<Ability> Abilities { get; set; }

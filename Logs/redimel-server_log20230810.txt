@@ -1,0 +1,1 @@
+2023-08-10 11:41:46.747 +03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.

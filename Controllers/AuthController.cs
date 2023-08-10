@@ -27,7 +27,7 @@ namespace redimel_server.Controllers
                 UserName = registerRequestDto.Username,
                 Email = registerRequestDto.Username
             };
-
+            
             var identityResult = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
 
             if (identityResult.Succeeded)

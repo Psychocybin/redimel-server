@@ -30,6 +30,8 @@ namespace redimel_server.Mappings
             CreateMap<ThrowingWeapon, ThrowingWeaponDto>().ReverseMap();
             CreateMap<Ultimate, UltimateDto>().ReverseMap();
             CreateMap<Weapon, WeaponDto>().ReverseMap();
+            CreateMap<ChoiceDto, Choice>().ReverseMap();
+            CreateMap<PageDto, Page>().ReverseMap();
         }
     }
 }
