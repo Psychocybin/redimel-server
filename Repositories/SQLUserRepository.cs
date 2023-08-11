@@ -20,21 +20,19 @@ namespace redimel_server.Repositories
             //var userMail = httpContextAccessor.HttpContext?.User.Claims.Single(a => a.Type == ClaimTypes.Email).Value;
         }
 
-        public async Task<User> CreateUserAsync(string heroClass)
+        public async Task<User> CreateUserAsync(string heroEmail)
         {
-            //TO DO
-            authDbContext.Users.Select(x => x.Id);
             var newUser = new User();
+
+            //TO DO
 
             return newUser;
         }
 
-        public string GetUserId()
+        public string GetUserEmail()
         {
-            //TO DO
-
-            var currentUser = this.user?.FindFirstValue(ClaimTypes.Email);
-            return currentUser;
+            var currentUserEmail = this.user?.FindFirstValue(ClaimTypes.Email);
+            return currentUserEmail;
         }
 
 

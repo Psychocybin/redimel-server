@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using redimel_server.CustomActionFilters;
+using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
 using redimel_server.Repositories;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using redimel_server.Models.Domain;
-using AutoMapper;
 
 namespace redimel_server.Controllers
 {
@@ -25,40 +23,18 @@ namespace redimel_server.Controllers
             this.startGameRepository = startGameRepository;
         }
 
-        // UserManager<User> userManager
-
-        [HttpGet]
-        [Authorize(Roles = "Reader,Writer")]
-        //[Route("Users/current")]
-        public async Task<IActionResult> GetUserId()
-        {
-            //var newUser = new User
-            //{
-            //    CurrentUserId = userRepository.GetUserId().ToString()
-            //};
-            //var userId = userRepository.GetUserId();
-            //var userId = HttpContext.User.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/Id");
-            //var userId = HttpContext.User.Identity.Name;
-            //var userId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var userId = HttpContext.User.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier/Id");
-            //var userId = newUser.CurrentUserId;
-            //var userId = HttpContext.User.FindFirstValue("Id");
-
-            var userId = userRepository.GetUserId();
-
-            return Ok(userId);
-        }
-
         [HttpPost]
         [ValidateModel]
         [Authorize(Roles = "Reader,Writer")]
-        public async Task<IActionResult> CreateOwnBattleGroup([FromBody] AddHeroDto hero)
+        public async Task<IActionResult> CreateGroupWestHeroes([FromBody] AddGroupWestHeroesRequestDto addGroupWestHeroesRequestDto)
         {
-            //TO DO
-            
-            var userId = userRepository.GetUserId();
+            var groupWestHeroesDomain = mapper.Map<GroupWestHeroes>(addGroupWestHeroesRequestDto);
+            var userEmail = userRepository.GetUserEmail();
 
-            return Ok(userId);
+            await userRepository.CreateUserAsync(userEmail);
+            await startGameRepository.AddGroupWestHeroes(userEmail, groupWestHeroesDomain);
+
+            return Ok("You have successfully registered heroes to the group!");
         }
 
         [HttpPost]
@@ -68,7 +44,7 @@ namespace redimel_server.Controllers
         {
             var choiceDomain = mapper.Map<Choice>(choiceDto);
 
-            var nextPage = startGameRepository.GetNextPage(choiceDomain);
+            var nextPage = await startGameRepository.GetNextPage(choiceDomain);
 
             var nextPageDto = mapper.Map<PageDto>(nextPage);
             return Ok(nextPageDto);

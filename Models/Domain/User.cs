@@ -10,12 +10,12 @@ namespace redimel_server.Models.Domain
         public string? CurrentLocation { get; set; }
         public string? Checkpoint { get; set; }
         public int TimeCounter { get; set; }
-        public string? CurrentUserId { get; set; }
+        public string CurrentUserEmail { get; set; }
         [ForeignKey("Redimel")]
-        public Guid? RedimelId { get; set; }
+        public Guid RedimelId { get; set; }
         [ForeignKey("GroupWest")]
-        public Guid? GroupWestId { get; set; }
-        public virtual Redimel? Redimel { get; set; }
-        public virtual GroupWest? GroupWest { get; set; }
+        public Guid GroupWestId { get; set; }
+        public virtual Redimel Redimel { get; set; }
+        public virtual GroupWest GroupWest { get; set; }
     }
 }

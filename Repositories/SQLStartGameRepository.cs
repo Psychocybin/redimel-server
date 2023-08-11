@@ -13,6 +13,13 @@ namespace redimel_server.Repositories
             this.dbContext = dbContext;
         }
 
+        public Task<List<Hero>> AddGroupWestHeroes(string userEmail, GroupWestHeroes groupWestHeroes)
+        {
+            //TO DO
+
+            throw new NotImplementedException();
+        }
+
         public async Task<Page> GetNextPage(Choice choice)
         {
             var nextPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == choice.NextPage);
@@ -23,5 +30,7 @@ namespace redimel_server.Repositories
 
             return nextPage;
         }
+
+
     }
 }

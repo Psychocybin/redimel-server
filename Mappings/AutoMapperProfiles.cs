@@ -36,6 +36,7 @@ namespace redimel_server.Mappings
             CreateMap<ChoiceDto, Choice>().ReverseMap();
             CreateMap<AddChoiceRequestDto, Choice>().ReverseMap();
             CreateMap<UpdateChoiceRequestDto, Choice>().ReverseMap();
+            CreateMap<AddGroupWestHeroesRequestDto, GroupWestHeroes>().ReverseMap();
         }
     }
 }
