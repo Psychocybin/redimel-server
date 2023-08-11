@@ -86,9 +86,10 @@ builder.Services.AddScoped<IUltimateRepository, SQLUltimateRepository>();
 builder.Services.AddScoped<IWeaponRepository, SQLWeaponRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 builder.Services.AddScoped<IStartGameRepository, SQLStartGameRepository>();
 builder.Services.AddScoped<IPageRepository, SQLPageRepository>();
+builder.Services.AddScoped<IChoiceRepository, SQLChoiceRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));

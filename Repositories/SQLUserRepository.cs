@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
@@ -7,15 +8,16 @@ using System.Security.Claims;
 
 namespace redimel_server.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class SQLUserRepository : IUserRepository
     {
         private readonly RedimelServerAuthDbContext authDbContext;
         private readonly ClaimsPrincipal user;
 
-        public UserRepository(RedimelServerAuthDbContext authDbContext, IHttpContextAccessor httpContextAccessor)
+        public SQLUserRepository(RedimelServerAuthDbContext authDbContext, IHttpContextAccessor httpContextAccessor)
         {
             this.authDbContext = authDbContext;
             this.user = httpContextAccessor.HttpContext?.User;
+            //var userMail = httpContextAccessor.HttpContext?.User.Claims.Single(a => a.Type == ClaimTypes.Email).Value;
         }
 
         public async Task<User> CreateUserAsync(string heroClass)
@@ -31,7 +33,7 @@ namespace redimel_server.Repositories
         {
             //TO DO
 
-            var currentUser = this.user?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentUser = this.user?.FindFirstValue(ClaimTypes.Email);
             return currentUser;
         }
 

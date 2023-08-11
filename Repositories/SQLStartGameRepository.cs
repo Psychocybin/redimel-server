@@ -15,14 +15,6 @@ namespace redimel_server.Repositories
 
         public async Task<Page> GetNextPage(Choice choice)
         {
-            //check User.CurrentLocation == pageId
-
-            //if (choice.NextPage == null && choice.PageId == null)
-            //{
-            //    throw new Exception();
-            //}
-
-
             var nextPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == choice.NextPage);
             var choicesList = await dbContext.Choices.Where(x => x.PageId == nextPage.Id).ToListAsync();
             nextPage.Choices = choicesList;

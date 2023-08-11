@@ -22,22 +22,43 @@ namespace redimel_server.Repositories
 
         public async Task<Page?> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var existingPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingPage == null)
+            {
+                return null;
+            }
+
+            dbContext.Pages.Remove(existingPage);
+            await dbContext.SaveChangesAsync();
+
+            return existingPage;
         }
 
         public async Task<List<Page>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await dbContext.Pages.ToListAsync();
         }
 
         public async Task<Page?> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Page?> UpdateAsync(string id, Page page)
         {
-            throw new NotImplementedException();
+            var existingPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingPage == null)
+            {
+                return null;
+            }
+
+            existingPage.Description = page.Description;
+
+            await dbContext.SaveChangesAsync();
+
+            return existingPage;
         }
     }
 }

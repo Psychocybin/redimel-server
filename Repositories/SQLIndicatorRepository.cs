@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
-using redimel_server.Models.DTO;
 
 namespace redimel_server.Repositories
 {
