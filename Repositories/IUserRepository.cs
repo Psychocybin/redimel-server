@@ -6,6 +6,6 @@ namespace redimel_server.Repositories
     public interface IUserRepository
     {
         string GetUserEmail();
-        Task<User> CreateUserAsync(string name);
+        Task<User> CreateUserAsync(string heroEmail, GroupWestHeroes groupWestHeroes);
     }
 }

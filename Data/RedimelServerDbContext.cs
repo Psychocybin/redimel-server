@@ -9,12 +9,9 @@ namespace redimel_server.Data
 {
     public class RedimelServerDbContext: DbContext
     {
-        private readonly IUserRepository userRepository;
 
-        public RedimelServerDbContext(DbContextOptions<RedimelServerDbContext> dbContextOptions,
-            IUserRepository userRepository): base(dbContextOptions)
+        public RedimelServerDbContext(DbContextOptions<RedimelServerDbContext> dbContextOptions): base(dbContextOptions)
         {
-            this.userRepository = userRepository;
         }
 
         public DbSet<Ability> Abilities { get; set; }

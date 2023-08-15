@@ -31,8 +31,7 @@ namespace redimel_server.Controllers
             var groupWestHeroesDomain = mapper.Map<GroupWestHeroes>(addGroupWestHeroesRequestDto);
             var userEmail = userRepository.GetUserEmail();
 
-            await userRepository.CreateUserAsync(userEmail);
-            await startGameRepository.AddGroupWestHeroes(userEmail, groupWestHeroesDomain);
+            await userRepository.CreateUserAsync(userEmail, groupWestHeroesDomain);
 
             return Ok("You have successfully registered heroes to the group!");
         }
