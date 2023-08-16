@@ -149,7 +149,7 @@ namespace redimel_server.Data
             modelBuilder.Entity<Weapon>().HasData(new Weapon
             {
                 Id = Guid.Parse("57006109-51e5-43e3-a8e0-8f3ece262649"),
-                WeaponType = "TwoHand",
+                WeaponType = "TwoHandSword",
                 IsExist = true,
                 IsItTwoHandWeapon = true,
                 Attack = 12,
@@ -221,9 +221,9 @@ namespace redimel_server.Data
             {
                 Id = Guid.Parse("a9542e10-30a3-45a8-b2ea-cacef3df468a"),
                 Name = "Vranko",
-                HeroClass = "Barbarian",
+                HeroClass = "Soldier",
                 BaggageCapacity = 60.0,
-                GroupWestId = Guid.Parse("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
+                GroupWestId = Guid.Parse("38481e3c-6bad-4014-87d1-dc8fe7a9830c"),
                 IndicatorsId = Guid.Parse("1aa43831-d5b0-4299-9585-a98c527ef9f8"),
                 EquipmentsId = Guid.Parse("6f58f2e9-7788-43f8-abe1-06a6d96a537b"),
                 AbilityId = Guid.Parse("cd5a3e48-5eb4-49fa-a24d-3c3e861f22b3"),
@@ -299,7 +299,7 @@ namespace redimel_server.Data
             modelBuilder.Entity<Weapon>().HasData(new Weapon
             {
                 Id = Guid.Parse("b29503f6-4955-4512-a0d9-619f16127a80"),
-                WeaponType = "OneHand",
+                WeaponType = "Axe",
                 IsExist = true,
                 IsItTwoHandWeapon = false,
                 Attack = 11,
@@ -373,7 +373,7 @@ namespace redimel_server.Data
                 Name = "TheLittleBear",
                 HeroClass = "Hunter",
                 BaggageCapacity = 50.0,
-                GroupWestId = Guid.Parse("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
+                GroupWestId = Guid.Parse("38481e3c-6bad-4014-87d1-dc8fe7a9830c"),
                 IndicatorsId = Guid.Parse("697d4622-b4d9-4b71-85e8-a81bbcd7c0a4"),
                 EquipmentsId = Guid.Parse("6d6e49e8-84b4-4a11-b8f8-c1613e97479a"),
                 AbilityId = Guid.Parse("0bd3e733-dcf3-40a3-8f90-e965a72687fd"),
@@ -382,32 +382,338 @@ namespace redimel_server.Data
                 Promises = new List<Promise>(),
             });
 
-            //seed data for GroupWest
+            //seed data for Mercenary Hero
 
-            modelBuilder.Entity<AditionalPoint>().HasData(new AditionalPoint
+            modelBuilder.Entity<Indicator>().HasData(new Indicator
             {
-                Id = Guid.Parse("8db8e341-9d6e-42e8-8504-45b5f56eac5f"),
-                TeamGame = 0,
-                ImportantInformation = 0,
-                SlainMonsters = 0,
-                Morals = 2,
-                Cover = 2,
-                GroupWestId = Guid.Parse("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
-                BattleGroups = new List<BattleGroup>(),
-                Negotiations = new List<Negotiation>()
+                Id = Guid.Parse("f925cafb-f71a-4bca-8f73-87dabdbfe1b2"),
+                Health = 60,
+                MentalEnergy = 24,
+                MentalStrength = 6,
+                Strength = 10,
+                Dexterity = 10,
+                Agility = 4,
+                Evasion = 5,
+                Endurance = 5,
+                HeroId = Guid.Parse("37f54a17-e9f7-4b50-9006-c6ba79105073")
             });
 
-            modelBuilder.Entity<GroupWest>().HasData(new GroupWest
+            modelBuilder.Entity<Ability>().HasData(new Ability
             {
-                Id = Guid.Parse("44a06217-58ec-4dce-bb7d-5a951e2bef9e"),
-                ActualMission = "",
-                AditionalPointsId = Guid.Parse("8db8e341-9d6e-42e8-8504-45b5f56eac5f"),
-                Missions = new List<Mission>(),
-                Heroes = new List<Hero>(),
-
+                Id = Guid.Parse("edcda087-9b4e-4e18-813e-8b3d02f6e84d"),
+                Survival = false,
+                Diplomacy = false,
+                Climbing = false,
+                Acrobatics = false,
+                Skill = false,
+                Guile = false,
+                SecretKnowledge = false,
+                Sneak = false,
+                Elusion = true,
+                WaterCycle = false,
+                Melee = true,
+                NatureSkills = false,
+                BreakingLocks = false,
+                Transformation = false,
+                Spells = false,
+                Rituals = false,
+                Traps = false,
+                Archery = false,
+                ThrowingKnives = false,
+                PoisonousNeedles = false,
+                Stimulants = false,
+                Wrestling = false,
+                Observation = false,
+                ShieldBearer = false,
+                HeroId = Guid.Parse("37f54a17-e9f7-4b50-9006-c6ba79105073")
             });
 
-            
+            modelBuilder.Entity<Armor>().HasData(new Armor
+            {
+                Id = Guid.Parse("b945752d-0733-4f95-8230-e8aa999d6e3b"),
+                ArmorType = "ChainMail",
+                IsExist = true,
+                Defence = 9,
+                EquipmentId = Guid.Parse("25b4abaa-3a4e-417a-8182-2b428ab850ca")
+            });
+
+            modelBuilder.Entity<Shield>().HasData(new Shield
+            {
+                Id = Guid.Parse("6630c9f4-5864-46a0-9d68-d50c4e8e54ae"),
+                ShieldType = "",
+                IsExist = false,
+                Defence = 0,
+                EquipmentId = Guid.Parse("25b4abaa-3a4e-417a-8182-2b428ab850ca")
+            });
+
+            modelBuilder.Entity<Weapon>().HasData(new Weapon
+            {
+                Id = Guid.Parse("365568f0-745a-4541-9261-59fd68cc4074"),
+                WeaponType = "LongSword",
+                IsExist = true,
+                IsItTwoHandWeapon = true,
+                Attack = 12,
+                Defence = 6,
+                Damage = 11,
+                WeaponRange = 3,
+                EquipmentId = Guid.Parse("25b4abaa-3a4e-417a-8182-2b428ab850ca")
+            });
+
+            modelBuilder.Entity<ThrowingWeapon>().HasData(new ThrowingWeapon
+            {
+                Id = Guid.Parse("638f70a9-f6bf-47b7-9720-a5f053293a78"),
+                ThrowingWeaponType = "",
+                IsExist = false,
+                Attack = 0,
+                Defence = 0,
+                Damage = 0,
+                Quantity = 0,
+                ThrowingWeaponRange = 0,
+                EquipmentId = Guid.Parse("25b4abaa-3a4e-417a-8182-2b428ab850ca")
+            });
+
+            modelBuilder.Entity<Equipment>().HasData(new Equipment
+            {
+                Id = Guid.Parse("25b4abaa-3a4e-417a-8182-2b428ab850ca"),
+                Knife = true,
+                SmokeBall = false,
+                Poison = false,
+                MedicPack = true,
+                MoneyBag = 100,
+                HeroId = Guid.Parse("37f54a17-e9f7-4b50-9006-c6ba79105073"),
+                ArmorId = Guid.Parse("b945752d-0733-4f95-8230-e8aa999d6e3b"),
+                ShieldId = Guid.Parse("6630c9f4-5864-46a0-9d68-d50c4e8e54ae"),
+                WeaponId = Guid.Parse("365568f0-745a-4541-9261-59fd68cc4074"),
+                ThrowingWeaponId = Guid.Parse("638f70a9-f6bf-47b7-9720-a5f053293a78"),
+                Talismans = new List<Talisman>()
+            });
+
+            modelBuilder.Entity<SpecialCombatSkill>().HasData(new SpecialCombatSkill
+            {
+                Id = Guid.Parse("fe691e8c-20bc-489a-b22d-68ec8762d98a"),
+                Name = "MercenarySCS",
+                SkillLevel = 1,
+                RequiredMentalEnergy = 3,
+                SpecialAbilitiesId = Guid.Parse("5a36646e-8d6b-4adb-8455-797b083cf516")
+            });
+
+            modelBuilder.Entity<Ultimate>().HasData(new Ultimate
+            {
+                Id = Guid.Parse("8be45ce0-4e07-41d4-824d-7f91e1b55e96"),
+                Name = "MercenaryUltimate",
+                SkillLevel = 1,
+                RequiredMentalEnergy = 6,
+                SpecialAbilitiesId = Guid.Parse("5a36646e-8d6b-4adb-8455-797b083cf516")
+            });
+
+            modelBuilder.Entity<SpecialAbility>().HasData(new SpecialAbility
+            {
+                Id = Guid.Parse("5a36646e-8d6b-4adb-8455-797b083cf516"),
+                SpecialCombatSkillId = Guid.Parse("fe691e8c-20bc-489a-b22d-68ec8762d98a"),
+                UltimateId = Guid.Parse("8be45ce0-4e07-41d4-824d-7f91e1b55e96"),
+                HeroId = Guid.Parse("37f54a17-e9f7-4b50-9006-c6ba79105073"),
+                Spells = new List<Spell>(),
+                Rituals = new List<Ritual>(),
+                NatureSkills = new List<NatureSkill>()
+            });
+
+            modelBuilder.Entity<Hero>().HasData(new Hero
+            {
+                Id = Guid.Parse("37f54a17-e9f7-4b50-9006-c6ba79105073"),
+                Name = "TheLongDeath",
+                HeroClass = "Mercenary",
+                BaggageCapacity = 50.0,
+                GroupWestId = Guid.Parse("38481e3c-6bad-4014-87d1-dc8fe7a9830c"),
+                IndicatorsId = Guid.Parse("f925cafb-f71a-4bca-8f73-87dabdbfe1b2"),
+                EquipmentsId = Guid.Parse("25b4abaa-3a4e-417a-8182-2b428ab850ca"),
+                AbilityId = Guid.Parse("edcda087-9b4e-4e18-813e-8b3d02f6e84d"),
+                SpecialAbilityId = Guid.Parse("5a36646e-8d6b-4adb-8455-797b083cf516"),
+                Baggages = new List<Baggage>(),
+                Promises = new List<Promise>(),
+            });
+
+            //seed data for Gladiator Hero
+
+            modelBuilder.Entity<Indicator>().HasData(new Indicator
+            {
+                Id = Guid.Parse("da1ebfdf-6ded-4ded-9822-f8b9c38ec62b"),
+                Health = 60,
+                MentalEnergy = 24,
+                MentalStrength = 3,
+                Strength = 8,
+                Dexterity = 12,
+                Agility = 5,
+                Evasion = 5,
+                Endurance = 7,
+                HeroId = Guid.Parse("f62256d9-2f28-4ce1-82d4-7e25625c097c")
+            });
+
+            modelBuilder.Entity<Ability>().HasData(new Ability
+            {
+                Id = Guid.Parse("5488f513-2bc4-46fc-915b-560c05dcad70"),
+                Survival = false,
+                Diplomacy = false,
+                Climbing = false,
+                Acrobatics = false,
+                Skill = true,
+                Guile = false,
+                SecretKnowledge = false,
+                Sneak = false,
+                Elusion = false,
+                WaterCycle = false,
+                Melee = false,
+                NatureSkills = false,
+                BreakingLocks = false,
+                Transformation = false,
+                Spells = false,
+                Rituals = false,
+                Traps = false,
+                Archery = false,
+                ThrowingKnives = false,
+                PoisonousNeedles = false,
+                Stimulants = false,
+                Wrestling = false,
+                Observation = false,
+                ShieldBearer = false,
+                HeroId = Guid.Parse("f62256d9-2f28-4ce1-82d4-7e25625c097c")
+            });
+
+            modelBuilder.Entity<Armor>().HasData(new Armor
+            {
+                Id = Guid.Parse("56dfcf22-f042-484f-b335-c95758e7e7e2"),
+                ArmorType = "IronBreastplate",
+                IsExist = true,
+                Defence = 7,
+                EquipmentId = Guid.Parse("9bca26b6-25b8-4699-9d48-5795bb0b40f2")
+            });
+
+            modelBuilder.Entity<Shield>().HasData(new Shield
+            {
+                Id = Guid.Parse("5cc02844-2a6c-4e1c-8da7-60c77ef32775"),
+                ShieldType = "",
+                IsExist = false,
+                Defence = 0,
+                EquipmentId = Guid.Parse("9bca26b6-25b8-4699-9d48-5795bb0b40f2")
+            });
+
+            modelBuilder.Entity<Weapon>().HasData(new Weapon
+            {
+                Id = Guid.Parse("306882a4-6f76-4860-bdac-cf7949b4f7ae"),
+                WeaponType = "TwoSwords",
+                IsExist = true,
+                IsItTwoHandWeapon = true,
+                Attack = 10,
+                Defence = 6,
+                Damage = 10,
+                WeaponRange = 2,
+                EquipmentId = Guid.Parse("9bca26b6-25b8-4699-9d48-5795bb0b40f2")
+            });
+
+            modelBuilder.Entity<ThrowingWeapon>().HasData(new ThrowingWeapon
+            {
+                Id = Guid.Parse("005da110-c051-46af-b841-481e56fbfc75"),
+                ThrowingWeaponType = "",
+                IsExist = false,
+                Attack = 0,
+                Defence = 0,
+                Damage = 0,
+                Quantity = 0,
+                ThrowingWeaponRange = 0,
+                EquipmentId = Guid.Parse("9bca26b6-25b8-4699-9d48-5795bb0b40f2")
+            });
+
+            modelBuilder.Entity<Equipment>().HasData(new Equipment
+            {
+                Id = Guid.Parse("9bca26b6-25b8-4699-9d48-5795bb0b40f2"),
+                Knife = true,
+                SmokeBall = false,
+                Poison = false,
+                MedicPack = false,
+                MoneyBag = 100,
+                HeroId = Guid.Parse("f62256d9-2f28-4ce1-82d4-7e25625c097c"),
+                ArmorId = Guid.Parse("56dfcf22-f042-484f-b335-c95758e7e7e2"),
+                ShieldId = Guid.Parse("5cc02844-2a6c-4e1c-8da7-60c77ef32775"),
+                WeaponId = Guid.Parse("306882a4-6f76-4860-bdac-cf7949b4f7ae"),
+                ThrowingWeaponId = Guid.Parse("005da110-c051-46af-b841-481e56fbfc75"),
+                Talismans = new List<Talisman>()
+            });
+
+            modelBuilder.Entity<SpecialCombatSkill>().HasData(new SpecialCombatSkill
+            {
+                Id = Guid.Parse("cbb18d5d-d024-499d-8599-aefd39603f22"),
+                Name = "GladiatorSCS",
+                SkillLevel = 1,
+                RequiredMentalEnergy = 0,
+                SpecialAbilitiesId = Guid.Parse("70433c63-0f45-439e-9925-ceb151499f1f")
+            });
+
+            modelBuilder.Entity<Ultimate>().HasData(new Ultimate
+            {
+                Id = Guid.Parse("4006513c-e014-4d88-a4cd-1a27b4e31166"),
+                Name = "GladiatorUltimate",
+                SkillLevel = 1,
+                RequiredMentalEnergy = 10,
+                SpecialAbilitiesId = Guid.Parse("70433c63-0f45-439e-9925-ceb151499f1f")
+            });
+
+            modelBuilder.Entity<SpecialAbility>().HasData(new SpecialAbility
+            {
+                Id = Guid.Parse("70433c63-0f45-439e-9925-ceb151499f1f"),
+                SpecialCombatSkillId = Guid.Parse("cbb18d5d-d024-499d-8599-aefd39603f22"),
+                UltimateId = Guid.Parse("4006513c-e014-4d88-a4cd-1a27b4e31166"),
+                HeroId = Guid.Parse("f62256d9-2f28-4ce1-82d4-7e25625c097c"),
+                Spells = new List<Spell>(),
+                Rituals = new List<Ritual>(),
+                NatureSkills = new List<NatureSkill>()
+            });
+
+            modelBuilder.Entity<Hero>().HasData(new Hero
+            {
+                Id = Guid.Parse("f62256d9-2f28-4ce1-82d4-7e25625c097c"),
+                Name = "Surful",
+                HeroClass = "Gladiator",
+                BaggageCapacity = 50.0,
+                GroupWestId = Guid.Parse("38481e3c-6bad-4014-87d1-dc8fe7a9830c"),
+                IndicatorsId = Guid.Parse("da1ebfdf-6ded-4ded-9822-f8b9c38ec62b"),
+                EquipmentsId = Guid.Parse("9bca26b6-25b8-4699-9d48-5795bb0b40f2"),
+                AbilityId = Guid.Parse("5488f513-2bc4-46fc-915b-560c05dcad70"),
+                SpecialAbilityId = Guid.Parse("70433c63-0f45-439e-9925-ceb151499f1f"),
+                Baggages = new List<Baggage>(),
+                Promises = new List<Promise>(),
+            });
+
+            //seed data for Pirate Hero
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

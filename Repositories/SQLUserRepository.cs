@@ -268,7 +268,7 @@ namespace redimel_server.Repositories
                     AditionalPoints = new AditionalPoint
                     {
                         Id = aditionalPointsId,
-                        TeamGame = 1,
+                        TeamGame = 0,
                         ImportantInformation = 0,
                         SlainMonsters = 0,
                         Morals = 2,
@@ -286,8 +286,8 @@ namespace redimel_server.Repositories
             {
                 await CreateHero(groupWestHeroes.FirstHero, groupWestId),
                 await CreateHero(groupWestHeroes.SecondHero, groupWestId),
-                await CreateHero(groupWestHeroes.ThirdHero, groupWestId),
-                await CreateHero(groupWestHeroes.FourthHero, groupWestId)
+                //await CreateHero(groupWestHeroes.ThirdHero, groupWestId),
+                //await CreateHero(groupWestHeroes.FourthHero, groupWestId)
             };
 
             newUser.GroupWest.Heroes = heroesList;
@@ -304,7 +304,7 @@ namespace redimel_server.Repositories
             return currentUserEmail;
         }
 
-        private async Task<Hero> CreateHero(string heroType, Guid groupWestId)
+        private async Task<Hero> CreateHero(string heroClass, Guid groupWestId)
         {
             var originalHero = await dbContext.Heroes.Include(x => x.Indicators).Include(x => x.Ability)
                 .Include(x => x.Equipments).ThenInclude(x => x.Weapon)
@@ -313,7 +313,7 @@ namespace redimel_server.Repositories
                 .Include(x => x.Equipments).ThenInclude(x => x.Armor)
                 .Include(x => x.SpecialAbility).ThenInclude(x => x.SpecialCombatSkill)
                 .Include(x => x.SpecialAbility).ThenInclude(x => x.Ultimate)
-                .FirstOrDefaultAsync(x => x.HeroClass == heroType);
+                .FirstOrDefaultAsync(x => x.HeroClass == heroClass);
 
             var heroId = Guid.NewGuid();
             var indicatorsId = Guid.NewGuid();
