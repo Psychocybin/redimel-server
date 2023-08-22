@@ -9,5 +9,6 @@ namespace redimel_server.Models.Domain
         public string SecondHero { get; set; }
         public string ThirdHero { get; set; }
         public string FourthHero { get; set; }
+        public string FifthHero { get; set; }
     }
 }

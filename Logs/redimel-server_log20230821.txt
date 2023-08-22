@@ -1,0 +1,2 @@
+2023-08-21 12:16:32.245 +03:00 [ERR] Failed executing DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Users] ADD CONSTRAINT [FK_Users_Redimels_RedimelId] FOREIGN KEY ([RedimelId]) REFERENCES [Redimels] ([Id]) ON DELETE CASCADE;

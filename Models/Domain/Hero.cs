@@ -19,7 +19,7 @@ namespace redimel_server.Models.Domain
         public Guid AbilityId { get; set; }
         [ForeignKey("SpecialAbility")]
         public Guid SpecialAbilityId { get; set; }
-        public virtual GroupWest GroupWest { get; set; }
+        //public virtual GroupWest GroupWest { get; set; }
         public virtual Indicator Indicators { get; set; }
         public virtual Equipment Equipments { get; set; }
         public virtual Ability Ability { get; set; }
