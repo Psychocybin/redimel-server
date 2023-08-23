@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
 using redimel_server.Models.Domain.RedimelDomain;
 using redimel_server.Models.Domain.RedimelDomain.MagelandDomain;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 
 namespace redimel_server.Repositories
@@ -25,6 +21,16 @@ namespace redimel_server.Repositories
 
         public async Task<User> CreateUserAsync(string heroEmail, GroupWestHeroes groupWestHeroes)
         {
+            var currentsImeils = await dbContext.Users.Select(x => x.CurrentUserEmail).ToListAsync();
+
+            foreach (var email in currentsImeils)
+            {
+                if (email == heroEmail)
+                {
+                    throw new Exception("This user already have battle group");
+                }
+            }
+
             var newUserId = Guid.NewGuid();
             var redimelId = Guid.NewGuid();
             var groupWestId = Guid.NewGuid();
