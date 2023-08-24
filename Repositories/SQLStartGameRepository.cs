@@ -18,12 +18,25 @@ namespace redimel_server.Repositories
         public async Task<Page> GetNextPage(Choice choice)
         {
             var currentUserEmail = userRepository.GetUserEmail();
-            var currentUser = await dbContext.Users.FirstOrDefaultAsync(x => x.CurrentUserEmail == currentUserEmail);
-
-            //var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
-            //    .Include(x => x.GroupWest).ThenInclude(x => x.Heroes.Where(x => x.HeroClass == "Soldier"))
-            //    .ThenInclude(x => x.Equipments).ThenInclude(x => x.Weapon)
-            //    .FirstOrDefaultAsync();
+            var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
+                .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.BattleGroups)
+                .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.Negotiations)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Missions)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Indicators)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Ability)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Baggages)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Promises)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.SpecialCombatSkill)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.Ultimate)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.Spells)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.Rituals)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.NatureSkills)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Weapon)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Armor)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Shield)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.ThrowingWeapon)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Talismans)
+                .Include(x => x.WorldInfoVariables).FirstOrDefaultAsync();
 
             if (choice.PageId != currentUser.CurrentLocation)
             {
@@ -47,30 +60,32 @@ namespace redimel_server.Repositories
                     {
                         if (situation == "001")
                         {
-                            choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "665C1F43-F725-4054-5640-08DBA3B46D02"));
+                            choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "7D7F0A55-EA5C-4643-7534-08DBA497FC0E"));
 
-                            //var variableElement = currentUser.Redimel.Magelands.MageTown.MageTownTheLibrary.MageTownTheLibraryVariables
-                            //    .Where(x => x.Name == "guard").FirstOrDefault().ToString();
-
-                            //if (variableElement == "guard")
-                            //{
-                            //    choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "D0926C39-BB5C-4A05-5641-08DBA3B46D02"));
-                            //}
-
-                            var element = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail).Select(x => x.GroupWest)
-                                .Select(x => x.Heroes.Where(y => y.HeroClass == "Soldier")).FirstOrDefaultAsync();
-
-                            if (element.ToString() == "Soldier")
+                            if (currentUser.GroupWest.Heroes.Any(x => x.HeroClass == "Soldier"))
                             {
-                                currentUser.GroupWest.Heroes.First(x => x.HeroClass == "Soldier").Indicators.Health -= 30;
-                                choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "1B88E04E-E5A6-49B3-5642-08DBA3B46D02"));
+                                choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "5BB83086-E234-4162-7535-08DBA497FC0E"));
+
+                                currentUser.WorldInfoVariables.Add(new WorldInfoVariable
+                                {
+                                    RedimelLocation = "redmagtowlib",
+                                    Name = "Guard",
+                                    Count = 1,
+                                    TrueOrFalse = true,
+                                    ActiveOrNot = true
+                                });
+
+                                currentUser.GroupWest.Heroes.First(x => x.HeroClass == "Soldier").Indicators.Health += 10;
                             }
 
                             nextPage.Choices = choicesList;
                         }
                         if (situation == "002")
                         {
-
+                            if (currentUser.WorldInfoVariables.Any(x => x.Name == "Guard"))
+                            {
+                                choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "582871F4-9419-4FD6-7536-08DBA497FC0E"));
+                            }
                         }
                         if (situation == "003")
                         {
