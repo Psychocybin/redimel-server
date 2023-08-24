@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
-using System.Linq.Expressions;
 
 namespace redimel_server.Repositories
 {
@@ -19,18 +18,12 @@ namespace redimel_server.Repositories
         public async Task<Page> GetNextPage(Choice choice)
         {
             var currentUserEmail = userRepository.GetUserEmail();
-            var currentUser = await dbContext.Users
-                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Weapon)
-                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Armor)
-                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.ThrowingWeapon)
-                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Shield)
-                .FirstOrDefaultAsync(x => x.CurrentUserEmail == currentUserEmail);
+            var currentUser = await dbContext.Users.FirstOrDefaultAsync(x => x.CurrentUserEmail == currentUserEmail);
 
-            
-
-            //var currentUser = await dbContext.Users.Include(x => x.Redimel).ThenInclude(x => x.Magelands).ThenInclude(x => x.MageTown)
-            //    .ThenInclude(x => x.MageTownTheLibrary).ThenInclude(x => x.MageTownTheLibraryVariables)
-            //    .FirstOrDefaultAsync(x => x.CurrentUserEmail == currentUserEmail);
+            //var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
+            //    .Include(x => x.GroupWest).ThenInclude(x => x.Heroes.Where(x => x.HeroClass == "Soldier"))
+            //    .ThenInclude(x => x.Equipments).ThenInclude(x => x.Weapon)
+            //    .FirstOrDefaultAsync();
 
             if (choice.PageId != currentUser.CurrentLocation)
             {
@@ -121,7 +114,5 @@ namespace redimel_server.Repositories
 
             return nextPage;
         }
-
-
     }
 }

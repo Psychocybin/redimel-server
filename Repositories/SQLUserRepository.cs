@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
-using redimel_server.Models.Domain.RedimelDomain;
-using redimel_server.Models.Domain.RedimelDomain.MagelandDomain;
 using System.Security.Claims;
 
 namespace redimel_server.Repositories
@@ -76,195 +74,7 @@ namespace redimel_server.Repositories
                 Checkpoint = "redmagtowlib001",
                 TimeCounter = 1,
                 CurrentUserEmail = heroEmail,
-                RedimelId = redimelId,
                 GroupWestId = groupWestId,
-                Redimel = new Redimel
-                {
-                    Id = redimelId,
-                    UserId = newUserId,
-                    TheHorsePeopleId = theHorsePeopleId,
-                    DikaniId = dikaniId,
-                    MagelandId = magelandId,
-                    TumpridadamId = tumpridadamId,
-                    TheOldKingdomId = theOldKingdomId,
-                    TheHigherOnesId = theHigherOnesId,
-                    TheTradeLeagueId = theTradeLeagueId,
-                    FaegraId = faegraId,
-                    TheEmpireId = theEmpireId,
-                    TheBigCityId = theBigCityId,
-                    StincumId = stincumId,
-                    ThePirateDomainsId = thePirateDomainsId,
-                    TheIslandersId = theIslandersId,
-                    TheForestTribesId = theForestTribesId,
-                    SouthernNomadsId = southernNomadsId,
-                    NorthernNomadsId = northernNomadsId,
-                    TheHuntersId = theHuntersId,
-                    OutlawTerritoryId = outlawTerritoryId,
-                    TheWastelandId = theWastelandId,
-                    TheShadowWorldId = theShadowWorldId,
-                    TheHorsePeople = new TheHorsePeople
-                    {
-                        Id = theHorsePeopleId,
-                        RedimelId = redimelId
-                    },
-                    Dikani = new Dikani
-                    {
-                        Id = dikaniId,
-                        RedimelId = redimelId
-                    },
-                    Magelands = new Mageland
-                    {
-                        Id = magelandId,
-                        RedimelId = redimelId,
-                        MageTownId = mageTownId,
-                        MageTradeRoadId = mageTradeRoadId,
-                        MageSeaId = mageSeaId,
-                        MageHarborId = mageHarborId,
-                        MageForestId = mageForestId,
-                        MageFieldsId = mageFieldsId,
-                        MageTown = new MageTown
-                        {
-                            Id = mageTownId,
-                            MagelandId = magelandId,
-                            MageTownTheCentralSquareId = mageTownTheCentralSquareId,
-                            MageTownInnTheOldMagicianId = mageTownInnTheOldMagicianId,
-                            MageTownTheLibraryId = mageTownTheLibraryId,
-                            MageTownGuardHillId = mageTownGuardHillId,
-                            MageTownTheCentralSquare = new MageTownTheCentralSquare
-                            {
-                                Id = mageTownTheCentralSquareId,
-                                MageTownId = mageTownId,
-                                MageTownTheCentralSquareVariables = new List<WorldInfoVariable>()
-                            },
-                            MageTownInnTheOldMagician = new MageTownInnTheOldMagician
-                            {
-                                Id = mageTownInnTheOldMagicianId,
-                                MageTownId = mageTownId,
-                                MageTownOldMagicianVariables = new List<WorldInfoVariable>()
-                            },
-                            MageTownTheLibrary = new MageTownTheLibrary
-                            {
-                                Id = mageTownTheLibraryId,
-                                MageTownId = mageTownId,
-                                MageTownTheLibraryVariables = new List<WorldInfoVariable>()
-                            },
-                            MageTownGuardHill = new MageTownGuardHill
-                            {
-                                Id = mageTownGuardHillId,
-                                MageTownId = mageTownId,
-                                MageTownGuardHillVariables = new List<WorldInfoVariable>()
-                            },
-                            MageTownVariables = new List<WorldInfoVariable>()
-                        },
-                        MageTradeRoad = new MageTradeRoad
-                        {
-                            Id = mageTradeRoadId,
-                        },
-                        MageSea = new MageSea
-                        {
-                            Id = mageSeaId
-                        },
-                        MageHarbor = new MageHarbor
-                        {
-                            Id = mageHarborId,
-                        },
-                        MageForest = new MageForest
-                        {
-                            Id = mageForestId,
-                        },
-                        MageFields = new MageFields
-                        {
-                            Id = mageFieldsId,
-                        },
-                        MagelandVariables = new List<WorldInfoVariable>()
-                    },
-                    Tumpridadam = new Tumpridadam
-                    {
-                        Id = tumpridadamId,
-                        RedimelId = redimelId
-                    },
-                    TheOldKingdom = new TheOldKingdom
-                    {
-                        Id = theOldKingdomId,
-                        RedimelId = redimelId
-                    },
-                    TheHigherOnes = new TheHigherOnes
-                    {
-                        Id = theHigherOnesId,
-                        RedimelId = redimelId
-                    },
-                    TheTradeLeague = new TheTradeLeague
-                    {
-                        Id = theTradeLeagueId,
-                        RedimelId = redimelId
-                    },
-                    Faegra = new Faegra
-                    {
-                        Id = faegraId,
-                        RedimelId = redimelId
-                    },
-                    TheEmpire = new TheEmpire
-                    {
-                        Id = theEmpireId,
-                        RedimelId = redimelId
-                    },
-                    TheBigCity = new TheBigCity
-                    {
-                        Id = theBigCityId,
-                        RedimelId = redimelId
-                    },
-                    Stincum = new Stincum
-                    {
-                        Id = stincumId,
-                        RedimelId = redimelId
-                    },
-                    ThePirateDomains = new ThePirateDomains
-                    {
-                        Id = thePirateDomainsId,
-                        RedimelId = redimelId
-                    },
-                    TheIslanders = new TheIslanders
-                    {
-                        Id = theIslandersId,
-                        RedimelId = redimelId
-                    },
-                    TheForestTribes = new TheForestTribes
-                    {
-                        Id = theForestTribesId,
-                        RedimelId = redimelId
-                    },
-                    SouthernNomads = new SouthernNomads
-                    {
-                        Id = southernNomadsId,
-                        RedimelId = redimelId
-                    },
-                    NorthernNomads = new NorthernNomads
-                    {
-                        Id = northernNomadsId,
-                        RedimelId = redimelId
-                    },
-                    TheHunters = new TheHunters
-                    {
-                        Id = theHuntersId,
-                        RedimelId = redimelId
-                    },
-                    OutlawTerritory = new OutlawTerritory
-                    {
-                        Id = outlawTerritoryId,
-                        RedimelId = redimelId
-                    },
-                    TheWasteland = new TheWasteland
-                    {
-                        Id = theWastelandId,
-                        RedimelId = redimelId
-                    },
-                    TheShadowWorld = new TheShadowWorld
-                    {
-                        Id = theShadowWorldId,
-                        RedimelId = redimelId
-                    },
-                    RedimelVariables = new List<WorldInfoVariable>()
-                },
                 GroupWest = new GroupWest
                 {
                     Id = groupWestId,
@@ -277,15 +87,16 @@ namespace redimel_server.Repositories
                         TeamGame = 0,
                         ImportantInformation = 0,
                         SlainMonsters = 0,
-                        Morals = 2,
-                        Cover = 2,
+                        Morals = 0,
+                        Cover = 0,
                         GroupWestId = groupWestId,
                         BattleGroups = new List<BattleGroup>(),
                         Negotiations = new List<Negotiation>()
                     },
                     Missions = new List<Mission>(),
                     Heroes = new List<Hero>()
-                }
+                },
+                WorldInfoVariables = new List<WorldInfoVariable>()
             };
 
             var heroesList = new List<Hero>

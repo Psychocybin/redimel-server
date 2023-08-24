@@ -1,5 +1,4 @@
-﻿using redimel_server.Models.Domain.RedimelDomain;
-using redimel_server.Models.Domain;
+﻿using redimel_server.Models.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace redimel_server.Models.DTO
@@ -13,7 +12,6 @@ namespace redimel_server.Models.DTO
         public Guid CurrentUserId { get; set; }
         public Guid RedimelId { get; set; }
         public Guid GroupWestId { get; set; }
-        public virtual Redimel Redimel { get; set; }
         public virtual GroupWest GroupWest { get; set; }
     }
 }
