@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace redimel_server.Models.Domain
+﻿namespace redimel_server.Models.Domain
 {
     public class WorldInfoVariable
     {
@@ -11,8 +9,8 @@ namespace redimel_server.Models.Domain
         public int Count { get; set; }
         public bool ActiveOrNot { get; set; }
         public bool TrueOrFalse { get; set; }
-        [ForeignKey("User")]
         public Guid UserId { get; set; }
+        public virtual User User { get; set; }
 
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace redimel_server.Models.Domain
+﻿namespace redimel_server.Models.Domain
 {
     public class AditionalPoint
     {
@@ -10,9 +8,7 @@ namespace redimel_server.Models.Domain
         public int SlainMonsters { get; set; }
         public int Morals { get; set; }
         public int Cover { get; set; }
-        //[ForeignKey("GroupWest")]
         public Guid GroupWestId { get; set; }
-        //public GroupWest GroupWest { get; set; }
         public virtual ICollection<BattleGroup> BattleGroups { get; set; }
         public virtual ICollection<Negotiation> Negotiations { get; set; }
     }

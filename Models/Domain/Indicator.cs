@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace redimel_server.Models.Domain
+﻿namespace redimel_server.Models.Domain
 {
     public class Indicator
     {
@@ -13,8 +11,6 @@ namespace redimel_server.Models.Domain
         public int Agility { get; set; }
         public int Evasion { get; set; }
         public int Endurance { get; set; }
-        //[ForeignKey("Hero")]
         public Guid HeroId { get; set; }
-        //public virtual Hero Hero { get; set; }
     }
 }

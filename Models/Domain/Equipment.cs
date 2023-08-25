@@ -10,7 +10,6 @@ namespace redimel_server.Models.Domain
         public Boolean Poison { get; set; }
         public Boolean MedicPack { get; set; }
         public int MoneyBag { get; set; }
-        //[ForeignKey("Hero")]
         public Guid HeroId { get; set; }
         [ForeignKey("Armor")]
         public Guid ArmorId { get; set; }
@@ -20,7 +19,6 @@ namespace redimel_server.Models.Domain
         public Guid WeaponId { get; set; }
         [ForeignKey("ThrowingWeapon")]
         public Guid ThrowingWeaponId { get; set; }
-        //public Hero Hero { get; set; }
         public virtual Armor Armor { get; set; }
         public virtual Shield Shield { get; set; }
         public virtual Weapon Weapon { get; set; }

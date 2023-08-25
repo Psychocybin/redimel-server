@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace redimel_server.Models.Domain
+﻿namespace redimel_server.Models.Domain
 {
     public class Ability
     {
@@ -30,8 +27,6 @@ namespace redimel_server.Models.Domain
         public Boolean Wrestling { get; set; }
         public Boolean Observation { get; set; }
         public Boolean ShieldBearer { get; set; }
-        //[ForeignKey("Hero")]
         public Guid HeroId { get; set; }
-        //public Hero Hero { get; set; }
     }
 }

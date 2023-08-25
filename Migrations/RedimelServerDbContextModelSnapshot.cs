@@ -936,7 +936,7 @@ namespace redimel_server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("redimel_server.Models.Domain.GroupWest", null)
+                    b.HasOne("redimel_server.Models.Domain.GroupWest", "GroupWest")
                         .WithMany("Heroes")
                         .HasForeignKey("GroupWestId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -957,6 +957,8 @@ namespace redimel_server.Migrations
                     b.Navigation("Ability");
 
                     b.Navigation("Equipments");
+
+                    b.Navigation("GroupWest");
 
                     b.Navigation("Indicators");
 
@@ -1072,11 +1074,13 @@ namespace redimel_server.Migrations
 
             modelBuilder.Entity("redimel_server.Models.Domain.WorldInfoVariable", b =>
                 {
-                    b.HasOne("redimel_server.Models.Domain.User", null)
+                    b.HasOne("redimel_server.Models.Domain.User", "User")
                         .WithMany("WorldInfoVariables")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.AditionalPoint", b =>

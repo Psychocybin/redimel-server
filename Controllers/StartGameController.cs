@@ -37,11 +37,12 @@ namespace redimel_server.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         [Authorize(Roles = "Reader,Writer")]
         [Route("BoardBookGame")]
-        public async Task<IActionResult> GetNextPage([FromBody] ChoiceDto choiceDto)
+        public async Task<IActionResult> GetNextPage([FromBody] AddChoiceRequestDto addChoiceRequestDto)
         {
-            var choiceDomain = mapper.Map<Choice>(choiceDto);
+            var choiceDomain = mapper.Map<Choice>(addChoiceRequestDto);
 
             var nextPage = await startGameRepository.GetNextPage(choiceDomain);
 

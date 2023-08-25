@@ -5,13 +5,11 @@ namespace redimel_server.Models.Domain
     public class SpecialAbility
     {
         public Guid Id { get; set; }
-        //[ForeignKey("Hero")]
         public Guid HeroId { get; set; }
         [ForeignKey("SpecialCombatSkill")]
         public Guid SpecialCombatSkillId { get; set; }
         [ForeignKey("Ultimate")]
         public Guid UltimateId { get; set; }
-        //public Hero Hero { get; set; }
         public virtual SpecialCombatSkill SpecialCombatSkill { get; set; }
         public virtual Ultimate Ultimate { get; set; }
         public virtual ICollection<Spell> Spells { get; set; }

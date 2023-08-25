@@ -1,6 +1,4 @@
-﻿using redimel_server.Models.Domain;
-
-namespace redimel_server.Models.DTO
+﻿namespace redimel_server.Models.DTO
 {
     public class PageDto
     {

@@ -5,7 +5,6 @@ using redimel_server.CustomActionFilters;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
 using redimel_server.Repositories;
-using System.Security.Claims;
 
 namespace redimel_server.Controllers
 {

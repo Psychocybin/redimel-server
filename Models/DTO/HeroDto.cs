@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace redimel_server.Models.DTO
+﻿namespace redimel_server.Models.DTO
 {
     public class HeroDto
     {

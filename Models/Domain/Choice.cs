@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace redimel_server.Models.Domain
+﻿namespace redimel_server.Models.Domain
 {
     public class Choice
     {
