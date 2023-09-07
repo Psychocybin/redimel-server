@@ -116,10 +116,57 @@ namespace redimel_server.Repositories
             return newUser;
         }
 
+        public async Task<User?> DeleteAsync(Guid id)
+        {
+            var existingUser = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingUser == null)
+            {
+                return null;
+            }
+
+            dbContext.Users.Remove(existingUser);
+            await dbContext.SaveChangesAsync();
+
+            return existingUser;
+        }
+
+        public async Task<List<User>> GetAllAsync()
+        {
+            return await dbContext.Users.ToListAsync();
+
+        }
+
+        public async Task<User?> GetByIdAsync(Guid id)
+        {
+            return await dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+        }
+
         public string GetUserEmail()
         {
             var currentUserEmail = this.user?.FindFirstValue(ClaimTypes.Email);
             return currentUserEmail;
+        }
+
+        public async Task<User?> UpdateAsync(Guid id, User user)
+        {
+            var existingUser = await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
+
+            if (existingUser == null)
+            {
+                return null;
+            }
+
+            existingUser.Checkpoint = user.Checkpoint;
+            existingUser.CurrentLocation = user.CurrentLocation;
+            existingUser.CurrentUserEmail = user.CurrentUserEmail;
+            existingUser.GroupWestId = user.GroupWestId;
+            existingUser.TimeCounter = user.TimeCounter;
+
+            await dbContext.SaveChangesAsync();
+
+            return existingUser;
         }
 
         private async Task<Hero> CreateHero(string heroClass, Guid groupWestId)

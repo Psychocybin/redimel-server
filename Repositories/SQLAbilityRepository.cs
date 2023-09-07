@@ -7,10 +7,12 @@ namespace redimel_server.Repositories
     public class SQLAbilityRepository : IAbilityRepository
     {
         private readonly RedimelServerDbContext dbContext;
+        private readonly IUserRepository userRepository;
 
-        public SQLAbilityRepository(RedimelServerDbContext dbContext)
+        public SQLAbilityRepository(RedimelServerDbContext dbContext, IUserRepository userRepository)
         {
             this.dbContext = dbContext;
+            this.userRepository = userRepository;
         }
 
         public async Task<List<Ability>> GetAllAsync()
