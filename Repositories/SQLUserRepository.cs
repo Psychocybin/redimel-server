@@ -199,6 +199,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "Vranko",
                     HeroClass = heroClass,
+                    HeroType = "Warrior",
                     OrderOfBattle = 0,
                     BaggageCapacity = 60.0,
                     GroupWestId = groupWestId,
@@ -301,6 +302,9 @@ namespace redimel_server.Repositories
                         Wrestling = true,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -355,6 +359,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "TheLittleBear",
                     HeroClass = heroClass,
+                    HeroType = "Fighter",
                     OrderOfBattle = 0,
                     BaggageCapacity = 50.0,
                     GroupWestId = groupWestId,
@@ -457,6 +462,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -511,6 +519,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "TheLongDeath",
                     HeroClass = heroClass,
+                    HeroType = "Warrior",
                     OrderOfBattle = 0,
                     BaggageCapacity = 50.0,
                     GroupWestId = groupWestId,
@@ -613,6 +622,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -667,6 +679,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "Surful",
                     HeroClass = heroClass,
+                    HeroType = "Warrior",
                     OrderOfBattle = 0,
                     BaggageCapacity = 50.0,
                     GroupWestId = groupWestId,
@@ -769,6 +782,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = true,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -823,6 +839,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "CrazyWater",
                     HeroClass = heroClass,
+                    HeroType = "Fighter",
                     OrderOfBattle = 0,
                     BaggageCapacity = 40.0,
                     GroupWestId = groupWestId,
@@ -925,6 +942,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -979,6 +999,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "MonsterSlayer",
                     HeroClass = heroClass,
+                    HeroType = "Defender",
                     OrderOfBattle = 0,
                     BaggageCapacity = 50.0,
                     GroupWestId = groupWestId,
@@ -1081,6 +1102,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = true,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -1135,6 +1159,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "Gigi",
                     HeroClass = heroClass,
+                    HeroType = "Helper",
                     OrderOfBattle = 0,
                     BaggageCapacity = 50.0,
                     GroupWestId = groupWestId,
@@ -1237,6 +1262,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -1291,6 +1319,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "KirguainTheThird",
                     HeroClass = heroClass,
+                    HeroType = "Helper",
                     OrderOfBattle = 0,
                     BaggageCapacity = 40.0,
                     GroupWestId = groupWestId,
@@ -1393,6 +1422,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = true,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -1447,6 +1479,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "TheSonOfTheShadow",
                     HeroClass = heroClass,
+                    HeroType = "Helper",
                     OrderOfBattle = 0,
                     BaggageCapacity = 40.0,
                     GroupWestId = groupWestId,
@@ -1549,6 +1582,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -1603,6 +1639,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "AbrakanaMaye",
                     HeroClass = heroClass,
+                    HeroType = "Mystic",
                     OrderOfBattle = 0,
                     BaggageCapacity = 50.0,
                     GroupWestId = groupWestId,
@@ -1705,6 +1742,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -1759,6 +1799,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "Lusiferat",
                     HeroClass = heroClass,
+                    HeroType = "Mystic",
                     OrderOfBattle = 0,
                     BaggageCapacity = 40.0,
                     GroupWestId = groupWestId,
@@ -1861,6 +1902,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -1915,6 +1959,7 @@ namespace redimel_server.Repositories
                     Id = heroId,
                     Name = "Rhamzeda",
                     HeroClass = heroClass,
+                    HeroType = "Mystic",
                     OrderOfBattle = 0,
                     BaggageCapacity = 45.0,
                     GroupWestId = groupWestId,
@@ -2017,6 +2062,9 @@ namespace redimel_server.Repositories
                         Wrestling = false,
                         Observation = false,
                         ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
                         HeroId = heroId
                     },
                     SpecialAbility = new SpecialAbility
@@ -2052,7 +2100,487 @@ namespace redimel_server.Repositories
                 return newHero;
             }
 
-            return null; ;
+            if (heroClass == "Knight")
+            {
+                var heroId = Guid.NewGuid();
+                var indicatorsId = Guid.NewGuid();
+                var equipmentsId = Guid.NewGuid();
+                var abilityId = Guid.NewGuid();
+                var specialAbilityId = Guid.NewGuid();
+                var specialCombatSkillId = Guid.NewGuid();
+                var ultimateId = Guid.NewGuid();
+                var armorId = Guid.NewGuid();
+                var shieldId = Guid.NewGuid();
+                var weaponId = Guid.NewGuid();
+                var throwingWeaponId = Guid.NewGuid();
+
+                var newHero = new Hero
+                {
+                    Id = heroId,
+                    Name = "TheMountainLion",
+                    HeroClass = heroClass,
+                    HeroType = "Defender",
+                    OrderOfBattle = 0,
+                    BaggageCapacity = 50.0,
+                    GroupWestId = groupWestId,
+                    IndicatorsId = indicatorsId,
+                    EquipmentsId = equipmentsId,
+                    AbilityId = abilityId,
+                    SpecialAbilityId = specialAbilityId,
+                    Indicators = new Indicator
+                    {
+                        Id = indicatorsId,
+                        Health = 60,
+                        MentalEnergy = 24,
+                        MentalStrength = 10,
+                        Strength = 10,
+                        Dexterity = 6,
+                        Agility = 2,
+                        Evasion = 7,
+                        Endurance = 5,
+                        HeroId = heroId
+                    },
+                    Equipments = new Equipment
+                    {
+                        Id = equipmentsId,
+                        Knife = true,
+                        SmokeBall = false,
+                        Poison = false,
+                        MedicPack = true,
+                        MoneyBag = 100,
+                        HeroId = heroId,
+                        ArmorId = armorId,
+                        ShieldId = shieldId,
+                        WeaponId = weaponId,
+                        ThrowingWeaponId = throwingWeaponId,
+                        Armor = new Armor
+                        {
+                            Id = armorId,
+                            ArmorType = "FullPlate",
+                            IsExist = true,
+                            Defence = 11,
+                            EquipmentId = equipmentsId
+                        },
+                        Shield = new Shield
+                        {
+                            Id = shieldId,
+                            ShieldType = "Kite",
+                            IsExist = true,
+                            Defence = 8,
+                            EquipmentId = equipmentsId
+                        },
+                        Weapon = new Weapon
+                        {
+                            Id = weaponId,
+                            WeaponType = "ShortSpear",
+                            IsExist = true,
+                            IsItTwoHandWeapon = false,
+                            Attack = 8,
+                            Defence = 5,
+                            Damage = 9,
+                            WeaponRange = 2,
+                            EquipmentId = equipmentsId
+                        },
+                        ThrowingWeapon = new ThrowingWeapon
+                        {
+                            Id = throwingWeaponId,
+                            ThrowingWeaponType = "",
+                            IsExist = false,
+                            Attack = 0,
+                            Defence = 0,
+                            Damage = 0,
+                            Quantity = 0,
+                            ThrowingWeaponRange = 0,
+                            EquipmentId = equipmentsId
+                        },
+                        Talismans = new List<Talisman>()
+                    },
+                    Ability = new Ability
+                    {
+                        Id = abilityId,
+                        Survival = false,
+                        Diplomacy = false,
+                        Climbing = false,
+                        Acrobatics = false,
+                        Skill = false,
+                        Guile = false,
+                        SecretKnowledge = false,
+                        Sneak = false,
+                        Elusion = false,
+                        WaterCycle = false,
+                        Melee = false,
+                        NatureSkills = false,
+                        BreakingLocks = false,
+                        Transformation = false,
+                        Spells = false,
+                        Rituals = false,
+                        Traps = false,
+                        Archery = false,
+                        ThrowingKnives = false,
+                        PoisonousNeedles = false,
+                        Stimulants = false,
+                        Wrestling = false,
+                        Observation = false,
+                        ShieldBearer = true,
+                        Leadership = true,
+                        KickFight = false,
+                        DoubleStrike = false,
+                        HeroId = heroId
+                    },
+                    SpecialAbility = new SpecialAbility
+                    {
+                        Id = specialAbilityId,
+                        HeroId = heroId,
+                        SpecialCombatSkillId = specialCombatSkillId,
+                        UltimateId = ultimateId,
+                        SpecialCombatSkill = new SpecialCombatSkill
+                        {
+                            Id = specialCombatSkillId,
+                            Name = "KnightSCS",
+                            SkillLevel = 1,
+                            RequiredMentalEnergy = 3,
+                            SpecialAbilitiesId = specialAbilityId
+                        },
+                        Ultimate = new Ultimate
+                        {
+                            Id = ultimateId,
+                            Name = "KnightUltimate",
+                            SkillLevel = 1,
+                            RequiredMentalEnergy = 8,
+                            SpecialAbilitiesId = specialAbilityId
+                        },
+                        Spells = new List<Spell>(),
+                        Rituals = new List<Ritual>(),
+                        NatureSkills = new List<NatureSkill>()
+                    },
+                    Baggages = new List<Baggage>(),
+                    Promises = new List<Promise>()
+                };
+
+                return newHero;
+            }
+
+            if (heroClass == "Savage")
+            {
+                var heroId = Guid.NewGuid();
+                var indicatorsId = Guid.NewGuid();
+                var equipmentsId = Guid.NewGuid();
+                var abilityId = Guid.NewGuid();
+                var specialAbilityId = Guid.NewGuid();
+                var specialCombatSkillId = Guid.NewGuid();
+                var ultimateId = Guid.NewGuid();
+                var armorId = Guid.NewGuid();
+                var shieldId = Guid.NewGuid();
+                var weaponId = Guid.NewGuid();
+                var throwingWeaponId = Guid.NewGuid();
+
+                var newHero = new Hero
+                {
+                    Id = heroId,
+                    Name = "Anshuun",
+                    HeroClass = heroClass,
+                    HeroType = "Fighter",
+                    OrderOfBattle = 0,
+                    BaggageCapacity = 45.0,
+                    GroupWestId = groupWestId,
+                    IndicatorsId = indicatorsId,
+                    EquipmentsId = equipmentsId,
+                    AbilityId = abilityId,
+                    SpecialAbilityId = specialAbilityId,
+                    Indicators = new Indicator
+                    {
+                        Id = indicatorsId,
+                        Health = 50,
+                        MentalEnergy = 20,
+                        MentalStrength = 6,
+                        Strength = 7,
+                        Dexterity = 7,
+                        Agility = 7,
+                        Evasion = 6,
+                        Endurance = 7,
+                        HeroId = heroId
+                    },
+                    Equipments = new Equipment
+                    {
+                        Id = equipmentsId,
+                        Knife = true,
+                        SmokeBall = false,
+                        Poison = true,
+                        MedicPack = false,
+                        MoneyBag = 100,
+                        HeroId = heroId,
+                        ArmorId = armorId,
+                        ShieldId = shieldId,
+                        WeaponId = weaponId,
+                        ThrowingWeaponId = throwingWeaponId,
+                        Armor = new Armor
+                        {
+                            Id = armorId,
+                            ArmorType = "Fabric",
+                            IsExist = true,
+                            Defence = 1,
+                            EquipmentId = equipmentsId
+                        },
+                        Shield = new Shield
+                        {
+                            Id = shieldId,
+                            ShieldType = "",
+                            IsExist = false,
+                            Defence = 0,
+                            EquipmentId = equipmentsId
+                        },
+                        Weapon = new Weapon
+                        {
+                            Id = weaponId,
+                            WeaponType = "BattleSickle",
+                            IsExist = true,
+                            IsItTwoHandWeapon = false,
+                            Attack = 9,
+                            Defence = 2,
+                            Damage = 10,
+                            WeaponRange = 2,
+                            EquipmentId = equipmentsId
+                        },
+                        ThrowingWeapon = new ThrowingWeapon
+                        {
+                            Id = throwingWeaponId,
+                            ThrowingWeaponType = "Needles",
+                            IsExist = true,
+                            Attack = 7,
+                            Defence = 0,
+                            Damage = 1,
+                            Quantity = 100,
+                            ThrowingWeaponRange = 2,
+                            EquipmentId = equipmentsId
+                        },
+                        Talismans = new List<Talisman>()
+                    },
+                    Ability = new Ability
+                    {
+                        Id = abilityId,
+                        Survival = false,
+                        Diplomacy = false,
+                        Climbing = false,
+                        Acrobatics = false,
+                        Skill = false,
+                        Guile = false,
+                        SecretKnowledge = false,
+                        Sneak = false,
+                        Elusion = false,
+                        WaterCycle = false,
+                        Melee = false,
+                        NatureSkills = false,
+                        BreakingLocks = false,
+                        Transformation = false,
+                        Spells = false,
+                        Rituals = false,
+                        Traps = false,
+                        Archery = false,
+                        ThrowingKnives = false,
+                        PoisonousNeedles = true,
+                        Stimulants = true,
+                        Wrestling = false,
+                        Observation = false,
+                        ShieldBearer = false,
+                        Leadership = false,
+                        KickFight = false,
+                        DoubleStrike = false,
+                        HeroId = heroId
+                    },
+                    SpecialAbility = new SpecialAbility
+                    {
+                        Id = specialAbilityId,
+                        HeroId = heroId,
+                        SpecialCombatSkillId = specialCombatSkillId,
+                        UltimateId = ultimateId,
+                        SpecialCombatSkill = new SpecialCombatSkill
+                        {
+                            Id = specialCombatSkillId,
+                            Name = "SavageSCS",
+                            SkillLevel = 1,
+                            RequiredMentalEnergy = 0,
+                            SpecialAbilitiesId = specialAbilityId
+                        },
+                        Ultimate = new Ultimate
+                        {
+                            Id = ultimateId,
+                            Name = "SavageUltimate",
+                            SkillLevel = 1,
+                            RequiredMentalEnergy = 6,
+                            SpecialAbilitiesId = specialAbilityId
+                        },
+                        Spells = new List<Spell>(),
+                        Rituals = new List<Ritual>(),
+                        NatureSkills = new List<NatureSkill>()
+                    },
+                    Baggages = new List<Baggage>(),
+                    Promises = new List<Promise>()
+                };
+
+                return newHero;
+            }
+
+            if (heroClass == "Robber")
+            {
+                var heroId = Guid.NewGuid();
+                var indicatorsId = Guid.NewGuid();
+                var equipmentsId = Guid.NewGuid();
+                var abilityId = Guid.NewGuid();
+                var specialAbilityId = Guid.NewGuid();
+                var specialCombatSkillId = Guid.NewGuid();
+                var ultimateId = Guid.NewGuid();
+                var armorId = Guid.NewGuid();
+                var shieldId = Guid.NewGuid();
+                var weaponId = Guid.NewGuid();
+                var throwingWeaponId = Guid.NewGuid();
+
+                var newHero = new Hero
+                {
+                    Id = heroId,
+                    Name = "EvilHawk",
+                    HeroClass = heroClass,
+                    HeroType = "Defender",
+                    OrderOfBattle = 0,
+                    BaggageCapacity = 55.0,
+                    GroupWestId = groupWestId,
+                    IndicatorsId = indicatorsId,
+                    EquipmentsId = equipmentsId,
+                    AbilityId = abilityId,
+                    SpecialAbilityId = specialAbilityId,
+                    Indicators = new Indicator
+                    {
+                        Id = indicatorsId,
+                        Health = 60,
+                        MentalEnergy = 16,
+                        MentalStrength = 2,
+                        Strength = 6,
+                        Dexterity = 6,
+                        Agility = 6,
+                        Evasion = 10,
+                        Endurance = 10,
+                        HeroId = heroId
+                    },
+                    Equipments = new Equipment
+                    {
+                        Id = equipmentsId,
+                        Knife = true,
+                        SmokeBall = true,
+                        Poison = false,
+                        MedicPack = false,
+                        MoneyBag = 100,
+                        HeroId = heroId,
+                        ArmorId = armorId,
+                        ShieldId = shieldId,
+                        WeaponId = weaponId,
+                        ThrowingWeaponId = throwingWeaponId,
+                        Armor = new Armor
+                        {
+                            Id = armorId,
+                            ArmorType = "Leather",
+                            IsExist = true,
+                            Defence = 3,
+                            EquipmentId = equipmentsId
+                        },
+                        Shield = new Shield
+                        {
+                            Id = shieldId,
+                            ShieldType = "Round",
+                            IsExist = true,
+                            Defence = 4,
+                            EquipmentId = equipmentsId
+                        },
+                        Weapon = new Weapon
+                        {
+                            Id = weaponId,
+                            WeaponType = "BattleChain",
+                            IsExist = true,
+                            IsItTwoHandWeapon = false,
+                            Attack = 9,
+                            Defence = 2,
+                            Damage = 7,
+                            WeaponRange = 3,
+                            EquipmentId = equipmentsId
+                        },
+                        ThrowingWeapon = new ThrowingWeapon
+                        {
+                            Id = throwingWeaponId,
+                            ThrowingWeaponType = "",
+                            IsExist = false,
+                            Attack = 0,
+                            Defence = 0,
+                            Damage = 0,
+                            Quantity = 0,
+                            ThrowingWeaponRange = 0,
+                            EquipmentId = equipmentsId
+                        },
+                        Talismans = new List<Talisman>()
+                    },
+                    Ability = new Ability
+                    {
+                        Id = abilityId,
+                        Survival = false,
+                        Diplomacy = false,
+                        Climbing = false,
+                        Acrobatics = false,
+                        Skill = false,
+                        Guile = false,
+                        SecretKnowledge = false,
+                        Sneak = false,
+                        Elusion = false,
+                        WaterCycle = false,
+                        Melee = false,
+                        NatureSkills = false,
+                        BreakingLocks = false,
+                        Transformation = false,
+                        Spells = false,
+                        Rituals = false,
+                        Traps = true,
+                        Archery = false,
+                        ThrowingKnives = false,
+                        PoisonousNeedles = false,
+                        Stimulants = false,
+                        Wrestling = false,
+                        Observation = false,
+                        ShieldBearer = true,
+                        Leadership = false,
+                        KickFight = true,
+                        DoubleStrike = false,
+                        HeroId = heroId
+                    },
+                    SpecialAbility = new SpecialAbility
+                    {
+                        Id = specialAbilityId,
+                        HeroId = heroId,
+                        SpecialCombatSkillId = specialCombatSkillId,
+                        UltimateId = ultimateId,
+                        SpecialCombatSkill = new SpecialCombatSkill
+                        {
+                            Id = specialCombatSkillId,
+                            Name = "RobberSCS",
+                            SkillLevel = 1,
+                            RequiredMentalEnergy = 3,
+                            SpecialAbilitiesId = specialAbilityId
+                        },
+                        Ultimate = new Ultimate
+                        {
+                            Id = ultimateId,
+                            Name = "RobberUltimate",
+                            SkillLevel = 1,
+                            RequiredMentalEnergy = 7,
+                            SpecialAbilitiesId = specialAbilityId
+                        },
+                        Spells = new List<Spell>(),
+                        Rituals = new List<Ritual>(),
+                        NatureSkills = new List<NatureSkill>()
+                    },
+                    Baggages = new List<Baggage>(),
+                    Promises = new List<Promise>()
+                };
+
+                return newHero;
+            }
+
+            return null;
         }
 
         //private int GetOrderOfBattle(string orderInput)
