@@ -15,7 +15,7 @@ namespace redimel_server.Repositories
             this.userRepository = userRepository;
         }
 
-        public async Task<Page> GetNextPage(Choice choice)
+        public async Task<Page> GetNextPageAsync(Choice choice)
         {
             var currentUserEmail = userRepository.GetUserEmail();
             var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)

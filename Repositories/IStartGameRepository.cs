@@ -4,6 +4,6 @@ namespace redimel_server.Repositories
 {
     public interface IStartGameRepository
     {
-        Task<Page> GetNextPage(Choice choice);
+        Task<Page> GetNextPageAsync(Choice choice);
     }
 }

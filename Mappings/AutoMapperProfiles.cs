@@ -39,6 +39,7 @@ namespace redimel_server.Mappings
             CreateMap<AddGroupWestHeroesRequestDto, GroupWestHeroes>().ReverseMap();
             CreateMap<UserDto, User>().ReverseMap();
             CreateMap<UpdateUserRequestDto, User>().ReverseMap();
+            CreateMap<BattlePointDto, BattlePoint>().ReverseMap();
         }
     }
 }

@@ -15,12 +15,15 @@ namespace redimel_server.Controllers
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
         private readonly IStartGameRepository startGameRepository;
+        private readonly IAuxiliaryRepository auxiliaryRepository;
 
-        public StartGameController(IUserRepository userRepository, IMapper mapper, IStartGameRepository startGameRepository)
+        public StartGameController(IUserRepository userRepository, IMapper mapper, IStartGameRepository startGameRepository,
+            IAuxiliaryRepository auxiliaryRepository)
         {
             this.userRepository = userRepository;
             this.mapper = mapper;
             this.startGameRepository = startGameRepository;
+            this.auxiliaryRepository = auxiliaryRepository;
         }
 
         [HttpPost]
@@ -44,10 +47,26 @@ namespace redimel_server.Controllers
         {
             var choiceDomain = mapper.Map<Choice>(addChoiceRequestDto);
 
-            var nextPage = await startGameRepository.GetNextPage(choiceDomain);
+            var nextPage = await startGameRepository.GetNextPageAsync(choiceDomain);
 
             var nextPageDto = mapper.Map<PageDto>(nextPage);
             return Ok(nextPageDto);
+        }
+
+        [HttpGet]
+        [ValidateModel]
+        [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader,Writer")]
+        public async Task<IActionResult> ShowBattlePoints([FromRoute] Guid id)
+        {
+            var battlePointsDomain = auxiliaryRepository.ShowBattlePointsAsync(id);
+
+            if (battlePointsDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<BattlePointDto>(battlePointsDomain));
         }
     }
 }
