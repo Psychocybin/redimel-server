@@ -5,6 +5,7 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string HeroClass { get; set; }
+        public string HeroType { get; set; }
         public int OrderOfBattle { get; set; }
         public double BaggageCapacity { get; set; }
         public Guid GroupWestId { get; set; }

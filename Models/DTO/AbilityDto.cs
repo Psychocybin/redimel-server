@@ -27,6 +27,9 @@
         public Boolean Wrestling { get; set; }
         public Boolean Observation { get; set; }
         public Boolean ShieldBearer { get; set; }
+        public Boolean Leadership { get; set; }
+        public Boolean KickFight { get; set; }
+        public Boolean DoubleStrike { get; set; }
         public Guid HeroId { get; set; }
     }
 }
