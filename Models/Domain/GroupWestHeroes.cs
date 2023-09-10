@@ -5,10 +5,10 @@ namespace redimel_server.Models.Domain
     [NotMapped]
     public class GroupWestHeroes
     {
-        public string FirstHero { get; set; }
-        public string SecondHero { get; set; }
-        public string ThirdHero { get; set; }
-        public string FourthHero { get; set; }
-        public string FifthHero { get; set; }
+        public string Warrior { get; set; }
+        public string Fighter { get; set; }
+        public string Defender { get; set; }
+        public string Helper { get; set; }
+        public string Mystic { get; set; }
     }
 }

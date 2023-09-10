@@ -101,13 +101,14 @@ namespace redimel_server.Repositories
 
             var heroesList = new List<Hero>
             {
-                await CreateHero(groupWestHeroes.FirstHero, groupWestId),
-                await CreateHero(groupWestHeroes.SecondHero, groupWestId),
-                await CreateHero(groupWestHeroes.ThirdHero, groupWestId),
-                await CreateHero(groupWestHeroes.FourthHero, groupWestId),
-                await CreateHero(groupWestHeroes.FifthHero, groupWestId)
+                await CreateHero(groupWestHeroes.Warrior, groupWestId),
+                await CreateHero(groupWestHeroes.Fighter, groupWestId),
+                await CreateHero(groupWestHeroes.Defender, groupWestId),
+                await CreateHero(groupWestHeroes.Helper, groupWestId),
+                await CreateHero(groupWestHeroes.Mystic, groupWestId)
             };
 
+            heroesList = GetOrderOfBattle(heroesList);
             newUser.GroupWest.Heroes = heroesList;
 
             await dbContext.Users.AddAsync(newUser);
@@ -2583,32 +2584,106 @@ namespace redimel_server.Repositories
             return null;
         }
 
-        //private int GetOrderOfBattle(string orderInput)
-        //{
-        //    int orderResult = 0;
+        private List<Hero> GetOrderOfBattle(List<Hero> heroesList)
+        {
+            var helper = heroesList.FirstOrDefault(x => x.HeroType == "Helper");
+            var mystic = heroesList.FirstOrDefault(x => x.HeroType == "Mystic");
+            var warrior = heroesList.FirstOrDefault(x => x.HeroType == "Warrior");
+            var fighter = heroesList.FirstOrDefault(x => x.HeroType == "Fighter");
+            var defender = heroesList.FirstOrDefault(x => x.HeroType == "Defender");
 
-        //    if (orderInput == "first")
-        //    {
-        //        orderResult = 1;
-        //        return orderResult;
-        //    }
-        //    else if (orderInput == "second")
-        //    {
-        //        orderResult = 2;
-        //        return orderResult;
-        //    }
-        //    else if (orderInput == "third")
-        //    {
-        //        orderResult = 3;
-        //        return orderResult;
-        //    }
-        //    else if (orderInput == "fourth")
-        //    {
-        //        orderResult = 4;
-        //        return orderResult;
-        //    }
+            if (helper.HeroClass == "Acrobat")
+            {
+                if (mystic.HeroClass == "Magician")
+                {
+                    warrior.OrderOfBattle = 1;
+                    fighter.OrderOfBattle = 5;
+                    defender.OrderOfBattle = 2;
+                    helper.OrderOfBattle = 4;
+                    mystic.OrderOfBattle = 3;
+                }
+                else if (mystic.HeroClass == "Missionary")
+                {
+                    warrior.OrderOfBattle = 2;
+                    fighter.OrderOfBattle = 3;
+                    defender.OrderOfBattle = 1;
+                    helper.OrderOfBattle = 5;
+                    mystic.OrderOfBattle = 4;
+                }
+                else if (mystic.HeroClass == "Librarian")
+                {
+                    warrior.OrderOfBattle = 2;
+                    fighter.OrderOfBattle = 1;
+                    defender.OrderOfBattle = 5;
+                    helper.OrderOfBattle = 3;
+                    mystic.OrderOfBattle = 4;
+                }
+            }
+            else if (helper.HeroClass == "Merchant")
+            {
+                if (mystic.HeroClass == "Magician")
+                {
+                    warrior.OrderOfBattle = 5;
+                    fighter.OrderOfBattle = 4;
+                    defender.OrderOfBattle = 1;
+                    helper.OrderOfBattle = 3;
+                    mystic.OrderOfBattle = 2;
+                }
+                else if (mystic.HeroClass == "Missionary")
+                {
+                    warrior.OrderOfBattle = 3;
+                    fighter.OrderOfBattle = 1;
+                    defender.OrderOfBattle = 2;
+                    helper.OrderOfBattle = 4;
+                    mystic.OrderOfBattle = 5;
+                }
+                else if (mystic.HeroClass == "Librarian")
+                {
+                    warrior.OrderOfBattle = 1;
+                    fighter.OrderOfBattle = 5;
+                    defender.OrderOfBattle = 4;
+                    helper.OrderOfBattle = 3;
+                    mystic.OrderOfBattle = 2;
+                }
+            }
+            else if (helper.HeroClass == "Thief")
+            {
+                if (mystic.HeroClass == "Magician")
+                {
+                    warrior.OrderOfBattle = 4;
+                    fighter.OrderOfBattle = 5;
+                    defender.OrderOfBattle = 1;
+                    helper.OrderOfBattle = 3;
+                    mystic.OrderOfBattle = 2;
+                }
+                else if (mystic.HeroClass == "Missionary")
+                {
+                    warrior.OrderOfBattle = 1;
+                    fighter.OrderOfBattle = 3;
+                    defender.OrderOfBattle = 5;
+                    helper.OrderOfBattle = 4;
+                    mystic.OrderOfBattle = 2;
+                }
+                else if (mystic.HeroClass == "Librarian")
+                {
+                    warrior.OrderOfBattle = 1;
+                    fighter.OrderOfBattle = 2;
+                    defender.OrderOfBattle = 3;
+                    helper.OrderOfBattle = 5;
+                    mystic.OrderOfBattle = 4;
+                }
+            }
 
-        //    return orderResult;
-        //}
+            var heroListResponse = new List<Hero>
+            {
+                warrior,
+                fighter,
+                defender,
+                helper,
+                mystic
+            };
+
+            return heroListResponse;
+        }
     }
 }
