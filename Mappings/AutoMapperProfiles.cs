@@ -40,6 +40,9 @@ namespace redimel_server.Mappings
             CreateMap<UserDto, User>().ReverseMap();
             CreateMap<UpdateUserRequestDto, User>().ReverseMap();
             CreateMap<BattlePointDto, BattlePoint>().ReverseMap();
+            CreateMap<AddRedimelInfoRequestDto, RedimelInfo>().ReverseMap();
+            CreateMap<UpdateRedimelInfoRequestDto, RedimelInfo>().ReverseMap();
+            CreateMap<RedimelInfoDto, RedimelInfo>().ReverseMap();
         }
     }
 }

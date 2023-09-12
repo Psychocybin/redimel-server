@@ -91,6 +91,7 @@ builder.Services.AddScoped<IStartGameRepository, SQLStartGameRepository>();
 builder.Services.AddScoped<IPageRepository, SQLPageRepository>();
 builder.Services.AddScoped<IChoiceRepository, SQLChoiceRepository>();
 builder.Services.AddScoped<IAuxiliaryRepository, SQLAuxiliaryRepository>();
+builder.Services.AddScoped<IRedimelInfoRepository, SQLRedimelInfoRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
