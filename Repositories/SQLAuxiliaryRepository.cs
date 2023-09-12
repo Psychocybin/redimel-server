@@ -15,7 +15,15 @@ namespace redimel_server.Repositories
 
         public async Task<BattlePoint?> ShowBattlePointsAsync(Guid id)
         {
-            var hero = await dbContext.Heroes.FirstOrDefaultAsync(x => x.Id == id);
+            var hero = await dbContext.Heroes.Where(x => x.Id == id)
+                .Include(x => x.Indicators)
+                .Include(x => x.Equipments).ThenInclude(x => x.Talismans)
+                .Include(x => x.Equipments).ThenInclude(x => x.Weapon)
+                .Include(x => x.Equipments).ThenInclude(x => x.Shield)
+                .Include(x => x.Equipments).ThenInclude(x => x.ThrowingWeapon)
+                .Include(x => x.Equipments).ThenInclude(x => x.Armor)
+                .FirstOrDefaultAsync();
+
             var talismans = hero.Equipments.Talismans.ToList();
 
             var attackWithHandToHandWeapon = 0;

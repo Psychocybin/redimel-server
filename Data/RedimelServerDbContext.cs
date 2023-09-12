@@ -37,6 +37,7 @@ namespace redimel_server.Data
         public DbSet<Choice> Choices { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<WorldInfoVariable> WorldInfoVariables { get; set; }
+        public DbSet<RedimelInfo> RedimelInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

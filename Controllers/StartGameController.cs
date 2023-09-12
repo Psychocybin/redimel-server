@@ -29,7 +29,7 @@ namespace redimel_server.Controllers
         [HttpPost]
         [ValidateModel]
         [Authorize(Roles = "Reader,Writer")]
-        public async Task<IActionResult> CreateGroupWestHeroes([FromBody] AddGroupWestHeroesRequestDto addGroupWestHeroesRequestDto)
+        public async Task<IActionResult> CreateUserAndGroupWest([FromBody] AddGroupWestHeroesRequestDto addGroupWestHeroesRequestDto)
         {
             var groupWestHeroesDomain = mapper.Map<GroupWestHeroes>(addGroupWestHeroesRequestDto);
             var userEmail = userRepository.GetUserEmail();
@@ -54,12 +54,11 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
-        [ValidateModel]
         [Route("{id:Guid}")]
         [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> ShowBattlePoints([FromRoute] Guid id)
         {
-            var battlePointsDomain = auxiliaryRepository.ShowBattlePointsAsync(id);
+            var battlePointsDomain = await auxiliaryRepository.ShowBattlePointsAsync(id);
 
             if (battlePointsDomain == null)
             {

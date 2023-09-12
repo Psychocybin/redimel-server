@@ -5,14 +5,14 @@ namespace redimel_server.Models.DTO
     public class AddGroupWestHeroesRequestDto
     {
         [Required]
-        public string FirstHero { get; set; }
+        public string Warrior { get; set; }
         [Required]
-        public string SecondHero { get; set; }
+        public string Fighter { get; set; }
         [Required]
-        public string ThirdHero { get; set; }
+        public string Defender { get; set; }
         [Required]
-        public string FourthHero { get; set; }
+        public string Helper { get; set; }
         [Required]
-        public string FifthHero { get; set; }
+        public string Mystic { get; set; }
     }
 }

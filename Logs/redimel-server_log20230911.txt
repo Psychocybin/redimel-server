@@ -1,0 +1,491 @@
+2023-09-11 12:20:08.521 +03:00 [ERR] f495c143-500d-4a1d-8ddd-9f66fa4354e3 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method309(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 12:41:43.091 +03:00 [ERR] 7cbe65c5-138b-41dd-8227-1351160b82f1 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method309(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 12:52:34.475 +03:00 [ERR] 70e735e4-2c99-4829-af56-71f9fc785f29 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method182(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 12:52:55.149 +03:00 [ERR] 9f256ec1-df7b-4928-a9c0-61c611974f1e : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method182(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 12:53:35.428 +03:00 [ERR] 264756b9-e2ce-4577-968c-0372568ff45b : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method182(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 12:54:51.589 +03:00 [ERR] cdad309f-5d10-4083-b5d7-51d9f212ca36 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method190(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 13:10:09.199 +03:00 [ERR] 55f37384-7bad-4107-a422-6ce09b3ca5e0 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method144(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 13:10:38.095 +03:00 [ERR] 001ca80b-e5ee-4d1e-8682-c25299de9ba2 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method179(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 13:51:33.777 +03:00 [ERR] 2dd03285-6e49-4e55-90e7-55ab7536b794 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method9(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 13:52:29.441 +03:00 [ERR] 1410a428-90ec-4ca2-aeb9-d68d2f3eab34 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method9(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 13:53:48.307 +03:00 [ERR] 2d3d6cd3-9513-48d8-8e6c-83546c583c58 : Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+System.InvalidOperationException: Unable to resolve service for type 'redimel_server.Repositories.IAuxiliaryRepository' while attempting to activate 'redimel_server.Controllers.StartGameController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method9(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 14:39:28.842 +03:00 [ERR] f4d836bf-81b0-4294-905c-ca4dc9192b78 : Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at redimel_server.Repositories.SQLUserRepository.<>c.<GetOrderOfBattle>b__10_0(Hero x) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Repositories\SQLUserRepository.cs:line 2589
+   at System.Linq.Enumerable.TryGetFirst[TSource](IEnumerable`1 source, Func`2 predicate, Boolean& found)
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at redimel_server.Repositories.SQLUserRepository.GetOrderOfBattle(List`1 heroesList) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Repositories\SQLUserRepository.cs:line 2589
+   at redimel_server.Repositories.SQLUserRepository.CreateUserAsync(String heroEmail, GroupWestHeroes groupWestHeroes) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Repositories\SQLUserRepository.cs:line 111
+   at redimel_server.Controllers.StartGameController.CreateUserAndGroupWest(AddGroupWestHeroesRequestDto addGroupWestHeroesRequestDto) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Controllers\StartGameController.cs:line 37
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 14:45:20.301 +03:00 [ERR] 530e899e-62ac-4312-b7ca-108f8b5a3103 : This user already have battle group
+System.Exception: This user already have battle group
+   at redimel_server.Repositories.SQLUserRepository.CreateUserAsync(String heroEmail, GroupWestHeroes groupWestHeroes) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Repositories\SQLUserRepository.cs:line 28
+   at redimel_server.Controllers.StartGameController.CreateUserAndGroupWest(AddGroupWestHeroesRequestDto addGroupWestHeroesRequestDto) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Controllers\StartGameController.cs:line 37
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 14:55:12.117 +03:00 [ERR] 7aa08336-2d8c-4113-8250-d42c73b44de6 : Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+   at lambda_method55(Closure, Object, BattlePointDto, ResolutionContext)
+   at redimel_server.Controllers.StartGameController.ShowBattlePoints(Guid id) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Controllers\StartGameController.cs:line 68
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 14:55:12.246 +03:00 [ERR] Failed executing DbCommand (32ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AbilityId], [t0].[BaggageCapacity], [t0].[EquipmentsId], [t0].[GroupWestId], [t0].[HeroClass], [t0].[HeroType], [t0].[IndicatorsId], [t0].[Name], [t0].[OrderOfBattle], [t0].[SpecialAbilityId], [t0].[Id0], [t0].[Agility], [t0].[Dexterity], [t0].[Endurance], [t0].[Evasion], [t0].[Health], [t0].[HeroId], [t0].[MentalEnergy], [t0].[MentalStrength], [t0].[Strength], [t0].[Id1], [t0].[ArmorId], [t0].[HeroId0], [t0].[Knife], [t0].[MedicPack], [t0].[MoneyBag], [t0].[Poison], [t0].[ShieldId], [t0].[SmokeBall], [t0].[ThrowingWeaponId], [t0].[WeaponId], [t0].[Id2], [t0].[Id3], [t0].[Id4], [t0].[Id5], [t1].[Id], [t1].[BonusIndicator], [t1].[BonusPoints], [t1].[EquipmentId], [t1].[Name], [t1].[TalismanType], [t0].[Attack], [t0].[Damage], [t0].[Defence], [t0].[EquipmentId], [t0].[IsExist], [t0].[IsItTwoHandWeapon], [t0].[WeaponRange], [t0].[WeaponType], [t0].[Defence0], [t0].[EquipmentId0], [t0].[IsExist0], [t0].[ShieldType], [t0].[Attack0], [t0].[Damage0], [t0].[Defence1], [t0].[EquipmentId1], [t0].[IsExist1], [t0].[Quantity], [t0].[ThrowingWeaponRange], [t0].[ThrowingWeaponType], [t0].[ArmorType], [t0].[Defence2], [t0].[EquipmentId2], [t0].[IsExist2]
+FROM (
+    SELECT TOP(1) [h].[Id], [h].[AbilityId], [h].[BaggageCapacity], [h].[EquipmentsId], [h].[GroupWestId], [h].[HeroClass], [h].[HeroType], [h].[IndicatorsId], [h].[Name], [h].[OrderOfBattle], [h].[SpecialAbilityId], [i].[Id] AS [Id0], [i].[Agility], [i].[Dexterity], [i].[Endurance], [i].[Evasion], [i].[Health], [i].[HeroId], [i].[MentalEnergy], [i].[MentalStrength], [i].[Strength], [e].[Id] AS [Id1], [e].[ArmorId], [e].[HeroId] AS [HeroId0], [e].[Knife], [e].[MedicPack], [e].[MoneyBag], [e].[Poison], [e].[ShieldId], [e].[SmokeBall], [e].[ThrowingWeaponId], [e].[WeaponId], [w].[Id] AS [Id2], [w].[Attack], [w].[Damage], [w].[Defence], [w].[EquipmentId], [w].[IsExist], [w].[IsItTwoHandWeapon], [w].[WeaponRange], [w].[WeaponType], [s].[Id] AS [Id3], [s].[Defence] AS [Defence0], [s].[EquipmentId] AS [EquipmentId0], [s].[IsExist] AS [IsExist0], [s].[ShieldType], [t].[Id] AS [Id4], [t].[Attack] AS [Attack0], [t].[Damage] AS [Damage0], [t].[Defence] AS [Defence1], [t].[EquipmentId] AS [EquipmentId1], [t].[IsExist] AS [IsExist1], [t].[Quantity], [t].[ThrowingWeaponRange], [t].[ThrowingWeaponType], [a].[Id] AS [Id5], [a].[ArmorType], [a].[Defence] AS [Defence2], [a].[EquipmentId] AS [EquipmentId2], [a].[IsExist] AS [IsExist2]
+    FROM [Heroes] AS [h]
+    INNER JOIN [Indicators] AS [i] ON [h].[IndicatorsId] = [i].[Id]
+    INNER JOIN [Equipments] AS [e] ON [h].[EquipmentsId] = [e].[Id]
+    INNER JOIN [Weapons] AS [w] ON [e].[WeaponId] = [w].[Id]
+    INNER JOIN [Shields] AS [s] ON [e].[ShieldId] = [s].[Id]
+    INNER JOIN [ThrowingWeapons] AS [t] ON [e].[ThrowingWeaponId] = [t].[Id]
+    INNER JOIN [Armors] AS [a] ON [e].[ArmorId] = [a].[Id]
+    WHERE [h].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN [Talismans] AS [t1] ON [t0].[Id1] = [t1].[EquipmentId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t0].[Id3], [t0].[Id4], [t0].[Id5]
+2023-09-11 14:55:12.265 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'redimel_server.Data.RedimelServerDbContext'.
+System.InvalidOperationException: Invalid operation. The connection is closed.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: Invalid operation. The connection is closed.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-09-11 14:56:11.779 +03:00 [ERR] 900fa4f9-a499-47d8-89fe-7a05ce6b6ea3 : Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+   at lambda_method55(Closure, Object, BattlePointDto, ResolutionContext)
+   at redimel_server.Controllers.StartGameController.ShowBattlePoints(Guid id) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Controllers\StartGameController.cs:line 68
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 14:56:11.803 +03:00 [ERR] Failed executing DbCommand (24ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AbilityId], [t0].[BaggageCapacity], [t0].[EquipmentsId], [t0].[GroupWestId], [t0].[HeroClass], [t0].[HeroType], [t0].[IndicatorsId], [t0].[Name], [t0].[OrderOfBattle], [t0].[SpecialAbilityId], [t0].[Id0], [t0].[Agility], [t0].[Dexterity], [t0].[Endurance], [t0].[Evasion], [t0].[Health], [t0].[HeroId], [t0].[MentalEnergy], [t0].[MentalStrength], [t0].[Strength], [t0].[Id1], [t0].[ArmorId], [t0].[HeroId0], [t0].[Knife], [t0].[MedicPack], [t0].[MoneyBag], [t0].[Poison], [t0].[ShieldId], [t0].[SmokeBall], [t0].[ThrowingWeaponId], [t0].[WeaponId], [t0].[Id2], [t0].[Id3], [t0].[Id4], [t0].[Id5], [t1].[Id], [t1].[BonusIndicator], [t1].[BonusPoints], [t1].[EquipmentId], [t1].[Name], [t1].[TalismanType], [t0].[Attack], [t0].[Damage], [t0].[Defence], [t0].[EquipmentId], [t0].[IsExist], [t0].[IsItTwoHandWeapon], [t0].[WeaponRange], [t0].[WeaponType], [t0].[Defence0], [t0].[EquipmentId0], [t0].[IsExist0], [t0].[ShieldType], [t0].[Attack0], [t0].[Damage0], [t0].[Defence1], [t0].[EquipmentId1], [t0].[IsExist1], [t0].[Quantity], [t0].[ThrowingWeaponRange], [t0].[ThrowingWeaponType], [t0].[ArmorType], [t0].[Defence2], [t0].[EquipmentId2], [t0].[IsExist2]
+FROM (
+    SELECT TOP(1) [h].[Id], [h].[AbilityId], [h].[BaggageCapacity], [h].[EquipmentsId], [h].[GroupWestId], [h].[HeroClass], [h].[HeroType], [h].[IndicatorsId], [h].[Name], [h].[OrderOfBattle], [h].[SpecialAbilityId], [i].[Id] AS [Id0], [i].[Agility], [i].[Dexterity], [i].[Endurance], [i].[Evasion], [i].[Health], [i].[HeroId], [i].[MentalEnergy], [i].[MentalStrength], [i].[Strength], [e].[Id] AS [Id1], [e].[ArmorId], [e].[HeroId] AS [HeroId0], [e].[Knife], [e].[MedicPack], [e].[MoneyBag], [e].[Poison], [e].[ShieldId], [e].[SmokeBall], [e].[ThrowingWeaponId], [e].[WeaponId], [w].[Id] AS [Id2], [w].[Attack], [w].[Damage], [w].[Defence], [w].[EquipmentId], [w].[IsExist], [w].[IsItTwoHandWeapon], [w].[WeaponRange], [w].[WeaponType], [s].[Id] AS [Id3], [s].[Defence] AS [Defence0], [s].[EquipmentId] AS [EquipmentId0], [s].[IsExist] AS [IsExist0], [s].[ShieldType], [t].[Id] AS [Id4], [t].[Attack] AS [Attack0], [t].[Damage] AS [Damage0], [t].[Defence] AS [Defence1], [t].[EquipmentId] AS [EquipmentId1], [t].[IsExist] AS [IsExist1], [t].[Quantity], [t].[ThrowingWeaponRange], [t].[ThrowingWeaponType], [a].[Id] AS [Id5], [a].[ArmorType], [a].[Defence] AS [Defence2], [a].[EquipmentId] AS [EquipmentId2], [a].[IsExist] AS [IsExist2]
+    FROM [Heroes] AS [h]
+    INNER JOIN [Indicators] AS [i] ON [h].[IndicatorsId] = [i].[Id]
+    INNER JOIN [Equipments] AS [e] ON [h].[EquipmentsId] = [e].[Id]
+    INNER JOIN [Weapons] AS [w] ON [e].[WeaponId] = [w].[Id]
+    INNER JOIN [Shields] AS [s] ON [e].[ShieldId] = [s].[Id]
+    INNER JOIN [ThrowingWeapons] AS [t] ON [e].[ThrowingWeaponId] = [t].[Id]
+    INNER JOIN [Armors] AS [a] ON [e].[ArmorId] = [a].[Id]
+    WHERE [h].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN [Talismans] AS [t1] ON [t0].[Id1] = [t1].[EquipmentId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t0].[Id3], [t0].[Id4], [t0].[Id5]
+2023-09-11 14:56:11.809 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'redimel_server.Data.RedimelServerDbContext'.
+System.InvalidOperationException: Invalid operation. The connection is closed.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: Invalid operation. The connection is closed.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-09-11 14:56:19.549 +03:00 [ERR] 0aa70202-d317-4427-b9a5-a087fcdb5ebc : Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+   at lambda_method55(Closure, Object, BattlePointDto, ResolutionContext)
+   at redimel_server.Controllers.StartGameController.ShowBattlePoints(Guid id) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Controllers\StartGameController.cs:line 68
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 14:56:19.559 +03:00 [ERR] Failed executing DbCommand (18ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AbilityId], [t0].[BaggageCapacity], [t0].[EquipmentsId], [t0].[GroupWestId], [t0].[HeroClass], [t0].[HeroType], [t0].[IndicatorsId], [t0].[Name], [t0].[OrderOfBattle], [t0].[SpecialAbilityId], [t0].[Id0], [t0].[Agility], [t0].[Dexterity], [t0].[Endurance], [t0].[Evasion], [t0].[Health], [t0].[HeroId], [t0].[MentalEnergy], [t0].[MentalStrength], [t0].[Strength], [t0].[Id1], [t0].[ArmorId], [t0].[HeroId0], [t0].[Knife], [t0].[MedicPack], [t0].[MoneyBag], [t0].[Poison], [t0].[ShieldId], [t0].[SmokeBall], [t0].[ThrowingWeaponId], [t0].[WeaponId], [t0].[Id2], [t0].[Id3], [t0].[Id4], [t0].[Id5], [t1].[Id], [t1].[BonusIndicator], [t1].[BonusPoints], [t1].[EquipmentId], [t1].[Name], [t1].[TalismanType], [t0].[Attack], [t0].[Damage], [t0].[Defence], [t0].[EquipmentId], [t0].[IsExist], [t0].[IsItTwoHandWeapon], [t0].[WeaponRange], [t0].[WeaponType], [t0].[Defence0], [t0].[EquipmentId0], [t0].[IsExist0], [t0].[ShieldType], [t0].[Attack0], [t0].[Damage0], [t0].[Defence1], [t0].[EquipmentId1], [t0].[IsExist1], [t0].[Quantity], [t0].[ThrowingWeaponRange], [t0].[ThrowingWeaponType], [t0].[ArmorType], [t0].[Defence2], [t0].[EquipmentId2], [t0].[IsExist2]
+FROM (
+    SELECT TOP(1) [h].[Id], [h].[AbilityId], [h].[BaggageCapacity], [h].[EquipmentsId], [h].[GroupWestId], [h].[HeroClass], [h].[HeroType], [h].[IndicatorsId], [h].[Name], [h].[OrderOfBattle], [h].[SpecialAbilityId], [i].[Id] AS [Id0], [i].[Agility], [i].[Dexterity], [i].[Endurance], [i].[Evasion], [i].[Health], [i].[HeroId], [i].[MentalEnergy], [i].[MentalStrength], [i].[Strength], [e].[Id] AS [Id1], [e].[ArmorId], [e].[HeroId] AS [HeroId0], [e].[Knife], [e].[MedicPack], [e].[MoneyBag], [e].[Poison], [e].[ShieldId], [e].[SmokeBall], [e].[ThrowingWeaponId], [e].[WeaponId], [w].[Id] AS [Id2], [w].[Attack], [w].[Damage], [w].[Defence], [w].[EquipmentId], [w].[IsExist], [w].[IsItTwoHandWeapon], [w].[WeaponRange], [w].[WeaponType], [s].[Id] AS [Id3], [s].[Defence] AS [Defence0], [s].[EquipmentId] AS [EquipmentId0], [s].[IsExist] AS [IsExist0], [s].[ShieldType], [t].[Id] AS [Id4], [t].[Attack] AS [Attack0], [t].[Damage] AS [Damage0], [t].[Defence] AS [Defence1], [t].[EquipmentId] AS [EquipmentId1], [t].[IsExist] AS [IsExist1], [t].[Quantity], [t].[ThrowingWeaponRange], [t].[ThrowingWeaponType], [a].[Id] AS [Id5], [a].[ArmorType], [a].[Defence] AS [Defence2], [a].[EquipmentId] AS [EquipmentId2], [a].[IsExist] AS [IsExist2]
+    FROM [Heroes] AS [h]
+    INNER JOIN [Indicators] AS [i] ON [h].[IndicatorsId] = [i].[Id]
+    INNER JOIN [Equipments] AS [e] ON [h].[EquipmentsId] = [e].[Id]
+    INNER JOIN [Weapons] AS [w] ON [e].[WeaponId] = [w].[Id]
+    INNER JOIN [Shields] AS [s] ON [e].[ShieldId] = [s].[Id]
+    INNER JOIN [ThrowingWeapons] AS [t] ON [e].[ThrowingWeaponId] = [t].[Id]
+    INNER JOIN [Armors] AS [a] ON [e].[ArmorId] = [a].[Id]
+    WHERE [h].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN [Talismans] AS [t1] ON [t0].[Id1] = [t1].[EquipmentId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t0].[Id3], [t0].[Id4], [t0].[Id5]
+2023-09-11 14:56:19.563 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'redimel_server.Data.RedimelServerDbContext'.
+System.InvalidOperationException: Invalid operation. The connection is closed.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: Invalid operation. The connection is closed.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-09-11 14:57:57.926 +03:00 [ERR] ff019b18-50c3-4ab6-8f25-7a840ad03b39 : Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+AsyncStateMachineBox`1 -> BattlePointDto
+System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[[redimel_server.Models.Domain.BattlePoint, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[redimel_server.Repositories.SQLAuxiliaryRepository+<ShowBattlePointsAsync>d__2, redimel-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> redimel_server.Models.DTO.BattlePointDto
+   at lambda_method55(Closure, Object, BattlePointDto, ResolutionContext)
+   at redimel_server.Controllers.StartGameController.ShowBattlePoints(Guid id) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Controllers\StartGameController.cs:line 68
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at redimel_server.Middlewares.ExceptionHandlerMiddleware.InvokeAsync(HttpContext httpContext) in C:\Disk D\VS projects\redimel-server\redimel\redimel-server\Middlewares\ExceptionHandlerMiddleware.cs:line 21
+2023-09-11 14:57:57.938 +03:00 [ERR] An error occurred using the connection to database 'RedimelServerDb' on server 'PSYCHOCYBIN\MSSQL'.
+2023-09-11 14:57:57.948 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'redimel_server.Data.RedimelServerDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: SSL Provider, error: 0 - The wait operation timed out.)
+ ---> System.ComponentModel.Win32Exception (258): The wait operation timed out.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.WaitForSSLHandShakeToComplete(UInt32& error, Int32& protocolVersion)
+   at Microsoft.Data.SqlClient.TdsParser.EnableSsl(UInt32 info, SqlConnectionEncryptOption encrypt, Boolean integratedSecurity)
+   at Microsoft.Data.SqlClient.TdsParser.ConsumePreLoginHandshake(SqlConnectionEncryptOption encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean& marsCapable, Boolean& fedAuthRequired, Boolean tlsFirst)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:11511a99-cd57-4408-92de-1310ed483d10
+Error Number:258,State:0,Class:20
+Microsoft.Data.SqlClient.SqlException (0x80131904): A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: SSL Provider, error: 0 - The wait operation timed out.)
+ ---> System.ComponentModel.Win32Exception (258): The wait operation timed out.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.WaitForSSLHandShakeToComplete(UInt32& error, Int32& protocolVersion)
+   at Microsoft.Data.SqlClient.TdsParser.EnableSsl(UInt32 info, SqlConnectionEncryptOption encrypt, Boolean integratedSecurity)
+   at Microsoft.Data.SqlClient.TdsParser.ConsumePreLoginHandshake(SqlConnectionEncryptOption encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean& marsCapable, Boolean& fedAuthRequired, Boolean tlsFirst)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:11511a99-cd57-4408-92de-1310ed483d10
+Error Number:258,State:0,Class:20
