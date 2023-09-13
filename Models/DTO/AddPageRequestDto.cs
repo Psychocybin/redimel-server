@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using redimel_server.Models.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace redimel_server.Models.DTO
 {

@@ -1,4 +1,6 @@
-﻿namespace redimel_server.Models.DTO
+﻿using redimel_server.Models.Domain;
+
+namespace redimel_server.Models.DTO
 {
     public class HeroDto
     {

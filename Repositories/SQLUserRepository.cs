@@ -89,6 +89,7 @@ namespace redimel_server.Repositories
                         SlainMonsters = 0,
                         Morals = 0,
                         Cover = 0,
+                        TemporaryPoints = 0,
                         GroupWestId = groupWestId,
                         BattleGroups = new List<BattleGroup>(),
                         Negotiations = new List<Negotiation>()
@@ -2584,7 +2585,7 @@ namespace redimel_server.Repositories
             return null;
         }
 
-        private List<Hero> GetOrderOfBattle(List<Hero> heroesList)
+        private static List<Hero> GetOrderOfBattle(List<Hero> heroesList)
         {
             var helper = heroesList.FirstOrDefault(x => x.HeroType == "Helper");
             var mystic = heroesList.FirstOrDefault(x => x.HeroType == "Mystic");

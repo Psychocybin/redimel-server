@@ -8,6 +8,7 @@
         public int SlainMonsters { get; set; }
         public int Morals { get; set; }
         public int Cover { get; set; }
+        public int TemporaryPoints { get; set; }
         public Guid GroupWestId { get; set; }
     }
 }
