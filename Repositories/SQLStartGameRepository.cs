@@ -17,7 +17,11 @@ namespace redimel_server.Repositories
 
         public async Task<Page> GetNextPageAsync(Choice choice)
         {
+            var mandatoryChoices = await dbContext.Choices.Where(x => x.AdditionalCheck == false)
+                .Where(x => x.PageId == choice.NextPage).ToListAsync();
+
             var currentUserEmail = userRepository.GetUserEmail();
+
             var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
                 .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.BattleGroups)
                 .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.Negotiations)
@@ -47,87 +51,118 @@ namespace redimel_server.Repositories
 
             var choicesList = new List<Choice>();
 
-            var country = nextPage.Id.Substring(3, 3);
-            var area = nextPage.Id.Substring(6, 3);
-            var place = nextPage.Id.Substring(9, 3);
-            var situation = nextPage.Id.Substring(12, 3);
-
-            if (country == "mag")
+            foreach (var item in mandatoryChoices)
             {
-                if (area == "tow")
+                choicesList.Add(item);
+            }
+
+            var changesList = await dbContext.Changes.Where(x => x.PageId == nextPage.Id).ToListAsync();
+
+            foreach (var change in changesList)
+            {
+                var currentChoice = PerformChange(change);
+
+                if (currentChoice != null)
                 {
-                    if (place == "lib")
-                    {
-                        if (situation == "001")
-                        {
-                            choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "7D7F0A55-EA5C-4643-7534-08DBA497FC0E"));
-
-                            if (currentUser.GroupWest.Heroes.Any(x => x.HeroClass == "Soldier"))
-                            {
-                                choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "5BB83086-E234-4162-7535-08DBA497FC0E"));
-
-                                currentUser.WorldInfoVariables.Add(new WorldInfoVariable
-                                {
-                                    RedimelLocation = "redmagtowlib",
-                                    Name = "Guard",
-                                    Count = 1,
-                                    TrueOrFalse = true,
-                                    ActiveOrNot = true
-                                });
-
-                                currentUser.GroupWest.Heroes.First(x => x.HeroClass == "Soldier").Indicators.Health += 10;
-                            }
-
-                            nextPage.Choices = choicesList;
-                        }
-                        if (situation == "002")
-                        {
-                            if (currentUser.WorldInfoVariables.Any(x => x.Name == "Guard"))
-                            {
-                                choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "582871F4-9419-4FD6-7536-08DBA497FC0E"));
-                            }
-                        }
-                        if (situation == "003")
-                        {
-
-                        }
-                    }
-                    if (place == "cen")
-                    {
-                        if (situation == "")
-                        {
-
-                        }
-                    }
-                    if (place == "inn")
-                    {
-                        if (situation == "")
-                        {
-
-                        }
-                    }
-                    if (place == "gua")
-                    {
-                        if (situation == "")
-                        {
-
-                        }
-                    }
+                    choicesList.Add(currentChoice);
                 }
             }
-            else if (country == "out")
-            {
 
-            }
-            else
-            {
-                throw new Exception();
-            }
-
+            nextPage.Choices = choicesList;
             currentUser.CurrentLocation = nextPage.Id;
+
             await dbContext.SaveChangesAsync();
 
             return nextPage;
+
+
+
+            //var country = nextPage.Id.Substring(3, 3);
+            //var area = nextPage.Id.Substring(6, 3);
+            //var place = nextPage.Id.Substring(9, 3);
+            //var situation = nextPage.Id.Substring(12, 3);
+
+            //if (country == "mag")
+            //{
+            //    if (area == "tow")
+            //    {
+            //        if (place == "lib")
+            //        {
+            //            if (situation == "001")
+            //            {
+            //                choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "7D7F0A55-EA5C-4643-7534-08DBA497FC0E"));
+
+            //                if (currentUser.GroupWest.Heroes.Any(x => x.HeroClass == "Soldier"))
+            //                {
+            //                    choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "5BB83086-E234-4162-7535-08DBA497FC0E"));
+
+            //                    currentUser.WorldInfoVariables.Add(new WorldInfoVariable
+            //                    {
+            //                        RedimelLocation = "redmagtowlib",
+            //                        Name = "Guard",
+            //                        Count = 1,
+            //                        TrueOrFalse = true,
+            //                        ActiveOrNot = true
+            //                    });
+
+            //                    currentUser.GroupWest.Heroes.First(x => x.HeroClass == "Soldier").Indicators.Health += 10;
+            //                }
+
+            //                nextPage.Choices = choicesList;
+            //            }
+            //            if (situation == "002")
+            //            {
+            //                if (currentUser.WorldInfoVariables.Any(x => x.Name == "Guard"))
+            //                {
+            //                    choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "582871F4-9419-4FD6-7536-08DBA497FC0E"));
+            //                }
+            //            }
+            //            if (situation == "003")
+            //            {
+
+            //            }
+            //        }
+            //        if (place == "cen")
+            //        {
+            //            if (situation == "")
+            //            {
+
+            //            }
+            //        }
+            //        if (place == "inn")
+            //        {
+            //            if (situation == "")
+            //            {
+
+            //            }
+            //        }
+            //        if (place == "gua")
+            //        {
+            //            if (situation == "")
+            //            {
+
+            //            }
+            //        }
+            //    }
+            //}
+            //else if (country == "out")
+            //{
+
+            //}
+            //else
+            //{
+            //    throw new Exception();
+            //}
+        }
+
+        private static Choice PerformChange(Change change)
+        {
+            if (change.ClassName == "Ability")
+            {
+                return null;
+            }
+
+            return null;
         }
     }
 }

@@ -3,6 +3,7 @@
     public class Choice
     {
         public Guid Id { get; set; }
+        public Boolean AdditionalCheck { get; set; }
         public string Description { get; set; }
         public string NextPage { get; set; }
         public string PageId { get; set; }

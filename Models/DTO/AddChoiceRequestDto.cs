@@ -5,6 +5,8 @@ namespace redimel_server.Models.DTO
     public class AddChoiceRequestDto
     {
         [Required]
+        public Boolean AdditionalCheck { get; set; }
+        [Required]
         [MinLength(5)]
         [MaxLength(5000)]
         public string Description { get; set; }

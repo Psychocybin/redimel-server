@@ -20,13 +20,12 @@ namespace redimel_server.Models.DTO
         [MinLength(15)]
         [MaxLength(15)]
         public string PageId { get; set; }
-        [MinLength(2)]
+        [Required]
+        public Guid ChoiceId { get; set; }
         [MaxLength(50)]
         public string? Name { get; set; }
-        [MinLength(2)]
         [MaxLength(50)]
         public string? Description { get; set; }
-        [MinLength(2)]
         [MaxLength(50)]
         public string? AdditionalInfo { get; set; }
         public Boolean TrueOrFalse { get; set; }

@@ -58,6 +58,7 @@ namespace redimel_server.Repositories
             existingChange.PropertyName = change.PropertyName;
             existingChange.ActionType = change.ActionType;
             existingChange.PageId = change.PageId;
+            existingChange.ChoiceId = change.ChoiceId;
             existingChange.Name = change.Name;
             existingChange.Description = change.Description;
             existingChange.AdditionalInfo = change.AdditionalInfo;

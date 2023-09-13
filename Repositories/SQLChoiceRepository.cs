@@ -59,6 +59,7 @@ namespace redimel_server.Repositories
                 return null;
             }
 
+            existingChoice.AdditionalCheck = choice.AdditionalCheck;
             existingChoice.Description = choice.Description;
             existingChoice.NextPage = choice.NextPage;
             existingChoice.PageId = choice.PageId;
