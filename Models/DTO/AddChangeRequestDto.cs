@@ -16,6 +16,12 @@ namespace redimel_server.Models.DTO
         [MinLength(2)]
         [MaxLength(20)]
         public string ActionType { get; set; }
+        [MaxLength(20)]
+        public string HeroClass { get; set; }
+        [MaxLength(20)]
+        public string HeroType { get; set; }
+        [Range(0, 5)]
+        public int OrderOfBattle { get; set; }
         [Required]
         [MinLength(15)]
         [MaxLength(15)]

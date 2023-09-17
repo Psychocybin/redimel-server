@@ -57,6 +57,9 @@ namespace redimel_server.Repositories
             existingChange.ClassName = change.ClassName;
             existingChange.PropertyName = change.PropertyName;
             existingChange.ActionType = change.ActionType;
+            existingChange.HeroClass = change.HeroClass;
+            existingChange.HeroType = change.HeroType;
+            existingChange.OrderOfBattle = change.OrderOfBattle;
             existingChange.PageId = change.PageId;
             existingChange.ChoiceId = change.ChoiceId;
             existingChange.Name = change.Name;

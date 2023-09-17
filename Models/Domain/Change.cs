@@ -6,6 +6,9 @@
         public string ClassName { get; set; }
         public string PropertyName { get; set; }
         public string ActionType { get; set; }
+        public string HeroClass { get; set; }
+        public string HeroType { get; set; }
+        public int OrderOfBattle { get; set; }
         public string PageId { get; set; }
         public Guid ChoiceId { get; set; }
         public string? Name { get; set; }
