@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace redimel_server.Repositories
 {
@@ -165,7 +166,7 @@ namespace redimel_server.Repositories
                 {
                     throw new InvalidOperationException();
                 }
-                
+
                 if (change.PropertyName == "Survival")
                 {
                     if (change.ActionType == "check")
@@ -737,9 +738,217 @@ namespace redimel_server.Repositories
 
             if (change.ClassName == "AditionalPoints")
             {
+                var aditionalPoints = user.GroupWest.AditionalPoints;
 
+                if (change.ActionType == "check")
+                {
+                    if (change.PropertyName == "TeamGame")
+                    {
+                        var teamGame = aditionalPoints.TeamGame;
+                        var requiredTeamGame = change.Attack;
+                        var indicator = change.AdditionalInfo;
+
+                        if (indicator == "equal")
+                        {
+                            if (teamGame == requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "bigger")
+                        {
+                            if (teamGame >= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "less")
+                        {
+                            if (teamGame <= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                    }
+                    else if (change.PropertyName == "ImportantInformation")
+                    {
+                        var importantInformation = aditionalPoints.ImportantInformation;
+                        var requiredTeamGame = change.Attack;
+                        var indicator = change.AdditionalInfo;
+
+                        if (indicator == "equal")
+                        {
+                            if (importantInformation == requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "bigger")
+                        {
+                            if (importantInformation >= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "less")
+                        {
+                            if (importantInformation <= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                    }
+                    else if (change.PropertyName == "SlainMonsters")
+                    {
+                        var slainMonsters = aditionalPoints.SlainMonsters;
+                        var requiredTeamGame = change.Attack;
+                        var indicator = change.AdditionalInfo;
+
+                        if (indicator == "equal")
+                        {
+                            if (slainMonsters == requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "bigger")
+                        {
+                            if (slainMonsters >= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "less")
+                        {
+                            if (slainMonsters <= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                    }
+                    else if (change.PropertyName == "Morals")
+                    {
+                        var morals = aditionalPoints.Morals;
+                        var requiredTeamGame = change.Attack;
+                        var indicator = change.AdditionalInfo;
+
+                        if (indicator == "equal")
+                        {
+                            if (morals == requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "bigger")
+                        {
+                            if (morals >= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "less")
+                        {
+                            if (morals <= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                    }
+                    else if (change.PropertyName == "Cover")
+                    {
+                        var cover = aditionalPoints.Cover;
+                        var requiredTeamGame = change.Attack;
+                        var indicator = change.AdditionalInfo;
+
+                        if (indicator == "equal")
+                        {
+                            if (cover == requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "bigger")
+                        {
+                            if (cover >= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "less")
+                        {
+                            if (cover <= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                    }
+                    else if (change.PropertyName == "TemporaryPoints")
+                    {
+                        var temporaryPoints = aditionalPoints.TemporaryPoints;
+                        var requiredTeamGame = change.Attack;
+                        var indicator = change.AdditionalInfo;
+
+                        if (indicator == "equal")
+                        {
+                            if (temporaryPoints == requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "bigger")
+                        {
+                            if (temporaryPoints >= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                        else if (indicator == "less")
+                        {
+                            if (temporaryPoints <= requiredTeamGame)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                    }
+                }
+                else if (change.ActionType == "add")
+                {
+                    aditionalPoints.TeamGame += change.Attack;
+                    aditionalPoints.ImportantInformation += change.Defence;
+                    aditionalPoints.SlainMonsters += change.Damage;
+                    aditionalPoints.Morals += Convert.ToInt32(change.Range);
+                    aditionalPoints.Cover += Convert.ToInt32(change.Quantity);
+                    aditionalPoints.TemporaryPoints += int.Parse(change.AdditionalInfo);
+                }
+                else if (change.ActionType == "remove")
+                {
+                    aditionalPoints.TeamGame -= change.Attack;
+                    aditionalPoints.ImportantInformation -= change.Defence;
+                    aditionalPoints.SlainMonsters -= change.Damage;
+                    aditionalPoints.Morals -= Convert.ToInt32(change.Range);
+                    aditionalPoints.Cover -= Convert.ToInt32(change.Quantity);
+                    aditionalPoints.TemporaryPoints -= int.Parse(change.AdditionalInfo);
+                }
             }
-            
+
             return null;
         }
     }
