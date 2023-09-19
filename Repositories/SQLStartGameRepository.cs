@@ -949,6 +949,63 @@ namespace redimel_server.Repositories
                 }
             }
 
+            if (change.ClassName == "Armors")
+            {
+                var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+
+                if (change.ActionType == "check")
+                {
+                    var IsArmorExist = hero.Equipments.Armor.IsExist;
+
+                    if (change.TrueOrFalse == true)
+                    {
+                        var heroArmorType = hero.Equipments.Armor.ArmorType;
+
+                        if (heroArmorType == change.AdditionalInfo)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+
+                        //TO DO when finished enum's
+                    }
+
+                    if (IsArmorExist == change.ActiveOrNot)
+                    {
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                }
+                else if (change.ActionType == "add")
+                {
+                    var heroArmor = new Armor
+                    {
+                        ArmorType = change.AdditionalInfo,
+                        IsExist = true,
+                        Defence = change.Defence,
+                        EquipmentId = hero.EquipmentsId
+                    };
+
+                    hero.Equipments.Armor = heroArmor;
+                }
+                else if (change.ActionType == "remove")
+                {
+                    var heroArmor = new Armor
+                    {
+                        ArmorType = "",
+                        IsExist = false,
+                        Defence = 0,
+                        EquipmentId = hero.EquipmentsId
+                    };
+
+                    hero.Equipments.Armor = heroArmor;
+                }
+                else if (change.ActionType == "update")
+                {
+                    hero.Equipments.Armor.Defence += change.Defence;
+                }
+            }
+
             return null;
         }
     }
