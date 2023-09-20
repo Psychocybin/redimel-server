@@ -4,6 +4,13 @@ namespace redimel_server.Models.Domain
 {
     public class SpecialAbility
     {
+        public SpecialAbility()
+        {
+            this.NatureSkills = new List<NatureSkill>();
+            this.Rituals = new List<Ritual>();
+            this.Spells = new List<Spell>();
+        }
+
         public Guid Id { get; set; }
         public Guid HeroId { get; set; }
         [ForeignKey("SpecialCombatSkill")]

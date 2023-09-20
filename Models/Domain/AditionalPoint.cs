@@ -2,6 +2,12 @@
 {
     public class AditionalPoint
     {
+
+        public AditionalPoint()
+        {
+            this.BattleGroups = new List<BattleGroup>();
+            this.Negotiations = new List<Negotiation>();
+        }
         public Guid Id { get; set; }
         public int TeamGame { get; set; }
         public int ImportantInformation { get; set; }

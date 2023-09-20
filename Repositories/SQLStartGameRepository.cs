@@ -1006,6 +1006,28 @@ namespace redimel_server.Repositories
                 }
             }
 
+            if (change.ClassName == "Baggages")
+            {
+                var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+
+                if (change.ActionType == "check")
+                {
+                    //var heroBaggages = await dbContext.Baggages.FirstOrDefaultAsync(x => x.HeroId == hero.Id);
+
+                    List<Baggage> heroBaggages = (List<Baggage>)hero.Baggages;
+
+                    //foreach (var baggage in heroBaggages)
+                    //{
+
+                    //}
+
+                    //if ()
+                    //{
+
+                    //}
+                }
+            }
+
             return null;
         }
     }

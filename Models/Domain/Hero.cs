@@ -4,6 +4,12 @@ namespace redimel_server.Models.Domain
 {
     public class Hero
     {
+        public Hero()
+        {
+            this.Baggages = new List<Baggage>();
+            this.Promises = new List<Promise>();
+        }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string HeroClass { get; set; }

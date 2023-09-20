@@ -4,6 +4,11 @@ namespace redimel_server.Models.Domain
 {
     public class User
     {
+        public User()
+        {
+            this.WorldInfoVariables = new List<WorldInfoVariable>();
+        }
+
         public Guid Id { get; set; }
         public string? CurrentLocation { get; set; }
         public string? Checkpoint { get; set; }

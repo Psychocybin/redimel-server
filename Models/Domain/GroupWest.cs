@@ -4,6 +4,12 @@ namespace redimel_server.Models.Domain
 {
     public class GroupWest
     {
+        public GroupWest()
+        {
+            this.Missions = new List<Mission>();
+            this.Heroes = new List<Hero>();
+        }
+
         public Guid Id { get; set; }
         public string ActualMission { get; set; }
         public Guid UserId { get; set; }

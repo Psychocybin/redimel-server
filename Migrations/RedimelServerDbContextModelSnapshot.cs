@@ -114,7 +114,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Abilities");
+                    b.ToTable("Abilities", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.AditionalPoint", b =>
@@ -146,7 +146,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AditionalPoints");
+                    b.ToTable("AditionalPoints", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Armor", b =>
@@ -170,7 +170,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Armors");
+                    b.ToTable("Armors", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Baggage", b =>
@@ -193,7 +193,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("HeroId");
 
-                    b.ToTable("Baggages");
+                    b.ToTable("Baggages", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.BattleGroup", b =>
@@ -216,7 +216,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("AditionalPointsId");
 
-                    b.ToTable("BattleGroups");
+                    b.ToTable("BattleGroups", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Change", b =>
@@ -287,7 +287,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Changes");
+                    b.ToTable("Changes", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Choice", b =>
@@ -315,7 +315,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("PageId");
 
-                    b.ToTable("Choices");
+                    b.ToTable("Choices", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Equipment", b =>
@@ -364,7 +364,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("WeaponId");
 
-                    b.ToTable("Equipments");
+                    b.ToTable("Equipments", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.GroupWest", b =>
@@ -387,7 +387,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("AditionalPointsId");
 
-                    b.ToTable("GroupWests");
+                    b.ToTable("GroupWests", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Hero", b =>
@@ -441,7 +441,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("Heroes");
+                    b.ToTable("Heroes", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Image", b =>
@@ -470,7 +470,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Indicator", b =>
@@ -508,7 +508,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Indicators");
+                    b.ToTable("Indicators", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Mission", b =>
@@ -531,7 +531,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("GroupWestId");
 
-                    b.ToTable("Missions");
+                    b.ToTable("Missions", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.NatureSkill", b =>
@@ -557,7 +557,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("NatureSkills");
+                    b.ToTable("NatureSkills", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Negotiation", b =>
@@ -577,7 +577,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("AditionalPointsId");
 
-                    b.ToTable("Negotiations");
+                    b.ToTable("Negotiations", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Page", b =>
@@ -591,7 +591,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pages");
+                    b.ToTable("Pages", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Promise", b =>
@@ -614,7 +614,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("HeroId");
 
-                    b.ToTable("Promises");
+                    b.ToTable("Promises", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.RedimelInfo", b =>
@@ -636,7 +636,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RedimelInfos");
+                    b.ToTable("RedimelInfos", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ritual", b =>
@@ -662,7 +662,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("Rituals");
+                    b.ToTable("Rituals", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Shield", b =>
@@ -686,7 +686,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shields");
+                    b.ToTable("Shields", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>
@@ -710,7 +710,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("UltimateId");
 
-                    b.ToTable("SpecialAbilities");
+                    b.ToTable("SpecialAbilities", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialCombatSkill", b =>
@@ -734,7 +734,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpecialCombatSkills");
+                    b.ToTable("SpecialCombatSkills", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Spell", b =>
@@ -760,7 +760,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("Spells");
+                    b.ToTable("Spells", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Talisman", b =>
@@ -791,7 +791,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("EquipmentId");
 
-                    b.ToTable("Talismans");
+                    b.ToTable("Talismans", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.ThrowingWeapon", b =>
@@ -827,7 +827,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ThrowingWeapons");
+                    b.ToTable("ThrowingWeapons", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ultimate", b =>
@@ -851,7 +851,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ultimates");
+                    b.ToTable("Ultimates", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.User", b =>
@@ -880,7 +880,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("GroupWestId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Weapon", b =>
@@ -916,7 +916,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Weapons");
+                    b.ToTable("Weapons", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.WorldInfoVariable", b =>
@@ -952,7 +952,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WorldInfoVariables");
+                    b.ToTable("WorldInfoVariables", (string)null);
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Baggage", b =>

@@ -4,6 +4,11 @@ namespace redimel_server.Models.Domain
 {
     public class Equipment
     {
+        public Equipment()
+        {
+            this.Talismans = new List<Talisman>();
+        }
+
         public Guid Id { get; set; }
         public Boolean Knife { get; set; }
         public Boolean SmokeBall { get; set; }
