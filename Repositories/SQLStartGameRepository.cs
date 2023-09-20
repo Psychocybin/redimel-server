@@ -1008,23 +1008,105 @@ namespace redimel_server.Repositories
 
             if (change.ClassName == "Baggages")
             {
-                var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
-
                 if (change.ActionType == "check")
                 {
-                    //var heroBaggages = await dbContext.Baggages.FirstOrDefaultAsync(x => x.HeroId == hero.Id);
+                    var wantedItem = change.Name;
 
-                    List<Baggage> heroBaggages = (List<Baggage>)hero.Baggages;
+                    if (change.HeroType == "all")
+                    {
+                        List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
 
-                    //foreach (var baggage in heroBaggages)
-                    //{
+                        foreach (var h in heroes)
+                        {
+                            Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
 
-                    //}
+                            if (baggage != null)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
 
-                    //if ()
-                    //{
+                        return null;
+                    }
 
-                    //}
+                    var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+
+                    if (hero != null)
+                    {
+                        Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+
+                        if (baggage != null)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+                else if (change.ActionType == "add")
+                {
+                    Hero hero;
+
+                    if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
+                    {
+                        hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+                    }
+                    else
+                    {
+                        hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+                    }
+
+                    var newBaggage = new Baggage
+                    {
+                        Name = change.Name,
+                        Volume = change.Quantity,
+                        HeroId = hero.Id
+                    };
+
+                    var currentBaggageCapacity = hero.Baggages.Sum(x => x.Volume) + newBaggage.Volume;
+
+                    if (currentBaggageCapacity <= hero.BaggageCapacity)
+                    {
+                        hero.Baggages.Add(newBaggage);
+                    }
+                }
+                else if (change.ActionType == "remove")
+                {
+                    var wantedItem = change.Name;
+
+                    if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
+                    {
+                        var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+
+                        Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+
+                        if (baggage != null)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            hero.Baggages.Remove(baggage);
+                            return choice;
+                        }
+                    }
+                    else
+                    {
+                        List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
+
+                        foreach (var h in heroes)
+                        {
+                            Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+
+                            if (baggage != null)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                h.Baggages.Remove(baggage);
+                                return choice;
+                            }
+                        }
+                    }
                 }
             }
 
