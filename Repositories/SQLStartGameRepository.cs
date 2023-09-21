@@ -1110,6 +1110,56 @@ namespace redimel_server.Repositories
                 }
             }
 
+            if (change.ClassName == "BattleGroups")
+            {
+                if (change.ActionType == "check")
+                {
+                    var wantedGroup = change.Name;
+                    var countPeople = change.Attack;
+
+                    List<BattleGroup> battleGroups = (List<BattleGroup>)user.GroupWest.AditionalPoints.BattleGroups;
+
+                    foreach (var group in battleGroups)
+                    {
+                        if (group != null)
+                        {
+                            if (group.CountPeople > countPeople)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
+                    }
+                }
+                else if (change.ActionType == "add")
+                {
+                    var aditionalPoint = user.GroupWest.AditionalPoints;
+
+                    var battleGroup = new BattleGroup
+                    {
+                        Name = change.Name,
+                        CountPeople = change.Attack,
+                        AditionalPointsId = aditionalPoint.Id
+                    };
+
+                    aditionalPoint.BattleGroups.Add(battleGroup);
+                }
+                else if (change.ActionType == "remove")
+                {
+                    var wantedGroup = change.Name;
+                    var aditionalPoint = user.GroupWest.AditionalPoints;
+
+                    var groupToDelete = aditionalPoint.BattleGroups.FirstOrDefault(x => x.Name == wantedGroup);
+
+                    if (groupToDelete != null)
+                    {
+                        aditionalPoint.BattleGroups.Remove(groupToDelete);
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                }
+            }
+
             return null;
         }
     }
