@@ -1,9 +1,11 @@
-﻿namespace redimel_server.Models.Domain
+﻿using redimel_server.Models.Enums;
+
+namespace redimel_server.Models.Domain
 {
     public class Weapon
     {
         public Guid Id { get; set; }
-        public string WeaponType { get; set; }
+        public WeaponType WeaponType { get; set; }
         public Boolean IsExist { get; set; }
         public Boolean IsItTwoHandWeapon { get; set; }
         public int Attack { get; set; }

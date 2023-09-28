@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
+using redimel_server.Utils;
 
 namespace redimel_server.Mappings
 {
@@ -46,6 +47,21 @@ namespace redimel_server.Mappings
             CreateMap<ChangeDto, Change>().ReverseMap();
             CreateMap<UpdateChangeRequestDto, Change>().ReverseMap();
             CreateMap<AddChangeRequestDto, Change>().ReverseMap();
+            CreateMap<SavageHero, HeroCreator>();
+            CreateMap<ThiefHero, HeroCreator>();
+            CreateMap<SoldierHero, HeroCreator>();
+            CreateMap<RobberHero, HeroCreator>();
+            CreateMap<PirateHero, HeroCreator>();
+            CreateMap<MonsterSlayerHero, HeroCreator>();
+            CreateMap<MissionaryHero, HeroCreator>();
+            CreateMap<MerchantHero, HeroCreator>();
+            CreateMap<MercenaryHero, HeroCreator>();
+            CreateMap<MagicianHero, HeroCreator>();
+            CreateMap<LibrarianHero, HeroCreator>();
+            CreateMap<KnightHero, HeroCreator>();
+            CreateMap<HunterHero, HeroCreator>();
+            CreateMap<GladiatorHero, HeroCreator>();
+            CreateMap<AcrobatHero, HeroCreator>();
         }
     }
 }

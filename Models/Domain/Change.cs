@@ -1,13 +1,15 @@
-﻿namespace redimel_server.Models.Domain
+﻿using redimel_server.Models.Enums;
+
+namespace redimel_server.Models.Domain
 {
     public class Change
     {
         public Guid Id { get; set; }
         public string ClassName { get; set; }
-        public string PropertyName { get; set; }
-        public string ActionType { get; set; }
-        public string HeroClass { get; set; }
-        public string HeroType { get; set; }
+        public string PropertyName { get; set; } // enum Important info .......
+        public ActionType ActionType { get; set; }
+        public HeroClass HeroClass { get; set; }
+        public HeroType HeroType { get; set; }
         public int OrderOfBattle { get; set; }
         public string PageId { get; set; }
         public Guid ChoiceId { get; set; }

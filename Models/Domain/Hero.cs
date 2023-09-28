@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using redimel_server.Models.Enums;
+using redimel_server.Utils;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace redimel_server.Models.Domain
 {
@@ -6,14 +8,15 @@ namespace redimel_server.Models.Domain
     {
         public Hero()
         {
+            this.OrderOfBattle = RedimelConstants.ORDEROFBATTLE;
             this.Baggages = new List<Baggage>();
             this.Promises = new List<Promise>();
         }
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string HeroClass { get; set; }
-        public string HeroType { get; set; }
+        public HeroClass HeroClass { get; set; }
+        public HeroType HeroType { get; set; }
         public int OrderOfBattle { get; set; }
         public double BaggageCapacity { get; set; }
         public Guid GroupWestId { get; set; }

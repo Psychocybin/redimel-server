@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using redimel_server.Utils;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace redimel_server.Models.Domain
 {
@@ -6,12 +7,15 @@ namespace redimel_server.Models.Domain
     {
         public User()
         {
+            this.CurrentLocation = RedimelConstants.STARTLOCATION;
+            this.Checkpoint = RedimelConstants.STARTLOCATION;
+            this.TimeCounter = 1;
             this.WorldInfoVariables = new List<WorldInfoVariable>();
         }
 
         public Guid Id { get; set; }
-        public string? CurrentLocation { get; set; }
-        public string? Checkpoint { get; set; }
+        public string CurrentLocation { get; set; }
+        public string Checkpoint { get; set; }
         public int TimeCounter { get; set; }
         public string CurrentUserEmail { get; set; }
         [ForeignKey("GroupWest")]

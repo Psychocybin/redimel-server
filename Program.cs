@@ -9,6 +9,7 @@ using redimel_server.Mappings;
 using redimel_server.Middlewares;
 using redimel_server.Repositories;
 using Serilog;
+using System.Collections;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

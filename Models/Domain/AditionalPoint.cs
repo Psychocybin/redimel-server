@@ -1,4 +1,6 @@
-﻿namespace redimel_server.Models.Domain
+﻿using redimel_server.Utils;
+
+namespace redimel_server.Models.Domain
 {
     public class AditionalPoint
     {
@@ -7,6 +9,12 @@
         {
             this.BattleGroups = new List<BattleGroup>();
             this.Negotiations = new List<Negotiation>();
+            this.TeamGame = RedimelConstants.TEAMGAME;
+            this.ImportantInformation = RedimelConstants.IMPORTANTINFORMATION;
+            this.SlainMonsters = RedimelConstants.SLAINMONSTERS;
+            this.Morals = RedimelConstants.MORALS;
+            this.Cover = RedimelConstants.COVER;
+            this.TemporaryPoints = RedimelConstants.TEMPORARYPOINTS;
         }
         public Guid Id { get; set; }
         public int TeamGame { get; set; }

@@ -1,9 +1,11 @@
-﻿namespace redimel_server.Models.Domain
+﻿using redimel_server.Models.Enums;
+
+namespace redimel_server.Models.Domain
 {
     public class ThrowingWeapon
     {
         public Guid Id { get; set; }
-        public string ThrowingWeaponType { get; set; }
+        public ThrowingWeaponType ThrowingWeaponType { get; set; }
         public Boolean IsExist { get; set; }
         public int Attack { get; set; }
         public int Defence { get; set; }

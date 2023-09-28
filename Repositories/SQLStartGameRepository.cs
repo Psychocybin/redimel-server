@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Models.Domain;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using redimel_server.Models.Enums;
+using redimel_server.Utils;
 
 namespace redimel_server.Repositories
 {
@@ -158,1009 +159,1038 @@ namespace redimel_server.Repositories
 
         public async Task<Choice> PerformChange(User user, Change change)
         {
-            if (change.ClassName == "Abilities")
-            {
-                var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
-
-                if (hero == null)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                if (change.PropertyName == "Survival")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Survival == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Survival = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Survival = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Diplomacy")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Diplomacy == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Diplomacy = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Diplomacy = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Climbing")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Climbing == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Climbing = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Climbing = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Acrobatics")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Acrobatics == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Acrobatics = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Acrobatics = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Skill")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Skill == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Skill = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Skill = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Guile")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Guile == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Guile = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Guile = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "SecretKnowledge")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.SecretKnowledge == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.SecretKnowledge = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.SecretKnowledge = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Sneak")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Sneak == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Sneak = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Sneak = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Elusion")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Elusion == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Elusion = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Elusion = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "WaterCycle")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.WaterCycle == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.WaterCycle = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.WaterCycle = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Melee")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Melee == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Melee = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Melee = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "NatureSkills")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.NatureSkills == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.NatureSkills = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.NatureSkills = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "BreakingLocks")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.BreakingLocks == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.BreakingLocks = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.BreakingLocks = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Transformation")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Transformation == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Transformation = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Transformation = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Spells")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Spells == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Spells = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Spells = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Rituals")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Rituals == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Rituals = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Rituals = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Traps")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Traps == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Traps = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Traps = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Archery")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Archery == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Archery = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Archery = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "ThrowingKnives")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.ThrowingKnives == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.ThrowingKnives = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.ThrowingKnives = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "PoisonousNeedles")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.PoisonousNeedles == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.PoisonousNeedles = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.PoisonousNeedles = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Stimulants")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Stimulants == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Stimulants = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Stimulants = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Wrestling")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Wrestling == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Wrestling = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Wrestling = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Observation")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Observation == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Observation = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Observation = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "ShieldBearer")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.ShieldBearer == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.ShieldBearer = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.ShieldBearer = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "Leadership")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.Leadership == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.Leadership = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.Leadership = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "KickFight")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.KickFight == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.KickFight = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.KickFight = false;
-                    }
-
-                    return null;
-                }
-                else if (change.PropertyName == "DoubleStrike")
-                {
-                    if (change.ActionType == "check")
-                    {
-                        if (hero.Ability.DoubleStrike == true)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                    }
-                    else if (change.ActionType == "add")
-                    {
-                        hero.Ability.DoubleStrike = true;
-                    }
-                    else if (change.ActionType == "remove")
-                    {
-                        hero.Ability.DoubleStrike = false;
-                    }
-
-                    return null;
-                }
-            }
-
-            if (change.ClassName == "AditionalPoints")
-            {
-                var aditionalPoints = user.GroupWest.AditionalPoints;
-
-                if (change.ActionType == "check")
-                {
-                    if (change.PropertyName == "TeamGame")
-                    {
-                        var teamGame = aditionalPoints.TeamGame;
-                        var requiredTeamGame = change.Attack;
-                        var indicator = change.AdditionalInfo;
-
-                        if (indicator == "equal")
-                        {
-                            if (teamGame == requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "bigger")
-                        {
-                            if (teamGame >= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "less")
-                        {
-                            if (teamGame <= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                    }
-                    else if (change.PropertyName == "ImportantInformation")
-                    {
-                        var importantInformation = aditionalPoints.ImportantInformation;
-                        var requiredTeamGame = change.Attack;
-                        var indicator = change.AdditionalInfo;
-
-                        if (indicator == "equal")
-                        {
-                            if (importantInformation == requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "bigger")
-                        {
-                            if (importantInformation >= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "less")
-                        {
-                            if (importantInformation <= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                    }
-                    else if (change.PropertyName == "SlainMonsters")
-                    {
-                        var slainMonsters = aditionalPoints.SlainMonsters;
-                        var requiredTeamGame = change.Attack;
-                        var indicator = change.AdditionalInfo;
-
-                        if (indicator == "equal")
-                        {
-                            if (slainMonsters == requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "bigger")
-                        {
-                            if (slainMonsters >= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "less")
-                        {
-                            if (slainMonsters <= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                    }
-                    else if (change.PropertyName == "Morals")
-                    {
-                        var morals = aditionalPoints.Morals;
-                        var requiredTeamGame = change.Attack;
-                        var indicator = change.AdditionalInfo;
-
-                        if (indicator == "equal")
-                        {
-                            if (morals == requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "bigger")
-                        {
-                            if (morals >= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "less")
-                        {
-                            if (morals <= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                    }
-                    else if (change.PropertyName == "Cover")
-                    {
-                        var cover = aditionalPoints.Cover;
-                        var requiredTeamGame = change.Attack;
-                        var indicator = change.AdditionalInfo;
-
-                        if (indicator == "equal")
-                        {
-                            if (cover == requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "bigger")
-                        {
-                            if (cover >= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "less")
-                        {
-                            if (cover <= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                    }
-                    else if (change.PropertyName == "TemporaryPoints")
-                    {
-                        var temporaryPoints = aditionalPoints.TemporaryPoints;
-                        var requiredTeamGame = change.Attack;
-                        var indicator = change.AdditionalInfo;
-
-                        if (indicator == "equal")
-                        {
-                            if (temporaryPoints == requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "bigger")
-                        {
-                            if (temporaryPoints >= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                        else if (indicator == "less")
-                        {
-                            if (temporaryPoints <= requiredTeamGame)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                    }
-                }
-                else if (change.ActionType == "add")
-                {
-                    aditionalPoints.TeamGame += change.Attack;
-                    aditionalPoints.ImportantInformation += change.Defence;
-                    aditionalPoints.SlainMonsters += change.Damage;
-                    aditionalPoints.Morals += Convert.ToInt32(change.Range);
-                    aditionalPoints.Cover += Convert.ToInt32(change.Quantity);
-                    aditionalPoints.TemporaryPoints += int.Parse(change.AdditionalInfo);
-                }
-                else if (change.ActionType == "remove")
-                {
-                    aditionalPoints.TeamGame -= change.Attack;
-                    aditionalPoints.ImportantInformation -= change.Defence;
-                    aditionalPoints.SlainMonsters -= change.Damage;
-                    aditionalPoints.Morals -= Convert.ToInt32(change.Range);
-                    aditionalPoints.Cover -= Convert.ToInt32(change.Quantity);
-                    aditionalPoints.TemporaryPoints -= int.Parse(change.AdditionalInfo);
-                }
-            }
-
-            if (change.ClassName == "Armors")
-            {
-                var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
-
-                if (change.ActionType == "check")
-                {
-                    var IsArmorExist = hero.Equipments.Armor.IsExist;
-
-                    if (change.TrueOrFalse == true)
-                    {
-                        var heroArmorType = hero.Equipments.Armor.ArmorType;
-
-                        if (heroArmorType == change.AdditionalInfo)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-
-                        //TO DO when finished enum's
-                    }
-
-                    if (IsArmorExist == change.ActiveOrNot)
-                    {
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
-                    }
-                }
-                else if (change.ActionType == "add")
-                {
-                    var heroArmor = new Armor
-                    {
-                        ArmorType = change.AdditionalInfo,
-                        IsExist = true,
-                        Defence = change.Defence,
-                        EquipmentId = hero.EquipmentsId
-                    };
-
-                    hero.Equipments.Armor = heroArmor;
-                }
-                else if (change.ActionType == "remove")
-                {
-                    var heroArmor = new Armor
-                    {
-                        ArmorType = "",
-                        IsExist = false,
-                        Defence = 0,
-                        EquipmentId = hero.EquipmentsId
-                    };
-
-                    hero.Equipments.Armor = heroArmor;
-                }
-                else if (change.ActionType == "update")
-                {
-                    hero.Equipments.Armor.Defence += change.Defence;
-                }
-            }
-
-            if (change.ClassName == "Baggages")
-            {
-                if (change.ActionType == "check")
-                {
-                    var wantedItem = change.Name;
-
-                    if (change.HeroType == "all")
-                    {
-                        List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
-
-                        foreach (var h in heroes)
-                        {
-                            Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
-
-                            if (baggage != null)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-
-                        return null;
-                    }
-
-                    var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
-
-                    if (hero != null)
-                    {
-                        Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
-
-                        if (baggage != null)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
-                }
-                else if (change.ActionType == "add")
-                {
-                    Hero hero;
-
-                    if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
-                    {
-                        hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
-                    }
-                    else
-                    {
-                        hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
-                    }
-
-                    var newBaggage = new Baggage
-                    {
-                        Name = change.Name,
-                        Volume = change.Quantity,
-                        HeroId = hero.Id
-                    };
-
-                    var currentBaggageCapacity = hero.Baggages.Sum(x => x.Volume) + newBaggage.Volume;
-
-                    if (currentBaggageCapacity <= hero.BaggageCapacity)
-                    {
-                        hero.Baggages.Add(newBaggage);
-                    }
-                }
-                else if (change.ActionType == "remove")
-                {
-                    var wantedItem = change.Name;
-
-                    if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
-                    {
-                        var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
-
-                        Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
-
-                        if (baggage != null)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            hero.Baggages.Remove(baggage);
-                            return choice;
-                        }
-                    }
-                    else
-                    {
-                        List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
-
-                        foreach (var h in heroes)
-                        {
-                            Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
-
-                            if (baggage != null)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                h.Baggages.Remove(baggage);
-                                return choice;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (change.ClassName == "BattleGroups")
-            {
-                if (change.ActionType == "check")
-                {
-                    var wantedGroup = change.Name;
-                    var countPeople = change.Attack;
-
-                    List<BattleGroup> battleGroups = (List<BattleGroup>)user.GroupWest.AditionalPoints.BattleGroups;
-
-                    foreach (var group in battleGroups)
-                    {
-                        if (group != null)
-                        {
-                            if (group.CountPeople > countPeople)
-                            {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
-                            }
-                        }
-                    }
-                }
-                else if (change.ActionType == "add")
-                {
-                    var aditionalPoint = user.GroupWest.AditionalPoints;
-
-                    var battleGroup = new BattleGroup
-                    {
-                        Name = change.Name,
-                        CountPeople = change.Attack,
-                        AditionalPointsId = aditionalPoint.Id
-                    };
-
-                    aditionalPoint.BattleGroups.Add(battleGroup);
-                }
-                else if (change.ActionType == "remove")
-                {
-                    var wantedGroup = change.Name;
-                    var aditionalPoint = user.GroupWest.AditionalPoints;
-
-                    var groupToDelete = aditionalPoint.BattleGroups.FirstOrDefault(x => x.Name == wantedGroup);
-
-                    if (groupToDelete != null)
-                    {
-                        aditionalPoint.BattleGroups.Remove(groupToDelete);
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
-                    }
-                }
-            }
+            //if (change.ClassName == nameof(Ability))
+            //{
+            //    var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+
+            //    if (hero == null)
+            //    {
+            //        throw new InvalidOperationException();
+            //    }
+
+            //    switch (change.PropertyName)
+            //    {
+            //        case "Survival":
+            //            {
+            //                return await NewMethod(change, hero);
+            //            }
+            //        case "Diplomacy":
+            //            {
+            //                return await NewMethod(change, hero);
+            //            }
+            //        case "Climbing":
+            //            {
+            //                if (change.ActionType.Equals(ComparisonMark.Less))
+            //                {
+            //                    if (hero.Ability.Climbing == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Climbing = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Climbing = false;
+            //                }
+            //                var onjjj = Type.GetType("SoldierConstants");
+            //                var newOnjjjj = Activator.CreateInstance(onjjj);
+            //                var onggg = new SoldierConstants();
+            //                return null;
+            //            }
+
+            //        case "Acrobatics":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Acrobatics == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Acrobatics = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Acrobatics = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Skill":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Skill == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Skill = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Skill = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Guile":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Guile == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Guile = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Guile = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "SecretKnowledge":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.SecretKnowledge == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.SecretKnowledge = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.SecretKnowledge = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Sneak":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Sneak == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Sneak = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Sneak = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Elusion":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Elusion == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Elusion = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Elusion = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "WaterCycle":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.WaterCycle == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.WaterCycle = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.WaterCycle = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Melee":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Melee == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Melee = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Melee = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "NatureSkills":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.NatureSkills == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.NatureSkills = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.NatureSkills = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "BreakingLocks":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.BreakingLocks == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.BreakingLocks = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.BreakingLocks = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Transformation":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Transformation == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Transformation = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Transformation = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Spells":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Spells == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Spells = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Spells = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Rituals":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Rituals == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Rituals = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Rituals = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Traps":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Traps == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Traps = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Traps = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Archery":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Archery == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Archery = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Archery = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "ThrowingKnives":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.ThrowingKnives == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.ThrowingKnives = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.ThrowingKnives = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "PoisonousNeedles":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.PoisonousNeedles == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.PoisonousNeedles = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.PoisonousNeedles = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Stimulants":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Stimulants == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Stimulants = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Stimulants = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Wrestling":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Wrestling == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Wrestling = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Wrestling = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Observation":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Observation == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Observation = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Observation = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "ShieldBearer":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.ShieldBearer == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.ShieldBearer = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.ShieldBearer = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "Leadership":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.Leadership == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.Leadership = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.Leadership = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "KickFight":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.KickFight == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.KickFight = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.KickFight = false;
+            //                }
+
+            //                return null;
+            //            }
+
+            //        case "DoubleStrike":
+            //            {
+            //                if (change.ActionType == "check")
+            //                {
+            //                    if (hero.Ability.DoubleStrike == true)
+            //                    {
+            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                        return choice;
+            //                    }
+            //                }
+            //                else if (change.ActionType == "add")
+            //                {
+            //                    hero.Ability.DoubleStrike = true;
+            //                }
+            //                else if (change.ActionType == "remove")
+            //                {
+            //                    hero.Ability.DoubleStrike = false;
+            //                }
+
+            //                return null;
+            //            }
+            //    }
+            //}
+
+            //if (change.ClassName == "AditionalPoints")
+            //{
+            //    var aditionalPoints = user.GroupWest.AditionalPoints;
+
+            //    if (change.ActionType == "check")
+            //    {
+            //        switch (change.PropertyName)
+            //        {
+            //            case "TeamGame":
+            //                {
+            //                    var teamGame = aditionalPoints.TeamGame;
+            //                    return await NewMethod1(change, teamGame);
+            //                }
+
+            //            case "ImportantInformation":
+            //                {
+            //                    var importantInformation = aditionalPoints.ImportantInformation;
+            //                    var requiredTeamGame = change.Attack;
+            //                    var indicator = change.AdditionalInfo;
+
+            //                    if (indicator == "equal")
+            //                    {
+            //                        if (importantInformation == requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "bigger")
+            //                    {
+            //                        if (importantInformation >= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "less")
+            //                    {
+            //                        if (importantInformation <= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+
+            //                    break;
+            //                }
+
+            //            case "SlainMonsters":
+            //                {
+            //                    var slainMonsters = aditionalPoints.SlainMonsters;
+            //                    var requiredTeamGame = change.Attack;
+            //                    var indicator = change.AdditionalInfo;
+
+            //                    if (indicator == "equal")
+            //                    {
+            //                        if (slainMonsters == requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "bigger")
+            //                    {
+            //                        if (slainMonsters >= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "less")
+            //                    {
+            //                        if (slainMonsters <= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+
+            //                    break;
+            //                }
+
+            //            case "Morals":
+            //                {
+            //                    var morals = aditionalPoints.Morals;
+            //                    var requiredTeamGame = change.Attack;
+            //                    var indicator = change.AdditionalInfo;
+
+            //                    if (indicator == "equal")
+            //                    {
+            //                        if (morals == requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "bigger")
+            //                    {
+            //                        if (morals >= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "less")
+            //                    {
+            //                        if (morals <= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+
+            //                    break;
+            //                }
+
+            //            case "Cover":
+            //                {
+            //                    var cover = aditionalPoints.Cover;
+            //                    var requiredTeamGame = change.Attack;
+            //                    var indicator = change.AdditionalInfo;
+
+            //                    if (indicator == "equal")
+            //                    {
+            //                        if (cover == requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "bigger")
+            //                    {
+            //                        if (cover >= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "less")
+            //                    {
+            //                        if (cover <= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+
+            //                    break;
+            //                }
+
+            //            case "TemporaryPoints":
+            //                {
+            //                    var temporaryPoints = aditionalPoints.TemporaryPoints;
+            //                    var requiredTeamGame = change.Attack;
+            //                    var indicator = change.AdditionalInfo;
+
+            //                    if (indicator == "equal")
+            //                    {
+            //                        if (temporaryPoints == requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "bigger")
+            //                    {
+            //                        if (temporaryPoints >= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+            //                    else if (indicator == "less")
+            //                    {
+            //                        if (temporaryPoints <= requiredTeamGame)
+            //                        {
+            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                            return choice;
+            //                        }
+            //                    }
+
+            //                    break;
+            //                }
+            //        }
+            //    }
+            //    else if (change.ActionType.ToString() == "add" || change.ActionType == "remove")
+            //    {
+            //        aditionalPoints.TeamGame += change.Attack;
+            //        aditionalPoints.ImportantInformation += change.Defence;
+            //        aditionalPoints.SlainMonsters += change.Damage;
+            //        aditionalPoints.Morals += Convert.ToInt32(change.Range);
+            //        aditionalPoints.Cover += Convert.ToInt32(change.Quantity);
+            //        aditionalPoints.TemporaryPoints += int.Parse(change.AdditionalInfo);
+            //    }
+            //}
+
+            //if (change.ClassName == "Armors")
+            //{
+            //    var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+
+            //    if (change.ActionType == "check")
+            //    {
+            //        var IsArmorExist = hero.Equipments.Armor.IsExist;
+
+            //        if (change.TrueOrFalse == true)
+            //        {
+            //            var heroArmorType = hero.Equipments.Armor.ArmorType;
+
+            //            if (heroArmorType == change.AdditionalInfo)
+            //            {
+            //                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                return choice;
+            //            }
+
+            //            //TO DO when finished enum's
+            //        }
+
+            //        if (IsArmorExist == change.ActiveOrNot)
+            //        {
+            //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //            return choice;
+            //        }
+            //    }
+            //    else if (change.ActionType == "add")
+            //    {
+            //        var heroArmor = new Armor
+            //        {
+            //            ArmorType = change.AdditionalInfo,
+            //            IsExist = true,
+            //            Defence = change.Defence,
+            //            EquipmentId = hero.EquipmentsId
+            //        };
+
+            //        hero.Equipments.Armor = heroArmor;
+            //    }
+            //    else if (change.ActionType == "remove")
+            //    {
+            //        var heroArmor = new Armor
+            //        {
+            //            ArmorType = "",
+            //            IsExist = false,
+            //            Defence = 0,
+            //            EquipmentId = hero.EquipmentsId
+            //        };
+
+            //        hero.Equipments.Armor = heroArmor;
+            //    }
+            //    else if (change.ActionType == "update")
+            //    {
+            //        hero.Equipments.Armor.Defence += change.Defence;
+            //    }
+            //}
+
+            //if (change.ClassName == "Baggages")
+            //{
+            //    if (change.ActionType == "check")
+            //    {
+            //        var wantedItem = change.Name;
+
+            //        if (change.HeroType == "all")
+            //        {
+            //            List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
+
+            //            foreach (var h in heroes)
+            //            {
+            //                Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+
+            //                if (baggage != null)
+            //                {
+            //                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                    return choice;
+            //                }
+            //            }
+
+            //            return null;
+            //        }
+
+            //        var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+
+            //        if (hero != null)
+            //        {
+            //            Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+
+            //            if (baggage != null)
+            //            {
+            //                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                return choice;
+            //            }
+            //            else
+            //            {
+            //                return null;
+            //            }
+            //        }
+            //    }
+            //    else if (change.ActionType == "add")
+            //    {
+            //        Hero hero;
+
+            //        if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
+            //        {
+            //            hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+            //        }
+            //        else
+            //        {
+            //            hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+            //        }
+
+            //        var newBaggage = new Baggage
+            //        {
+            //            Name = change.Name,
+            //            Volume = change.Quantity,
+            //            HeroId = hero.Id
+            //        };
+
+            //        var currentBaggageCapacity = hero.Baggages.Sum(x => x.Volume) + newBaggage.Volume;
+
+            //        if (currentBaggageCapacity <= hero.BaggageCapacity)
+            //        {
+            //            hero.Baggages.Add(newBaggage);
+            //        }
+            //    }
+            //    else if (change.ActionType == "remove")
+            //    {
+            //        var wantedItem = change.Name;
+
+            //        if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
+            //        {
+            //            var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+
+            //            Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+
+            //            if (baggage != null)
+            //            {
+            //                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                hero.Baggages.Remove(baggage);
+            //                return choice;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
+
+            //            foreach (var h in heroes)
+            //            {
+            //                Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+
+            //                if (baggage != null)
+            //                {
+            //                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                    h.Baggages.Remove(baggage);
+            //                    return choice;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            //if (change.ClassName == "BattleGroups")
+            //{
+            //    if (change.ActionType == "check")
+            //    {
+            //        var wantedGroup = change.Name;
+            //        var countPeople = change.Attack;
+
+            //        List<BattleGroup> battleGroups = (List<BattleGroup>)user.GroupWest.AditionalPoints.BattleGroups;
+
+            //        foreach (var group in battleGroups)
+            //        {
+            //            if (group != null)
+            //            {
+            //                if (group.CountPeople > countPeople)
+            //                {
+            //                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //                    return choice;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    else if (change.ActionType == "add")
+            //    {
+            //        var aditionalPoint = user.GroupWest.AditionalPoints;
+
+            //        var battleGroup = new BattleGroup
+            //        {
+            //            Name = change.Name,
+            //            CountPeople = change.Attack,
+            //            AditionalPointsId = aditionalPoint.Id
+            //        };
+
+            //        aditionalPoint.BattleGroups.Add(battleGroup);
+            //    }
+            //    else if (change.ActionType == "remove")
+            //    {
+            //        var wantedGroup = change.Name;
+            //        var aditionalPoint = user.GroupWest.AditionalPoints;
+
+            //        var groupToDelete = aditionalPoint.BattleGroups.FirstOrDefault(x => x.Name == wantedGroup);
+
+            //        if (groupToDelete != null)
+            //        {
+            //            aditionalPoint.BattleGroups.Remove(groupToDelete);
+            //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            //            return choice;
+            //        }
+            //    }
+            //}
 
             return null;
         }
+
+        //private async Task<Choice> NewMethod1(Change change, int teamGame)
+        //{
+        //    var requiredTeamGame = change.Attack;
+        //    var indicator = change.AdditionalInfo;
+
+        //    if (indicator == "equal" && teamGame == requiredTeamGame)
+        //    {
+        //        return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+        //    }
+        //    else if (indicator == "bigger")
+        //    {
+        //        if (teamGame >= requiredTeamGame)
+        //        {
+        //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+        //            return choice;
+        //        }
+        //    }
+        //    else if (indicator == "less")
+        //    {
+        //        if (teamGame <= requiredTeamGame)
+        //        {
+        //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+        //            return choice;
+        //        }
+        //    }
+
+        //    return null;
+        //}
+
+        //private async Task<Choice> NewMethod(Change change, Hero? hero)
+        //{
+        //    if (change.ActionType == "check")
+        //    {
+        //        if (hero.Ability.Survival == true)
+        //        {
+        //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+        //            return choice;
+        //        }
+        //    }
+        //    else if (change.ActionType == "add")
+        //    {
+        //        hero.Ability.Survival = true;
+        //    }
+        //    else if (change.ActionType == "remove")
+        //    {
+        //        hero.Ability.Survival = false;
+        //    }
+
+        //    return null;
+        //}
     }
 }
