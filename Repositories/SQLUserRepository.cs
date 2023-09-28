@@ -69,7 +69,7 @@ namespace redimel_server.Repositories
                 CreateHero(groupWestHeroes.Mystic, groupWestId)
             };
 
-            //heroesList = GetOrderOfBattle(heroesList);
+            heroesList = GetOrderOfBattle(heroesList);
             newUser.GroupWest.Heroes = heroesList;
 
             await dbContext.Users.AddAsync(newUser);
@@ -409,239 +409,86 @@ namespace redimel_server.Repositories
             return newHero;
         }
 
-        //private static List<Hero> GetOrderOfBattle(List<Hero> heroesList)
-        //{
-        //    var helper = heroesList.FirstOrDefault(x => x.HeroType == "Helper");
-        //    var mystic = heroesList.FirstOrDefault(x => x.HeroType == "Mystic");
-        //    var warrior = heroesList.FirstOrDefault(x => x.HeroType == "Warrior");
-        //    var fighter = heroesList.FirstOrDefault(x => x.HeroType == "Fighter");
-        //    var defender = heroesList.FirstOrDefault(x => x.HeroType == "Defender");
+        private static List<Hero> GetOrderOfBattle(List<Hero> heroesList)
+        {
+            var helper = heroesList.FirstOrDefault(x => x.HeroType == HeroType.Helper);
+            var mystic = heroesList.FirstOrDefault(x => x.HeroType == HeroType.Mystic);
+            var warrior = heroesList.FirstOrDefault(x => x.HeroType == HeroType.Warrior);
+            var fighter = heroesList.FirstOrDefault(x => x.HeroType == HeroType.Fighter);
+            var defender = heroesList.FirstOrDefault(x => x.HeroType == HeroType.Defender);
 
-        //    if (helper.HeroClass == "Acrobat")
-        //    {
-        //        //if (mystic.HeroClass == "Magician")
-        //        //{
-        //        //    AddSkills(helper, mystic, warrior, fighter, defender);
-        //        //}
-        //        if (mystic.HeroClass == "Missionary")
-        //        {
-        //            warrior.OrderOfBattle = 2;
-        //            fighter.OrderOfBattle = 3;
-        //            defender.OrderOfBattle = 1;
-        //            helper.OrderOfBattle = 5;
-        //            mystic.OrderOfBattle = 4;
-        //        }
-        //        else if (mystic.HeroClass == "Librarian")
-        //        {
-        //            warrior.OrderOfBattle = 2;
-        //            fighter.OrderOfBattle = 1;
-        //            defender.OrderOfBattle = 5;
-        //            helper.OrderOfBattle = 3;
-        //            mystic.OrderOfBattle = 4;
-        //        }
-        //    }
-        //    else if (helper.HeroClass == "Merchant")
-        //    {
-        //        if (mystic.HeroClass == "Magician")
-        //        {
-        //            warrior.OrderOfBattle = 5;
-        //            fighter.OrderOfBattle = 4;
-        //            defender.OrderOfBattle = 1;
-        //            helper.OrderOfBattle = 3;
-        //            mystic.OrderOfBattle = 2;
-        //        }
-        //        else if (mystic.HeroClass == "Missionary")
-        //        {
-        //            warrior.OrderOfBattle = 3;
-        //            fighter.OrderOfBattle = 1;
-        //            defender.OrderOfBattle = 2;
-        //            helper.OrderOfBattle = 4;
-        //            mystic.OrderOfBattle = 5;
-        //        }
-        //        else if (mystic.HeroClass == "Librarian")
-        //        {
-        //            warrior.OrderOfBattle = 1;
-        //            fighter.OrderOfBattle = 5;
-        //            defender.OrderOfBattle = 4;
-        //            helper.OrderOfBattle = 3;
-        //            mystic.OrderOfBattle = 2;
-        //        }
-        //    }
-        //    else if (helper.HeroClass == "Thief")
-        //    {
-        //        if (mystic.HeroClass == "Magician")
-        //        {
-        //            warrior.OrderOfBattle = 4;
-        //            fighter.OrderOfBattle = 5;
-        //            defender.OrderOfBattle = 1;
-        //            helper.OrderOfBattle = 3;
-        //            mystic.OrderOfBattle = 2;
-        //        }
-        //        else if (mystic.HeroClass == "Missionary")
-        //        {
-        //            warrior.OrderOfBattle = 1;
-        //            fighter.OrderOfBattle = 3;
-        //            defender.OrderOfBattle = 5;
-        //            helper.OrderOfBattle = 4;
-        //            mystic.OrderOfBattle = 2;
-        //        }
-        //        else if (mystic.HeroClass == "Librarian")
-        //        {
-        //            warrior.OrderOfBattle = 1;
-        //            fighter.OrderOfBattle = 2;
-        //            defender.OrderOfBattle = 3;
-        //            helper.OrderOfBattle = 5;
-        //            mystic.OrderOfBattle = 4;
-        //        }
-        //    }
+            if (helper == null || mystic == null || warrior == null || fighter == null || defender == null)
+            {
+                throw new Exception("Hero is null!");
+            }
 
-        //    var heroListResponse = new List<Hero>
-        //    {
-        //        warrior,
-        //        fighter,
-        //        defender,
-        //        helper,
-        //        mystic
-        //    };
+            if (helper.HeroClass == HeroClass.Acrobat)
+            {
+                if (mystic.HeroClass == HeroClass.Missionary)
+                {
+                    return GetTheSortedHeroes(defender, warrior, fighter, mystic, helper);
+                }
+                else if (helper.HeroClass == HeroClass.Magician)
+                {
+                    return GetTheSortedHeroes(warrior, defender, mystic, helper, fighter);
+                }
+                else if (mystic.HeroClass == HeroClass.Librarian)
+                {
+                    return GetTheSortedHeroes(fighter, warrior, helper, mystic, defender);
+                }
+            }
+            else if (helper.HeroClass == HeroClass.Merchant)
+            {
+                if (mystic.HeroClass == HeroClass.Magician)
+                {
+                    return GetTheSortedHeroes(defender, mystic, helper, fighter, warrior);
+                }
+                else if (mystic.HeroClass == HeroClass.Missionary)
+                {
+                    return GetTheSortedHeroes(fighter, defender, warrior, helper, mystic);
+                }
+                else if (mystic.HeroClass == HeroClass.Librarian)
+                {
+                    return GetTheSortedHeroes(warrior, mystic, helper, defender, fighter);
+                }
+            }
+            else if (helper.HeroClass == HeroClass.Thief)
+            {
+                if (mystic.HeroClass == HeroClass.Magician)
+                {
+                    return GetTheSortedHeroes(defender, mystic, helper, warrior, fighter);
+                }
+                else if (mystic.HeroClass == HeroClass.Missionary)
+                {
+                    return GetTheSortedHeroes(warrior, mystic, fighter, helper, defender);
+                }
+                else if (mystic.HeroClass == HeroClass.Librarian)
+                {
+                    return GetTheSortedHeroes(warrior, fighter, defender, helper, mystic);
+                }
+            }
 
-        //    return heroListResponse;
-        //}
+            return null;
+        }
 
-        //private static void AddSkills(int helper, Hero? mystic, Hero? warrior, Hero? fighter, Hero? defender, herolist// )
-        //{
-        //    warrior.OrderOfBattle = 1;// magic numbers
-        //    fighter.OrderOfBattle = 5;
-        //    defender.OrderOfBattle = 2;
-        //    helper.OrderOfBattle = 4;
-        //    mystic.OrderOfBattle = 3;
-        //}
+        private static List<Hero> GetTheSortedHeroes(Hero first, Hero second, Hero third, Hero fourth, Hero fifth)
+        {
+            first.OrderOfBattle = OrderOfBattle.First;
+            second.OrderOfBattle = OrderOfBattle.Second;
+            third.OrderOfBattle = OrderOfBattle.Third;
+            fourth.OrderOfBattle = OrderOfBattle.Fourth;
+            fifth.OrderOfBattle = OrderOfBattle.Fifth;
+            
+            var heroListResponse = new List<Hero>
+            {
+                first,
+                second,
+                third,
+                fourth,
+                fifth
+            };
 
-        //private void Text()
-        //{
-        //    var heroId = Guid.NewGuid();
-        //    var indicatorsId = Guid.NewGuid();
-        //    var equipmentsId = Guid.NewGuid();
-        //    var abilityId = Guid.NewGuid();
-        //    var specialAbilityId = Guid.NewGuid();
-        //    var specialCombatSkillId = Guid.NewGuid();
-        //    var ultimateId = Guid.NewGuid();
-        //    var armorId = Guid.NewGuid();
-        //    var shieldId = Guid.NewGuid();
-        //    var weaponId = Guid.NewGuid();
-        //    var throwingWeaponId = Guid.NewGuid();
-
-        //    var newHero = new Hero
-        //    {
-        //        Id = heroId,
-        //        Name = heroCreator.NAME,
-        //        HeroClass = SavageConstants.HEROCLASS,
-        //        HeroType = SavageConstants.HEROTYPE,
-        //        BaggageCapacity = SavageConstants.BAGGAGECAPACITY,
-        //        GroupWestId = groupWestId,
-        //        IndicatorsId = indicatorsId,
-        //        EquipmentsId = equipmentsId,
-        //        AbilityId = abilityId,
-        //        SpecialAbilityId = specialAbilityId,
-        //        Indicators = new Indicator
-        //        {
-        //            Id = indicatorsId,
-        //            Health = SavageConstants.HEALTH,
-        //            MentalEnergy = SavageConstants.MENTALENERGY,
-        //            MentalStrength = SavageConstants.MENTALSTRENGTH,
-        //            Strength = SavageConstants.STRENGTH,
-        //            Dexterity = SavageConstants.DEXTERITY,
-        //            Agility = SavageConstants.AGILITY,
-        //            Evasion = SavageConstants.EVASION,
-        //            Endurance = SavageConstants.ENDURANCE,
-        //            HeroId = heroId
-        //        },
-        //        Equipments = new Equipment
-        //        {
-        //            Id = equipmentsId,
-        //            Knife = SavageConstants.KNIFE,
-        //            SmokeBall = SavageConstants.SMOKEBALL,
-        //            Poison = SavageConstants.POISON,
-        //            MedicPack = SavageConstants.MEDICPACK,
-        //            MoneyBag = SavageConstants.MONEY,
-        //            HeroId = heroId,
-        //            ArmorId = armorId,
-        //            ShieldId = shieldId,
-        //            WeaponId = weaponId,
-        //            ThrowingWeaponId = throwingWeaponId,
-        //            Armor = new Armor
-        //            {
-        //                Id = armorId,
-        //                ArmorType = SavageConstants.ARMORTYPE,
-        //                IsExist = SavageConstants.ISARMOREXIST,
-        //                Defence = SavageConstants.ARMORDEFENCE,
-        //                EquipmentId = equipmentsId
-        //            },
-        //            Shield = new Shield
-        //            {
-        //                Id = shieldId,
-        //                ShieldType = SavageConstants.SHIELDTYPE,
-        //                IsExist = SavageConstants.ISSHIELDEXIST,
-        //                Defence = SavageConstants.SHIELDDEFENCE,
-        //                EquipmentId = equipmentsId
-        //            },
-        //            Weapon = new Weapon
-        //            {
-        //                Id = weaponId,
-        //                WeaponType = SavageConstants.WEAPONTYPE,
-        //                IsExist = SavageConstants.ISWEAPONEXIST,
-        //                IsItTwoHandWeapon = SavageConstants.ISWEAPONTWOHAND,
-        //                Attack = SavageConstants.WEAPONATTACK,
-        //                Defence = SavageConstants.WEAPONDEFENCE,
-        //                Damage = SavageConstants.WEAPONDAMAGE,
-        //                WeaponRange = SavageConstants.WEAPONRANGE,
-        //                EquipmentId = equipmentsId
-        //            },
-        //            ThrowingWeapon = new ThrowingWeapon
-        //            {
-        //                Id = throwingWeaponId,
-        //                ThrowingWeaponType = SavageConstants.THROWINGWEAPONTYPE,
-        //                IsExist = SavageConstants.ISTHROWINGWEAPONEXIST,
-        //                Attack = SavageConstants.THROWINGWEAPONATTACK,
-        //                Defence = SavageConstants.THROWINGWEAPONDEFENCE,
-        //                Damage = SavageConstants.THROWINGWEAPONDAMAGE,
-        //                Quantity = SavageConstants.THROWINGWEAPONQUANTITY,
-        //                ThrowingWeaponRange = SavageConstants.THROWINGWEAPONRANGE,
-        //                EquipmentId = equipmentsId
-        //            },
-        //        },
-        //        Ability = new Ability
-        //        {
-        //            Id = abilityId,
-        //            PoisonousNeedles = SavageConstants.POISONOUSNEEDLES,
-        //            Stimulants = SavageConstants.STIMULANTS,
-        //            HeroId = heroId
-        //        },
-        //        SpecialAbility = new SpecialAbility
-        //        {
-        //            Id = specialAbilityId,
-        //            HeroId = heroId,
-        //            SpecialCombatSkillId = specialCombatSkillId,
-        //            UltimateId = ultimateId,
-        //            SpecialCombatSkill = new SpecialCombatSkill
-        //            {
-        //                Id = specialCombatSkillId,
-        //                Name = SavageConstants.SCSNAME,
-        //                SkillLevel = SavageConstants.SCSLEVEL,
-        //                RequiredMentalEnergy = SavageConstants.SCSENERGY,
-        //                SpecialAbilitiesId = specialAbilityId
-        //            },
-        //            Ultimate = new Ultimate
-        //            {
-        //                Id = ultimateId,
-        //                Name = SavageConstants.ULTIMATENAME,
-        //                SkillLevel = SavageConstants.ULTIMATELEVEL,
-        //                RequiredMentalEnergy = SavageConstants.ULTIMATEENERGY,
-        //                SpecialAbilitiesId = specialAbilityId
-        //            },
-        //        },
-        //    };
-
-        //    return newHero;
-        //}
+            return heroListResponse;
+        }
     }
 }

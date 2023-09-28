@@ -17,7 +17,7 @@ namespace redimel_server.Models.Domain
         public string Name { get; set; }
         public HeroClass HeroClass { get; set; }
         public HeroType HeroType { get; set; }
-        public int OrderOfBattle { get; set; }
+        public OrderOfBattle OrderOfBattle { get; set; }
         public double BaggageCapacity { get; set; }
         public Guid GroupWestId { get; set; }
         [ForeignKey("Indicators")]

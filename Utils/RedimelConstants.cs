@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using redimel_server.Models.Domain;
+using redimel_server.Models.Enums;
 
 namespace redimel_server.Utils
 {
@@ -28,6 +29,6 @@ namespace redimel_server.Utils
         public const int MORALS = 0;
         public const int COVER = 0;
         public const int TEMPORARYPOINTS = 0;
-        public const int ORDEROFBATTLE = 0;
+        public const OrderOfBattle ORDEROFBATTLE = OrderOfBattle.None;
     }
 }
