@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using redimel_server.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace redimel_server.Models.DTO
 {
@@ -7,10 +8,10 @@ namespace redimel_server.Models.DTO
         public Guid Id { get; set; }
         public string ClassName { get; set; }
         public string PropertyName { get; set; }
-        public string ActionType { get; set; }
-        public string HeroClass { get; set; }
-        public string HeroType { get; set; }
-        public int OrderOfBattle { get; set; }
+        public ActionType ActionType { get; set; }
+        public HeroClass HeroClass { get; set; }
+        public HeroType HeroType { get; set; }
+        public OrderOfBattle OrderOfBattle { get; set; }
         public string PageId { get; set; }
         public Guid ChoiceId { get; set; }
         public string? Name { get; set; }

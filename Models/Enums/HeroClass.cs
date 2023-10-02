@@ -17,6 +17,7 @@
         Merchant = 12,
         Missionary = 13,
         Magician = 14,
-        Librarian = 15
+        Librarian = 15,
+        All = 16
     }
 }

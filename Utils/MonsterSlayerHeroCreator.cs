@@ -1,44 +1,45 @@
-﻿using redimel_server.Models.Enums;
+﻿using redimel_server.Models.Domain;
+using redimel_server.Models.Enums;
 
 namespace redimel_server.Utils
 {
-    public class SoldierHero
+    public class MonsterSlayerHeroCreator : HeroCreator
     {
-        public const string NAME = "Vranko";
-        public const HeroClass HEROCLASS = HeroClass.Soldier;
-        public const HeroType HEROTYPE = HeroType.Warrior;
-        public const double BAGGAGECAPACITY = 60.0;
-        public const int HEALTH = 70;
+        public const string NAME = "MonsterSlayer";
+        public const HeroClass HEROCLASS = HeroClass.MonsterSlayer;
+        public const HeroType HEROTYPE = HeroType.Defender;
+        public const double BAGGAGECAPACITY = 50.0;
+        public const int HEALTH = 60;
         public const int MENTALENERGY = 20;
         public const int MENTALSTRENGTH = 6;
-        public const int STRENGTH = 12;
-        public const int DEXTERITY = 8;
-        public const int AGILITY = 3;
-        public const int EVASION = 5;
-        public const int ENDURANCE = 6;
+        public const int STRENGTH = 10;
+        public const int DEXTERITY = 6;
+        public const int AGILITY = 6;
+        public const int EVASION = 6;
+        public const int ENDURANCE = 10;
         public const Boolean KNIFE = true;
         public const Boolean SMOKEBALL = true;
         public const Boolean POISON = false;
         public const Boolean MEDICPACK = true;
         public const int MONEY = 100;
-        public const ArmorType ARMORTYPE = ArmorType.FullPlate;
+        public const ArmorType ARMORTYPE = ArmorType.ChainMail;
         public const Boolean ISARMOREXIST = true;
         public const int ARMORDEFENCE = (int)ARMORTYPE;
-        public const ShieldType SHIELDTYPE = ShieldType.None;
-        public const Boolean ISSHIELDEXIST = false;
+        public const ShieldType SHIELDTYPE = ShieldType.Heater;
+        public const Boolean ISSHIELDEXIST = true;
         public const int SHIELDDEFENCE = (int)SHIELDTYPE;
-        public const WeaponType WEAPONTYPE = WeaponType.TwoHandSword;
+        public const WeaponType WEAPONTYPE = WeaponType.WarHammer;
         public const Boolean ISWEAPONEXIST = true;
-        public const Boolean ISWEAPONTWOHAND = true;
-        public const int WEAPONATTACK = 12;
-        public const int WEAPONDEFENCE = 3;
+        public const Boolean ISWEAPONTWOHAND = false;
+        public const int WEAPONATTACK = 10;
+        public const int WEAPONDEFENCE = 1;
         public const int WEAPONDAMAGE = (int)WEAPONTYPE;
-        public const int WEAPONRANGE = 3;
+        public const int WEAPONRANGE = 2;
         public const ThrowingWeaponType THROWINGWEAPONTYPE = ThrowingWeaponType.None;
         public const Boolean ISTHROWINGWEAPONEXIST = false;
         public const int THROWINGWEAPONATTACK = 0;
-        public const int THROWINGWEAPONDAMAGE = 0;
         public const int THROWINGWEAPONDEFENCE = 0;
+        public const int THROWINGWEAPONDAMAGE = 0;
         public const int THROWINGWEAPONRANGE = (int)THROWINGWEAPONTYPE;
         public const int THROWINGWEAPONQUANTITY = 0;
         public const Boolean SURVIVAL = false;
@@ -62,20 +63,20 @@ namespace redimel_server.Utils
         public const Boolean THROWINGKNIVES = false;
         public const Boolean POISONOUSNEEDLES = false;
         public const Boolean STIMULANTS = false;
-        public const Boolean WRESTLING = true;
+        public const Boolean WRESTLING = false;
         public const Boolean OBSERVATION = false;
-        public const Boolean SHIELDBEARER = false;
+        public const Boolean SHIELDBEARER = true;
         public const Boolean LEADERSHIP = false;
         public const Boolean KICKFIGHT = false;
         public const Boolean DOUBLESTRIKE = false;
-        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.SoldierSCS;
+        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.MonsterSlayerSCS;
         public const int SCSLEVEL = 1;
         public const int SCSENERGY = 4;
-        public const UltimateType ULTIMATENAME = UltimateType.SoldierUltimate;
+        public const UltimateType ULTIMATENAME = UltimateType.MonsterSlayerUltimate;
         public const int ULTIMATELEVEL = 1;
-        public const int ULTIMATEENERGY = 5;
+        public const int ULTIMATEENERGY = 9;
 
-        public SoldierHero()
+        public MonsterSlayerHeroCreator()
         {
             this.Name = NAME;
             this.HeroClass = HEROCLASS;
@@ -98,11 +99,11 @@ namespace redimel_server.Utils
             this.IsArmorExist = ISARMOREXIST;
             this.ArmorDefence = ARMORDEFENCE;
             this.ShieldType = SHIELDTYPE;
-            //this.IsShieldExist = ISSHIELDEXIST;
-            //this.ShieldDefence = SHIELDDEFENCE;
+            this.IsShieldExist = ISSHIELDEXIST;
+            this.ShieldDefence = SHIELDDEFENCE;
             this.WeaponType = WEAPONTYPE;
             this.IsWeaponExist = ISWEAPONEXIST;
-            this.IsWeaponTwoHand = ISWEAPONTWOHAND;
+            //this.IsWeaponTwoHand = ISWEAPONTWOHAND;
             this.WeaponAttack = WEAPONATTACK;
             this.WeaponDefence = WEAPONDEFENCE;
             this.WeaponDamage = WEAPONDAMAGE;
@@ -135,9 +136,9 @@ namespace redimel_server.Utils
             //this.ThrowingKnives = THROWINGKNIVES;
             //this.PoisonousNeedles = POISONOUSNEEDLES;
             //this.Stimulants = STIMULANTS;
-            this.Wrestling = WRESTLING;
+            //this.Wrestling = WRESTLING;
             //this.Observation = OBSERVATION;
-            //this.ShieldBearer = SHIELDBEARER;
+            this.ShieldBearer = SHIELDBEARER;
             //this.Leadership = LEADERSHIP;
             //this.KickFight = KICKFIGHT;
             //this.DoubleStrike = DOUBLESTRIKE;

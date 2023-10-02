@@ -7,6 +7,7 @@
         Fighter = 2,
         Defender = 3,
         Helper = 4,
-        Mystic = 5
+        Mystic = 5,
+        All = 6
     }
 }

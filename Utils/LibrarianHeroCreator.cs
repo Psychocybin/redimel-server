@@ -1,37 +1,38 @@
-﻿using redimel_server.Models.Enums;
+﻿using redimel_server.Models.Domain;
+using redimel_server.Models.Enums;
 
 namespace redimel_server.Utils
 {
-    public class AcrobatHero
+    public class LibrarianHeroCreator : HeroCreator
     {
-        public const string NAME = "Gigi";
-        public const HeroClass HEROCLASS = HeroClass.Acrobat;
-        public const HeroType HEROTYPE = HeroType.Helper;
-        public const double BAGGAGECAPACITY = 50.0;
-        public const int HEALTH = 60;
-        public const int MENTALENERGY = 24;
-        public const int MENTALSTRENGTH = 3;
+        public const string NAME = "Rhamzeda";
+        public const HeroClass HEROCLASS = HeroClass.Librarian;
+        public const HeroType HEROTYPE = HeroType.Mystic;
+        public const double BAGGAGECAPACITY = 45.0;
+        public const int HEALTH = 50;
+        public const int MENTALENERGY = 32;
+        public const int MENTALSTRENGTH = 10;
         public const int STRENGTH = 5;
-        public const int DEXTERITY = 5;
-        public const int AGILITY = 12;
-        public const int EVASION = 7;
-        public const int ENDURANCE = 8;
+        public const int DEXTERITY = 6;
+        public const int AGILITY = 7;
+        public const int EVASION = 10;
+        public const int ENDURANCE = 2;
         public const Boolean KNIFE = true;
         public const Boolean SMOKEBALL = false;
         public const Boolean POISON = true;
         public const Boolean MEDICPACK = true;
         public const int MONEY = 100;
-        public const ArmorType ARMORTYPE = ArmorType.Fabric;
+        public const ArmorType ARMORTYPE = ArmorType.IronBreastplate;
         public const Boolean ISARMOREXIST = true;
         public const int ARMORDEFENCE = (int)ARMORTYPE;
         public const ShieldType SHIELDTYPE = ShieldType.None;
         public const Boolean ISSHIELDEXIST = false;
         public const int SHIELDDEFENCE = (int)SHIELDTYPE;
-        public const WeaponType WEAPONTYPE = WeaponType.Saber;
+        public const WeaponType WEAPONTYPE = WeaponType.ShortSword;
         public const Boolean ISWEAPONEXIST = true;
         public const Boolean ISWEAPONTWOHAND = false;
-        public const int WEAPONATTACK = 9;
-        public const int WEAPONDEFENCE = 5;
+        public const int WEAPONATTACK = 8;
+        public const int WEAPONDEFENCE = 4;
         public const int WEAPONDAMAGE = (int)WEAPONTYPE;
         public const int WEAPONRANGE = 2;
         public const ThrowingWeaponType THROWINGWEAPONTYPE = ThrowingWeaponType.None;
@@ -44,19 +45,19 @@ namespace redimel_server.Utils
         public const Boolean SURVIVAL = false;
         public const Boolean DIPLOMACY = false;
         public const Boolean CLIMBING = false;
-        public const Boolean ACROBATICS = true;
+        public const Boolean ACROBATICS = false;
         public const Boolean SKILL = false;
         public const Boolean GUILE = false;
-        public const Boolean SECRETKNOWLEDGE = false;
+        public const Boolean SECRETKNOWLEDGE = true;
         public const Boolean SNEAK = false;
         public const Boolean ELUSION = false;
         public const Boolean WATERCYCLE = false;
         public const Boolean MELEE = false;
         public const Boolean NATURESKILLS = false;
         public const Boolean BREAKINGLOCKS = false;
-        public const Boolean TRANSFORMATION = true;
+        public const Boolean TRANSFORMATION = false;
         public const Boolean SPELLS = false;
-        public const Boolean RITUALS = false;
+        public const Boolean RITUALS = true;
         public const Boolean TRAPS = false;
         public const Boolean ARCHERY = false;
         public const Boolean THROWINGKNIVES = false;
@@ -68,14 +69,14 @@ namespace redimel_server.Utils
         public const Boolean LEADERSHIP = false;
         public const Boolean KICKFIGHT = false;
         public const Boolean DOUBLESTRIKE = false;
-        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.AcrobatSCS;
+        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.LibrarianSCS;
         public const int SCSLEVEL = 1;
-        public const int SCSENERGY = 2;
-        public const UltimateType ULTIMATENAME = UltimateType.AcrobatUltimate;
+        public const int SCSENERGY = 4;
+        public const UltimateType ULTIMATENAME = UltimateType.LibrarianUltimate;
         public const int ULTIMATELEVEL = 1;
-        public const int ULTIMATEENERGY = 7;
+        public const int ULTIMATEENERGY = 8;
 
-        public AcrobatHero()
+        public LibrarianHeroCreator()
         {
             this.Name = NAME;
             this.HeroClass = HEROCLASS;
@@ -117,19 +118,19 @@ namespace redimel_server.Utils
             //this.Survival = SURVIVAL;
             //this.Diplomacy = DIPLOMACY;
             //this.Climbing = CLIMBING;
-            this.Acrobatics = ACROBATICS;
+            //this.Acrobatics = ACROBATICS;
             //this.Skill = SKILL;
             //this.Guile = GUILE;
-            //this.SecretKnowledge = SECRETKNOWLEDGE;
+            this.SecretKnowledge = SECRETKNOWLEDGE;
             //this.Sneak = SNEAK;
             //this.Elusion = ELUSION;
             //this.WaterCycle = WATERCYCLE;
             //this.Melee = MELEE;
             //this.NatureSkills = NATURESKILLS;
             //this.BreakingLocks = BREAKINGLOCKS;
-            this.Transformation = TRANSFORMATION;
+            //this.Transformation = TRANSFORMATION;
             //this.Spells = SPELLS;
-            //this.Rituals = RITUALS;
+            this.Rituals = RITUALS;
             //this.Traps = TRAPS;
             //this.Archery = ARCHERY;
             //this.ThrowingKnives = THROWINGKNIVES;

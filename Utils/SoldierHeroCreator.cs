@@ -1,44 +1,45 @@
-﻿using redimel_server.Models.Enums;
+﻿using redimel_server.Models.Domain;
+using redimel_server.Models.Enums;
 
 namespace redimel_server.Utils
 {
-    public class MerchantHero
+    public class SoldierHeroCreator : HeroCreator
     {
-        public const string NAME = "KirguainTheThird";
-        public const HeroClass HEROCLASS = HeroClass.Merchant;
-        public const HeroType HEROTYPE = HeroType.Helper;
-        public const double BAGGAGECAPACITY = 40.0;
-        public const int HEALTH = 50;
+        public const string NAME = "Vranko";
+        public const HeroClass HEROCLASS = HeroClass.Soldier;
+        public const HeroType HEROTYPE = HeroType.Warrior;
+        public const double BAGGAGECAPACITY = 60.0;
+        public const int HEALTH = 70;
         public const int MENTALENERGY = 20;
-        public const int MENTALSTRENGTH = 5;
-        public const int STRENGTH = 2;
-        public const int DEXTERITY = 10;
-        public const int AGILITY = 7;
-        public const int EVASION = 10;
-        public const int ENDURANCE = 2;
+        public const int MENTALSTRENGTH = 6;
+        public const int STRENGTH = 12;
+        public const int DEXTERITY = 8;
+        public const int AGILITY = 3;
+        public const int EVASION = 5;
+        public const int ENDURANCE = 6;
         public const Boolean KNIFE = true;
         public const Boolean SMOKEBALL = true;
         public const Boolean POISON = false;
         public const Boolean MEDICPACK = true;
-        public const int MONEY = 200;
-        public const ArmorType ARMORTYPE = ArmorType.Fabric;
+        public const int MONEY = 100;
+        public const ArmorType ARMORTYPE = ArmorType.FullPlate;
         public const Boolean ISARMOREXIST = true;
         public const int ARMORDEFENCE = (int)ARMORTYPE;
         public const ShieldType SHIELDTYPE = ShieldType.None;
         public const Boolean ISSHIELDEXIST = false;
         public const int SHIELDDEFENCE = (int)SHIELDTYPE;
-        public const WeaponType WEAPONTYPE = WeaponType.Rapier;
+        public const WeaponType WEAPONTYPE = WeaponType.TwoHandSword;
         public const Boolean ISWEAPONEXIST = true;
-        public const Boolean ISWEAPONTWOHAND = false;
-        public const int WEAPONATTACK = 9;
-        public const int WEAPONDEFENCE = 5;
+        public const Boolean ISWEAPONTWOHAND = true;
+        public const int WEAPONATTACK = 12;
+        public const int WEAPONDEFENCE = 3;
         public const int WEAPONDAMAGE = (int)WEAPONTYPE;
-        public const int WEAPONRANGE = 2;
+        public const int WEAPONRANGE = 3;
         public const ThrowingWeaponType THROWINGWEAPONTYPE = ThrowingWeaponType.None;
         public const Boolean ISTHROWINGWEAPONEXIST = false;
         public const int THROWINGWEAPONATTACK = 0;
-        public const int THROWINGWEAPONDEFENCE = 0;
         public const int THROWINGWEAPONDAMAGE = 0;
+        public const int THROWINGWEAPONDEFENCE = 0;
         public const int THROWINGWEAPONRANGE = (int)THROWINGWEAPONTYPE;
         public const int THROWINGWEAPONQUANTITY = 0;
         public const Boolean SURVIVAL = false;
@@ -46,7 +47,7 @@ namespace redimel_server.Utils
         public const Boolean CLIMBING = false;
         public const Boolean ACROBATICS = false;
         public const Boolean SKILL = false;
-        public const Boolean GUILE = true;
+        public const Boolean GUILE = false;
         public const Boolean SECRETKNOWLEDGE = false;
         public const Boolean SNEAK = false;
         public const Boolean ELUSION = false;
@@ -62,20 +63,20 @@ namespace redimel_server.Utils
         public const Boolean THROWINGKNIVES = false;
         public const Boolean POISONOUSNEEDLES = false;
         public const Boolean STIMULANTS = false;
-        public const Boolean WRESTLING = false;
-        public const Boolean OBSERVATION = true;
+        public const Boolean WRESTLING = true;
+        public const Boolean OBSERVATION = false;
         public const Boolean SHIELDBEARER = false;
         public const Boolean LEADERSHIP = false;
         public const Boolean KICKFIGHT = false;
         public const Boolean DOUBLESTRIKE = false;
-        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.MerchantSCS;
+        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.SoldierSCS;
         public const int SCSLEVEL = 1;
-        public const int SCSENERGY = 3;
-        public const UltimateType ULTIMATENAME = UltimateType.MerchantUltimate;
+        public const int SCSENERGY = 4;
+        public const UltimateType ULTIMATENAME = UltimateType.SoldierUltimate;
         public const int ULTIMATELEVEL = 1;
-        public const int ULTIMATEENERGY = 7;
+        public const int ULTIMATEENERGY = 5;
 
-        public MerchantHero()
+        public SoldierHeroCreator()
         {
             this.Name = NAME;
             this.HeroClass = HEROCLASS;
@@ -102,7 +103,7 @@ namespace redimel_server.Utils
             //this.ShieldDefence = SHIELDDEFENCE;
             this.WeaponType = WEAPONTYPE;
             this.IsWeaponExist = ISWEAPONEXIST;
-            //this.IsWeaponTwoHand = ISWEAPONTWOHAND;
+            this.IsWeaponTwoHand = ISWEAPONTWOHAND;
             this.WeaponAttack = WEAPONATTACK;
             this.WeaponDefence = WEAPONDEFENCE;
             this.WeaponDamage = WEAPONDAMAGE;
@@ -119,7 +120,7 @@ namespace redimel_server.Utils
             //this.Climbing = CLIMBING;
             //this.Acrobatics = ACROBATICS;
             //this.Skill = SKILL;
-            this.Guile = GUILE;
+            //this.Guile = GUILE;
             //this.SecretKnowledge = SECRETKNOWLEDGE;
             //this.Sneak = SNEAK;
             //this.Elusion = ELUSION;
@@ -135,8 +136,8 @@ namespace redimel_server.Utils
             //this.ThrowingKnives = THROWINGKNIVES;
             //this.PoisonousNeedles = POISONOUSNEEDLES;
             //this.Stimulants = STIMULANTS;
-            //this.Wrestling = WRESTLING;
-            this.Observation = OBSERVATION;
+            this.Wrestling = WRESTLING;
+            //this.Observation = OBSERVATION;
             //this.ShieldBearer = SHIELDBEARER;
             //this.Leadership = LEADERSHIP;
             //this.KickFight = KICKFIGHT;
@@ -149,75 +150,75 @@ namespace redimel_server.Utils
             this.UltimateEnergy = ULTIMATEENERGY;
         }
 
-        public string Name { get; set; }
-        public HeroClass HeroClass { get; set; }
-        public HeroType HeroType { get; set; }
-        public double BaggageCapacity { get; set; }
-        public int Health { get; set; }
-        public int MentalEnergy { get; set; }
-        public int MentalStrength { get; set; }
-        public int Strength { get; set; }
-        public int Dexterity { get; set; }
-        public int Agility { get; set; }
-        public int Evasion { get; set; }
-        public int Endurance { get; set; }
-        public Boolean Knife { get; set; }
-        public Boolean SmokeBall { get; set; }
-        public Boolean Poison { get; set; }
-        public Boolean MedicPack { get; set; }
-        public int Money { get; set; }
-        public ArmorType ArmorType { get; set; }
-        public Boolean IsArmorExist { get; set; }
-        public int ArmorDefence { get; set; }
-        public ShieldType ShieldType { get; set; }
-        public Boolean IsShieldExist { get; set; }
-        public int ShieldDefence { get; set; }
-        public WeaponType WeaponType { get; set; }
-        public Boolean IsWeaponExist { get; set; }
-        public Boolean IsWeaponTwoHand { get; set; }
-        public int WeaponAttack { get; set; }
-        public int WeaponDefence { get; set; }
-        public int WeaponDamage { get; set; }
-        public int WeaponRange { get; set; }
-        public ThrowingWeaponType ThrowingWeaponType { get; set; }
-        public Boolean IsThrowingWeaponExist { get; set; }
-        public int ThrowingWeaponAttack { get; set; }
-        public int ThrowingWeaponDefence { get; set; }
-        public int ThrowingWeaponDamage { get; set; }
-        public int ThrowingWeaponRange { get; set; }
-        public int ThrowingWeaponQuantity { get; set; }
-        public Boolean Survival { get; set; }
-        public Boolean Diplomacy { get; set; }
-        public Boolean Climbing { get; set; }
-        public Boolean Acrobatics { get; set; }
-        public Boolean Skill { get; set; }
-        public Boolean Guile { get; set; }
-        public Boolean SecretKnowledge { get; set; }
-        public Boolean Sneak { get; set; }
-        public Boolean Elusion { get; set; }
-        public Boolean WaterCycle { get; set; }
-        public Boolean Melee { get; set; }
-        public Boolean NatureSkills { get; set; }
-        public Boolean BreakingLocks { get; set; }
-        public Boolean Transformation { get; set; }
-        public Boolean Spells { get; set; }
-        public Boolean Rituals { get; set; }
-        public Boolean Traps { get; set; }
-        public Boolean Archery { get; set; }
-        public Boolean ThrowingKnives { get; set; }
-        public Boolean PoisonousNeedles { get; set; }
-        public Boolean Stimulants { get; set; }
-        public Boolean Wrestling { get; set; }
-        public Boolean Observation { get; set; }
-        public Boolean ShieldBearer { get; set; }
-        public Boolean Leadership { get; set; }
-        public Boolean KickFight { get; set; }
-        public Boolean DoubleStrike { get; set; }
-        public SpecialCombatSkillType SCSName { get; set; }
-        public int SCSLevel { get; set; }
-        public int SCSEnergy { get; set; }
-        public UltimateType UltimateName { get; set; }
-        public int UltimateLevel { get; set; }
-        public int UltimateEnergy { get; set; }
+        //public string Name { get; set; }
+        //public HeroClass HeroClass { get; set; }
+        //public HeroType HeroType { get; set; }
+        //public double BaggageCapacity { get; set; }
+        //public int Health { get; set; }
+        //public int MentalEnergy { get; set; }
+        //public int MentalStrength { get; set; }
+        //public int Strength { get; set; }
+        //public int Dexterity { get; set; }
+        //public int Agility { get; set; }
+        //public int Evasion { get; set; }
+        //public int Endurance { get; set; }
+        //public Boolean Knife { get; set; }
+        //public Boolean SmokeBall { get; set; }
+        //public Boolean Poison { get; set; }
+        //public Boolean MedicPack { get; set; }
+        //public int Money { get; set; }
+        //public ArmorType ArmorType { get; set; }
+        //public Boolean IsArmorExist { get; set; }
+        //public int ArmorDefence { get; set; }
+        //public ShieldType ShieldType { get; set; }
+        //public Boolean IsShieldExist { get; set; }
+        //public int ShieldDefence { get; set; }
+        //public WeaponType WeaponType { get; set; }
+        //public Boolean IsWeaponExist { get; set; }
+        //public Boolean IsWeaponTwoHand { get; set; }
+        //public int WeaponAttack { get; set; }
+        //public int WeaponDefence { get; set; }
+        //public int WeaponDamage { get; set; }
+        //public int WeaponRange { get; set; }
+        //public ThrowingWeaponType ThrowingWeaponType { get; set; }
+        //public Boolean IsThrowingWeaponExist { get; set; }
+        //public int ThrowingWeaponAttack { get; set; }
+        //public int ThrowingWeaponDefence { get; set; }
+        //public int ThrowingWeaponDamage { get; set; }
+        //public int ThrowingWeaponRange { get; set; }
+        //public int ThrowingWeaponQuantity { get; set; }
+        //public Boolean Survival { get; set; }
+        //public Boolean Diplomacy { get; set; }
+        //public Boolean Climbing { get; set; }
+        //public Boolean Acrobatics { get; set; }
+        //public Boolean Skill { get; set; }
+        //public Boolean Guile { get; set; }
+        //public Boolean SecretKnowledge { get; set; }
+        //public Boolean Sneak { get; set; }
+        //public Boolean Elusion { get; set; }
+        //public Boolean WaterCycle { get; set; }
+        //public Boolean Melee { get; set; }
+        //public Boolean NatureSkills { get; set; }
+        //public Boolean BreakingLocks { get; set; }
+        //public Boolean Transformation { get; set; }
+        //public Boolean Spells { get; set; }
+        //public Boolean Rituals { get; set; }
+        //public Boolean Traps { get; set; }
+        //public Boolean Archery { get; set; }
+        //public Boolean ThrowingKnives { get; set; }
+        //public Boolean PoisonousNeedles { get; set; }
+        //public Boolean Stimulants { get; set; }
+        //public Boolean Wrestling { get; set; }
+        //public Boolean Observation { get; set; }
+        //public Boolean ShieldBearer { get; set; }
+        //public Boolean Leadership { get; set; }
+        //public Boolean KickFight { get; set; }
+        //public Boolean DoubleStrike { get; set; }
+        //public SpecialCombatSkillType SCSName { get; set; }
+        //public int SCSLevel { get; set; }
+        //public int SCSEnergy { get; set; }
+        //public UltimateType UltimateName { get; set; }
+        //public int UltimateLevel { get; set; }
+        //public int UltimateEnergy { get; set; }
     }
 }

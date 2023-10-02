@@ -1,4 +1,4 @@
-﻿using redimel_server.Models.Domain;
+﻿using redimel_server.Models.Enums;
 
 namespace redimel_server.Models.DTO
 {
@@ -6,9 +6,9 @@ namespace redimel_server.Models.DTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string HeroClass { get; set; }
-        public string HeroType { get; set; }
-        public int OrderOfBattle { get; set; }
+        public HeroClass HeroClass { get; set; }
+        public HeroType HeroType { get; set; }
+        public OrderOfBattle OrderOfBattle { get; set; }
         public double BaggageCapacity { get; set; }
         public Guid GroupWestId { get; set; }
         public Guid EquipmentsId { get; set; }

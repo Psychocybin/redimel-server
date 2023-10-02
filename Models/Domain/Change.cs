@@ -6,11 +6,11 @@ namespace redimel_server.Models.Domain
     {
         public Guid Id { get; set; }
         public string ClassName { get; set; }
-        public string PropertyName { get; set; } // enum Important info .......
+        public string PropertyName { get; set; }
         public ActionType ActionType { get; set; }
         public HeroClass HeroClass { get; set; }
         public HeroType HeroType { get; set; }
-        public int OrderOfBattle { get; set; }
+        public OrderOfBattle OrderOfBattle { get; set; }
         public string PageId { get; set; }
         public Guid ChoiceId { get; set; }
         public string? Name { get; set; }

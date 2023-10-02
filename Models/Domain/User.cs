@@ -9,7 +9,7 @@ namespace redimel_server.Models.Domain
         {
             this.CurrentLocation = RedimelConstants.STARTLOCATION;
             this.Checkpoint = RedimelConstants.STARTLOCATION;
-            this.TimeCounter = 1;
+            this.TimeCounter = RedimelConstants.TIMECOUNTER;
             this.WorldInfoVariables = new List<WorldInfoVariable>();
         }
 

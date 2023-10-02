@@ -114,7 +114,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Abilities", (string)null);
+                    b.ToTable("Abilities");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.AditionalPoint", b =>
@@ -146,7 +146,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AditionalPoints", (string)null);
+                    b.ToTable("AditionalPoints");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Armor", b =>
@@ -155,9 +155,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ArmorType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ArmorType")
+                        .HasColumnType("int");
 
                     b.Property<int>("Defence")
                         .HasColumnType("int");
@@ -170,7 +169,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Armors", (string)null);
+                    b.ToTable("Armors");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Baggage", b =>
@@ -193,7 +192,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("HeroId");
 
-                    b.ToTable("Baggages", (string)null);
+                    b.ToTable("Baggages");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.BattleGroup", b =>
@@ -216,7 +215,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("AditionalPointsId");
 
-                    b.ToTable("BattleGroups", (string)null);
+                    b.ToTable("BattleGroups");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Change", b =>
@@ -225,9 +224,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ActionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ActionType")
+                        .HasColumnType("int");
 
                     b.Property<bool>("ActiveOrNot")
                         .HasColumnType("bit");
@@ -254,13 +252,11 @@ namespace redimel_server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HeroClass")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("HeroClass")
+                        .HasColumnType("int");
 
-                    b.Property<string>("HeroType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("HeroType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -287,7 +283,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Changes", (string)null);
+                    b.ToTable("Changes");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Choice", b =>
@@ -315,7 +311,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("PageId");
 
-                    b.ToTable("Choices", (string)null);
+                    b.ToTable("Choices");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Equipment", b =>
@@ -364,7 +360,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("WeaponId");
 
-                    b.ToTable("Equipments", (string)null);
+                    b.ToTable("Equipments");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.GroupWest", b =>
@@ -387,7 +383,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("AditionalPointsId");
 
-                    b.ToTable("GroupWests", (string)null);
+                    b.ToTable("GroupWests");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Hero", b =>
@@ -408,13 +404,11 @@ namespace redimel_server.Migrations
                     b.Property<Guid>("GroupWestId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("HeroClass")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("HeroClass")
+                        .HasColumnType("int");
 
-                    b.Property<string>("HeroType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("HeroType")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("IndicatorsId")
                         .HasColumnType("uniqueidentifier");
@@ -441,7 +435,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("Heroes", (string)null);
+                    b.ToTable("Heroes");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Image", b =>
@@ -468,9 +462,14 @@ namespace redimel_server.Migrations
                     b.Property<long>("FileSizeInBytes")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("PageId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Images", (string)null);
+                    b.HasIndex("PageId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Indicator", b =>
@@ -508,7 +507,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Indicators", (string)null);
+                    b.ToTable("Indicators");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Mission", b =>
@@ -531,7 +530,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("GroupWestId");
 
-                    b.ToTable("Missions", (string)null);
+                    b.ToTable("Missions");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.NatureSkill", b =>
@@ -557,7 +556,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("NatureSkills", (string)null);
+                    b.ToTable("NatureSkills");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Negotiation", b =>
@@ -577,7 +576,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("AditionalPointsId");
 
-                    b.ToTable("Negotiations", (string)null);
+                    b.ToTable("Negotiations");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Page", b =>
@@ -591,7 +590,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pages", (string)null);
+                    b.ToTable("Pages");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Promise", b =>
@@ -614,7 +613,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("HeroId");
 
-                    b.ToTable("Promises", (string)null);
+                    b.ToTable("Promises");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.RedimelInfo", b =>
@@ -636,7 +635,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RedimelInfos", (string)null);
+                    b.ToTable("RedimelInfos");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ritual", b =>
@@ -662,7 +661,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("Rituals", (string)null);
+                    b.ToTable("Rituals");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Shield", b =>
@@ -680,13 +679,12 @@ namespace redimel_server.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ShieldType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ShieldType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shields", (string)null);
+                    b.ToTable("Shields");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>
@@ -710,7 +708,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("UltimateId");
 
-                    b.ToTable("SpecialAbilities", (string)null);
+                    b.ToTable("SpecialAbilities");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialCombatSkill", b =>
@@ -719,9 +717,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
 
                     b.Property<int>("RequiredMentalEnergy")
                         .HasColumnType("int");
@@ -734,7 +731,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpecialCombatSkills", (string)null);
+                    b.ToTable("SpecialCombatSkills");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Spell", b =>
@@ -760,7 +757,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("SpecialAbilityId");
 
-                    b.ToTable("Spells", (string)null);
+                    b.ToTable("Spells");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Talisman", b =>
@@ -783,15 +780,14 @@ namespace redimel_server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TalismanType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TalismanType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EquipmentId");
 
-                    b.ToTable("Talismans", (string)null);
+                    b.ToTable("Talismans");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.ThrowingWeapon", b =>
@@ -821,13 +817,12 @@ namespace redimel_server.Migrations
                     b.Property<int>("ThrowingWeaponRange")
                         .HasColumnType("int");
 
-                    b.Property<string>("ThrowingWeaponType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ThrowingWeaponType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ThrowingWeapons", (string)null);
+                    b.ToTable("ThrowingWeapons");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Ultimate", b =>
@@ -836,9 +831,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
 
                     b.Property<int>("RequiredMentalEnergy")
                         .HasColumnType("int");
@@ -851,7 +845,7 @@ namespace redimel_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ultimates", (string)null);
+                    b.ToTable("Ultimates");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.User", b =>
@@ -861,9 +855,11 @@ namespace redimel_server.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Checkpoint")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CurrentLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CurrentUserEmail")
@@ -880,7 +876,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("GroupWestId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Weapon", b =>
@@ -910,13 +906,12 @@ namespace redimel_server.Migrations
                     b.Property<int>("WeaponRange")
                         .HasColumnType("int");
 
-                    b.Property<string>("WeaponType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("WeaponType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Weapons", (string)null);
+                    b.ToTable("Weapons");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.WorldInfoVariable", b =>
@@ -952,7 +947,7 @@ namespace redimel_server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WorldInfoVariables", (string)null);
+                    b.ToTable("WorldInfoVariables");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Baggage", b =>
@@ -1075,6 +1070,13 @@ namespace redimel_server.Migrations
                     b.Navigation("Indicators");
 
                     b.Navigation("SpecialAbility");
+                });
+
+            modelBuilder.Entity("redimel_server.Models.Domain.Image", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.Page", null)
+                        .WithMany("Images")
+                        .HasForeignKey("PageId");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.Mission", b =>
@@ -1224,6 +1226,8 @@ namespace redimel_server.Migrations
             modelBuilder.Entity("redimel_server.Models.Domain.Page", b =>
                 {
                     b.Navigation("Choices");
+
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>

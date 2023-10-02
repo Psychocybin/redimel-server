@@ -12,8 +12,8 @@ using redimel_server.Data;
 namespace redimel_server.Migrations
 {
     [DbContext(typeof(RedimelServerDbContext))]
-    [Migration("20230913093712_AddingChangeTable")]
-    partial class AddingChangeTable
+    [Migration("20231002151308_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,9 +158,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ArmorType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ArmorType")
+                        .HasColumnType("int");
 
                     b.Property<int>("Defence")
                         .HasColumnType("int");
@@ -228,9 +227,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ActionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ActionType")
+                        .HasColumnType("int");
 
                     b.Property<bool>("ActiveOrNot")
                         .HasColumnType("bit");
@@ -240,6 +238,9 @@ namespace redimel_server.Migrations
 
                     b.Property<int>("Attack")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("ChoiceId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ClassName")
                         .IsRequired()
@@ -254,8 +255,17 @@ namespace redimel_server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("HeroClass")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HeroType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderOfBattle")
+                        .HasColumnType("int");
 
                     b.Property<string>("PageId")
                         .IsRequired()
@@ -284,6 +294,9 @@ namespace redimel_server.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("AdditionalCheck")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -394,13 +407,11 @@ namespace redimel_server.Migrations
                     b.Property<Guid>("GroupWestId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("HeroClass")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("HeroClass")
+                        .HasColumnType("int");
 
-                    b.Property<string>("HeroType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("HeroType")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("IndicatorsId")
                         .HasColumnType("uniqueidentifier");
@@ -454,7 +465,12 @@ namespace redimel_server.Migrations
                     b.Property<long>("FileSizeInBytes")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("PageId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PageId");
 
                     b.ToTable("Images");
                 });
@@ -666,9 +682,8 @@ namespace redimel_server.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ShieldType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ShieldType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -705,9 +720,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
 
                     b.Property<int>("RequiredMentalEnergy")
                         .HasColumnType("int");
@@ -769,9 +783,8 @@ namespace redimel_server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TalismanType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TalismanType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -807,9 +820,8 @@ namespace redimel_server.Migrations
                     b.Property<int>("ThrowingWeaponRange")
                         .HasColumnType("int");
 
-                    b.Property<string>("ThrowingWeaponType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ThrowingWeaponType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -822,9 +834,8 @@ namespace redimel_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
 
                     b.Property<int>("RequiredMentalEnergy")
                         .HasColumnType("int");
@@ -847,9 +858,11 @@ namespace redimel_server.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Checkpoint")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CurrentLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CurrentUserEmail")
@@ -896,9 +909,8 @@ namespace redimel_server.Migrations
                     b.Property<int>("WeaponRange")
                         .HasColumnType("int");
 
-                    b.Property<string>("WeaponType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("WeaponType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1063,6 +1075,13 @@ namespace redimel_server.Migrations
                     b.Navigation("SpecialAbility");
                 });
 
+            modelBuilder.Entity("redimel_server.Models.Domain.Image", b =>
+                {
+                    b.HasOne("redimel_server.Models.Domain.Page", null)
+                        .WithMany("Images")
+                        .HasForeignKey("PageId");
+                });
+
             modelBuilder.Entity("redimel_server.Models.Domain.Mission", b =>
                 {
                     b.HasOne("redimel_server.Models.Domain.GroupWest", "GroupWest")
@@ -1210,6 +1229,8 @@ namespace redimel_server.Migrations
             modelBuilder.Entity("redimel_server.Models.Domain.Page", b =>
                 {
                     b.Navigation("Choices");
+
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("redimel_server.Models.Domain.SpecialAbility", b =>

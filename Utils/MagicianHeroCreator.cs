@@ -1,39 +1,40 @@
-﻿using redimel_server.Models.Enums;
+﻿using redimel_server.Models.Domain;
+using redimel_server.Models.Enums;
 
 namespace redimel_server.Utils
 {
-    public class KnightHero
+    public class MagicianHeroCreator : HeroCreator
     {
-        public const string NAME = "TheMountainLion";
-        public const HeroClass HEROCLASS = HeroClass.Knight;
-        public const HeroType HEROTYPE = HeroType.Defender;
-        public const double BAGGAGECAPACITY = 50.0;
-        public const int HEALTH = 60;
-        public const int MENTALENERGY = 24;
-        public const int MENTALSTRENGTH = 10;
-        public const int STRENGTH = 10;
-        public const int DEXTERITY = 6;
-        public const int AGILITY = 2;
-        public const int EVASION = 7;
-        public const int ENDURANCE = 5;
+        public const string NAME = "Lusifera";
+        public const HeroClass HEROCLASS = HeroClass.Magician;
+        public const HeroType HEROTYPE = HeroType.Mystic;
+        public const double BAGGAGECAPACITY = 40.0;
+        public const int HEALTH = 50;
+        public const int MENTALENERGY = 32;
+        public const int MENTALSTRENGTH = 12;
+        public const int STRENGTH = 3;
+        public const int DEXTERITY = 3;
+        public const int AGILITY = 7;
+        public const int EVASION = 8;
+        public const int ENDURANCE = 3;
         public const Boolean KNIFE = true;
         public const Boolean SMOKEBALL = false;
         public const Boolean POISON = false;
-        public const Boolean MEDICPACK = true;
+        public const Boolean MEDICPACK = false;
         public const int MONEY = 100;
-        public const ArmorType ARMORTYPE = ArmorType.FullPlate;
+        public const ArmorType ARMORTYPE = ArmorType.Leather;
         public const Boolean ISARMOREXIST = true;
         public const int ARMORDEFENCE = (int)ARMORTYPE;
-        public const ShieldType SHIELDTYPE = ShieldType.Kite;
-        public const Boolean ISSHIELDEXIST = true;
+        public const ShieldType SHIELDTYPE = ShieldType.None;
+        public const Boolean ISSHIELDEXIST = false;
         public const int SHIELDDEFENCE = (int)SHIELDTYPE;
-        public const WeaponType WEAPONTYPE = WeaponType.ShortSpear;
+        public const WeaponType WEAPONTYPE = WeaponType.Scepter;
         public const Boolean ISWEAPONEXIST = true;
         public const Boolean ISWEAPONTWOHAND = false;
-        public const int WEAPONATTACK = 8;
-        public const int WEAPONDEFENCE = 5;
+        public const int WEAPONATTACK = 7;
+        public const int WEAPONDEFENCE = 3;
         public const int WEAPONDAMAGE = (int)WEAPONTYPE;
-        public const int WEAPONRANGE = 2;
+        public const int WEAPONRANGE = 1;
         public const ThrowingWeaponType THROWINGWEAPONTYPE = ThrowingWeaponType.None;
         public const Boolean ISTHROWINGWEAPONEXIST = false;
         public const int THROWINGWEAPONATTACK = 0;
@@ -47,7 +48,7 @@ namespace redimel_server.Utils
         public const Boolean ACROBATICS = false;
         public const Boolean SKILL = false;
         public const Boolean GUILE = false;
-        public const Boolean SECRETKNOWLEDGE = false;
+        public const Boolean SECRETKNOWLEDGE = true;
         public const Boolean SNEAK = false;
         public const Boolean ELUSION = false;
         public const Boolean WATERCYCLE = false;
@@ -55,7 +56,7 @@ namespace redimel_server.Utils
         public const Boolean NATURESKILLS = false;
         public const Boolean BREAKINGLOCKS = false;
         public const Boolean TRANSFORMATION = false;
-        public const Boolean SPELLS = false;
+        public const Boolean SPELLS = true;
         public const Boolean RITUALS = false;
         public const Boolean TRAPS = false;
         public const Boolean ARCHERY = false;
@@ -64,18 +65,18 @@ namespace redimel_server.Utils
         public const Boolean STIMULANTS = false;
         public const Boolean WRESTLING = false;
         public const Boolean OBSERVATION = false;
-        public const Boolean SHIELDBEARER = true;
-        public const Boolean LEADERSHIP = true;
+        public const Boolean SHIELDBEARER = false;
+        public const Boolean LEADERSHIP = false;
         public const Boolean KICKFIGHT = false;
         public const Boolean DOUBLESTRIKE = false;
-        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.KnightSCS;
+        public const SpecialCombatSkillType SCSNAME = SpecialCombatSkillType.MagicianSCS;
         public const int SCSLEVEL = 1;
-        public const int SCSENERGY = 3;
-        public const UltimateType ULTIMATENAME = UltimateType.KnightUltimate;
+        public const int SCSENERGY = 5;
+        public const UltimateType ULTIMATENAME = UltimateType.MagicianUltimate;
         public const int ULTIMATELEVEL = 1;
-        public const int ULTIMATEENERGY = 8;
+        public const int ULTIMATEENERGY = 10;
 
-        public KnightHero()
+        public MagicianHeroCreator()
         {
             this.Name = NAME;
             this.HeroClass = HEROCLASS;
@@ -92,14 +93,14 @@ namespace redimel_server.Utils
             this.Knife = KNIFE;
             //this.SmokeBall = SMOKEBALL;
             //this.Poison = POISON;
-            this.MedicPack = MEDICPACK;
+            //this.MedicPack = MEDICPACK;
             this.Money = MONEY;
             this.ArmorType = ARMORTYPE;
             this.IsArmorExist = ISARMOREXIST;
             this.ArmorDefence = ARMORDEFENCE;
             this.ShieldType = SHIELDTYPE;
-            this.IsShieldExist = ISSHIELDEXIST;
-            this.ShieldDefence = SHIELDDEFENCE;
+            //this.IsShieldExist = ISSHIELDEXIST;
+            //this.ShieldDefence = SHIELDDEFENCE;
             this.WeaponType = WEAPONTYPE;
             this.IsWeaponExist = ISWEAPONEXIST;
             //this.IsWeaponTwoHand = ISWEAPONTWOHAND;
@@ -120,7 +121,7 @@ namespace redimel_server.Utils
             //this.Acrobatics = ACROBATICS;
             //this.Skill = SKILL;
             //this.Guile = GUILE;
-            //this.SecretKnowledge = SECRETKNOWLEDGE;
+            this.SecretKnowledge = SECRETKNOWLEDGE;
             //this.Sneak = SNEAK;
             //this.Elusion = ELUSION;
             //this.WaterCycle = WATERCYCLE;
@@ -128,7 +129,7 @@ namespace redimel_server.Utils
             //this.NatureSkills = NATURESKILLS;
             //this.BreakingLocks = BREAKINGLOCKS;
             //this.Transformation = TRANSFORMATION;
-            //this.Spells = SPELLS;
+            this.Spells = SPELLS;
             //this.Rituals = RITUALS;
             //this.Traps = TRAPS;
             //this.Archery = ARCHERY;
@@ -137,8 +138,8 @@ namespace redimel_server.Utils
             //this.Stimulants = STIMULANTS;
             //this.Wrestling = WRESTLING;
             //this.Observation = OBSERVATION;
-            this.ShieldBearer = SHIELDBEARER;
-            this.Leadership = LEADERSHIP;
+            //this.ShieldBearer = SHIELDBEARER;
+            //this.Leadership = LEADERSHIP;
             //this.KickFight = KICKFIGHT;
             //this.DoubleStrike = DOUBLESTRIKE;
             this.SCSName = SCSNAME;

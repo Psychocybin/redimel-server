@@ -4,9 +4,6 @@ using redimel_server.Data;
 using redimel_server.Models.Domain;
 using redimel_server.Models.Enums;
 using redimel_server.Utils;
-using System.Diagnostics.Metrics;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace redimel_server.Repositories
@@ -133,9 +130,10 @@ namespace redimel_server.Repositories
 
         private Hero CreateHero(string heroClass, Guid groupWestId)
         {
+            //CHECK PROPERTIES!!!
             if (heroClass == RedimelConstants.CREATESOLDIER)
             {
-                var newHero = new SoldierHero();
+                var newHero = new SoldierHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -143,7 +141,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEHUNTER)
             {
-                var newHero = new HunterHero();
+                var newHero = new HunterHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -151,7 +149,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEMERCENARY)
             {
-                var newHero = new MercenaryHero();
+                var newHero = new MercenaryHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -159,7 +157,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEGLADIATOR)
             {
-                var newHero = new GladiatorHero();
+                var newHero = new GladiatorHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -167,7 +165,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEPIRATE)
             {
-                var newHero = new PirateHero();
+                var newHero = new PirateHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -175,7 +173,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEMONSTERSLAYER)
             {
-                var newHero = new MonsterSlayerHero();
+                var newHero = new MonsterSlayerHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -183,7 +181,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEACROBAT)
             {
-                var newHero = new AcrobatHero();
+                var newHero = new AcrobatHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -191,7 +189,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEMERCHANT)
             {
-                var newHero = new MerchantHero();
+                var newHero = new MerchantHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -199,7 +197,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATETHIEF)
             {
-                var newHero = new ThiefHero();
+                var newHero = new ThiefHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -207,7 +205,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEMISSIONARY)
             {
-                var newHero = new MissionaryHero();
+                var newHero = new MissionaryHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -215,7 +213,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEMAGICIAN)
             {
-                var newHero = new MagicianHero();
+                var newHero = new MagicianHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -223,7 +221,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATELIBRARIAN)
             {
-                var newHero = new LibrarianHero();
+                var newHero = new LibrarianHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -231,7 +229,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEKNIGHT)
             {
-                var newHero = new KnightHero();
+                var newHero = new KnightHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -239,7 +237,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATESAVAGE)
             {
-                var newHero = new SavageHero();
+                var newHero = new SavageHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);
@@ -247,7 +245,7 @@ namespace redimel_server.Repositories
 
             if (heroClass == RedimelConstants.CREATEROBBER)
             {
-                var newHero = new RobberHero();
+                var newHero = new RobberHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 
                 return CreateSingleHero(groupWestId, heroCreator);

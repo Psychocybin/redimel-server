@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using redimel_server.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace redimel_server.Models.DTO
 {
@@ -13,15 +14,10 @@ namespace redimel_server.Models.DTO
         [MaxLength(50)]
         public string PropertyName { get; set; }
         [Required]
-        [MinLength(2)]
-        [MaxLength(20)]
-        public string ActionType { get; set; }
-        [MaxLength(20)]
-        public string HeroClass { get; set; }
-        [MaxLength(20)]
-        public string HeroType { get; set; }
-        [Range(0, 5)]
-        public int OrderOfBattle { get; set; }
+        public ActionType ActionType { get; set; }
+        public HeroClass HeroClass { get; set; }
+        public HeroType HeroType { get; set; }
+        public OrderOfBattle OrderOfBattle { get; set; }
         [Required]
         [MinLength(15)]
         [MaxLength(15)]

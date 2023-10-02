@@ -78,659 +78,476 @@ namespace redimel_server.Repositories
             return nextPage;
 
 
-
-            //var country = nextPage.Id.Substring(3, 3);
-            //var area = nextPage.Id.Substring(6, 3);
-            //var place = nextPage.Id.Substring(9, 3);
-            //var situation = nextPage.Id.Substring(12, 3);
-
-            //if (country == "mag")
-            //{
-            //    if (area == "tow")
-            //    {
-            //        if (place == "lib")
-            //        {
-            //            if (situation == "001")
-            //            {
-            //                choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "7D7F0A55-EA5C-4643-7534-08DBA497FC0E"));
-
-            //                if (currentUser.GroupWest.Heroes.Any(x => x.HeroClass == "Soldier"))
-            //                {
-            //                    choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "5BB83086-E234-4162-7535-08DBA497FC0E"));
-
-            //                    currentUser.WorldInfoVariables.Add(new WorldInfoVariable
-            //                    {
-            //                        RedimelLocation = "redmagtowlib",
-            //                        Name = "Guard",
-            //                        Count = 1,
-            //                        TrueOrFalse = true,
-            //                        ActiveOrNot = true
-            //                    });
-
-            //                    currentUser.GroupWest.Heroes.First(x => x.HeroClass == "Soldier").Indicators.Health += 10;
-            //                }
-
-            //                nextPage.Choices = choicesList;
-            //            }
-            //            if (situation == "002")
-            //            {
-            //                if (currentUser.WorldInfoVariables.Any(x => x.Name == "Guard"))
-            //                {
-            //                    choicesList.Add(await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == "582871F4-9419-4FD6-7536-08DBA497FC0E"));
-            //                }
-            //            }
-            //            if (situation == "003")
-            //            {
-
-            //            }
-            //        }
-            //        if (place == "cen")
-            //        {
-            //            if (situation == "")
-            //            {
-
-            //            }
-            //        }
-            //        if (place == "inn")
-            //        {
-            //            if (situation == "")
-            //            {
-
-            //            }
-            //        }
-            //        if (place == "gua")
-            //        {
-            //            if (situation == "")
-            //            {
-
-            //            }
-            //        }
-            //    }
-            //}
-            //else if (country == "out")
-            //{
-
-            //}
-            //else
-            //{
-            //    throw new Exception();
-            //}
         }
 
         public async Task<Choice> PerformChange(User user, Change change)
         {
-            //if (change.ClassName == nameof(Ability))
-            //{
-            //    var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+            if (change.ClassName == nameof(Ability))
+            {
+                var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType) ?? throw new InvalidOperationException();
 
-            //    if (hero == null)
-            //    {
-            //        throw new InvalidOperationException();
-            //    }
+                switch (change.PropertyName)
+                {
+                    case nameof(Ability.Survival):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Survival
+                            };
 
-            //    switch (change.PropertyName)
-            //    {
-            //        case "Survival":
-            //            {
-            //                return await NewMethod(change, hero);
-            //            }
-            //        case "Diplomacy":
-            //            {
-            //                return await NewMethod(change, hero);
-            //            }
-            //        case "Climbing":
-            //            {
-            //                if (change.ActionType.Equals(ComparisonMark.Less))
-            //                {
-            //                    if (hero.Ability.Climbing == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Climbing = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Climbing = false;
-            //                }
-            //                var onjjj = Type.GetType("SoldierConstants");
-            //                var newOnjjjj = Activator.CreateInstance(onjjj);
-            //                var onggg = new SoldierConstants();
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "Acrobatics":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Acrobatics == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Acrobatics = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Acrobatics = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Survival)
+                            {
+                                hero.Ability.Survival = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Skill":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Skill == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Skill = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Skill = false;
-            //                }
+                    case nameof(Ability.Diplomacy):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Diplomacy
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "Guile":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Guile == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Guile = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Guile = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Diplomacy)
+                            {
+                                hero.Ability.Diplomacy = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "SecretKnowledge":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.SecretKnowledge == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.SecretKnowledge = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.SecretKnowledge = false;
-            //                }
+                    case nameof(Ability.Climbing):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Climbing
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "Sneak":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Sneak == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Sneak = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Sneak = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Climbing)
+                            {
+                                hero.Ability.Climbing = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Elusion":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Elusion == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Elusion = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Elusion = false;
-            //                }
+                    case nameof(Ability.Acrobatics):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Acrobatics
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "WaterCycle":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.WaterCycle == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.WaterCycle = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.WaterCycle = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Acrobatics)
+                            {
+                                hero.Ability.Acrobatics = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Melee":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Melee == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Melee = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Melee = false;
-            //                }
+                    case nameof(Ability.Skill):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Skill
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "NatureSkills":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.NatureSkills == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.NatureSkills = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.NatureSkills = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Skill)
+                            {
+                                hero.Ability.Skill = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "BreakingLocks":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.BreakingLocks == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.BreakingLocks = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.BreakingLocks = false;
-            //                }
+                    case nameof(Ability.Guile):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Guile
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "Transformation":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Transformation == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Transformation = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Transformation = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Guile)
+                            {
+                                hero.Ability.Guile = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Spells":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Spells == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Spells = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Spells = false;
-            //                }
+                    case nameof(Ability.SecretKnowledge):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.SecretKnowledge
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "Rituals":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Rituals == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Rituals = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Rituals = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.SecretKnowledge)
+                            {
+                                hero.Ability.SecretKnowledge = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Traps":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Traps == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Traps = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Traps = false;
-            //                }
+                    case nameof(Ability.Sneak):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Sneak
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "Archery":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Archery == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Archery = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Archery = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Sneak)
+                            {
+                                hero.Ability.Sneak = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "ThrowingKnives":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.ThrowingKnives == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.ThrowingKnives = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.ThrowingKnives = false;
-            //                }
+                    case nameof(Ability.Elusion):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Elusion
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "PoisonousNeedles":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.PoisonousNeedles == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.PoisonousNeedles = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.PoisonousNeedles = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Elusion)
+                            {
+                                hero.Ability.Elusion = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Stimulants":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Stimulants == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Stimulants = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Stimulants = false;
-            //                }
+                    case nameof(Ability.WaterCycle):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.WaterCycle
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "Wrestling":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Wrestling == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Wrestling = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Wrestling = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.WaterCycle)
+                            {
+                                hero.Ability.WaterCycle = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Observation":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Observation == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Observation = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Observation = false;
-            //                }
+                    case nameof(Ability.Melee):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Melee
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "ShieldBearer":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.ShieldBearer == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.ShieldBearer = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.ShieldBearer = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Melee)
+                            {
+                                hero.Ability.Melee = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "Leadership":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.Leadership == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.Leadership = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.Leadership = false;
-            //                }
+                    case nameof(Ability.NatureSkills):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.NatureSkills
+                            };
 
-            //                return null;
-            //            }
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
 
-            //        case "KickFight":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.KickFight == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.KickFight = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.KickFight = false;
-            //                }
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.NatureSkills)
+                            {
+                                hero.Ability.NatureSkills = booleanPropertyToCheck.ResearchedValue;
+                            }
 
-            //                return null;
-            //            }
+                            return booleanPropertyToCheck.Choice;
+                        }
 
-            //        case "DoubleStrike":
-            //            {
-            //                if (change.ActionType == "check")
-            //                {
-            //                    if (hero.Ability.DoubleStrike == true)
-            //                    {
-            //                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                        return choice;
-            //                    }
-            //                }
-            //                else if (change.ActionType == "add")
-            //                {
-            //                    hero.Ability.DoubleStrike = true;
-            //                }
-            //                else if (change.ActionType == "remove")
-            //                {
-            //                    hero.Ability.DoubleStrike = false;
-            //                }
+                    case nameof(Ability.BreakingLocks):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.BreakingLocks
+                            };
 
-            //                return null;
-            //            }
-            //    }
-            //}
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.BreakingLocks)
+                            {
+                                hero.Ability.BreakingLocks = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Transformation):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Transformation
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Transformation)
+                            {
+                                hero.Ability.Transformation = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Spells):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Spells
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Spells)
+                            {
+                                hero.Ability.Spells = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Rituals):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Rituals
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Rituals)
+                            {
+                                hero.Ability.Rituals = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Traps):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Traps
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Traps)
+                            {
+                                hero.Ability.Traps = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Archery):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Archery
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Archery)
+                            {
+                                hero.Ability.Archery = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.ThrowingKnives):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.ThrowingKnives
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.ThrowingKnives)
+                            {
+                                hero.Ability.ThrowingKnives = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.PoisonousNeedles):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.PoisonousNeedles
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.PoisonousNeedles)
+                            {
+                                hero.Ability.PoisonousNeedles = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Stimulants):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Stimulants
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Stimulants)
+                            {
+                                hero.Ability.Stimulants = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Wrestling):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Wrestling
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Wrestling)
+                            {
+                                hero.Ability.Wrestling = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Observation):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Observation
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Observation)
+                            {
+                                hero.Ability.Observation = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.ShieldBearer):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.ShieldBearer
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.ShieldBearer)
+                            {
+                                hero.Ability.ShieldBearer = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.Leadership):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.Leadership
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Leadership)
+                            {
+                                hero.Ability.Leadership = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.KickFight):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.KickFight
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.KickFight)
+                            {
+                                hero.Ability.KickFight = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(Ability.DoubleStrike):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Ability.DoubleStrike
+                            };
+
+                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.DoubleStrike)
+                            {
+                                hero.Ability.DoubleStrike = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+                }
+            }
 
             //if (change.ClassName == "AditionalPoints")
             //{
@@ -1142,55 +959,63 @@ namespace redimel_server.Repositories
             return null;
         }
 
-        //private async Task<Choice> NewMethod1(Change change, int teamGame)
-        //{
-        //    var requiredTeamGame = change.Attack;
-        //    var indicator = change.AdditionalInfo;
+        private async Task<Choice> NewMethod1(Change change, int teamGame)
+        {
+            var requiredTeamGame = change.Attack;
+            var indicator = change.AdditionalInfo;
 
-        //    if (indicator == "equal" && teamGame == requiredTeamGame)
-        //    {
-        //        return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-        //    }
-        //    else if (indicator == "bigger")
-        //    {
-        //        if (teamGame >= requiredTeamGame)
-        //        {
-        //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-        //            return choice;
-        //        }
-        //    }
-        //    else if (indicator == "less")
-        //    {
-        //        if (teamGame <= requiredTeamGame)
-        //        {
-        //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-        //            return choice;
-        //        }
-        //    }
+            if (indicator == "equal" && teamGame == requiredTeamGame)
+            {
+                return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+            }
+            else if (indicator == "bigger")
+            {
+                if (teamGame >= requiredTeamGame)
+                {
+                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                    return choice;
+                }
+            }
+            else if (indicator == "less")
+            {
+                if (teamGame <= requiredTeamGame)
+                {
+                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                    return choice;
+                }
+            }
 
-        //    return null;
-        //}
+            return null;
+        }
 
-        //private async Task<Choice> NewMethod(Change change, Hero? hero)
-        //{
-        //    if (change.ActionType == "check")
-        //    {
-        //        if (hero.Ability.Survival == true)
-        //        {
-        //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-        //            return choice;
-        //        }
-        //    }
-        //    else if (change.ActionType == "add")
-        //    {
-        //        hero.Ability.Survival = true;
-        //    }
-        //    else if (change.ActionType == "remove")
-        //    {
-        //        hero.Ability.Survival = false;
-        //    }
+        private async Task<BooleanPropertyToCheck> PropertyToCheck(Change change, BooleanPropertyToCheck booleanPropertyToCheck)
+        {
+            var result = new BooleanPropertyToCheck();
 
-        //    return null;
-        //}
+            if (change.ActionType == ActionType.Check)
+            {
+                if (booleanPropertyToCheck.ResearchedValue == true)
+                {
+                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                    result.ResearchedValue = booleanPropertyToCheck.ResearchedValue;
+                    result.Choice = choice;
+                    return result;
+                }
+            }
+            else if (change.ActionType == ActionType.Add)
+            {
+                result.ResearchedValue = true;
+            }
+            else if (change.ActionType == ActionType.Remove)
+            {
+                result.ResearchedValue = false;
+            }
+            else
+            {
+                return null;
+            }
+
+            return result;
+        }
     }
 }

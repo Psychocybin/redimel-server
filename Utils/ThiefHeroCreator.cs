@@ -1,8 +1,9 @@
-﻿using redimel_server.Models.Enums;
+﻿using redimel_server.Models.Domain;
+using redimel_server.Models.Enums;
 
 namespace redimel_server.Utils
 {
-    public class ThiefHero
+    public class ThiefHeroCreator : HeroCreator
     {
         public const string NAME = "TheSonOfTheShadow";
         public const HeroClass HEROCLASS = HeroClass.Thief;
@@ -75,7 +76,7 @@ namespace redimel_server.Utils
         public const int ULTIMATELEVEL = 1;
         public const int ULTIMATEENERGY = 9;
 
-        public ThiefHero()
+        public ThiefHeroCreator()
         {
             this.Name = NAME;
             this.HeroClass = HEROCLASS;

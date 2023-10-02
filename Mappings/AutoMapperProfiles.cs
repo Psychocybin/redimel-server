@@ -47,21 +47,21 @@ namespace redimel_server.Mappings
             CreateMap<ChangeDto, Change>().ReverseMap();
             CreateMap<UpdateChangeRequestDto, Change>().ReverseMap();
             CreateMap<AddChangeRequestDto, Change>().ReverseMap();
-            CreateMap<SavageHero, HeroCreator>();
-            CreateMap<ThiefHero, HeroCreator>();
-            CreateMap<SoldierHero, HeroCreator>();
-            CreateMap<RobberHero, HeroCreator>();
-            CreateMap<PirateHero, HeroCreator>();
-            CreateMap<MonsterSlayerHero, HeroCreator>();
-            CreateMap<MissionaryHero, HeroCreator>();
-            CreateMap<MerchantHero, HeroCreator>();
-            CreateMap<MercenaryHero, HeroCreator>();
-            CreateMap<MagicianHero, HeroCreator>();
-            CreateMap<LibrarianHero, HeroCreator>();
-            CreateMap<KnightHero, HeroCreator>();
-            CreateMap<HunterHero, HeroCreator>();
-            CreateMap<GladiatorHero, HeroCreator>();
-            CreateMap<AcrobatHero, HeroCreator>();
+            CreateMap<SavageHeroCreator, HeroCreator>();
+            CreateMap<ThiefHeroCreator, HeroCreator>();
+            CreateMap<SoldierHeroCreator, HeroCreator>();
+            CreateMap<RobberHeroCreator, HeroCreator>();
+            CreateMap<PirateHeroCreator, HeroCreator>();
+            CreateMap<MonsterSlayerHeroCreator, HeroCreator>();
+            CreateMap<MissionaryHeroCreator, HeroCreator>();
+            CreateMap<MerchantHeroCreator, HeroCreator>();
+            CreateMap<MercenaryHeroCreator, HeroCreator>();
+            CreateMap<MagicianHeroCreator, HeroCreator>();
+            CreateMap<LibrarianHeroCreator, HeroCreator>();
+            CreateMap<KnightHeroCreator, HeroCreator>();
+            CreateMap<HunterHeroCreator, HeroCreator>();
+            CreateMap<GladiatorHeroCreator, HeroCreator>();
+            CreateMap<AcrobatHeroCreator, HeroCreator>();
         }
     }
 }

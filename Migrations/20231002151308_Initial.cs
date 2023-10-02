@@ -40,6 +40,9 @@ namespace redimel_server.Migrations
                     Wrestling = table.Column<bool>(type: "bit", nullable: false),
                     Observation = table.Column<bool>(type: "bit", nullable: false),
                     ShieldBearer = table.Column<bool>(type: "bit", nullable: false),
+                    Leadership = table.Column<bool>(type: "bit", nullable: false),
+                    KickFight = table.Column<bool>(type: "bit", nullable: false),
+                    DoubleStrike = table.Column<bool>(type: "bit", nullable: false),
                     HeroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -57,6 +60,7 @@ namespace redimel_server.Migrations
                     SlainMonsters = table.Column<int>(type: "int", nullable: false),
                     Morals = table.Column<int>(type: "int", nullable: false),
                     Cover = table.Column<int>(type: "int", nullable: false),
+                    TemporaryPoints = table.Column<int>(type: "int", nullable: false),
                     GroupWestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -69,7 +73,7 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ArmorType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArmorType = table.Column<int>(type: "int", nullable: false),
                     IsExist = table.Column<bool>(type: "bit", nullable: false),
                     Defence = table.Column<int>(type: "int", nullable: false),
                     EquipmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -80,19 +84,32 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
+                name: "Changes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FileDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FileExtension = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FileSizeInBytes = table.Column<long>(type: "bigint", nullable: false),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ClassName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PropertyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActionType = table.Column<int>(type: "int", nullable: false),
+                    HeroClass = table.Column<int>(type: "int", nullable: false),
+                    HeroType = table.Column<int>(type: "int", nullable: false),
+                    OrderOfBattle = table.Column<int>(type: "int", nullable: false),
+                    PageId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChoiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdditionalInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrueOrFalse = table.Column<bool>(type: "bit", nullable: false),
+                    ActiveOrNot = table.Column<bool>(type: "bit", nullable: false),
+                    Attack = table.Column<int>(type: "int", nullable: false),
+                    Defence = table.Column<int>(type: "int", nullable: false),
+                    Damage = table.Column<int>(type: "int", nullable: false),
+                    Range = table.Column<double>(type: "float", nullable: false),
+                    Quantity = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.PrimaryKey("PK_Changes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,11 +145,25 @@ namespace redimel_server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RedimelInfos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdditionalInfo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RedimelInfos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shields",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ShieldType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShieldType = table.Column<int>(type: "int", nullable: false),
                     IsExist = table.Column<bool>(type: "bit", nullable: false),
                     Defence = table.Column<int>(type: "int", nullable: false),
                     EquipmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -147,7 +178,7 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<int>(type: "int", nullable: false),
                     SkillLevel = table.Column<int>(type: "int", nullable: false),
                     RequiredMentalEnergy = table.Column<int>(type: "int", nullable: false),
                     SpecialAbilitiesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -162,7 +193,7 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ThrowingWeaponType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThrowingWeaponType = table.Column<int>(type: "int", nullable: false),
                     IsExist = table.Column<bool>(type: "bit", nullable: false),
                     Attack = table.Column<int>(type: "int", nullable: false),
                     Defence = table.Column<int>(type: "int", nullable: false),
@@ -181,7 +212,7 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<int>(type: "int", nullable: false),
                     SkillLevel = table.Column<int>(type: "int", nullable: false),
                     RequiredMentalEnergy = table.Column<int>(type: "int", nullable: false),
                     SpecialAbilitiesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -196,7 +227,7 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    WeaponType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WeaponType = table.Column<int>(type: "int", nullable: false),
                     IsExist = table.Column<bool>(type: "bit", nullable: false),
                     IsItTwoHandWeapon = table.Column<bool>(type: "bit", nullable: false),
                     Attack = table.Column<int>(type: "int", nullable: false),
@@ -274,6 +305,7 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AdditionalCheck = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NextPage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PageId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -287,6 +319,28 @@ namespace redimel_server.Migrations
                         principalTable: "Pages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PageId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileExtension = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileSizeInBytes = table.Column<long>(type: "bigint", nullable: false),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Pages_PageId",
+                        column: x => x.PageId,
+                        principalTable: "Pages",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -385,8 +439,8 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CurrentLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Checkpoint = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CurrentLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Checkpoint = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TimeCounter = table.Column<int>(type: "int", nullable: false),
                     CurrentUserEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GroupWestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -471,7 +525,8 @@ namespace redimel_server.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HeroClass = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HeroClass = table.Column<int>(type: "int", nullable: false),
+                    HeroType = table.Column<int>(type: "int", nullable: false),
                     OrderOfBattle = table.Column<int>(type: "int", nullable: false),
                     BaggageCapacity = table.Column<double>(type: "float", nullable: false),
                     GroupWestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -520,7 +575,7 @@ namespace redimel_server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TalismanType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TalismanType = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BonusIndicator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BonusPoints = table.Column<int>(type: "int", nullable: false),
@@ -667,6 +722,11 @@ namespace redimel_server.Migrations
                 column: "SpecialAbilityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Images_PageId",
+                table: "Images",
+                column: "PageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Missions_GroupWestId",
                 table: "Missions",
                 column: "GroupWestId");
@@ -732,6 +792,9 @@ namespace redimel_server.Migrations
                 name: "BattleGroups");
 
             migrationBuilder.DropTable(
+                name: "Changes");
+
+            migrationBuilder.DropTable(
                 name: "Choices");
 
             migrationBuilder.DropTable(
@@ -748,6 +811,9 @@ namespace redimel_server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Promises");
+
+            migrationBuilder.DropTable(
+                name: "RedimelInfos");
 
             migrationBuilder.DropTable(
                 name: "Rituals");
