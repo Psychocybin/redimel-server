@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using redimel_server.Models.Domain;
-using redimel_server.Models.Enums;
+﻿using redimel_server.Models.Enums;
 
 namespace redimel_server.Utils
 {

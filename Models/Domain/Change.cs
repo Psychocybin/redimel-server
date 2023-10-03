@@ -11,6 +11,7 @@ namespace redimel_server.Models.Domain
         public HeroClass HeroClass { get; set; }
         public HeroType HeroType { get; set; }
         public OrderOfBattle OrderOfBattle { get; set; }
+        public ComparisonMark ComparisonMark { get; set; }
         public string PageId { get; set; }
         public Guid ChoiceId { get; set; }
         public string? Name { get; set; }

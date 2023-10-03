@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace redimel_server.Models.Domain
+﻿namespace redimel_server.Infrastructure
 {
-    [NotMapped]
     public class BattlePoint
     {
         public int AttackWithHandToHandWeapon { get; set; }

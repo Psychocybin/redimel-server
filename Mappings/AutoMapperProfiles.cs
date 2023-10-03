@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using redimel_server.Infrastructure;
 using redimel_server.Models.Domain;
 using redimel_server.Models.DTO;
 using redimel_server.Utils;

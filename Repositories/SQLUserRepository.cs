@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
+using redimel_server.Infrastructure;
 using redimel_server.Models.Domain;
 using redimel_server.Models.Enums;
 using redimel_server.Utils;

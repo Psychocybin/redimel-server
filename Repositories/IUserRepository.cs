@@ -1,4 +1,5 @@
-﻿using redimel_server.Models.Domain;
+﻿using redimel_server.Infrastructure;
+using redimel_server.Models.Domain;
 
 namespace redimel_server.Repositories
 {

@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
+using redimel_server.Infrastructure;
 using redimel_server.Models.Domain;
 using redimel_server.Models.Enums;
 using redimel_server.Utils;
+using System.Linq;
 
 namespace redimel_server.Repositories
 {
@@ -84,7 +86,17 @@ namespace redimel_server.Repositories
         {
             if (change.ClassName == nameof(Ability))
             {
-                var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType) ?? throw new InvalidOperationException();
+                var hero = new Hero();
+
+                if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
+                {
+                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+                }
+                else
+                {
+                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType) 
+                        ?? throw new InvalidOperationException("Hero is null");
+                }
 
                 switch (change.PropertyName)
                 {
@@ -95,7 +107,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Survival
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Survival)
                             {
@@ -112,7 +124,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Diplomacy
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Diplomacy)
                             {
@@ -129,7 +141,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Climbing
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Climbing)
                             {
@@ -146,7 +158,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Acrobatics
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Acrobatics)
                             {
@@ -163,7 +175,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Skill
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Skill)
                             {
@@ -180,7 +192,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Guile
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Guile)
                             {
@@ -197,7 +209,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.SecretKnowledge
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.SecretKnowledge)
                             {
@@ -214,7 +226,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Sneak
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Sneak)
                             {
@@ -231,7 +243,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Elusion
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Elusion)
                             {
@@ -248,7 +260,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.WaterCycle
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.WaterCycle)
                             {
@@ -265,7 +277,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Melee
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Melee)
                             {
@@ -282,7 +294,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.NatureSkills
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.NatureSkills)
                             {
@@ -299,7 +311,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.BreakingLocks
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.BreakingLocks)
                             {
@@ -316,7 +328,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Transformation
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Transformation)
                             {
@@ -333,7 +345,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Spells
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Spells)
                             {
@@ -350,7 +362,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Rituals
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Rituals)
                             {
@@ -367,7 +379,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Traps
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Traps)
                             {
@@ -384,7 +396,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Archery
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Archery)
                             {
@@ -401,7 +413,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.ThrowingKnives
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.ThrowingKnives)
                             {
@@ -418,7 +430,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.PoisonousNeedles
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.PoisonousNeedles)
                             {
@@ -435,7 +447,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Stimulants
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Stimulants)
                             {
@@ -452,7 +464,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Wrestling
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Wrestling)
                             {
@@ -469,7 +481,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Observation
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Observation)
                             {
@@ -486,7 +498,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.ShieldBearer
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.ShieldBearer)
                             {
@@ -503,7 +515,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.Leadership
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Leadership)
                             {
@@ -520,7 +532,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.KickFight
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.KickFight)
                             {
@@ -537,7 +549,7 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Ability.DoubleStrike
                             };
 
-                            booleanPropertyToCheck = PropertyToCheck(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Ability.DoubleStrike)
                             {
@@ -549,258 +561,182 @@ namespace redimel_server.Repositories
                 }
             }
 
-            //if (change.ClassName == "AditionalPoints")
-            //{
-            //    var aditionalPoints = user.GroupWest.AditionalPoints;
+            if (change.ClassName == nameof(AditionalPoint))
+            {
+                var aditionalPoints = user.GroupWest.AditionalPoints ?? throw new InvalidOperationException("AditionalPoint is null");
 
-            //    if (change.ActionType == "check")
-            //    {
-            //        switch (change.PropertyName)
-            //        {
-            //            case "TeamGame":
-            //                {
-            //                    var teamGame = aditionalPoints.TeamGame;
-            //                    return await NewMethod1(change, teamGame);
-            //                }
+                switch (change.PropertyName)
+                {
+                    case nameof(aditionalPoints.TeamGame):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = aditionalPoints.TeamGame
+                            };
 
-            //            case "ImportantInformation":
-            //                {
-            //                    var importantInformation = aditionalPoints.ImportantInformation;
-            //                    var requiredTeamGame = change.Attack;
-            //                    var indicator = change.AdditionalInfo;
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
 
-            //                    if (indicator == "equal")
-            //                    {
-            //                        if (importantInformation == requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "bigger")
-            //                    {
-            //                        if (importantInformation >= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "less")
-            //                    {
-            //                        if (importantInformation <= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
+                            if (intPropertyToCheck.ResearchedValue != aditionalPoints.TeamGame)
+                            {
+                                aditionalPoints.TeamGame = intPropertyToCheck.ResearchedValue;
+                            }
 
-            //                    break;
-            //                }
+                            return intPropertyToCheck.Choice;
+                        }
 
-            //            case "SlainMonsters":
-            //                {
-            //                    var slainMonsters = aditionalPoints.SlainMonsters;
-            //                    var requiredTeamGame = change.Attack;
-            //                    var indicator = change.AdditionalInfo;
+                    case nameof(aditionalPoints.ImportantInformation):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = aditionalPoints.ImportantInformation
+                            };
 
-            //                    if (indicator == "equal")
-            //                    {
-            //                        if (slainMonsters == requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "bigger")
-            //                    {
-            //                        if (slainMonsters >= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "less")
-            //                    {
-            //                        if (slainMonsters <= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
 
-            //                    break;
-            //                }
+                            if (intPropertyToCheck.ResearchedValue != aditionalPoints.ImportantInformation)
+                            {
+                                aditionalPoints.ImportantInformation = intPropertyToCheck.ResearchedValue;
+                            }
 
-            //            case "Morals":
-            //                {
-            //                    var morals = aditionalPoints.Morals;
-            //                    var requiredTeamGame = change.Attack;
-            //                    var indicator = change.AdditionalInfo;
+                            return intPropertyToCheck.Choice;
+                        }
 
-            //                    if (indicator == "equal")
-            //                    {
-            //                        if (morals == requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "bigger")
-            //                    {
-            //                        if (morals >= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "less")
-            //                    {
-            //                        if (morals <= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
+                    case nameof(aditionalPoints.SlainMonsters):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = aditionalPoints.SlainMonsters
+                            };
 
-            //                    break;
-            //                }
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
 
-            //            case "Cover":
-            //                {
-            //                    var cover = aditionalPoints.Cover;
-            //                    var requiredTeamGame = change.Attack;
-            //                    var indicator = change.AdditionalInfo;
+                            if (intPropertyToCheck.ResearchedValue != aditionalPoints.SlainMonsters)
+                            {
+                                aditionalPoints.SlainMonsters = intPropertyToCheck.ResearchedValue;
+                            }
 
-            //                    if (indicator == "equal")
-            //                    {
-            //                        if (cover == requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "bigger")
-            //                    {
-            //                        if (cover >= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "less")
-            //                    {
-            //                        if (cover <= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
+                            return intPropertyToCheck.Choice;
+                        }
 
-            //                    break;
-            //                }
+                    case nameof(aditionalPoints.Morals):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = aditionalPoints.Morals
+                            };
 
-            //            case "TemporaryPoints":
-            //                {
-            //                    var temporaryPoints = aditionalPoints.TemporaryPoints;
-            //                    var requiredTeamGame = change.Attack;
-            //                    var indicator = change.AdditionalInfo;
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
 
-            //                    if (indicator == "equal")
-            //                    {
-            //                        if (temporaryPoints == requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "bigger")
-            //                    {
-            //                        if (temporaryPoints >= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
-            //                    else if (indicator == "less")
-            //                    {
-            //                        if (temporaryPoints <= requiredTeamGame)
-            //                        {
-            //                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                            return choice;
-            //                        }
-            //                    }
+                            if (intPropertyToCheck.ResearchedValue != aditionalPoints.Morals)
+                            {
+                                aditionalPoints.Morals = intPropertyToCheck.ResearchedValue;
+                            }
 
-            //                    break;
-            //                }
-            //        }
-            //    }
-            //    else if (change.ActionType.ToString() == "add" || change.ActionType == "remove")
-            //    {
-            //        aditionalPoints.TeamGame += change.Attack;
-            //        aditionalPoints.ImportantInformation += change.Defence;
-            //        aditionalPoints.SlainMonsters += change.Damage;
-            //        aditionalPoints.Morals += Convert.ToInt32(change.Range);
-            //        aditionalPoints.Cover += Convert.ToInt32(change.Quantity);
-            //        aditionalPoints.TemporaryPoints += int.Parse(change.AdditionalInfo);
-            //    }
-            //}
+                            return intPropertyToCheck.Choice;
+                        }
 
-            //if (change.ClassName == "Armors")
-            //{
-            //    var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+                    case nameof(aditionalPoints.Cover):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = aditionalPoints.Cover
+                            };
 
-            //    if (change.ActionType == "check")
-            //    {
-            //        var IsArmorExist = hero.Equipments.Armor.IsExist;
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
 
-            //        if (change.TrueOrFalse == true)
-            //        {
-            //            var heroArmorType = hero.Equipments.Armor.ArmorType;
+                            if (intPropertyToCheck.ResearchedValue != aditionalPoints.Cover)
+                            {
+                                aditionalPoints.Cover = intPropertyToCheck.ResearchedValue;
+                            }
 
-            //            if (heroArmorType == change.AdditionalInfo)
-            //            {
-            //                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                return choice;
-            //            }
+                            return intPropertyToCheck.Choice;
+                        }
 
-            //            //TO DO when finished enum's
-            //        }
+                    case nameof(aditionalPoints.TemporaryPoints):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = aditionalPoints.TemporaryPoints
+                            };
 
-            //        if (IsArmorExist == change.ActiveOrNot)
-            //        {
-            //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //            return choice;
-            //        }
-            //    }
-            //    else if (change.ActionType == "add")
-            //    {
-            //        var heroArmor = new Armor
-            //        {
-            //            ArmorType = change.AdditionalInfo,
-            //            IsExist = true,
-            //            Defence = change.Defence,
-            //            EquipmentId = hero.EquipmentsId
-            //        };
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
 
-            //        hero.Equipments.Armor = heroArmor;
-            //    }
-            //    else if (change.ActionType == "remove")
-            //    {
-            //        var heroArmor = new Armor
-            //        {
-            //            ArmorType = "",
-            //            IsExist = false,
-            //            Defence = 0,
-            //            EquipmentId = hero.EquipmentsId
-            //        };
+                            if (intPropertyToCheck.ResearchedValue != aditionalPoints.TemporaryPoints)
+                            {
+                                aditionalPoints.TemporaryPoints = intPropertyToCheck.ResearchedValue;
+                            }
 
-            //        hero.Equipments.Armor = heroArmor;
-            //    }
-            //    else if (change.ActionType == "update")
-            //    {
-            //        hero.Equipments.Armor.Defence += change.Defence;
-            //    }
-            //}
+                            return intPropertyToCheck.Choice;
+                        }
+                }
+            }
+
+            if (change.ClassName == nameof(Armor))
+            {
+                var hero = new Hero();
+
+                if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
+                {
+                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+                }
+                else
+                {
+                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType)
+                        ?? throw new InvalidOperationException("Hero is null");
+                }
+
+                if (change.ActionType == "check")
+                {
+                    var IsArmorExist = hero.Equipments.Armor.IsExist;
+
+                    if (change.TrueOrFalse == true)
+                    {
+                        var heroArmorType = hero.Equipments.Armor.ArmorType;
+
+                        if (heroArmorType == change.AdditionalInfo)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+
+                        //TO DO when finished enum's
+                    }
+
+                    if (IsArmorExist == change.ActiveOrNot)
+                    {
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                }
+                else if (change.ActionType == "add")
+                {
+                    var heroArmor = new Armor
+                    {
+                        ArmorType = change.AdditionalInfo,
+                        IsExist = true,
+                        Defence = change.Defence,
+                        EquipmentId = hero.EquipmentsId
+                    };
+
+                    hero.Equipments.Armor = heroArmor;
+                }
+                else if (change.ActionType == "remove")
+                {
+                    var heroArmor = new Armor
+                    {
+                        ArmorType = "",
+                        IsExist = false,
+                        Defence = 0,
+                        EquipmentId = hero.EquipmentsId
+                    };
+
+                    hero.Equipments.Armor = heroArmor;
+                }
+                else if (change.ActionType == "update")
+                {
+                    hero.Equipments.Armor.Defence += change.Defence;
+                }
+            }
 
             //if (change.ClassName == "Baggages")
             //{
@@ -959,36 +895,40 @@ namespace redimel_server.Repositories
             return null;
         }
 
-        private async Task<Choice> NewMethod1(Change change, int teamGame)
+        private async Task<IntPropertyToCheck> CheckIntProperty(Change change, IntPropertyToCheck intPropertyToCheckInput)
         {
-            var requiredTeamGame = change.Attack;
-            var indicator = change.AdditionalInfo;
+            var requiredValue = change.Attack;
 
-            if (indicator == "equal" && teamGame == requiredTeamGame)
+            var intPropertToCheckResult = new IntPropertyToCheck();
+
+            if (change.ActionType == ActionType.Check)
             {
-                return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            }
-            else if (indicator == "bigger")
-            {
-                if (teamGame >= requiredTeamGame)
+                if (change.ComparisonMark == ComparisonMark.Equal && intPropertyToCheckInput.ResearchedValue == requiredValue)
                 {
-                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                    return choice;
+                    intPropertToCheckResult.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                 }
-            }
-            else if (indicator == "less")
-            {
-                if (teamGame <= requiredTeamGame)
+                else if (change.ComparisonMark == ComparisonMark.Bigger && intPropertyToCheckInput.ResearchedValue >= requiredValue)
                 {
-                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                    return choice;
+                    intPropertToCheckResult.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                 }
+                else if (change.ComparisonMark == ComparisonMark.Less && intPropertyToCheckInput.ResearchedValue <= requiredValue)
+                {
+                    intPropertToCheckResult.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                }
+
+                intPropertToCheckResult.ResearchedValue = requiredValue;
+                return intPropertToCheckResult;
+            }
+            else if (change.ActionType == ActionType.Add || change.ActionType == ActionType.Remove)
+            {
+                intPropertToCheckResult.ResearchedValue = intPropertyToCheckInput.ResearchedValue + requiredValue;
+                return intPropertToCheckResult;
             }
 
             return null;
         }
 
-        private async Task<BooleanPropertyToCheck> PropertyToCheck(Change change, BooleanPropertyToCheck booleanPropertyToCheck)
+        private async Task<BooleanPropertyToCheck> CheckBooleanProperty(Change change, BooleanPropertyToCheck booleanPropertyToCheck)
         {
             var result = new BooleanPropertyToCheck();
 

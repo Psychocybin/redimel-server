@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
-using redimel_server.Models.Domain;
+using redimel_server.Infrastructure;
 
 namespace redimel_server.Repositories
 {
