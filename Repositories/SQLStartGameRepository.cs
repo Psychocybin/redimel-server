@@ -90,7 +90,8 @@ namespace redimel_server.Repositories
 
                 if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
                 {
-                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle)
+                        ?? throw new InvalidOperationException("Hero is null");
                 }
                 else
                 {
@@ -677,7 +678,8 @@ namespace redimel_server.Repositories
 
                 if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
                 {
-                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle)
+                        ?? throw new InvalidOperationException("Hero is null");
                 }
                 else
                 {
@@ -685,22 +687,22 @@ namespace redimel_server.Repositories
                         ?? throw new InvalidOperationException("Hero is null");
                 }
 
-                if (change.ActionType == "check")
+                if (change.ActionType == ActionType.Check)
                 {
-                    var IsArmorExist = hero.Equipments.Armor.IsExist;
-
                     if (change.TrueOrFalse == true)
                     {
-                        var heroArmorType = hero.Equipments.Armor.ArmorType;
-
-                        if (heroArmorType == change.AdditionalInfo)
+                        if (hero.Equipments.Armor.ArmorType.ToString() == change.AdditionalInfo)
                         {
                             var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                             return choice;
                         }
 
-                        //TO DO when finished enum's
+                        //TO DO with ComparisonMark
+
+                        return null;
                     }
+
+                    var IsArmorExist = hero.Equipments.Armor.IsExist;
 
                     if (IsArmorExist == change.ActiveOrNot)
                     {
@@ -708,34 +710,43 @@ namespace redimel_server.Repositories
                         return choice;
                     }
                 }
-                else if (change.ActionType == "add")
+                else if (change.ActionType == ActionType.Add)
                 {
-                    var heroArmor = new Armor
+                    if (Enum.TryParse(change.AdditionalInfo, out ArmorType armorType))
                     {
-                        ArmorType = change.AdditionalInfo,
-                        IsExist = true,
-                        Defence = change.Defence,
-                        EquipmentId = hero.EquipmentsId
-                    };
+                        var heroArmor = new Armor
+                        {
+                            ArmorType = armorType,
+                            IsExist = true,
+                            Defence = change.Defence,
+                            EquipmentId = hero.EquipmentsId
+                        };
 
-                    hero.Equipments.Armor = heroArmor;
+                        hero.Equipments.Armor = heroArmor;
+
+                        //TO DO The old armor must be deleted
+                    }
                 }
-                else if (change.ActionType == "remove")
+                else if (change.ActionType == ActionType.Remove)
                 {
                     var heroArmor = new Armor
                     {
-                        ArmorType = "",
+                        ArmorType = ArmorType.None,
                         IsExist = false,
                         Defence = 0,
                         EquipmentId = hero.EquipmentsId
                     };
 
                     hero.Equipments.Armor = heroArmor;
+
+                    //TO DO The old armor must be deleted
                 }
-                else if (change.ActionType == "update")
+                else if (change.ActionType == ActionType.Update)
                 {
                     hero.Equipments.Armor.Defence += change.Defence;
                 }
+
+                return null;
             }
 
             //if (change.ClassName == "Baggages")
@@ -936,9 +947,8 @@ namespace redimel_server.Repositories
             {
                 if (booleanPropertyToCheck.ResearchedValue == true)
                 {
-                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     result.ResearchedValue = booleanPropertyToCheck.ResearchedValue;
-                    result.Choice = choice;
+                    result.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     return result;
                 }
             }
