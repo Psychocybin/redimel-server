@@ -868,6 +868,7 @@ namespace redimel_server.Repositories
             }
 
             if (change.ClassName == nameof(Equipment))
+
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
 
@@ -959,6 +960,42 @@ namespace redimel_server.Repositories
                         }
 
                 }
+            }
+
+
+
+            if (change.ClassName == nameof(Hero))
+            {
+                if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
+                {
+                    Hero hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle) ?? throw new InvalidOperationException("Hero is null");
+
+                    if (change.HeroClass == HeroClass.All)
+                    {
+                        if (hero.HeroType == change.HeroType)
+                        {
+                            return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        }
+                    }
+                    else if (hero.HeroClass == change.HeroClass )
+                    {
+                        return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                    }
+                }
+                else if (change.OrderOfBattle == OrderOfBattle.All)
+                {
+                    List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
+
+                    foreach (var h in heroes)
+                    {
+                        if (h.HeroClass == change.HeroClass)
+                        {
+                            return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        }
+                    }
+                }
+
+                //TO DO HeroType options?
             }
 
             if (change.ClassName == nameof(Indicator))
