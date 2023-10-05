@@ -79,8 +79,6 @@ namespace redimel_server.Repositories
             await dbContext.SaveChangesAsync();
 
             return nextPage;
-
-
         }
 
         public async Task<Choice> PerformChange(User user, Change change)
@@ -962,7 +960,30 @@ namespace redimel_server.Repositories
                 }
             }
 
+            if (change.ClassName == nameof(GroupWest))
+            {
+                var groupWest = user.GroupWest;
 
+                switch (change.PropertyName)
+                {
+                    case nameof(groupWest.ActualMission):
+                        {
+                            var stringPropertyToCheck = new StringPropertyToCheck
+                            {
+                                ResearchedValue = groupWest.ActualMission
+                            };
+
+                            stringPropertyToCheck = CheckStringProperty(change, stringPropertyToCheck).Result;
+
+                            if (stringPropertyToCheck.ResearchedValue != groupWest.ActualMission)
+                            {
+                                groupWest.ActualMission = stringPropertyToCheck.ResearchedValue;
+                            }
+
+                            return stringPropertyToCheck.Choice;
+                        }
+                }
+            }
 
             if (change.ClassName == nameof(Hero))
             {
@@ -1182,12 +1203,17 @@ namespace redimel_server.Repositories
                     intPropertToCheckResult.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                 }
 
-                intPropertToCheckResult.ResearchedValue = requiredValue;
+                intPropertToCheckResult.ResearchedValue = intPropertyToCheckInput.ResearchedValue;
                 return intPropertToCheckResult;
             }
             else if (change.ActionType == ActionType.Add || change.ActionType == ActionType.Remove)
             {
                 intPropertToCheckResult.ResearchedValue = intPropertyToCheckInput.ResearchedValue + requiredValue;
+                return intPropertToCheckResult;
+            }
+            else if (change.ActionType == ActionType.Update)
+            {
+                intPropertToCheckResult.ResearchedValue = requiredValue;
                 return intPropertToCheckResult;
             }
 
@@ -1221,6 +1247,41 @@ namespace redimel_server.Repositories
             }
 
             return result;
+        }
+
+        private async Task<StringPropertyToCheck> CheckStringProperty(Change change, StringPropertyToCheck stringPropertyToCheck)
+        {
+            var requiredValue = change.Name;
+
+            var stringPropertToCheckResult = new StringPropertyToCheck();
+
+            if (change.ActionType == ActionType.Check)
+            {
+                if (stringPropertyToCheck.ResearchedValue == requiredValue)
+                {
+                    stringPropertToCheckResult.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                }
+
+                stringPropertToCheckResult.ResearchedValue = stringPropertyToCheck.ResearchedValue;
+                return stringPropertToCheckResult;
+            }
+            else if (change.ActionType == ActionType.Add)
+            {
+                stringPropertToCheckResult.ResearchedValue = stringPropertyToCheck.ResearchedValue + requiredValue;
+                return stringPropertToCheckResult;
+            }
+            else if (change.ActionType == ActionType.Remove)
+            {
+                stringPropertToCheckResult.ResearchedValue = "";
+                return stringPropertToCheckResult;
+            }
+            else if (change.ActionType == ActionType.Update)
+            {
+                stringPropertToCheckResult.ResearchedValue = requiredValue;
+                return stringPropertToCheckResult;
+            }
+
+            return null;
         }
     }
 }
