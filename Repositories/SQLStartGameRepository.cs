@@ -5,6 +5,7 @@ using redimel_server.Models.Domain;
 using redimel_server.Models.Enums;
 using redimel_server.Utils;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace redimel_server.Repositories
 {
@@ -23,7 +24,7 @@ namespace redimel_server.Repositories
         {
             var mandatoryChoices = await dbContext.Choices.Where(x => x.AdditionalCheck == false)
                 .Where(x => x.PageId == choice.NextPage).ToListAsync();
-
+            
             var currentUserEmail = userRepository.GetUserEmail();
 
             var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
@@ -86,18 +87,7 @@ namespace redimel_server.Repositories
         {
             if (change.ClassName == nameof(Ability))
             {
-                var hero = new Hero();
-
-                if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
-                {
-                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle)
-                        ?? throw new InvalidOperationException("Hero is null");
-                }
-                else
-                {
-                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType) 
-                        ?? throw new InvalidOperationException("Hero is null");
-                }
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
 
                 switch (change.PropertyName)
                 {
@@ -674,18 +664,7 @@ namespace redimel_server.Repositories
 
             if (change.ClassName == nameof(Armor))
             {
-                var hero = new Hero();
-
-                if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
-                {
-                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle)
-                        ?? throw new InvalidOperationException("Hero is null");
-                }
-                else
-                {
-                    hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType)
-                        ?? throw new InvalidOperationException("Hero is null");
-                }
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
 
                 if (change.ActionType == ActionType.Check)
                 {
@@ -749,161 +728,311 @@ namespace redimel_server.Repositories
                 return null;
             }
 
-            //if (change.ClassName == "Baggages")
-            //{
-            //    if (change.ActionType == "check")
-            //    {
-            //        var wantedItem = change.Name;
+            if (change.ClassName == nameof(Baggage))
+            {
+                if (change.ActionType == ActionType.Check)
+                {
+                    var wantedItem = change.Name;
 
-            //        if (change.HeroType == "all")
-            //        {
-            //            List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
+                    if (change.HeroType == HeroType.All)
+                    {
+                        List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
 
-            //            foreach (var h in heroes)
-            //            {
-            //                Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+                        foreach (var h in heroes)
+                        {
+                            Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
 
-            //                if (baggage != null)
-            //                {
-            //                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                    return choice;
-            //                }
-            //            }
+                            if (baggage != null)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return choice;
+                            }
+                        }
 
-            //            return null;
-            //        }
+                        return null;
+                    }
 
-            //        var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+                    Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
 
-            //        if (hero != null)
-            //        {
-            //            Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+                    Baggage heroBaggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
 
-            //            if (baggage != null)
-            //            {
-            //                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                return choice;
-            //            }
-            //            else
-            //            {
-            //                return null;
-            //            }
-            //        }
-            //    }
-            //    else if (change.ActionType == "add")
-            //    {
-            //        Hero hero;
+                    if (heroBaggage != null)
+                    {
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                    
+                    return null;
+                }
+                else if (change.ActionType == ActionType.Add)
+                {
+                    Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
 
-            //        if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
-            //        {
-            //            hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
-            //        }
-            //        else
-            //        {
-            //            hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
-            //        }
+                    var newBaggage = new Baggage
+                    {
+                        Name = change.Name,
+                        Volume = change.Quantity,
+                        HeroId = hero.Id
+                    };
 
-            //        var newBaggage = new Baggage
-            //        {
-            //            Name = change.Name,
-            //            Volume = change.Quantity,
-            //            HeroId = hero.Id
-            //        };
+                    var currentBaggageCapacity = hero.Baggages.Sum(x => x.Volume) + newBaggage.Volume;
 
-            //        var currentBaggageCapacity = hero.Baggages.Sum(x => x.Volume) + newBaggage.Volume;
+                    if (currentBaggageCapacity <= hero.BaggageCapacity)
+                    {
+                        hero.Baggages.Add(newBaggage);
+                    }
+                }
+                else if (change.ActionType == ActionType.Remove)
+                {
+                    var wantedItem = change.Name;
 
-            //        if (currentBaggageCapacity <= hero.BaggageCapacity)
-            //        {
-            //            hero.Baggages.Add(newBaggage);
-            //        }
-            //    }
-            //    else if (change.ActionType == "remove")
-            //    {
-            //        var wantedItem = change.Name;
+                    if (change.OrderOfBattle == OrderOfBattle.All)
+                    {
+                        List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
 
-            //        if (change.OrderOfBattle <= 5 && change.OrderOfBattle >= 1)
-            //        {
-            //            var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+                        foreach (var h in heroes)
+                        {
+                            Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
 
-            //            Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+                            if (baggage != null)
+                            {
+                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                h.Baggages.Remove(baggage);
+                                return choice;
+                            }
+                        }
+                    }
+                    else if (change.OrderOfBattle <= OrderOfBattle.Fifth && change.OrderOfBattle >= OrderOfBattle.First)
+                    {
+                        var hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
 
-            //            if (baggage != null)
-            //            {
-            //                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                hero.Baggages.Remove(baggage);
-            //                return choice;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            List<Hero> heroes = (List<Hero>)user.GroupWest.Heroes;
+                        Baggage baggage = (Baggage)hero.Baggages.FirstOrDefault(b => b.Name == wantedItem);
 
-            //            foreach (var h in heroes)
-            //            {
-            //                Baggage baggage = (Baggage)h.Baggages.FirstOrDefault(b => b.Name == wantedItem);
+                        if (baggage != null)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            hero.Baggages.Remove(baggage);
+                            return choice;
+                        }
+                    }
 
-            //                if (baggage != null)
-            //                {
-            //                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                    h.Baggages.Remove(baggage);
-            //                    return choice;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+                    return null;
+                }
+            }
 
-            //if (change.ClassName == "BattleGroups")
-            //{
-            //    if (change.ActionType == "check")
-            //    {
-            //        var wantedGroup = change.Name;
-            //        var countPeople = change.Attack;
+            if (change.ClassName == nameof(BattleGroup))
+            {
+                if (change.ActionType == ActionType.Check)
+                {
+                    var wantedGroup = change.Name;
+                    var countPeople = change.Attack;
 
-            //        List<BattleGroup> battleGroups = (List<BattleGroup>)user.GroupWest.AditionalPoints.BattleGroups;
+                    List<BattleGroup> battleGroups = (List<BattleGroup>)user.GroupWest.AditionalPoints.BattleGroups;
 
-            //        foreach (var group in battleGroups)
-            //        {
-            //            if (group != null)
-            //            {
-            //                if (group.CountPeople > countPeople)
-            //                {
-            //                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //                    return choice;
-            //                }
-            //            }
-            //        }
-            //    }
-            //    else if (change.ActionType == "add")
-            //    {
-            //        var aditionalPoint = user.GroupWest.AditionalPoints;
+                    foreach (var group in battleGroups)
+                    {
+                        if (group.CountPeople > countPeople)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+                    }
+                }
+                else if (change.ActionType == ActionType.Add)
+                {
+                    var aditionalPoint = user.GroupWest.AditionalPoints;
 
-            //        var battleGroup = new BattleGroup
-            //        {
-            //            Name = change.Name,
-            //            CountPeople = change.Attack,
-            //            AditionalPointsId = aditionalPoint.Id
-            //        };
+                    var battleGroup = new BattleGroup
+                    {
+                        Name = change.Name,
+                        CountPeople = change.Attack,
+                        AditionalPointsId = aditionalPoint.Id
+                    };
 
-            //        aditionalPoint.BattleGroups.Add(battleGroup);
-            //    }
-            //    else if (change.ActionType == "remove")
-            //    {
-            //        var wantedGroup = change.Name;
-            //        var aditionalPoint = user.GroupWest.AditionalPoints;
+                    aditionalPoint.BattleGroups.Add(battleGroup);
+                }
+                else if (change.ActionType == ActionType.Remove)
+                {
+                    var wantedGroup = change.Name;
+                    var aditionalPoint = user.GroupWest.AditionalPoints;
 
-            //        var groupToDelete = aditionalPoint.BattleGroups.FirstOrDefault(x => x.Name == wantedGroup);
+                    var groupToDelete = aditionalPoint.BattleGroups.FirstOrDefault(x => x.Name == wantedGroup);
 
-            //        if (groupToDelete != null)
-            //        {
-            //            aditionalPoint.BattleGroups.Remove(groupToDelete);
-            //            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-            //            return choice;
-            //        }
-            //    }
-            //}
+                    if (groupToDelete != null)
+                    {
+                        aditionalPoint.BattleGroups.Remove(groupToDelete);
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                }
+            }
+
+            if (change.ClassName == nameof(Equipment))
+            {
+
+            }
+
+            if (change.ClassName == nameof(Indicator))
+            {
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+
+                switch (change.PropertyName)
+                {
+                    case nameof(hero.Indicators.Health):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.Health
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.Health)
+                            {
+                                hero.Indicators.Health = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Indicators.MentalEnergy):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.MentalEnergy
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalEnergy)
+                            {
+                                hero.Indicators.MentalEnergy = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Indicators.MentalStrength):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.MentalStrength
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalStrength)
+                            {
+                                hero.Indicators.MentalStrength = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Indicators.Strength):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.Strength
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.Strength)
+                            {
+                                hero.Indicators.Strength = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Indicators.Dexterity):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.Dexterity
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.Dexterity)
+                            {
+                                hero.Indicators.Dexterity = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Indicators.Agility):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.Agility
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.Agility)
+                            {
+                                hero.Indicators.Agility = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Indicators.Evasion):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.Evasion
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.Evasion)
+                            {
+                                hero.Indicators.Evasion = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Indicators.Endurance):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Indicators.Endurance
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Indicators.Endurance)
+                            {
+                                hero.Indicators.Endurance = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+                }
+            }
 
             return null;
+        }
+
+        private static Hero GetHero(User user, Change change)
+        {
+            var hero = new Hero();
+
+            if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
+            {
+                hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle);
+            }
+            else
+            {
+                hero = user.GroupWest.Heroes.FirstOrDefault(x => x.HeroType == change.HeroType);
+            }
+
+            return hero;
         }
 
         private async Task<IntPropertyToCheck> CheckIntProperty(Change change, IntPropertyToCheck intPropertyToCheckInput)
