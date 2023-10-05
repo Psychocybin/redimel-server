@@ -869,7 +869,96 @@ namespace redimel_server.Repositories
 
             if (change.ClassName == nameof(Equipment))
             {
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
 
+                switch (change.PropertyName)
+                {
+                    case nameof(hero.Equipments.Knife):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Equipments.Knife
+                            };
+
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.Knife)
+                            {
+                                hero.Equipments.Knife = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Equipments.SmokeBall):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Equipments.SmokeBall
+                            };
+
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.SmokeBall)
+                            {
+                                hero.Equipments.SmokeBall = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Equipments.Poison):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Equipments.Poison
+                            };
+
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.Poison)
+                            {
+                                hero.Equipments.Poison = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Equipments.MedicPack):
+                        {
+                            var booleanPropertyToCheck = new BooleanPropertyToCheck
+                            {
+                                ResearchedValue = hero.Equipments.MedicPack
+                            };
+
+                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+
+                            if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.MedicPack)
+                            {
+                                hero.Equipments.MedicPack = booleanPropertyToCheck.ResearchedValue;
+                            }
+
+                            return booleanPropertyToCheck.Choice;
+                        }
+
+                    case nameof(hero.Equipments.MoneyBag):
+                        {
+                            var intPropertyToCheck = new IntPropertyToCheck
+                            {
+                                ResearchedValue = hero.Equipments.MoneyBag
+                            };
+
+                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+
+                            if (intPropertyToCheck.ResearchedValue != hero.Equipments.MoneyBag)
+                            {
+                                hero.Equipments.MoneyBag = intPropertyToCheck.ResearchedValue;
+                            }
+
+                            return intPropertyToCheck.Choice;
+                        }
+
+                }
             }
 
             if (change.ClassName == nameof(Indicator))
