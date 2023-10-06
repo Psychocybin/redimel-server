@@ -1163,6 +1163,199 @@ namespace redimel_server.Repositories
                 }
             }
 
+            if (change.ClassName == nameof(Mission))
+            {
+                List<Mission> missions = (List<Mission>)user.GroupWest.Missions;
+
+                if (change.ActionType == ActionType.Check)
+                {
+                    var mission = missions.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (change.TrueOrFalse == true)
+                    {
+                        if (mission != null && mission.IsItDone == change.ActiveOrNot)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+                    }
+                    else
+                    {
+                        if (mission != null)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+                    }
+                }
+                else if (change.ActionType == ActionType.Add)
+                {
+                    var mission = new Mission
+                    {
+                        Name = change.Name,
+                        GroupWestId = user.GroupWestId,
+                    };
+
+                    missions.Add(mission);
+                }
+                else if (change.ActionType == ActionType.Remove)
+                {
+                    var mission = missions.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (mission != null)
+                    {
+                        missions.Remove(mission);
+                    }
+                }
+                else if (change.ActionType == ActionType.Update)
+                {
+                    var mission = missions.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (mission != null)
+                    {
+                        mission.IsItDone = true;
+                    }
+                }
+            }
+
+            if (change.ClassName == nameof(NatureSkill))
+            {
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+
+                if (change.ActionType == ActionType.Check)
+                {
+                    var natureSkill = hero.SpecialAbility.NatureSkills.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (natureSkill != null && natureSkill.SkillLevel >= change.Attack)
+                    {
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                }
+                else if (change.ActionType == ActionType.Add)
+                {
+                    var natureSkill = new NatureSkill
+                    {
+                        Name = change.Name,
+                        SkillLevel = change.Attack,
+                        RequiredMentalEnergy = change.Defence,
+                        SpecialAbilityId = hero.SpecialAbilityId
+                    };
+
+                    hero.SpecialAbility.NatureSkills.Add(natureSkill);
+                }
+                else if (change.ActionType == ActionType.Remove)
+                {
+                    var natureSkill = hero.SpecialAbility.NatureSkills.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (natureSkill != null)
+                    {
+                        hero.SpecialAbility.NatureSkills.Remove(natureSkill);
+                    }
+                }
+                else if (change.ActionType == ActionType.Update)
+                {
+                    var natureSkill = hero.SpecialAbility.NatureSkills.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (natureSkill != null)
+                    {
+                        natureSkill.SkillLevel++;
+                    }
+                }
+            }
+
+            if (change.ClassName == nameof(Ritual))
+            {
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+
+                if (change.ActionType == ActionType.Check)
+                {
+                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (ritual != null && ritual.SkillLevel >= change.Attack)
+                    {
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                }
+                else if (change.ActionType == ActionType.Add)
+                {
+                    var ritual = new Ritual
+                    {
+                        Name = change.Name,
+                        SkillLevel = change.Attack,
+                        RequiredMentalEnergy = change.Defence,
+                        SpecialAbilityId = hero.SpecialAbilityId
+                    };
+
+                    hero.SpecialAbility.Rituals.Add(ritual);
+                }
+                else if (change.ActionType == ActionType.Remove)
+                {
+                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (ritual != null)
+                    {
+                        hero.SpecialAbility.Rituals.Remove(ritual);
+                    }
+                }
+                else if (change.ActionType == ActionType.Update)
+                {
+                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (ritual != null)
+                    {
+                        ritual.SkillLevel++;
+                    }
+                }
+            }
+
+            if (change.ClassName == nameof(Spell))
+            {
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+
+                if (change.ActionType == ActionType.Check)
+                {
+                    var spell = hero.SpecialAbility.Spells.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (spell != null && spell.SkillLevel >= change.Attack)
+                    {
+                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return choice;
+                    }
+                }
+                else if (change.ActionType == ActionType.Add)
+                {
+                    var spell = new Spell
+                    {
+                        Name = change.Name,
+                        SkillLevel = change.Attack,
+                        RequiredMentalEnergy = change.Defence,
+                        SpecialAbilityId = hero.SpecialAbilityId
+                    };
+
+                    hero.SpecialAbility.Spells.Add(spell);
+                }
+                else if (change.ActionType == ActionType.Remove)
+                {
+                    var spell = hero.SpecialAbility.Spells.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (spell != null)
+                    {
+                        hero.SpecialAbility.Spells.Remove(spell);
+                    }
+                }
+                else if (change.ActionType == ActionType.Update)
+                {
+                    var spell = hero.SpecialAbility.Spells.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                    if (spell != null)
+                    {
+                        spell.SkillLevel++;
+                    }
+                }
+            }
+
             return null;
         }
 
@@ -1222,31 +1415,31 @@ namespace redimel_server.Repositories
 
         private async Task<BooleanPropertyToCheck> CheckBooleanProperty(Change change, BooleanPropertyToCheck booleanPropertyToCheck)
         {
-            var result = new BooleanPropertyToCheck();
+            var requiredValue = change.TrueOrFalse;
+            var booleanPropertyToCheckResult = new BooleanPropertyToCheck();
 
             if (change.ActionType == ActionType.Check)
             {
-                if (booleanPropertyToCheck.ResearchedValue == true)
+                if (booleanPropertyToCheck.ResearchedValue == requiredValue)
                 {
-                    result.ResearchedValue = booleanPropertyToCheck.ResearchedValue;
-                    result.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                    return result;
+                    booleanPropertyToCheckResult.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                 }
+
+                booleanPropertyToCheckResult.ResearchedValue = booleanPropertyToCheck.ResearchedValue;
+                return booleanPropertyToCheckResult;
             }
             else if (change.ActionType == ActionType.Add)
             {
-                result.ResearchedValue = true;
+                booleanPropertyToCheckResult.ResearchedValue = true;
+                return booleanPropertyToCheckResult;
             }
             else if (change.ActionType == ActionType.Remove)
             {
-                result.ResearchedValue = false;
-            }
-            else
-            {
-                return null;
+                booleanPropertyToCheckResult.ResearchedValue = false;
+                return booleanPropertyToCheckResult;
             }
 
-            return result;
+            return null;
         }
 
         private async Task<StringPropertyToCheck> CheckStringProperty(Change change, StringPropertyToCheck stringPropertyToCheck)
