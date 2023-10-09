@@ -1264,6 +1264,8 @@ namespace redimel_server.Repositories
                 }
             }
 
+            if (change.ClassName == nameof(Negotiation))
+
             if (change.ClassName == nameof(Ritual))
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
