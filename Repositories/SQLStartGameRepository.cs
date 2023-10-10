@@ -3,9 +3,6 @@ using redimel_server.Data;
 using redimel_server.Infrastructure;
 using redimel_server.Models.Domain;
 using redimel_server.Models.Enums;
-using redimel_server.Utils;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 
 namespace redimel_server.Repositories
 {
@@ -24,7 +21,7 @@ namespace redimel_server.Repositories
         {
             var mandatoryChoices = await dbContext.Choices.Where(x => x.AdditionalCheck == false)
                 .Where(x => x.PageId == choice.NextPage).ToListAsync();
-            
+
             var currentUserEmail = userRepository.GetUserEmail();
 
             var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
@@ -759,7 +756,7 @@ namespace redimel_server.Repositories
                         var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         return choice;
                     }
-                    
+
                     return null;
                 }
                 else if (change.ActionType == ActionType.Add)
@@ -998,7 +995,7 @@ namespace redimel_server.Repositories
                             return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         }
                     }
-                    else if (hero.HeroClass == change.HeroClass )
+                    else if (hero.HeroClass == change.HeroClass)
                     {
                         return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     }
@@ -1265,16 +1262,12 @@ namespace redimel_server.Repositories
             }
 
             if (change.ClassName == nameof(Negotiation))
-
-            if (change.ClassName == nameof(Ritual))
             {
-                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
-
                 if (change.ActionType == ActionType.Check)
                 {
-                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+                    var negotiation = user.GroupWest.AditionalPoints.Negotiations.Where(x => x.Name == change.Name).FirstOrDefault();
 
-                    if (ritual != null && ritual.SkillLevel >= change.Attack)
+                    if (negotiation != null)
                     {
                         var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         return choice;
@@ -1282,34 +1275,109 @@ namespace redimel_server.Repositories
                 }
                 else if (change.ActionType == ActionType.Add)
                 {
-                    var ritual = new Ritual
+                    var newNegotiation = new Negotiation
                     {
                         Name = change.Name,
-                        SkillLevel = change.Attack,
-                        RequiredMentalEnergy = change.Defence,
-                        SpecialAbilityId = hero.SpecialAbilityId
+                        AditionalPointsId = user.GroupWest.AditionalPointsId
                     };
 
-                    hero.SpecialAbility.Rituals.Add(ritual);
+                    user.GroupWest.AditionalPoints.Negotiations.Add(newNegotiation);
                 }
+            }
+
+            if (change.ClassName == nameof(Promise))
+            {
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+
+                if (change.ActionType == ActionType.Check)
+                {
+                    var promise = hero.Promises.FirstOrDefault(x => x.Name == change.Name);
+
+                    if (promise != null)
+                    {
+                        if (change.ActiveOrNot == true)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+
+                        if (promise.IsItDone == change.TrueOrFalse)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+                    }
+                }
+                if (change.ActionType == ActionType.Add)
+                {
+                    var newPromise = new Promise
+                    {
+                        Name = change.Name,
+                        HeroId = hero.Id
+                    };
+
+                    hero.Promises.Add(newPromise);
+                }
+                if (change.ActionType == ActionType.Remove)
+                {
+                    var promise = hero.Promises.FirstOrDefault(x => x.Name == change.Name);
+
+                    if (promise != null)
+                    {
+                        hero.Promises.Remove(promise);
+                    }
+                }
+                if (change.ActionType == ActionType.Update)
+                {
+                    var promise = hero.Promises.FirstOrDefault(x => x.Name == change.Name);
+                    promise.IsItDone = true;
+                }
+            }
+
+            if (change.ClassName == nameof(Ritual))
+            {
+                Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+
+                if (change.ActionType == ActionType.Check)
+                    {
+                        var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                        if (ritual != null && ritual.SkillLevel >= change.Attack)
+                        {
+                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return choice;
+                        }
+                    }
+                else if (change.ActionType == ActionType.Add)
+                    {
+                        var ritual = new Ritual
+                        {
+                            Name = change.Name,
+                            SkillLevel = change.Attack,
+                            RequiredMentalEnergy = change.Defence,
+                            SpecialAbilityId = hero.SpecialAbilityId
+                        };
+
+                        hero.SpecialAbility.Rituals.Add(ritual);
+                    }
                 else if (change.ActionType == ActionType.Remove)
-                {
-                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
-
-                    if (ritual != null)
                     {
-                        hero.SpecialAbility.Rituals.Remove(ritual);
+                        var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                        if (ritual != null)
+                        {
+                            hero.SpecialAbility.Rituals.Remove(ritual);
+                        }
                     }
-                }
                 else if (change.ActionType == ActionType.Update)
-                {
-                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
-
-                    if (ritual != null)
                     {
-                        ritual.SkillLevel++;
+                        var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+
+                        if (ritual != null)
+                        {
+                            ritual.SkillLevel++;
+                        }
                     }
-                }
             }
 
             if (change.ClassName == nameof(Spell))
