@@ -22,7 +22,7 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetAll()
         {
             var pageDomain = await pageRepository.GetAllAsync();
