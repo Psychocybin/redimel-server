@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using redimel_server.Data;
 using redimel_server.Infrastructure;
 using redimel_server.Models.Domain;
@@ -51,26 +52,28 @@ namespace redimel_server.Repositories
 
             var nextPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == choice.NextPage);
 
-            var choicesList = new List<Choice>();
-
             foreach (var item in mandatoryChoices)
             {
-                choicesList.Add(item);
+                nextPage.Choices.Add(item);
             }
 
             var changesList = await dbContext.Changes.Where(x => x.PageId == nextPage.Id).ToListAsync();
 
             foreach (var change in changesList)
             {
-                var currentChoice = PerformChange(currentUser, change).Result;
+                var changeResponse = await PerformChange(currentUser, change);
 
-                if (currentChoice != null)
+                if (changeResponse.Choice != null)
                 {
-                    choicesList.Add(currentChoice);
+                    nextPage.Choices.Add(changeResponse.Choice);
+                }
+
+                if (!changeResponse.ChangeNotice.IsNullOrEmpty())
+                {
+                    nextPage.ChangeNotices.Add(changeResponse.ChangeNotice);
                 }
             }
 
-            nextPage.Choices = choicesList;
             currentUser.CurrentLocation = nextPage.Id;
 
             await dbContext.SaveChangesAsync();
@@ -78,7 +81,7 @@ namespace redimel_server.Repositories
             return nextPage;
         }
 
-        public async Task<Choice> PerformChange(User user, Change change)
+        public async Task<ChangeResponse> PerformChange(User user, Change change)
         {
             if (change.ClassName == nameof(Ability))
             {
@@ -88,461 +91,434 @@ namespace redimel_server.Repositories
                 {
                     case nameof(Ability.Survival):
                         {
+                            var isHeroAbilityExist = hero.Ability.Survival;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Survival
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Survival)
-                            {
-                                hero.Ability.Survival = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Survival = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Diplomacy):
                         {
+                            var isHeroAbilityExist = hero.Ability.Diplomacy;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Diplomacy
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Diplomacy)
-                            {
-                                hero.Ability.Diplomacy = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Diplomacy = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Climbing):
                         {
+                            var isHeroAbilityExist = hero.Ability.Climbing;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Climbing
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Climbing)
-                            {
-                                hero.Ability.Climbing = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Climbing = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Acrobatics):
                         {
+                            var isHeroAbilityExist = hero.Ability.Acrobatics;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Acrobatics
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Acrobatics)
-                            {
-                                hero.Ability.Acrobatics = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Acrobatics = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Skill):
                         {
+                            var isHeroAbilityExist = hero.Ability.Skill;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Skill
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Skill)
-                            {
-                                hero.Ability.Skill = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Skill = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Guile):
                         {
+                            var isHeroAbilityExist = hero.Ability.Guile;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Guile
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Guile)
-                            {
-                                hero.Ability.Guile = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Guile = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.SecretKnowledge):
                         {
+                            var isHeroAbilityExist = hero.Ability.SecretKnowledge;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.SecretKnowledge
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.SecretKnowledge)
-                            {
-                                hero.Ability.SecretKnowledge = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.SecretKnowledge = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Sneak):
                         {
+                            var isHeroAbilityExist = hero.Ability.Sneak;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Sneak
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Sneak)
-                            {
-                                hero.Ability.Sneak = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Sneak = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Elusion):
                         {
+                            var isHeroAbilityExist = hero.Ability.Elusion;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Elusion
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Elusion)
-                            {
-                                hero.Ability.Elusion = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Elusion = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.WaterCycle):
                         {
+                            var isHeroAbilityExist = hero.Ability.WaterCycle;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.WaterCycle
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.WaterCycle)
-                            {
-                                hero.Ability.WaterCycle = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.WaterCycle = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Melee):
                         {
+                            var isHeroAbilityExist = hero.Ability.Melee;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Melee
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Melee)
-                            {
-                                hero.Ability.Melee = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Melee = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.NatureSkills):
                         {
+                            var isHeroAbilityExist = hero.Ability.NatureSkills;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.NatureSkills
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.NatureSkills)
-                            {
-                                hero.Ability.NatureSkills = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.NatureSkills = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.BreakingLocks):
                         {
+                            var isHeroAbilityExist = hero.Ability.BreakingLocks;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.BreakingLocks
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.BreakingLocks)
-                            {
-                                hero.Ability.BreakingLocks = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.BreakingLocks = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Transformation):
                         {
+                            var isHeroAbilityExist = hero.Ability.Transformation;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Transformation
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Transformation)
-                            {
-                                hero.Ability.Transformation = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Transformation = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Spells):
                         {
+                            var isHeroAbilityExist = hero.Ability.Spells;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Spells
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Spells)
-                            {
-                                hero.Ability.Spells = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Spells = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Rituals):
                         {
+                            var isHeroAbilityExist = hero.Ability.Rituals;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Rituals
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Rituals)
-                            {
-                                hero.Ability.Rituals = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Rituals = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Traps):
                         {
+                            var isHeroAbilityExist = hero.Ability.Traps;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Traps
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Traps)
-                            {
-                                hero.Ability.Traps = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Traps = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Archery):
                         {
+                            var isHeroAbilityExist = hero.Ability.Archery;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Archery
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Archery)
-                            {
-                                hero.Ability.Archery = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Archery = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.ThrowingKnives):
                         {
+                            var isHeroAbilityExist = hero.Ability.ThrowingKnives;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.ThrowingKnives
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.ThrowingKnives)
-                            {
-                                hero.Ability.ThrowingKnives = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.ThrowingKnives = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.PoisonousNeedles):
                         {
+                            var isHeroAbilityExist = hero.Ability.PoisonousNeedles;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.PoisonousNeedles
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.PoisonousNeedles)
-                            {
-                                hero.Ability.PoisonousNeedles = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.PoisonousNeedles = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Stimulants):
                         {
+                            var isHeroAbilityExist = hero.Ability.Stimulants;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Stimulants
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Stimulants)
-                            {
-                                hero.Ability.Stimulants = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Stimulants = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Wrestling):
                         {
+                            var isHeroAbilityExist = hero.Ability.Wrestling;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Wrestling
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Wrestling)
-                            {
-                                hero.Ability.Wrestling = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Wrestling = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Observation):
                         {
+                            var isHeroAbilityExist = hero.Ability.Observation;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Observation
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Observation)
-                            {
-                                hero.Ability.Observation = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Observation = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.ShieldBearer):
                         {
+                            var isHeroAbilityExist = hero.Ability.ShieldBearer;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.ShieldBearer
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.ShieldBearer)
-                            {
-                                hero.Ability.ShieldBearer = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.ShieldBearer = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.Leadership):
                         {
+                            var isHeroAbilityExist = hero.Ability.Leadership;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.Leadership
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.Leadership)
-                            {
-                                hero.Ability.Leadership = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.Leadership = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.KickFight):
                         {
+                            var isHeroAbilityExist = hero.Ability.KickFight;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.KickFight
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.KickFight)
-                            {
-                                hero.Ability.KickFight = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.KickFight = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
 
                     case nameof(Ability.DoubleStrike):
                         {
+                            var isHeroAbilityExist = hero.Ability.DoubleStrike;
+
                             var booleanPropertyToCheck = new BooleanPropertyToCheck
                             {
-                                ResearchedValue = hero.Ability.DoubleStrike
+                                ResearchedValue = isHeroAbilityExist
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
-                            if (booleanPropertyToCheck.ResearchedValue != hero.Ability.DoubleStrike)
-                            {
-                                hero.Ability.DoubleStrike = booleanPropertyToCheck.ResearchedValue;
-                            }
+                            hero.Ability.DoubleStrike = booleanPropertyToCheck.ResearchedValue;
 
-                            return booleanPropertyToCheck.Choice;
+                            return AbilityResponse(change, hero, isHeroAbilityExist, booleanPropertyToCheck);
                         }
                 }
             }
@@ -1029,14 +1005,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.Health
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Health)
                             {
                                 hero.Indicators.Health = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"Health is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Indicators.MentalEnergy):
@@ -1046,14 +1028,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.MentalEnergy
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalEnergy)
                             {
                                 hero.Indicators.MentalEnergy = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"MentalEnergy is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Indicators.MentalStrength):
@@ -1063,14 +1051,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.MentalStrength
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = (await CheckIntProperty(change, intPropertyToCheck));
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalStrength)
                             {
                                 hero.Indicators.MentalStrength = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"MentalStrength is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Indicators.Strength):
@@ -1080,14 +1074,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.Strength
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Strength)
                             {
                                 hero.Indicators.Strength = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"Strength is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Indicators.Dexterity):
@@ -1097,14 +1097,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.Dexterity
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Dexterity)
                             {
                                 hero.Indicators.Dexterity = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"Dexterity is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Indicators.Agility):
@@ -1114,14 +1120,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.Agility
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Agility)
                             {
                                 hero.Indicators.Agility = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"Agility is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Indicators.Evasion):
@@ -1131,14 +1143,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.Evasion
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Evasion)
                             {
                                 hero.Indicators.Evasion = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"Evasion is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Indicators.Endurance):
@@ -1148,14 +1166,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Indicators.Endurance
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Endurance)
                             {
                                 hero.Indicators.Endurance = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"Endurance is changed by {change.Attack}!";
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
                 }
             }
@@ -1427,6 +1451,23 @@ namespace redimel_server.Repositories
             }
 
             return null;
+        }
+
+        private static ChangeResponse AbilityResponse(Change change, Hero hero, bool isHeroAbilityExist, BooleanPropertyToCheck booleanPropertyToCheck)
+        {
+            var changeResponse = new ChangeResponse
+            {
+                Choice = booleanPropertyToCheck.Choice
+            };
+
+            if (booleanPropertyToCheck.ResearchedValue != isHeroAbilityExist)
+            {
+                changeResponse.ChangeNotice = isHeroAbilityExist 
+                    ? $"{hero.HeroClass} - You gain a {change.PropertyName} ability!"
+                    : $"{hero.HeroClass} - {change.PropertyName} ability is dropped!";
+            }
+
+            return changeResponse;
         }
 
         private static Hero GetHero(User user, Change change)
