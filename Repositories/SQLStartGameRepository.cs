@@ -536,14 +536,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = aditionalPoints.TeamGame
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.TeamGame)
                             {
                                 aditionalPoints.TeamGame = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = AditionalPointNotice(change);
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(aditionalPoints.ImportantInformation):
@@ -553,14 +559,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = aditionalPoints.ImportantInformation
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.ImportantInformation)
                             {
                                 aditionalPoints.ImportantInformation = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = AditionalPointNotice(change);
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(aditionalPoints.SlainMonsters):
@@ -570,14 +582,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = aditionalPoints.SlainMonsters
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.SlainMonsters)
                             {
                                 aditionalPoints.SlainMonsters = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = AditionalPointNotice(change);
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(aditionalPoints.Morals):
@@ -587,14 +605,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = aditionalPoints.Morals
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.Morals)
                             {
                                 aditionalPoints.Morals = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = AditionalPointNotice(change);
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(aditionalPoints.Cover):
@@ -604,14 +628,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = aditionalPoints.Cover
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.Cover)
                             {
                                 aditionalPoints.Cover = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = AditionalPointNotice(change);
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(aditionalPoints.TemporaryPoints):
@@ -621,14 +651,20 @@ namespace redimel_server.Repositories
                                 ResearchedValue = aditionalPoints.TemporaryPoints
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
+
+                            var changeResponse = new ChangeResponse
+                            {
+                                Choice = intPropertyToCheck.Choice
+                            };
 
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.TemporaryPoints)
                             {
                                 aditionalPoints.TemporaryPoints = intPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = AditionalPointNotice(change);
                             }
 
-                            return intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
                 }
             }
@@ -1015,7 +1051,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Health)
                             {
                                 hero.Indicators.Health = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"Health is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1038,7 +1074,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalEnergy)
                             {
                                 hero.Indicators.MentalEnergy = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"MentalEnergy is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1061,7 +1097,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalStrength)
                             {
                                 hero.Indicators.MentalStrength = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"MentalStrength is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1084,7 +1120,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Strength)
                             {
                                 hero.Indicators.Strength = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"Strength is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1107,7 +1143,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Dexterity)
                             {
                                 hero.Indicators.Dexterity = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"Dexterity is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1130,7 +1166,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Agility)
                             {
                                 hero.Indicators.Agility = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"Agility is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1153,7 +1189,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Evasion)
                             {
                                 hero.Indicators.Evasion = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"Evasion is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1176,7 +1212,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Endurance)
                             {
                                 hero.Indicators.Endurance = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = $"Endurance is changed by {change.Attack}!";
+                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
                             }
 
                             return changeResponse;
@@ -1451,6 +1487,16 @@ namespace redimel_server.Repositories
             }
 
             return null;
+        }
+
+        private static string IndicatorNotice(Change change, Hero hero)
+        {
+            return $"{hero.HeroClass} - {change.PropertyName} is changed by {change.Attack}!";
+        }
+
+        private static string AditionalPointNotice(Change change)
+        {
+            return $"GroupWest - {change.PropertyName} is changed by {change.Attack}";
         }
 
         private static ChangeResponse AbilityResponse(Change change, Hero hero, bool isHeroAbilityExist, BooleanPropertyToCheck booleanPropertyToCheck)
