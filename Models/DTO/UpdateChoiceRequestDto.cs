@@ -7,6 +7,8 @@ namespace redimel_server.Models.DTO
         [Required]
         public Boolean AdditionalCheck { get; set; }
         [Required]
+        public Boolean IsUniqueChoice { get; set; }
+        [Required]
         [MinLength(5)]
         [MaxLength(5000)]
         public string Description { get; set; }

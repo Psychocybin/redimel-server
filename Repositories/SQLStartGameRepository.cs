@@ -70,7 +70,7 @@ namespace redimel_server.Repositories
 
                 if (!changeResponse.ChangeNotice.IsNullOrEmpty())
                 {
-                    nextPage.ChangeNotices.Add(changeResponse.ChangeNotice);
+                    nextPage.ChangeNotices = $"{nextPage.ChangeNotices}   {changeResponse.ChangeNotice}";
                 }
             }
 
@@ -546,7 +546,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.TeamGame)
                             {
                                 aditionalPoints.TeamGame = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = AditionalPointNotice(change);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -569,7 +569,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.ImportantInformation)
                             {
                                 aditionalPoints.ImportantInformation = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = AditionalPointNotice(change);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -592,7 +592,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.SlainMonsters)
                             {
                                 aditionalPoints.SlainMonsters = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = AditionalPointNotice(change);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -615,7 +615,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.Morals)
                             {
                                 aditionalPoints.Morals = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = AditionalPointNotice(change);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -638,7 +638,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.Cover)
                             {
                                 aditionalPoints.Cover = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = AditionalPointNotice(change);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -661,7 +661,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.TemporaryPoints)
                             {
                                 aditionalPoints.TemporaryPoints = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = AditionalPointNotice(change);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -672,6 +672,7 @@ namespace redimel_server.Repositories
             if (change.ClassName == nameof(Armor))
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+                var changeResponse = new ChangeResponse();
 
                 if (change.ActionType == ActionType.Check)
                 {
@@ -679,21 +680,21 @@ namespace redimel_server.Repositories
                     {
                         if (hero.Equipments.Armor.ArmorType.ToString() == change.AdditionalInfo)
                         {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return changeResponse;
                         }
 
                         //TO DO with ComparisonMark
 
-                        return null;
+                        return changeResponse;
                     }
 
                     var IsArmorExist = hero.Equipments.Armor.IsExist;
 
                     if (IsArmorExist == change.ActiveOrNot)
                     {
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return changeResponse;
                     }
                 }
                 else if (change.ActionType == ActionType.Add)
@@ -709,6 +710,7 @@ namespace redimel_server.Repositories
                         };
 
                         hero.Equipments.Armor = heroArmor;
+                        changeResponse.ChangeNotice = AddObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
 
                         //TO DO The old armor must be deleted
                     }
@@ -724,19 +726,23 @@ namespace redimel_server.Repositories
                     };
 
                     hero.Equipments.Armor = heroArmor;
+                    changeResponse.ChangeNotice = RemoveObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
 
                     //TO DO The old armor must be deleted
                 }
                 else if (change.ActionType == ActionType.Update)
                 {
                     hero.Equipments.Armor.Defence += change.Defence;
+                    changeResponse.ChangeNotice = UpdateObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
                 }
 
-                return null;
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(Baggage))
             {
+                var changeResponse = new ChangeResponse();
+
                 if (change.ActionType == ActionType.Check)
                 {
                     var wantedItem = change.Name;
@@ -751,12 +757,12 @@ namespace redimel_server.Repositories
 
                             if (baggage != null)
                             {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                                return choice;
+                                changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                return changeResponse;
                             }
                         }
 
-                        return null;
+                        return changeResponse;
                     }
 
                     Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
@@ -765,11 +771,11 @@ namespace redimel_server.Repositories
 
                     if (heroBaggage != null)
                     {
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        return changeResponse;
                     }
 
-                    return null;
+                    return changeResponse;
                 }
                 else if (change.ActionType == ActionType.Add)
                 {
@@ -787,6 +793,7 @@ namespace redimel_server.Repositories
                     if (currentBaggageCapacity <= hero.BaggageCapacity)
                     {
                         hero.Baggages.Add(newBaggage);
+                        changeResponse.ChangeNotice = AddObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
                     }
                 }
                 else if (change.ActionType == ActionType.Remove)
@@ -803,9 +810,9 @@ namespace redimel_server.Repositories
 
                             if (baggage != null)
                             {
-                                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                                 h.Baggages.Remove(baggage);
-                                return choice;
+                                changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                                changeResponse.ChangeNotice = RemoveObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
                             }
                         }
                     }
@@ -817,18 +824,20 @@ namespace redimel_server.Repositories
 
                         if (baggage != null)
                         {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                             hero.Baggages.Remove(baggage);
-                            return choice;
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            changeResponse.ChangeNotice = UpdateObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
                         }
                     }
 
-                    return null;
+                    return changeResponse;
                 }
             }
 
             if (change.ClassName == nameof(BattleGroup))
             {
+                var changeResponse = new ChangeResponse();
+
                 if (change.ActionType == ActionType.Check)
                 {
                     var wantedGroup = change.Name;
@@ -840,8 +849,7 @@ namespace redimel_server.Repositories
                     {
                         if (group.CountPeople > countPeople)
                         {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         }
                     }
                 }
@@ -857,6 +865,7 @@ namespace redimel_server.Repositories
                     };
 
                     aditionalPoint.BattleGroups.Add(battleGroup);
+                    changeResponse.ChangeNotice = AddObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
                 }
                 else if (change.ActionType == ActionType.Remove)
                 {
@@ -868,16 +877,18 @@ namespace redimel_server.Repositories
                     if (groupToDelete != null)
                     {
                         aditionalPoint.BattleGroups.Remove(groupToDelete);
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        changeResponse.ChangeNotice = RemoveObjNoticeResponse(change.HeroClass.ToString(), change.ClassName);
                     }
                 }
+
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(Equipment))
-
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+                var changeResponse = new ChangeResponse();
 
                 switch (change.PropertyName)
                 {
@@ -888,14 +899,18 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Equipments.Knife
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.Knife)
                             {
                                 hero.Equipments.Knife = booleanPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = hero.Equipments.Knife == true
+                                                                ? AddObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName)
+                                                                : RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName);
                             }
 
-                            return booleanPropertyToCheck.Choice;
+                            changeResponse.Choice = booleanPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Equipments.SmokeBall):
@@ -905,14 +920,18 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Equipments.SmokeBall
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.SmokeBall)
                             {
                                 hero.Equipments.SmokeBall = booleanPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = hero.Equipments.Knife == true
+                                                                ? AddObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName)
+                                                                : RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName);
                             }
 
-                            return booleanPropertyToCheck.Choice;
+                            changeResponse.Choice = booleanPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Equipments.Poison):
@@ -922,14 +941,18 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Equipments.Poison
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.Poison)
                             {
                                 hero.Equipments.Poison = booleanPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = hero.Equipments.Knife == true
+                                                                ? AddObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName)
+                                                                : RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName);
                             }
 
-                            return booleanPropertyToCheck.Choice;
+                            changeResponse.Choice = booleanPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Equipments.MedicPack):
@@ -939,14 +962,18 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Equipments.MedicPack
                             };
 
-                            booleanPropertyToCheck = CheckBooleanProperty(change, booleanPropertyToCheck).Result;
+                            booleanPropertyToCheck = await CheckBooleanProperty(change, booleanPropertyToCheck);
 
                             if (booleanPropertyToCheck.ResearchedValue != hero.Equipments.MedicPack)
                             {
                                 hero.Equipments.MedicPack = booleanPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = hero.Equipments.Knife == true
+                                                                ? AddObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName)
+                                                                : RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.PropertyName);
                             }
 
-                            return booleanPropertyToCheck.Choice;
+                            changeResponse.Choice = booleanPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                     case nameof(hero.Equipments.MoneyBag):
@@ -956,17 +983,28 @@ namespace redimel_server.Repositories
                                 ResearchedValue = hero.Equipments.MoneyBag
                             };
 
-                            intPropertyToCheck = CheckIntProperty(change, intPropertyToCheck).Result;
+                            intPropertyToCheck = await CheckIntProperty(change, intPropertyToCheck);
 
                             if (intPropertyToCheck.ResearchedValue != hero.Equipments.MoneyBag)
                             {
                                 hero.Equipments.MoneyBag = intPropertyToCheck.ResearchedValue;
+                                if (change.Attack > 0)
+                                {
+                                    changeResponse.ChangeNotice = $"{hero.HeroClass} - added {change.Attack} gold coins";
+                                }
+                                else
+                                {
+                                    changeResponse.ChangeNotice = $"{hero.HeroClass} - removed {change.Attack} gold coins";
+                                }
                             }
 
-                            return intPropertyToCheck.Choice;
+                            changeResponse.Choice = intPropertyToCheck.Choice;
+                            return changeResponse;
                         }
 
                 }
+
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(GroupWest))
@@ -977,6 +1015,8 @@ namespace redimel_server.Repositories
                 {
                     case nameof(groupWest.ActualMission):
                         {
+                            var changeResponse = new ChangeResponse();
+
                             var stringPropertyToCheck = new StringPropertyToCheck
                             {
                                 ResearchedValue = groupWest.ActualMission
@@ -987,15 +1027,18 @@ namespace redimel_server.Repositories
                             if (stringPropertyToCheck.ResearchedValue != groupWest.ActualMission)
                             {
                                 groupWest.ActualMission = stringPropertyToCheck.ResearchedValue;
+                                changeResponse.ChangeNotice = $"Group West - the actual mission has been changed to {groupWest.ActualMission}";
                             }
 
-                            return stringPropertyToCheck.Choice;
+                            return changeResponse;
                         }
                 }
             }
 
             if (change.ClassName == nameof(Hero))
             {
+                var changeResponse = new ChangeResponse();
+
                 if (change.OrderOfBattle >= OrderOfBattle.First && change.OrderOfBattle <= OrderOfBattle.Fifth)
                 {
                     Hero hero = user.GroupWest.Heroes.FirstOrDefault(x => x.OrderOfBattle == change.OrderOfBattle) ?? throw new InvalidOperationException("Hero is null");
@@ -1004,12 +1047,12 @@ namespace redimel_server.Repositories
                     {
                         if (hero.HeroType == change.HeroType)
                         {
-                            return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         }
                     }
                     else if (hero.HeroClass == change.HeroClass)
                     {
-                        return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     }
                 }
                 else if (change.OrderOfBattle == OrderOfBattle.All)
@@ -1020,11 +1063,12 @@ namespace redimel_server.Repositories
                     {
                         if (h.HeroClass == change.HeroClass)
                         {
-                            return await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         }
                     }
                 }
 
+                return changeResponse;
                 //TO DO HeroType options?
             }
 
@@ -1051,7 +1095,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Health)
                             {
                                 hero.Indicators.Health = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1074,7 +1118,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalEnergy)
                             {
                                 hero.Indicators.MentalEnergy = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1097,7 +1141,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalStrength)
                             {
                                 hero.Indicators.MentalStrength = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1120,7 +1164,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Strength)
                             {
                                 hero.Indicators.Strength = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1143,7 +1187,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Dexterity)
                             {
                                 hero.Indicators.Dexterity = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1166,7 +1210,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Agility)
                             {
                                 hero.Indicators.Agility = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1189,7 +1233,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Evasion)
                             {
                                 hero.Indicators.Evasion = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1212,7 +1256,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Endurance)
                             {
                                 hero.Indicators.Endurance = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IndicatorNotice(change, hero);
+                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1223,6 +1267,7 @@ namespace redimel_server.Repositories
             if (change.ClassName == nameof(Mission))
             {
                 List<Mission> missions = (List<Mission>)user.GroupWest.Missions;
+                var changeResponse = new ChangeResponse();
 
                 if (change.ActionType == ActionType.Check)
                 {
@@ -1232,16 +1277,14 @@ namespace redimel_server.Repositories
                     {
                         if (mission != null && mission.IsItDone == change.ActiveOrNot)
                         {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         }
                     }
                     else
                     {
                         if (mission != null)
                         {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         }
                     }
                 }
@@ -1254,6 +1297,7 @@ namespace redimel_server.Repositories
                     };
 
                     missions.Add(mission);
+                    changeResponse.ChangeNotice = AddObjNoticeResponse("", change.ClassName);
                 }
                 else if (change.ActionType == ActionType.Remove)
                 {
@@ -1262,6 +1306,7 @@ namespace redimel_server.Repositories
                     if (mission != null)
                     {
                         missions.Remove(mission);
+                        changeResponse.ChangeNotice = RemoveObjNoticeResponse("", change.ClassName);
                     }
                 }
                 else if (change.ActionType == ActionType.Update)
@@ -1271,13 +1316,17 @@ namespace redimel_server.Repositories
                     if (mission != null)
                     {
                         mission.IsItDone = true;
+                        changeResponse.ChangeNotice = UpdateObjNoticeResponse("", change.ClassName);
                     }
                 }
+
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(NatureSkill))
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+                var changeResponse = new ChangeResponse();
 
                 if (change.ActionType == ActionType.Check)
                 {
@@ -1285,8 +1334,7 @@ namespace redimel_server.Repositories
 
                     if (natureSkill != null && natureSkill.SkillLevel >= change.Attack)
                     {
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     }
                 }
                 else if (change.ActionType == ActionType.Add)
@@ -1300,6 +1348,7 @@ namespace redimel_server.Repositories
                     };
 
                     hero.SpecialAbility.NatureSkills.Add(natureSkill);
+                    changeResponse.ChangeNotice = AddObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                 }
                 else if (change.ActionType == ActionType.Remove)
                 {
@@ -1308,6 +1357,7 @@ namespace redimel_server.Repositories
                     if (natureSkill != null)
                     {
                         hero.SpecialAbility.NatureSkills.Remove(natureSkill);
+                        changeResponse.ChangeNotice = RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                     }
                 }
                 else if (change.ActionType == ActionType.Update)
@@ -1317,20 +1367,24 @@ namespace redimel_server.Repositories
                     if (natureSkill != null)
                     {
                         natureSkill.SkillLevel++;
+                        changeResponse.ChangeNotice = UpdateObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                     }
                 }
+
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(Negotiation))
             {
+                var changeResponse = new ChangeResponse();
+
                 if (change.ActionType == ActionType.Check)
                 {
                     var negotiation = user.GroupWest.AditionalPoints.Negotiations.Where(x => x.Name == change.Name).FirstOrDefault();
 
                     if (negotiation != null)
                     {
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     }
                 }
                 else if (change.ActionType == ActionType.Add)
@@ -1342,12 +1396,16 @@ namespace redimel_server.Repositories
                     };
 
                     user.GroupWest.AditionalPoints.Negotiations.Add(newNegotiation);
+                    changeResponse.ChangeNotice = AddObjNoticeResponse("", change.ClassName);
                 }
+
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(Promise))
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+                var changeResponse = new ChangeResponse();
 
                 if (change.ActionType == ActionType.Check)
                 {
@@ -1357,18 +1415,21 @@ namespace redimel_server.Repositories
                     {
                         if (change.ActiveOrNot == true)
                         {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                            return changeResponse;
                         }
 
                         if (promise.IsItDone == change.TrueOrFalse)
                         {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
+                        }
+                        else
+                        {
+                            changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                         }
                     }
                 }
-                if (change.ActionType == ActionType.Add)
+                else if (change.ActionType == ActionType.Add)
                 {
                     var newPromise = new Promise
                     {
@@ -1377,72 +1438,87 @@ namespace redimel_server.Repositories
                     };
 
                     hero.Promises.Add(newPromise);
+                    changeResponse.ChangeNotice = AddObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                 }
-                if (change.ActionType == ActionType.Remove)
+                else if (change.ActionType == ActionType.Remove)
                 {
                     var promise = hero.Promises.FirstOrDefault(x => x.Name == change.Name);
 
                     if (promise != null)
                     {
                         hero.Promises.Remove(promise);
+                        changeResponse.ChangeNotice = RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                     }
                 }
-                if (change.ActionType == ActionType.Update)
+                else if (change.ActionType == ActionType.Update)
                 {
                     var promise = hero.Promises.FirstOrDefault(x => x.Name == change.Name);
-                    promise.IsItDone = true;
+
+                    if (promise != null)
+                    {
+                        promise.IsItDone = true;
+                        changeResponse.ChangeNotice = UpdateObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
+                    }
                 }
+
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(Ritual))
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+                var changeResponse = new ChangeResponse();
 
                 if (change.ActionType == ActionType.Check)
-                    {
-                        var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+                {
+                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
 
-                        if (ritual != null && ritual.SkillLevel >= change.Attack)
-                        {
-                            var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                            return choice;
-                        }
+                    if (ritual != null && ritual.SkillLevel >= change.Attack)
+                    {
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     }
+                }
                 else if (change.ActionType == ActionType.Add)
+                {
+                    var ritual = new Ritual
                     {
-                        var ritual = new Ritual
-                        {
-                            Name = change.Name,
-                            SkillLevel = change.Attack,
-                            RequiredMentalEnergy = change.Defence,
-                            SpecialAbilityId = hero.SpecialAbilityId
-                        };
+                        Name = change.Name,
+                        SkillLevel = change.Attack,
+                        RequiredMentalEnergy = change.Defence,
+                        SpecialAbilityId = hero.SpecialAbilityId
+                    };
 
-                        hero.SpecialAbility.Rituals.Add(ritual);
-                    }
+                    hero.SpecialAbility.Rituals.Add(ritual);
+                    changeResponse.ChangeNotice = AddObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
+                }
                 else if (change.ActionType == ActionType.Remove)
-                    {
-                        var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+                {
+                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
 
-                        if (ritual != null)
-                        {
-                            hero.SpecialAbility.Rituals.Remove(ritual);
-                        }
+                    if (ritual != null)
+                    {
+                        hero.SpecialAbility.Rituals.Remove(ritual);
+                        changeResponse.ChangeNotice = RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                     }
+                }
                 else if (change.ActionType == ActionType.Update)
-                    {
-                        var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
+                {
+                    var ritual = hero.SpecialAbility.Rituals.Where(x => x.Name == change.Name).FirstOrDefault();
 
-                        if (ritual != null)
-                        {
-                            ritual.SkillLevel++;
-                        }
+                    if (ritual != null)
+                    {
+                        ritual.SkillLevel++;
+                        changeResponse.ChangeNotice = UpdateObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                     }
+                }
+
+                return changeResponse;
             }
 
             if (change.ClassName == nameof(Spell))
             {
                 Hero hero = GetHero(user, change) ?? throw new InvalidOperationException("Hero is null");
+                var changeResponse = new ChangeResponse();
 
                 if (change.ActionType == ActionType.Check)
                 {
@@ -1450,8 +1526,7 @@ namespace redimel_server.Repositories
 
                     if (spell != null && spell.SkillLevel >= change.Attack)
                     {
-                        var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
-                        return choice;
+                        changeResponse.Choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id == change.ChoiceId);
                     }
                 }
                 else if (change.ActionType == ActionType.Add)
@@ -1465,6 +1540,7 @@ namespace redimel_server.Repositories
                     };
 
                     hero.SpecialAbility.Spells.Add(spell);
+                    changeResponse.ChangeNotice = AddObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                 }
                 else if (change.ActionType == ActionType.Remove)
                 {
@@ -1473,6 +1549,7 @@ namespace redimel_server.Repositories
                     if (spell != null)
                     {
                         hero.SpecialAbility.Spells.Remove(spell);
+                        changeResponse.ChangeNotice = RemoveObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                     }
                 }
                 else if (change.ActionType == ActionType.Update)
@@ -1482,21 +1559,62 @@ namespace redimel_server.Repositories
                     if (spell != null)
                     {
                         spell.SkillLevel++;
+                        changeResponse.ChangeNotice = UpdateObjNoticeResponse(hero.HeroClass.ToString(), change.ClassName);
                     }
                 }
+
+                return changeResponse;
             }
 
             return null;
         }
 
-        private static string IndicatorNotice(Change change, Hero hero)
+        private static string IntNoticeResponse(Change change, Hero? hero)
         {
-            return $"{hero.HeroClass} - {change.PropertyName} is changed by {change.Attack}!";
+            if (hero == null)
+            {
+                return $"GroupWest - {change.PropertyName} is changed by {change.Attack}";
+            }
+            else
+            {
+                return $"{hero.HeroClass} - {change.PropertyName} is changed by {change.Attack}!";
+            }
         }
 
-        private static string AditionalPointNotice(Change change)
+        private static string AddObjNoticeResponse(string heroClass, string className)
         {
-            return $"GroupWest - {change.PropertyName} is changed by {change.Attack}";
+            if (heroClass.IsNullOrEmpty())
+            {
+                return $"Group West - Added new {className}!";
+            }
+            else
+            {
+                return $"{heroClass} - Added new {className}!";
+            }
+        }
+
+        private static string RemoveObjNoticeResponse(string heroClass, string className)
+        {
+            if (heroClass.IsNullOrEmpty())
+            {
+                return $"Group West - {className} was removed!!";
+            }
+            else
+            {
+                return $"{heroClass} - {className} was removed!";
+            }
+        }
+
+        private static string UpdateObjNoticeResponse(string heroClass, string className)
+        {
+            if (heroClass.IsNullOrEmpty())
+            {
+                return $"Group West - {className} was updated!";
+            }
+            else
+            {
+                return $"{heroClass} - {className} was updated!";
+            }
         }
 
         private static ChangeResponse AbilityResponse(Change change, Hero hero, bool isHeroAbilityExist, BooleanPropertyToCheck booleanPropertyToCheck)
