@@ -39,6 +39,7 @@ namespace redimel_server.Data
         public DbSet<WorldInfoVariable> WorldInfoVariables { get; set; }
         public DbSet<RedimelInfo> RedimelInfos { get; set; }
         public DbSet<Change> Changes { get; set; }
+        public DbSet<Location> Locations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

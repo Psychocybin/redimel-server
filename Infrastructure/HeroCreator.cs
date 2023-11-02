@@ -2,7 +2,7 @@
 
 namespace redimel_server.Infrastructure
 {
-    public class HeroCreator
+    public abstract class HeroCreator
     {
         public string Name { get; set; }
         public HeroClass HeroClass { get; set; }

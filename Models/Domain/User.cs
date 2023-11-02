@@ -7,20 +7,23 @@ namespace redimel_server.Models.Domain
     {
         public User()
         {
-            this.CurrentLocation = RedimelConstants.STARTLOCATION;
+            //this.CurrentLocation = RedimelConstants.STARTLOCATION;
             this.Checkpoint = RedimelConstants.STARTLOCATION;
             this.TimeCounter = RedimelConstants.TIMECOUNTER;
             this.WorldInfoVariables = new List<WorldInfoVariable>();
         }
 
         public Guid Id { get; set; }
-        public string CurrentLocation { get; set; }
+        //public string CurrentLocation { get; set; }
         public string Checkpoint { get; set; }
         public int TimeCounter { get; set; }
         public string CurrentUserEmail { get; set; }
         [ForeignKey("GroupWest")]
         public Guid GroupWestId { get; set; }
+        [ForeignKey("Location")]
+        public Guid LocationId { get; set; }
         public virtual GroupWest GroupWest { get; set; }
+        public virtual Location Location { get; set; }
         public virtual ICollection<WorldInfoVariable> WorldInfoVariables { get; set; }
     }
 }

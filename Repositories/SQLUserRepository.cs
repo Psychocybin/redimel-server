@@ -38,17 +38,23 @@ namespace redimel_server.Repositories
             var newUserId = Guid.NewGuid();
             var groupWestId = Guid.NewGuid();
             var aditionalPointsId = Guid.NewGuid();
+            var locationId = Guid.NewGuid();
 
             var newUser = new User
             {
                 Id = newUserId,
                 CurrentUserEmail = heroEmail,
                 GroupWestId = groupWestId,
+                LocationId = locationId,
+                Location = new Location
+                {
+                    Id = locationId,
+                    UserId = newUserId
+                },
                 GroupWest = new GroupWest
                 {
                     Id = groupWestId,
                     UserId = newUserId,
-                    ActualMission = string.Empty,
                     AditionalPointsId = aditionalPointsId,
                     AditionalPoints = new AditionalPoint
                     {
@@ -119,9 +125,11 @@ namespace redimel_server.Repositories
             }
 
             existingUser.Checkpoint = user.Checkpoint;
-            existingUser.CurrentLocation = user.CurrentLocation;
+            existingUser.Location.PageId = user.Location.PageId;
+            //existingUser.CurrentLocation = user.CurrentLocation;
             existingUser.CurrentUserEmail = user.CurrentUserEmail;
             existingUser.GroupWestId = user.GroupWestId;
+            existingUser.LocationId = user.LocationId;
             existingUser.TimeCounter = user.TimeCounter;
 
             await dbContext.SaveChangesAsync();

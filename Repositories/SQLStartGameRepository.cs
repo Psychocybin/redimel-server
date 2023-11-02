@@ -45,7 +45,7 @@ namespace redimel_server.Repositories
                 .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Talismans)
                 .Include(x => x.WorldInfoVariables).FirstOrDefaultAsync();
 
-            if (choice.PageId != currentUser.CurrentLocation)
+            if (choice.PageId != currentUser.Location.PageId)
             {
                 throw new Exception();
             }
@@ -74,7 +74,7 @@ namespace redimel_server.Repositories
                 }
             }
 
-            currentUser.CurrentLocation = nextPage.Id;
+            currentUser.Location.PageId = nextPage.Id;
 
             await dbContext.SaveChangesAsync();
 
@@ -546,7 +546,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.TeamGame)
                             {
                                 aditionalPoints.TeamGame = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -569,7 +569,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.ImportantInformation)
                             {
                                 aditionalPoints.ImportantInformation = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -592,7 +592,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.SlainMonsters)
                             {
                                 aditionalPoints.SlainMonsters = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -615,7 +615,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.Morals)
                             {
                                 aditionalPoints.Morals = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -638,7 +638,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.Cover)
                             {
                                 aditionalPoints.Cover = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -661,7 +661,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != aditionalPoints.TemporaryPoints)
                             {
                                 aditionalPoints.TemporaryPoints = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, null);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, null);
                             }
 
                             return changeResponse;
@@ -1095,7 +1095,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Health)
                             {
                                 hero.Indicators.Health = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1118,7 +1118,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalEnergy)
                             {
                                 hero.Indicators.MentalEnergy = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1141,7 +1141,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.MentalStrength)
                             {
                                 hero.Indicators.MentalStrength = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1164,7 +1164,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Strength)
                             {
                                 hero.Indicators.Strength = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1187,7 +1187,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Dexterity)
                             {
                                 hero.Indicators.Dexterity = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1210,7 +1210,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Agility)
                             {
                                 hero.Indicators.Agility = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1233,7 +1233,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Evasion)
                             {
                                 hero.Indicators.Evasion = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1256,7 +1256,7 @@ namespace redimel_server.Repositories
                             if (intPropertyToCheck.ResearchedValue != hero.Indicators.Endurance)
                             {
                                 hero.Indicators.Endurance = intPropertyToCheck.ResearchedValue;
-                                changeResponse.ChangeNotice = IntNoticeResponse(change, hero);
+                                changeResponse.ChangeNotice = NumberNoticeResponse(change, hero);
                             }
 
                             return changeResponse;
@@ -1569,7 +1569,7 @@ namespace redimel_server.Repositories
             return null;
         }
 
-        private static string IntNoticeResponse(Change change, Hero? hero)
+        private static string NumberNoticeResponse(Change change, Hero? hero)
         {
             if (hero == null)
             {
