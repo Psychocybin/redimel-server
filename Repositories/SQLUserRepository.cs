@@ -56,6 +56,7 @@ namespace redimel_server.Repositories
                     Id = groupWestId,
                     UserId = newUserId,
                     AditionalPointsId = aditionalPointsId,
+                    ActualMission = "",
                     AditionalPoints = new AditionalPoint
                     {
                         Id = aditionalPointsId,
@@ -106,7 +107,6 @@ namespace redimel_server.Repositories
         public async Task<User?> GetByIdAsync(Guid id)
         {
             return await dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
-
         }
 
         public string GetUserEmail()
@@ -117,7 +117,7 @@ namespace redimel_server.Repositories
 
         public async Task<User?> UpdateAsync(Guid id, User user)
         {
-            var existingUser = await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
+            var existingUser = await dbContext.Users.Include(x => x.Location).FirstOrDefaultAsync(i => i.Id == id);
 
             if (existingUser == null)
             {
@@ -435,7 +435,7 @@ namespace redimel_server.Repositories
                 {
                     return GetTheSortedHeroes(defender, warrior, fighter, mystic, helper);
                 }
-                else if (helper.HeroClass == HeroClass.Magician)
+                else if (mystic.HeroClass == HeroClass.Magician)
                 {
                     return GetTheSortedHeroes(warrior, defender, mystic, helper, fighter);
                 }

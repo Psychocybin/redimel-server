@@ -68,5 +68,20 @@ namespace redimel_server.Controllers
 
             return Ok(mapper.Map<BattlePointDto>(battlePointsDomain));
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Reader,Writer")]
+        [Route("StartGame")]
+        public async Task<IActionResult> StartGame()
+        {
+            var page = await startGameRepository.GetCurrentLocation();
+
+            if (page == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<PageDto>(page));
+        }
     }
 }

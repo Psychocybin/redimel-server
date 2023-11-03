@@ -26,6 +26,7 @@ namespace redimel_server.Repositories
             var currentUserEmail = userRepository.GetUserEmail();
 
             var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
+                .Include(x => x.Location)
                 .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.BattleGroups)
                 .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.Negotiations)
                 .Include(x => x.GroupWest).ThenInclude(x => x.Missions)
@@ -43,14 +44,16 @@ namespace redimel_server.Repositories
                 .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Shield)
                 .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.ThrowingWeapon)
                 .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Talismans)
-                .Include(x => x.WorldInfoVariables).FirstOrDefaultAsync();
+                .Include(x => x.WorldInfoVariables).FirstOrDefaultAsync()
+                    ?? throw new Exception("This user cannot be found!");
 
             if (choice.PageId != currentUser.Location.PageId)
             {
-                throw new Exception();
+                throw new Exception("You are on wrong page!");
             }
 
-            var nextPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == choice.NextPage);
+            var nextPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == choice.NextPage) 
+                ?? throw new Exception("This page not exist!");
 
             foreach (var item in mandatoryChoices)
             {
@@ -74,7 +77,9 @@ namespace redimel_server.Repositories
                 }
             }
 
-            currentUser.Location.PageId = nextPage.Id;
+            var location = await SaveCurrentLocation(nextPage, currentUser.Location.Id);
+
+            currentUser.Location = location;
 
             await dbContext.SaveChangesAsync();
 
@@ -1567,6 +1572,56 @@ namespace redimel_server.Repositories
             }
 
             return null;
+        }
+
+        public async Task<Page> GetCurrentLocation()
+        {
+            var currentUserEmail = userRepository.GetUserEmail();
+
+            var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
+                .Include(x => x.Location).FirstOrDefaultAsync();
+            var location = currentUser.Location;
+
+            var page = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == location.PageId);
+
+            page.ChangeNotices = location.ChangeNotice;
+            var choices = location.ChoicesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            var images = location.ImagesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < choices.Length; i++)
+            {
+                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == choices[i]);
+
+                if (choice != null)
+                {
+                    page.Choices.Add(choice);
+                }
+            }
+
+            for (int i = 0; i < images.Length; i++)
+            {
+                var image = await dbContext.Images.FirstOrDefaultAsync(x => x.Id.ToString() == images[i]);
+
+                if (image != null)
+                {
+                    page.Images.Add(image);
+                }
+            }
+
+            return page;
+        }
+
+        public async Task<Location> SaveCurrentLocation(Page page, Guid locationId)
+        {
+            var location = await dbContext.Locations.FirstOrDefaultAsync(x => x.Id == locationId)
+                ?? throw new Exception("This page not exist!");
+
+            location.PageId = page.Id;
+            location.ChangeNotice = page.ChangeNotices;
+            location.ChoicesId = string.Join(",", page.Choices.Select(x => x.Id));
+            location.ImagesId = string.Join(",", page.Images.Select(x => x.Id));
+
+            return location;
         }
 
         private static string NumberNoticeResponse(Change change, Hero? hero)

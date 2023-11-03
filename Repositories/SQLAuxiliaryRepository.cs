@@ -65,44 +65,36 @@ namespace redimel_server.Repositories
 
             foreach (var item in talismans)
             {
-                if (item.BonusIndicator == "attackWithHandToHandWeapon")
+                switch (item.BonusIndicator)
                 {
-                    attackWithHandToHandWeapon += item.BonusPoints;
+                    case "attackWithHandToHandWeapon":
+                        attackWithHandToHandWeapon += item.BonusPoints;
+                        break;
+                    case "defenceWithHandToHandWeapon":
+                        defenceWithHandToHandWeapon += item.BonusPoints;
+                        break;
+                    case "damageWithHandToHandWeapon":
+                        damageWithHandToHandWeapon += item.BonusPoints;
+                        break;
+                    case "attackWithRangedWeapon":
+                        attackWithRangedWeapon += item.BonusPoints;
+                        break;
+                    case "defenceWithRangedWeapon":
+                        defenceWithRangedWeapon += item.BonusPoints;
+                        break;
+                    case "defenceAgainstRangedWeapon":
+                        defenceAgainstRangedWeapon += item.BonusPoints;
+                        break;
+                    case "damageWithRangedWeapon":
+                        damageWithRangedWeapon += item.BonusPoints;
+                        break;
+                    case "defenceArmor":
+                        defenceArmor += item.BonusPoints;
+                        break;
+                    case "defenceShield":
+                        defenceShield += item.BonusPoints;
+                        break;
                 }
-                else if (item.BonusIndicator == "defenceWithHandToHandWeapon")
-                {
-                    defenceWithHandToHandWeapon += item.BonusPoints;
-                }
-                else if (item.BonusIndicator == "damageWithHandToHandWeapon")
-                {
-                    damageWithHandToHandWeapon += item.BonusPoints;
-                }
-                else if (item.BonusIndicator == "attackWithRangedWeapon")
-                {
-                    attackWithRangedWeapon += item.BonusPoints;
-                }
-                else if (item.BonusIndicator == "defenceWithRangedWeapon")
-                {
-                    defenceWithRangedWeapon += item.BonusPoints;
-                }
-                else if (item.BonusIndicator == "defenceAgainstRangedWeapon")
-                {
-                    defenceAgainstRangedWeapon += item.BonusPoints;
-                }
-                else if (item.BonusIndicator == "damageWithRangedWeapon")
-                {
-                    damageWithRangedWeapon += item.BonusPoints;
-                }
-                else if (item.BonusIndicator == "defenceArmor")
-                {
-                    defenceArmor += item.BonusPoints;
-                }
-                else if (item.BonusIndicator == "defenceShield")
-                {
-                    defenceShield += item.BonusPoints;
-                }
-
-
             }
 
             var battlePoints = new BattlePoint

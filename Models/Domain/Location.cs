@@ -7,6 +7,9 @@ namespace redimel_server.Models.Domain
         public Location()
         {
             this.PageId = RedimelConstants.STARTLOCATION;
+            this.ChangeNotice = "";
+            this.ChoicesId = "";
+            this.ImagesId = "";
         }
 
         public Guid Id { get; set; }
