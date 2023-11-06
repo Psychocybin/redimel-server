@@ -18,6 +18,7 @@ namespace redimel_server.Models.DTO
         public HeroClass HeroClass { get; set; }
         public HeroType HeroType { get; set; }
         public OrderOfBattle OrderOfBattle { get; set; }
+        public ComparisonMark ComparisonMark { get; set; }
         [Required]
         [MinLength(15)]
         [MaxLength(15)]

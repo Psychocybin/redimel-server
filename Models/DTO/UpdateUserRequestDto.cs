@@ -6,9 +6,6 @@ namespace redimel_server.Models.DTO
     {
         [MinLength(15)]
         [MaxLength(15)]
-        public string? CurrentLocation { get; set; }
-        [MinLength(15)]
-        [MaxLength(15)]
         public string? Checkpoint { get; set; }
         [Required]
         public int TimeCounter { get; set; }

@@ -5,7 +5,6 @@
         public string Id { get; set; }
         public string Description { get; set; }
         public string ChangeNotices { get; set; }
-        //public Image? Image { get; set; }
         public List<ChoiceDto> Choices { get; set; }
         public List<ImageUploadRequestDto> Images { get; set; }
     }
