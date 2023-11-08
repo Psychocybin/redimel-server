@@ -55,12 +55,9 @@ namespace redimel_server.Repositories
             var nextPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == choice.NextPage) 
                 ?? throw new Exception("This page not exist!");
 
-            foreach (var item in mandatoryChoices)
-            {
-                nextPage.Choices.Add(item);
-            }
-
             var changesList = await dbContext.Changes.Where(x => x.PageId == nextPage.Id).ToListAsync();
+            List<Choice> choicesToAdd = new();
+            string changeNoticeToAdd = "";
 
             foreach (var change in changesList)
             {
@@ -68,14 +65,29 @@ namespace redimel_server.Repositories
 
                 if (changeResponse.Choice != null)
                 {
-                    nextPage.Choices.Add(changeResponse.Choice);
+                    choicesToAdd.Add(changeResponse.Choice);
                 }
 
                 if (!changeResponse.ChangeNotice.IsNullOrEmpty())
                 {
-                    nextPage.ChangeNotices = $"{nextPage.ChangeNotices}   {changeResponse.ChangeNotice}";
+                    changeNoticeToAdd = $"{changeNoticeToAdd}   {changeResponse.ChangeNotice}";
                 }
             }
+
+            nextPage.Choices = new List<Choice>();
+            nextPage.ChangeNotices = "";
+
+            foreach (var item in mandatoryChoices)
+            {
+                nextPage.Choices.Add(item);
+            }
+
+            foreach (var item in choicesToAdd)
+            {
+                nextPage.Choices.Add(item);
+            }
+
+            nextPage.ChangeNotices = changeNoticeToAdd;
 
             var location = await SaveCurrentLocation(nextPage, currentUser.Location.Id);
 
@@ -1579,14 +1591,18 @@ namespace redimel_server.Repositories
             var currentUserEmail = userRepository.GetUserEmail();
 
             var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
-                .Include(x => x.Location).FirstOrDefaultAsync();
+                .Include(x => x.Location).FirstOrDefaultAsync() ?? throw new Exception("This user not exist!");
+
             var location = currentUser.Location;
 
-            var page = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == location.PageId);
+            var page = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == location.PageId)
+                ?? throw new Exception("This page not exist!");
 
             page.ChangeNotices = location.ChangeNotice;
             var choices = location.ChoicesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            List<Choice> choicesToAdd = new();
             var images = location.ImagesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            List<Image> imagesToAdd = new();
 
             for (int i = 0; i < choices.Length; i++)
             {
@@ -1594,7 +1610,7 @@ namespace redimel_server.Repositories
 
                 if (choice != null)
                 {
-                    page.Choices.Add(choice);
+                    choicesToAdd.Add(choice);
                 }
             }
 
@@ -1604,9 +1620,12 @@ namespace redimel_server.Repositories
 
                 if (image != null)
                 {
-                    page.Images.Add(image);
+                    imagesToAdd.Add(image);
                 }
             }
+
+            page.Choices = new List<Choice>(choicesToAdd);
+            page.Images = new List<Image>(imagesToAdd);
 
             return page;
         }

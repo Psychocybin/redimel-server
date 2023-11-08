@@ -50,7 +50,7 @@ namespace redimel_server.Migrations
                 column: "LocationId",
                 principalTable: "Locations",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.SetDefault);
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
