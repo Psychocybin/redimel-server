@@ -52,7 +52,7 @@ namespace redimel_server.Repositories
                 throw new Exception("You are on wrong page!");
             }
 
-            var nextPage = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == choice.NextPage) 
+            var nextPage = await dbContext.Pages.AsNoTracking().FirstOrDefaultAsync(x => x.Id == choice.NextPage) 
                 ?? throw new Exception("This page not exist!");
 
             var changesList = await dbContext.Changes.Where(x => x.PageId == nextPage.Id).ToListAsync();
@@ -73,9 +73,6 @@ namespace redimel_server.Repositories
                     changeNoticeToAdd = $"{changeNoticeToAdd}   {changeResponse.ChangeNotice}";
                 }
             }
-
-            nextPage.Choices = new List<Choice>();
-            nextPage.ChangeNotices = "";
 
             foreach (var item in mandatoryChoices)
             {
@@ -1595,7 +1592,7 @@ namespace redimel_server.Repositories
 
             var location = currentUser.Location;
 
-            var page = await dbContext.Pages.FirstOrDefaultAsync(x => x.Id == location.PageId)
+            var page = await dbContext.Pages.AsNoTracking().FirstOrDefaultAsync(x => x.Id == location.PageId)
                 ?? throw new Exception("This page not exist!");
 
             page.ChangeNotices = location.ChangeNotice;
