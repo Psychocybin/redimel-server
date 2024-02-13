@@ -11,5 +11,6 @@
         public int DamageWithRangedWeapon { get; set; }
         public int DefenceArmor { get; set; }
         public int DefenceShield { get; set; }
+        public Guid HeroId { get; set; }
     }
 }

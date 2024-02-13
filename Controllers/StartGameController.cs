@@ -48,10 +48,35 @@ namespace redimel_server.Controllers
         {
             var choiceDomain = mapper.Map<Choice>(addChoiceRequestDto);
 
-            var nextPage = await startGameRepository.GetNextPageAsync(choiceDomain);
+            var page = await startGameRepository.GetNextPageAsync(choiceDomain);
+            var user = await auxiliaryRepository.GetUserAndGroupWestHeroesAsync();
 
-            var nextPageDto = mapper.Map<PageDto>(nextPage);
-            return Ok(nextPageDto);
+            if (page == null || user == null)
+            {
+                return NotFound("Something missing!");
+            }
+
+            var groupBattlePoints = new List<BattlePoint>();
+
+            foreach (var hero in user.GroupWest.Heroes)
+            {
+                var heroBattlePoints = await auxiliaryRepository.ShowBattlePointsAsync(hero.Id)
+                    ?? throw new Exception("Battle points missing!");
+                groupBattlePoints.Add(heroBattlePoints);
+            }
+
+            var pageRes = mapper.Map<PageDto>(page);
+            var userRes = mapper.Map<UserDto>(user);
+            var battlePointsRes = mapper.Map<List<BattlePointDto>>(groupBattlePoints);
+
+            var response = new UserGroupWestBattlePointsDto
+            {
+                Page = pageRes,
+                User = userRes,
+                BattlePoints = battlePointsRes
+            };
+
+            return Ok(response);
         }
 
         [HttpGet]
@@ -75,13 +100,34 @@ namespace redimel_server.Controllers
         public async Task<IActionResult> StartGame()
         {
             var page = await startGameRepository.GetCurrentLocation();
+            var user = await auxiliaryRepository.GetUserAndGroupWestHeroesAsync();
 
-            if (page == null)
+            if (page == null || user == null)
             {
-                return NotFound();
+                return NotFound("Something missing!");
             }
 
-            return Ok(mapper.Map<PageDto>(page));
+            var groupBattlePoints = new List<BattlePoint>();
+
+            foreach (var hero in user.GroupWest.Heroes)
+            {
+                var heroBattlePoints = await auxiliaryRepository.ShowBattlePointsAsync(hero.Id) 
+                    ?? throw new Exception("Battle points missing!");
+                groupBattlePoints.Add(heroBattlePoints);
+            }
+
+            var pageRes = mapper.Map<PageDto>(page);
+            var userRes = mapper.Map<UserDto>(user);
+            var battlePointsRes = mapper.Map<List<BattlePointDto>>(groupBattlePoints);
+
+            var response = new UserGroupWestBattlePointsDto
+            {
+                Page = pageRes,
+                User = userRes,
+                BattlePoints = battlePointsRes
+            };
+
+            return Ok(response);
         }
     }
 }

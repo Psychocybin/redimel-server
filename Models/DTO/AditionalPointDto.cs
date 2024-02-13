@@ -1,4 +1,6 @@
-﻿namespace redimel_server.Models.DTO
+﻿using redimel_server.Models.Domain;
+
+namespace redimel_server.Models.DTO
 {
     public class AditionalPointDto
     {
@@ -10,5 +12,7 @@
         public int Cover { get; set; }
         public int TemporaryPoints { get; set; }
         public Guid GroupWestId { get; set; }
+        public List<BattleGroupDto> BattleGroups { get; set; }
+        public List<NegotiationDto> Negotiations { get; set; }
     }
 }

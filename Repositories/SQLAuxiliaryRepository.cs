@@ -1,16 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using redimel_server.Data;
 using redimel_server.Infrastructure;
+using redimel_server.Models.Domain;
 
 namespace redimel_server.Repositories
 {
     public class SQLAuxiliaryRepository : IAuxiliaryRepository
     {
         private readonly RedimelServerDbContext dbContext;
+        private readonly IUserRepository userRepository;
 
-        public SQLAuxiliaryRepository(RedimelServerDbContext dbContext)
+        public SQLAuxiliaryRepository(RedimelServerDbContext dbContext, IUserRepository userRepository)
         {
             this.dbContext = dbContext;
+            this.userRepository = userRepository;
         }
 
         public async Task<BattlePoint?> ShowBattlePointsAsync(Guid id)
@@ -107,10 +110,39 @@ namespace redimel_server.Repositories
                 DefenceAgainstRangedWeapon = defenceAgainstRangedWeapon,
                 DamageWithRangedWeapon = damageWithRangedWeapon,
                 DefenceArmor = defenceArmor,
-                DefenceShield = defenceShield
+                DefenceShield = defenceShield,
+                HeroId = id
             };
 
             return battlePoints;
+        }
+
+        public async Task<User?> GetUserAndGroupWestHeroesAsync()
+        {
+            var currentUserEmail = userRepository.GetUserEmail();
+
+            var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == currentUserEmail)
+                .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.BattleGroups)
+                .Include(x => x.GroupWest).ThenInclude(x => x.AditionalPoints).ThenInclude(x => x.Negotiations)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Missions)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Indicators)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Ability)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Baggages)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Promises)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.SpecialCombatSkill)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.Ultimate)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.Spells)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.Rituals)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.SpecialAbility).ThenInclude(x => x.NatureSkills)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Weapon)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Armor)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Shield)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.ThrowingWeapon)
+                .Include(x => x.GroupWest).ThenInclude(x => x.Heroes).ThenInclude(x => x.Equipments).ThenInclude(x => x.Talismans)
+                .FirstOrDefaultAsync()
+                    ?? throw new Exception("This user cannot be found!");
+
+            return currentUser;
         }
     }
 }

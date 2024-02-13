@@ -63,6 +63,8 @@ namespace redimel_server.Mappings
             CreateMap<HunterHeroCreator, HeroCreator>();
             CreateMap<GladiatorHeroCreator, HeroCreator>();
             CreateMap<AcrobatHeroCreator, HeroCreator>();
+            CreateMap<GroupWest, GroupWestDto>();
+            CreateMap<SpecialAbility, SpecialAbilityDto>();
         }
     }
 }

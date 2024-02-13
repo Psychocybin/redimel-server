@@ -1,4 +1,6 @@
-﻿namespace redimel_server.Models.DTO
+﻿using redimel_server.Models.Domain;
+
+namespace redimel_server.Models.DTO
 {
     public class UserDto
     {
@@ -7,5 +9,6 @@
         public int TimeCounter { get; set; }
         public string CurrentUserEmail { get; set; }
         public Guid GroupWestId { get; set; }
+        public GroupWestDto GroupWest { get; set; }
     }
 }

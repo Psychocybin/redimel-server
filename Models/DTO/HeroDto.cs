@@ -15,5 +15,10 @@ namespace redimel_server.Models.DTO
         public Guid AbilityId { get; set; }
         public Guid SpecialAbilityId { get; set; }
         public IndicatorDto Indicators { get; set; }
+        public AbilityDto Ability { get; set; }
+        public SpecialAbilityDto SpecialAbility { get; set; }
+        public EquipmentDto Equipments { get; set; }
+        public List<BaggageDto> Baggages { get; set; }
+        public List<PromiseDto> Promises { get; set; }
     }
 }

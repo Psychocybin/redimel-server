@@ -20,7 +20,9 @@ namespace redimel_server.Repositories
 
         public async Task<Hero?> GetByIdAsync(Guid id)
         {
-            return await dbContext.Heroes.Include(x => x.Indicators).FirstOrDefaultAsync(x => x.Id == id);
+            return await dbContext.Heroes.Include(x => x.Indicators)
+                .Include(x => x.Equipments).ThenInclude(x => x.Armor)
+                .Include(x => x.Baggages).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

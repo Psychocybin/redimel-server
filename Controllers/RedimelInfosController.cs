@@ -22,7 +22,7 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetAll()
         {
             var redimelInfoDomain = await redimelInfoRepository.GetAllAsync();
@@ -31,7 +31,7 @@ namespace redimel_server.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Reader,Writer")]
+        //[Authorize(Roles = "Reader,Writer")]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
