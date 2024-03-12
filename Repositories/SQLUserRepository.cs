@@ -83,6 +83,21 @@ namespace redimel_server.Repositories
             return newUser;
         }
 
+        public async Task<string?> RemoveBattleGroup(string heroEmail)
+        {
+            var currentUser = await dbContext.Users.Where(x => x.CurrentUserEmail == heroEmail).FirstOrDefaultAsync();
+
+            if (currentUser == null)
+            {
+                return null;
+            }
+
+            dbContext.Users.Remove(currentUser);
+            await dbContext.SaveChangesAsync();
+
+            return "You have successfully removed the battle group";
+        }
+
         public async Task<User?> DeleteAsync(Guid id)
         {
             var existingUser = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
@@ -141,7 +156,7 @@ namespace redimel_server.Repositories
         {
             //CHECK PROPERTIES!!!
             if (heroClass == RedimelConstants.CREATESOLDIER)
-            {
+            {   
                 var newHero = new SoldierHeroCreator();
                 var heroCreator = mapper.Map<HeroCreator>(newHero);
 

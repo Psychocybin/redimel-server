@@ -9,6 +9,8 @@ namespace redimel_server.Repositories
 
         Task<User> CreateUserAsync(string heroEmail, GroupWestHeroes groupWestHeroes);
 
+        Task<string?> RemoveBattleGroup(string heroEmail);
+
         Task<List<User>> GetAllAsync();
 
         Task<User?> GetByIdAsync(Guid id);

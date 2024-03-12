@@ -129,5 +129,22 @@ namespace redimel_server.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Reader,Writer")]
+        [Route("RemoveBattleGroup")]
+        public async Task<IActionResult> RemoveBattleGroup()
+        {
+            var userEmail = userRepository.GetUserEmail();
+
+            var result = await userRepository.RemoveBattleGroup(userEmail);
+
+            if (result == null)
+            {
+                return BadRequest("Something wrong happened!");
+            }
+
+            return Ok(result);
+        }
     }
 }
