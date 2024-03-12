@@ -92,7 +92,9 @@ namespace redimel_server.Repositories
                 return null;
             }
 
-            dbContext.Users.Remove(currentUser);
+            var newEmail = "OLD" + currentUser.CurrentUserEmail;
+            currentUser.CurrentUserEmail = newEmail;
+
             await dbContext.SaveChangesAsync();
 
             return "You have successfully removed the battle group";
