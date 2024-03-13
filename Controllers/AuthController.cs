@@ -11,11 +11,13 @@ namespace redimel_server.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly ITokenRepository tokenRepository;
+        private readonly IConfiguration configuration;
 
-        public AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
+        public AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository, IConfiguration configuration)
         {
             this.userManager = userManager;
             this.tokenRepository = tokenRepository;
+            this.configuration = configuration;
         }
 
         [HttpPost]
@@ -34,6 +36,18 @@ namespace redimel_server.Controllers
             {
                 if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
                 {
+                    if (registerRequestDto.Roles[0].ToLower() == "writer")
+                    {
+                        return BadRequest("Something went wrong!");
+                    }
+
+                    var writerRole = configuration.GetValue<string>("Roles:Writer");
+
+                    if (registerRequestDto.Roles[0] == writerRole)
+                    {
+                        registerRequestDto.Roles[0] = "Writer";
+                    }
+
                     identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
 
                     if (identityResult.Succeeded)
