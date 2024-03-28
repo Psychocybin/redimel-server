@@ -1595,34 +1595,44 @@ namespace redimel_server.Repositories
             var page = await dbContext.Pages.AsNoTracking().FirstOrDefaultAsync(x => x.Id == location.PageId)
                 ?? throw new Exception("This page not exist!");
 
-            page.ChangeNotices = location.ChangeNotice;
-            var choices = location.ChoicesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            List<Choice> choicesToAdd = new();
-            var images = location.ImagesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            List<Image> imagesToAdd = new();
-
-            for (int i = 0; i < choices.Length; i++)
+            if (location.PageId == "redmagtowlib001")
             {
-                var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == choices[i]);
+                var mandatoryChoices = await dbContext.Choices.Where(x => x.AdditionalCheck == false)
+                    .Where(x => x.PageId == location.PageId).ToListAsync();
 
-                if (choice != null)
-                {
-                    choicesToAdd.Add(choice);
-                }
+                page.Choices = mandatoryChoices;
             }
-
-            for (int i = 0; i < images.Length; i++)
+            else
             {
-                var image = await dbContext.Images.FirstOrDefaultAsync(x => x.Id.ToString() == images[i]);
+                page.ChangeNotices = location.ChangeNotice;
+                var choices = location.ChoicesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                List<Choice> choicesToAdd = new();
+                var images = location.ImagesId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                List<Image> imagesToAdd = new();
 
-                if (image != null)
+                for (int i = 0; i < choices.Length; i++)
                 {
-                    imagesToAdd.Add(image);
-                }
-            }
+                    var choice = await dbContext.Choices.FirstOrDefaultAsync(x => x.Id.ToString() == choices[i]);
 
-            page.Choices = new List<Choice>(choicesToAdd);
-            page.Images = new List<Image>(imagesToAdd);
+                    if (choice != null)
+                    {
+                        choicesToAdd.Add(choice);
+                    }
+                }
+
+                for (int i = 0; i < images.Length; i++)
+                {
+                    var image = await dbContext.Images.FirstOrDefaultAsync(x => x.Id.ToString() == images[i]);
+
+                    if (image != null)
+                    {
+                        imagesToAdd.Add(image);
+                    }
+                }
+
+                page.Choices = new List<Choice>(choicesToAdd);
+                page.Images = new List<Image>(imagesToAdd);
+            }
 
             return page;
         }
